@@ -1,38 +1,46 @@
-.App {
-  text-align: center;
+
+.app-container {
+  height: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.navbar {
+  height: 8vh;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.alerts {
+  grid-area: alerts;
+  background-color: blue;
+}
+.constellation{
+  grid-area: constellation;
+  height: 100%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.constellation::part(container) {
+  height: 100%;
 }
 
-.App-link {
-  color: #61dafb;
+.constellation::part(body) {
+  padding: 0;
+  overflow-x: scroll;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.watcher {
+  grid-area: watcher;
+  background-color: purple;
 }
+
+.background {
+  height: 90vh;
+  padding: 10px;
+  background-color: steelblue;
+  width: 100vw;
+  display: grid;
+  gap: 15px 10px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 50% 50%;
+  grid-template-areas: 
+    "alerts constellation constellation"
+    "alerts watcher watcher";
+}
+
