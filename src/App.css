@@ -5,8 +5,21 @@
 
 .alerts {
   grid-area: alerts;
-  background-color: blue;
 }
+
+rux-container {
+  border: 2px solid var(--color-background-surface-hover);
+}
+
+rux-container::part(container) {
+  height: 100%;
+}
+
+
+rux-container::part(body) {
+  padding: 0;
+}
+
 .constellation{
   grid-area: constellation;
   height: 100%;
@@ -17,26 +30,32 @@
 }
 
 .constellation::part(body) {
-  padding: 0;
   overflow-x: scroll;
 }
 
 .watcher {
   grid-area: watcher;
-  background-color: purple;
 }
 
 .background {
   height: 90vh;
   padding: 10px;
-  background-color: steelblue;
+  background-color: var(--color-background-surface-default);
   width: 100vw;
   display: grid;
   gap: 15px 10px;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 50% 50%;
+  grid-template-columns: 30% 1fr 1fr;
+  grid-template-rows: 60% 40%;
   grid-template-areas: 
     "alerts constellation constellation"
     "alerts watcher watcher";
 }
 
+.watcher-body {
+  display: flex;
+  height: 100%;
+}
+
+.watcher-body rux-table{
+  flex-basis: 40%;
+}
