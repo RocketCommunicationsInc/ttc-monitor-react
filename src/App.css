@@ -1,3 +1,10 @@
+.app-container {
+  height: 100vh;
+}
+
+.navbar {
+  height: 10%;
+}
 
 .alerts {
   grid-area: alerts;
@@ -6,6 +13,7 @@
 .constellation{
   grid-area: constellation;
   background-color: green;
+  overflow: auto;
 }
 .watcher {
   grid-area: watcher;
@@ -13,11 +21,14 @@
 }
 
 .background {
+  height: 90%;
+  padding: 10px;
   background-color: steelblue;
   width: 100vw;
   display: grid;
+  gap: 15px 10px;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 50% 50%;
   grid-template-areas: 
     "alerts constellation constellation"
     "alerts watcher watcher";
