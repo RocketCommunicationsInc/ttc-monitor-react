@@ -12,7 +12,7 @@ import {
 
 const styles = {
   statusIndicators: {
-    marginLeft: "28rem",
+    marginLeft: "27rem",
     marginRight: "auto",
   },
   indicator: {

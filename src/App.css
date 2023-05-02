@@ -3,9 +3,9 @@
   height: 100%;
 }
 
-.navbar {
+/* .navbar {
   height: 8vh;
-}
+} */
 
 .alerts {
   grid-area: alerts;
