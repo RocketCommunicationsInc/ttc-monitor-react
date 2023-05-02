@@ -1,27 +1,37 @@
+
 .app-container {
-  height: 100vh;
+  height: 100%;
 }
 
 .navbar {
-  height: 10%;
+  height: 8vh;
 }
 
 .alerts {
   grid-area: alerts;
-    background-color: blue;
+  background-color: blue;
 }
 .constellation{
   grid-area: constellation;
-  background-color: green;
-  overflow: auto;
+  height: 100%;
 }
+
+.constellation::part(container) {
+  height: 100%;
+}
+
+.constellation::part(body) {
+  padding: 0;
+  overflow-x: scroll;
+}
+
 .watcher {
   grid-area: watcher;
   background-color: purple;
 }
 
 .background {
-  height: 90%;
+  height: 90vh;
   padding: 10px;
   background-color: steelblue;
   width: 100vw;
@@ -33,5 +43,4 @@
     "alerts constellation constellation"
     "alerts watcher watcher";
 }
-
 

@@ -1,10 +1,10 @@
 import React from 'react';
-import '@astrouxds/astro-web-components/dist/astro-web-components/astro-web-components.css'
 import Alerts from "./Components/Alerts"
 import Constellation from './Components/Constellation';
 import Watcher from './Components/Watcher';
 import NavBar from "./Components/NavBar";
 
+import '@astrouxds/astro-web-components/dist/astro-web-components/astro-web-components.css'
 import './App.css';
 
 function App() {

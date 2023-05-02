@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { RuxContainer, RuxSegmentedButton } from "@astrouxds/react"
-import ConstellationList from "./ListHeader"
+import ConstellationList from "./ConstellationList"
 import ConstellationTimeline from "./ConstellationTimeline"
 import { RuxSegmentedButtonCustomEvent } from "@astrouxds/astro-web-components/dist/types/components"
 
@@ -31,9 +31,7 @@ const Constellation = () => {
         >
         </RuxSegmentedButton>
       </div>
-      <div className="constellation-content">
-        {content}
-      </div>
+      {content}
     </RuxContainer>
   )
 }
