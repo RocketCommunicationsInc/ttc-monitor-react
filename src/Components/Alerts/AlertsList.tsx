@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-expressions */
 import {
   RuxTable,
   RuxTableHeader,
@@ -13,7 +12,7 @@ import {
   RuxAccordion,
   RuxAccordionItem,
 } from "@astrouxds/react";
-import "./AlertsList.css";
+import { useState } from "react";
 
 const styles = {
   investigateBtn: {
@@ -28,22 +27,53 @@ const styles = {
 };
 
 const AlertsList = () => {
-  // const selectAllHandler = (event: any) => {
-  //   const checkboxes = event.target.querySelectorAll(".rux-checkbox");
-  //   for (let i = 0; i < checkboxes.length; i++) {
-  //     checkboxes[i]. = true;
-  //   }
-  // };
+  const [checked, setChecked] = useState(false);
+
+  const selectAllHandler = () => {
+    const checkboxes: any = document.querySelectorAll(".checkboxes");
+    for (let i = 0; i < checkboxes.length; i++) {
+      checkboxes[i].checked = true;
+      setChecked(true);
+    }
+  };
+
+  const selectNoneHandler = () => {
+    const checkboxes: any = document.querySelectorAll(".checkboxes");
+    for (let i = 0; i < checkboxes.length; i++) {
+      checkboxes[i].checked = false;
+      setChecked(false);
+    }
+  };
+
+  const investigateHandler = () => {
+    alert("This feature has not been implemented.");
+  };
 
   return (
     <RuxTable>
       <RuxTableHeader>
         <RuxTableHeaderRow>
           <RuxTableHeaderCell>
-            <RuxButton borderless size="small">
-              Select All
-            </RuxButton>
-            Message <span style={{ marginLeft: "7rem" }}>Category</span>{" "}
+            {checked !== true ? (
+              <RuxButton
+                style={{ marginLeft: "-1rem" }}
+                borderless
+                size="small"
+                onClick={selectAllHandler}
+              >
+                Select All
+              </RuxButton>
+            ) : (
+              <RuxButton
+                style={{ marginLeft: "-1rem" }}
+                borderless
+                size="small"
+                onClick={selectNoneHandler}
+              >
+                Select None
+              </RuxButton>
+            )}
+            Message <span style={{ marginLeft: "7rem" }}>Category</span>
             <span style={{ marginLeft: "1rem" }}>Time</span>
           </RuxTableHeaderCell>
         </RuxTableHeaderRow>
@@ -54,10 +84,15 @@ const AlertsList = () => {
           <RuxTableRow>
             <RuxAccordionItem>
               Red FEP 124 is degraded at 15:59:57. <br />
-              <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
+              <RuxButton
+                style={styles.investigateBtn}
+                onClick={investigateHandler}
+              >
+                Investigate
+              </RuxButton>
               <div slot="label" style={styles.accordianLabel}>
                 <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox  />
+                  <RuxCheckbox className="checkboxes" />
                 </RuxTableCell>
                 <RuxTableCell>
                   <RuxStatus status="caution" />
@@ -74,13 +109,18 @@ const AlertsList = () => {
           <RuxTableRow>
             <RuxAccordionItem>
               Red FEP 124 is degraded at 15:59:57.
-              <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
+              <RuxButton
+                style={styles.investigateBtn}
+                onClick={investigateHandler}
+              >
+                Investigate
+              </RuxButton>
               <div slot="label" style={styles.accordianLabel}>
                 <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox  />
+                  <RuxCheckbox className="checkboxes" />
                 </RuxTableCell>
                 <RuxTableCell>
-                  <RuxStatus status="serious" />
+                  <RuxStatus status="critical" />
                 </RuxTableCell>
                 <RuxTableCell>Black FEP 201 - Degraded</RuxTableCell>
                 <RuxTableCell>Software</RuxTableCell>
@@ -94,10 +134,15 @@ const AlertsList = () => {
           <RuxTableRow>
             <RuxAccordionItem>
               Red FEP 124 is degraded at 15:59:57.
-              <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
+              <RuxButton
+                style={styles.investigateBtn}
+                onClick={investigateHandler}
+              >
+                Investigate
+              </RuxButton>
               <div slot="label" style={styles.accordianLabel}>
                 <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox  />
+                  <RuxCheckbox className="checkboxes" />
                 </RuxTableCell>
                 <RuxTableCell>
                   <RuxStatus status="normal" />
@@ -113,10 +158,15 @@ const AlertsList = () => {
           <RuxTableRow>
             <RuxAccordionItem>
               Red FEP 124 is degraded at 15:59:57. <br />
-              <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
+              <RuxButton
+                style={styles.investigateBtn}
+                onClick={investigateHandler}
+              >
+                Investigate
+              </RuxButton>
               <div slot="label" style={styles.accordianLabel}>
                 <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox  />
+                  <RuxCheckbox className="checkboxes" />
                 </RuxTableCell>
                 <RuxTableCell>
                   <RuxStatus status="caution" />
@@ -133,10 +183,15 @@ const AlertsList = () => {
           <RuxTableRow>
             <RuxAccordionItem>
               Red FEP 124 is degraded at 15:59:57.
-              <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
+              <RuxButton
+                style={styles.investigateBtn}
+                onClick={investigateHandler}
+              >
+                Investigate
+              </RuxButton>
               <div slot="label" style={styles.accordianLabel}>
                 <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox  />
+                  <RuxCheckbox className="checkboxes" />
                 </RuxTableCell>
                 <RuxTableCell>
                   <RuxStatus status="serious" />
@@ -153,10 +208,15 @@ const AlertsList = () => {
           <RuxTableRow>
             <RuxAccordionItem>
               Red FEP 124 is degraded at 15:59:57.
-              <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
+              <RuxButton
+                style={styles.investigateBtn}
+                onClick={investigateHandler}
+              >
+                Investigate
+              </RuxButton>
               <div slot="label" style={styles.accordianLabel}>
                 <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox  />
+                  <RuxCheckbox className="checkboxes" />
                 </RuxTableCell>
                 <RuxTableCell>
                   <RuxStatus status="normal" />
@@ -172,13 +232,18 @@ const AlertsList = () => {
           <RuxTableRow>
             <RuxAccordionItem>
               Red FEP 124 is degraded at 15:59:57. <br />
-              <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
+              <RuxButton
+                style={styles.investigateBtn}
+                onClick={investigateHandler}
+              >
+                Investigate
+              </RuxButton>
               <div slot="label" style={styles.accordianLabel}>
                 <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox  />
+                  <RuxCheckbox className="checkboxes" />
                 </RuxTableCell>
                 <RuxTableCell>
-                  <RuxStatus status="caution" />
+                  <RuxStatus status="critical" />
                 </RuxTableCell>
                 <RuxTableCell>Black FEP 201 - Degraded</RuxTableCell>
                 <RuxTableCell>Software</RuxTableCell>
@@ -192,10 +257,15 @@ const AlertsList = () => {
           <RuxTableRow>
             <RuxAccordionItem>
               Red FEP 124 is degraded at 15:59:57.
-              <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
+              <RuxButton
+                style={styles.investigateBtn}
+                onClick={investigateHandler}
+              >
+                Investigate
+              </RuxButton>
               <div slot="label" style={styles.accordianLabel}>
                 <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox  />
+                  <RuxCheckbox className="checkboxes" />
                 </RuxTableCell>
                 <RuxTableCell>
                   <RuxStatus status="serious" />
@@ -212,10 +282,15 @@ const AlertsList = () => {
           <RuxTableRow>
             <RuxAccordionItem>
               Red FEP 124 is degraded at 15:59:57.
-              <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
+              <RuxButton
+                style={styles.investigateBtn}
+                onClick={investigateHandler}
+              >
+                Investigate
+              </RuxButton>
               <div slot="label" style={styles.accordianLabel}>
                 <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox  />
+                  <RuxCheckbox className="checkboxes" />
                 </RuxTableCell>
                 <RuxTableCell>
                   <RuxStatus status="normal" />
@@ -231,10 +306,15 @@ const AlertsList = () => {
           <RuxTableRow>
             <RuxAccordionItem>
               Red FEP 124 is degraded at 15:59:57. <br />
-              <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
+              <RuxButton
+                style={styles.investigateBtn}
+                onClick={investigateHandler}
+              >
+                Investigate
+              </RuxButton>
               <div slot="label" style={styles.accordianLabel}>
                 <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox  />
+                  <RuxCheckbox className="checkboxes" />
                 </RuxTableCell>
                 <RuxTableCell>
                   <RuxStatus status="caution" />
@@ -251,10 +331,15 @@ const AlertsList = () => {
           <RuxTableRow>
             <RuxAccordionItem>
               Red FEP 124 is degraded at 15:59:57.
-              <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
+              <RuxButton
+                style={styles.investigateBtn}
+                onClick={investigateHandler}
+              >
+                Investigate
+              </RuxButton>
               <div slot="label" style={styles.accordianLabel}>
                 <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox  />
+                  <RuxCheckbox className="checkboxes" />
                 </RuxTableCell>
                 <RuxTableCell>
                   <RuxStatus status="serious" />
@@ -271,10 +356,15 @@ const AlertsList = () => {
           <RuxTableRow>
             <RuxAccordionItem>
               Red FEP 124 is degraded at 15:59:57.
-              <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
+              <RuxButton
+                style={styles.investigateBtn}
+                onClick={investigateHandler}
+              >
+                Investigate
+              </RuxButton>
               <div slot="label" style={styles.accordianLabel}>
                 <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox  />
+                  <RuxCheckbox className="checkboxes" />
                 </RuxTableCell>
                 <RuxTableCell>
                   <RuxStatus status="normal" />
