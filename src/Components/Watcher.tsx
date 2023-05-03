@@ -1,5 +1,15 @@
-import { RuxContainer, RuxTable, RuxTableHeader, RuxTableHeaderRow, RuxTableHeaderCell, RuxTableRow, RuxTableCell, RuxTableBody} from '@astrouxds/react'
+import { RuxContainer, RuxStatus, RuxTable, RuxTableHeader, RuxTableHeaderRow, RuxTableHeaderCell, RuxTableRow, RuxTableCell, RuxTableBody} from '@astrouxds/react'
 import LineChart from './LineChart'
+
+const watcherDataItem = {
+  status: "caution" as Status,
+  Mneumonic: 19999999,
+  Unit: "000011111",
+  Threshold: 450,
+  Actual: "Full",
+};
+
+const fixtureData = Array(6).fill(watcherDataItem);
 
 const Watcher = () => {
   return (
@@ -13,32 +23,20 @@ const Watcher = () => {
       <div className="watcher-body">
         <RuxTable>
           <RuxTableHeader>
-              <RuxTableHeaderRow>
-                  <RuxTableHeaderCell>Mnemonic</RuxTableHeaderCell>
-                  <RuxTableHeaderCell>Unit</RuxTableHeaderCell>
-                  <RuxTableHeaderCell>Threshold</RuxTableHeaderCell>
-                  <RuxTableHeaderCell>Actual</RuxTableHeaderCell>
+            <RuxTableHeaderRow>
+              {Object.keys(fixtureData[0]).map((key) => <RuxTableHeaderCell>{key}</RuxTableHeaderCell>)}
               </RuxTableHeaderRow>
           </RuxTableHeader>
           <RuxTableBody>
+            {fixtureData.map((dataObj) => (
               <RuxTableRow>
-                  <RuxTableCell>19999999</RuxTableCell>
-                  <RuxTableCell>000011111</RuxTableCell>
-                  <RuxTableCell>450</RuxTableCell>
-                  <RuxTableCell>Full</RuxTableCell>
-              </RuxTableRow>
-              <RuxTableRow>
-                  <RuxTableCell>19999999</RuxTableCell>
-                  <RuxTableCell>000011111</RuxTableCell>
-                  <RuxTableCell>450</RuxTableCell>
-                  <RuxTableCell>Full</RuxTableCell>
-              </RuxTableRow>
-              <RuxTableRow>
-                  <RuxTableCell>19999999</RuxTableCell>
-                  <RuxTableCell>000011111</RuxTableCell>
-                  <RuxTableCell>450</RuxTableCell>
-                  <RuxTableCell>Full</RuxTableCell>
-              </RuxTableRow>
+                <RuxStatus status={dataObj.status} />
+                {Object.entries(datObj).map([key, value] => 
+                <RuxTableCell>{key !== status ? value : null}</RuxTableCell>
+                )}
+                  
+                </RuxTableRow>
+              ))}
           </RuxTableBody>
         </RuxTable>
         <LineChart />
