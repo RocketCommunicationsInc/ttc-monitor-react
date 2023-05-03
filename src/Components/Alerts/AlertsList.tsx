@@ -31,7 +31,7 @@ const AlertsList = () => {
   // const selectAllHandler = (event: any) => {
   //   const checkboxes = event.target.querySelectorAll(".rux-checkbox");
   //   for (let i = 0; i < checkboxes.length; i++) {
-  //     checkboxes[i].checked = true;
+  //     checkboxes[i]. = true;
   //   }
   // };
 
@@ -57,7 +57,7 @@ const AlertsList = () => {
               <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
               <div slot="label" style={styles.accordianLabel}>
                 <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox checked />
+                  <RuxCheckbox  />
                 </RuxTableCell>
                 <RuxTableCell>
                   <RuxStatus status="caution" />
@@ -77,7 +77,7 @@ const AlertsList = () => {
               <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
               <div slot="label" style={styles.accordianLabel}>
                 <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox checked />
+                  <RuxCheckbox  />
                 </RuxTableCell>
                 <RuxTableCell>
                   <RuxStatus status="serious" />
@@ -97,7 +97,7 @@ const AlertsList = () => {
               <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
               <div slot="label" style={styles.accordianLabel}>
                 <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox checked />
+                  <RuxCheckbox  />
                 </RuxTableCell>
                 <RuxTableCell>
                   <RuxStatus status="normal" />
@@ -116,7 +116,7 @@ const AlertsList = () => {
               <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
               <div slot="label" style={styles.accordianLabel}>
                 <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox checked />
+                  <RuxCheckbox  />
                 </RuxTableCell>
                 <RuxTableCell>
                   <RuxStatus status="caution" />
@@ -136,7 +136,7 @@ const AlertsList = () => {
               <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
               <div slot="label" style={styles.accordianLabel}>
                 <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox checked />
+                  <RuxCheckbox  />
                 </RuxTableCell>
                 <RuxTableCell>
                   <RuxStatus status="serious" />
@@ -156,7 +156,7 @@ const AlertsList = () => {
               <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
               <div slot="label" style={styles.accordianLabel}>
                 <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox checked />
+                  <RuxCheckbox  />
                 </RuxTableCell>
                 <RuxTableCell>
                   <RuxStatus status="normal" />
@@ -175,7 +175,7 @@ const AlertsList = () => {
               <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
               <div slot="label" style={styles.accordianLabel}>
                 <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox checked />
+                  <RuxCheckbox  />
                 </RuxTableCell>
                 <RuxTableCell>
                   <RuxStatus status="caution" />
@@ -195,7 +195,7 @@ const AlertsList = () => {
               <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
               <div slot="label" style={styles.accordianLabel}>
                 <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox checked />
+                  <RuxCheckbox  />
                 </RuxTableCell>
                 <RuxTableCell>
                   <RuxStatus status="serious" />
@@ -215,7 +215,7 @@ const AlertsList = () => {
               <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
               <div slot="label" style={styles.accordianLabel}>
                 <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox checked />
+                  <RuxCheckbox  />
                 </RuxTableCell>
                 <RuxTableCell>
                   <RuxStatus status="normal" />
@@ -234,7 +234,7 @@ const AlertsList = () => {
               <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
               <div slot="label" style={styles.accordianLabel}>
                 <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox checked />
+                  <RuxCheckbox  />
                 </RuxTableCell>
                 <RuxTableCell>
                   <RuxStatus status="caution" />
@@ -254,7 +254,7 @@ const AlertsList = () => {
               <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
               <div slot="label" style={styles.accordianLabel}>
                 <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox checked />
+                  <RuxCheckbox  />
                 </RuxTableCell>
                 <RuxTableCell>
                   <RuxStatus status="serious" />
@@ -274,7 +274,7 @@ const AlertsList = () => {
               <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
               <div slot="label" style={styles.accordianLabel}>
                 <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox checked />
+                  <RuxCheckbox  />
                 </RuxTableCell>
                 <RuxTableCell>
                   <RuxStatus status="normal" />
