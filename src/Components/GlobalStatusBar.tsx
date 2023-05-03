@@ -37,11 +37,14 @@ const styles = {
 
 const GlobalStatusBar = () => {
   const [showPopUp, setShowPopUp] = useState(false);
-  const [status, setStatus] = useState(0);
-  const [notifications, setNotifications] = useState(0);
+  const [status1, setStatus1] = useState(0);
+  const [status2, setStatus2] = useState(5);
+  const [status3, setStatus3] = useState(3);
+  const [notifications1, setNotifications1] = useState(0);
+  const [notifications2, setNotifications2] = useState(2);
+  const [notifications3, setNotifications3] = useState(4);
 
   const iconStatusHanlder = () => {
-    // alert("hello")
     setShowPopUp(true);
   };
 
@@ -59,7 +62,11 @@ const GlobalStatusBar = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       const randomStatus = Math.floor(Math.random() * statusValuesArr.length);
-      setStatus(statusValuesArr[randomStatus] as any);
+      const randomStatus2 = Math.floor(Math.random() * statusValuesArr.length);
+      const randomStatus3 = Math.floor(Math.random() * statusValuesArr.length);
+      setStatus1(statusValuesArr[randomStatus] as any);
+      setStatus2(statusValuesArr[randomStatus2] as any);
+      setStatus3(statusValuesArr[randomStatus3] as any);
     }, 3000);
     return () => clearInterval(interval);
   });
@@ -67,7 +74,11 @@ const GlobalStatusBar = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       const randomNumber = Math.floor(Math.random() * notificationsArr.length);
-      setNotifications(notificationsArr[randomNumber]);
+      const randomNumber2 = Math.floor(Math.random() * notificationsArr.length);
+      const randomNumber3 = Math.floor(Math.random() * notificationsArr.length);
+      setNotifications1(notificationsArr[randomNumber]);
+      setNotifications2(notificationsArr[randomNumber2]);
+      setNotifications3(notificationsArr[randomNumber3]);
     }, 3000);
     return () => clearInterval(interval);
   });
@@ -85,10 +96,10 @@ const GlobalStatusBar = () => {
 
       <div style={styles.statusIndicators}>
         <RuxMonitoringIcon
-          status={status as any}
+          status={status1 as any}
           icon="antenna-off"
           label="Ground"
-          notifications={notifications}
+          notifications={notifications1}
           onClick={iconStatusHanlder}
           style={styles.monitorIcons}
         >
@@ -102,17 +113,17 @@ const GlobalStatusBar = () => {
         </RuxMonitoringIcon>
 
         <RuxMonitoringIcon
-          status={status as any}
+          status={status2 as any}
           icon="antenna-receive"
           label="Comms"
-          notifications={notifications}
+          notifications={notifications2}
           style={styles.monitorIcons}
         />
         <RuxMonitoringIcon
-          status={status as any}
+          status={status3 as any}
           icon="processor"
           label="Software"
-          notifications={notifications}
+          notifications={notifications3}
           style={styles.monitorIcons}
         />
       </div>
