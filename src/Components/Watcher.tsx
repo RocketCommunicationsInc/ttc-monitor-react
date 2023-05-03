@@ -36,8 +36,8 @@ const Watcher = () => {
           <RuxTableHeader>
             <RuxTableHeaderRow>
               {Object.keys(fixtureData[0]).map((key) => (
-                <RuxTableHeaderCell style={{ textAlign: "right" }}>
-                  {key}
+                <RuxTableHeaderCell>
+                  {key === "status" ? "" : key}
                 </RuxTableHeaderCell>
               ))}
             </RuxTableHeaderRow>
@@ -51,7 +51,7 @@ const Watcher = () => {
                       <RuxStatus status={dataObj.status} />
                     </RuxTableCell>
                   ) : (
-                    <RuxTableCell style={{ textAlign: "right" }}>
+                    <RuxTableCell>
                       {value}
                     </RuxTableCell>
                   )

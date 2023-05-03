@@ -85,10 +85,10 @@ const AlertsList = () => {
             )}
             Message <span style={{ marginLeft: "7rem" }}>Category</span>
             <span style={{ marginLeft: "1rem" }}>Time</span>
-          </RuxTableHeaderCell>
+           </RuxTableHeaderCell>
           {/* {Object.keys(fixtureData[0]).map((key) => (
             <RuxTableHeaderCell style={{ textAlign: "right" }}>
-              {key}
+              {key === "status" ? "" : key}
             </RuxTableHeaderCell>
           ))} */}
         </RuxTableHeaderRow>
