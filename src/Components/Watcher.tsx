@@ -12,6 +12,12 @@ import {
 import type { rowDataObject } from "../Types/types";
 import LineChart from "./LineChart";
 
+const styles = {
+  container: {
+    display: "flex",
+  },
+};
+
 const watcherDataItem = {
   status: "caution" as const,
   Mneumonic: 19999999,
@@ -25,10 +31,10 @@ const fixtureData = Array(6).fill(watcherDataItem);
 const Watcher = () => {
   return (
     <RuxContainer className="watcher">
-      <div slot="header" style={{ display: "flex" }}>
+      <div slot="header" style={styles.container}>
         Watcher
       </div>
-      <div slot="toolbar" style={{ display: "flex" }}>
+      <div slot="toolbar" style={styles.container}>
         IRON 4090
       </div>
       <div className="watcher-body">
@@ -51,9 +57,7 @@ const Watcher = () => {
                       <RuxStatus status={dataObj.status} />
                     </RuxTableCell>
                   ) : (
-                    <RuxTableCell>
-                      {value}
-                    </RuxTableCell>
+                    <RuxTableCell>{value}</RuxTableCell>
                   )
                 )}
               </RuxTableRow>

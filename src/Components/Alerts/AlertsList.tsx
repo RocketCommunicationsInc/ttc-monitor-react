@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   RuxTable,
   RuxTableHeader,
@@ -13,31 +14,37 @@ import {
   RuxAccordionItem,
 } from "@astrouxds/react";
 import type { rowDataObject } from "../../Types/types";
-import { useState } from "react";
 
 const styles = {
   investigateBtn: {
     display: "flex",
     justifyContent: "center",
-    paddingBlock: ".5rem",
+    paddingBlock: "var(--spacing-2)",
   },
   accordianLabel: {
-    color: "white",
-    width: "458px",
+    color: "var(--color-palette-neutral-000)",
+    width: "28.625rem",
+  },
+  checkboxes: {
+    paddingRight: "var(--spacing-4)",
+  },
+  selectNoneBtn: {
+    marginLeft: "-var(--spacing-4)",
+    marginRight: "-1.25rem",
   },
 };
-
-const alertsDataItem = {
-  status: "caution" as const,
-  Message: "Antenna VTS 1 - NOLOCK",
-  Category: "Software",
-  Time: "15:59:57",
-};
-
-const fixtureData = Array(6).fill(alertsDataItem);
 
 const AlertsList = () => {
   const [checked, setChecked] = useState(false);
+
+  const alertsDataItem = {
+    status: "caution" as const,
+    Message: "Antenna VTS 1 - NOLOCK",
+    Category: "Software",
+    Time: "15:59:57",
+  };
+
+  const fixtureData = Array(11).fill(alertsDataItem);
 
   const selectAllHandler = () => {
     const checkboxes: any = document.querySelectorAll(".checkboxes");
@@ -66,7 +73,7 @@ const AlertsList = () => {
           <RuxTableHeaderCell>
             {checked !== true ? (
               <RuxButton
-                style={{ marginLeft: "-1rem" }}
+                style={{ marginLeft: "-var(--spacing-4)" }}
                 borderless
                 size="small"
                 onClick={selectAllHandler}
@@ -75,7 +82,7 @@ const AlertsList = () => {
               </RuxButton>
             ) : (
               <RuxButton
-                style={{ marginLeft: "-1rem" }}
+                style={styles.selectNoneBtn}
                 borderless
                 size="small"
                 onClick={selectNoneHandler}
@@ -83,14 +90,10 @@ const AlertsList = () => {
                 Select None
               </RuxButton>
             )}
-            Message <span style={{ marginLeft: "7rem" }}>Category</span>
-            <span style={{ marginLeft: "1rem" }}>Time</span>
-           </RuxTableHeaderCell>
-          {/* {Object.keys(fixtureData[0]).map((key) => (
-            <RuxTableHeaderCell style={{ textAlign: "right" }}>
-              {key === "status" ? "" : key}
-            </RuxTableHeaderCell>
-          ))} */}
+            <span style={{ marginLeft: "var(--spacing-4)" }}> Message</span>
+            <span style={{ marginLeft: "7.65rem" }}>Category</span>
+            <span style={{ marginLeft: "var(--spacing-4)" }}>Time</span>
+          </RuxTableHeaderCell>
         </RuxTableHeaderRow>
       </RuxTableHeader>
       <RuxTableBody>
@@ -99,10 +102,18 @@ const AlertsList = () => {
             <RuxTableRow>
               <RuxAccordionItem>
                 Red FEP 124 is degraded at 15:59:57. <br />
-                <RuxButton onClick={investigateHandler} style={styles.investigateBtn}>Investigate</RuxButton>
+                <RuxButton
+                  onClick={investigateHandler}
+                  style={styles.investigateBtn}
+                >
+                  Investigate
+                </RuxButton>
                 <div slot="label" style={styles.accordianLabel}>
                   <RuxTableCell style={{ textAlign: "center" }}>
-                    <RuxCheckbox className="checkboxes"/>
+                    <RuxCheckbox
+                      style={styles.checkboxes}
+                      className="checkboxes"
+                    />
                   </RuxTableCell>
                   {Object.entries(dataObj).map(([key, value]) =>
                     key === "status" ? (

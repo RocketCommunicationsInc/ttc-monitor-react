@@ -15,12 +15,6 @@ const styles = {
     marginLeft: "27rem",
     marginRight: "auto",
   },
-  indicator: {
-    width: "108px",
-    margin: "0 auto",
-    padding: "0 10px",
-    display: "inline-block",
-  },
   clock: {
     marginLeft: "28rem",
   },
@@ -31,7 +25,7 @@ const styles = {
     zIndex: "10000",
   },
   monitorIcons: {
-    marginInline: ".5rem",
+    marginInline: "var(--spacing-2)",
   },
 };
 
