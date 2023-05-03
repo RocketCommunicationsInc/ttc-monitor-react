@@ -23,6 +23,7 @@ const styles = {
   },
   accordianLabel: {
     color: "white",
+    width: "458px",
   },
 };
 
@@ -85,11 +86,11 @@ const AlertsList = () => {
             Message <span style={{ marginLeft: "7rem" }}>Category</span>
             <span style={{ marginLeft: "1rem" }}>Time</span>
           </RuxTableHeaderCell>
-          {Object.keys(fixtureData[0]).map((key) => (
+          {/* {Object.keys(fixtureData[0]).map((key) => (
             <RuxTableHeaderCell style={{ textAlign: "right" }}>
               {key}
             </RuxTableHeaderCell>
-          ))}
+          ))} */}
         </RuxTableHeaderRow>
       </RuxTableHeader>
       <RuxTableBody>
