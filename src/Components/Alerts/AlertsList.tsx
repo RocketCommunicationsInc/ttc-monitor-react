@@ -28,7 +28,6 @@ const styles = {
 };
 
 const AlertsList = () => {
- 
   // const selectAllHandler = (event: any) => {
   //   const checkboxes = event.target.querySelectorAll(".rux-checkbox");
   //   for (let i = 0; i < checkboxes.length; i++) {
@@ -40,11 +39,12 @@ const AlertsList = () => {
     <RuxTable>
       <RuxTableHeader>
         <RuxTableHeaderRow>
-          <RuxTableHeaderCell >
+          <RuxTableHeaderCell>
             <RuxButton borderless size="small">
               Select All
             </RuxButton>
-           Message <span style={{marginLeft: "7rem"}}>Category</span> <span style={{marginLeft: "1rem"}}>Time</span> 
+            Message <span style={{ marginLeft: "7rem" }}>Category</span>{" "}
+            <span style={{ marginLeft: "1rem" }}>Time</span>
           </RuxTableHeaderCell>
         </RuxTableHeaderRow>
       </RuxTableHeader>
@@ -286,28 +286,6 @@ const AlertsList = () => {
             </RuxAccordionItem>
           </RuxTableRow>
         </RuxAccordion>
-        <RuxAccordion>
-          <RuxTableRow>
-            <RuxAccordionItem>
-              Red FEP 124 is degraded at 15:59:57.
-              <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
-              <div slot="label" style={styles.accordianLabel}>
-                <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox checked />
-                </RuxTableCell>
-                <RuxTableCell>
-                  <RuxStatus status="normal" />
-                </RuxTableCell>
-                <RuxTableCell>Black FEP 201 - Degraded</RuxTableCell>
-                <RuxTableCell>Software</RuxTableCell>
-                <RuxTableCell>15:59:57</RuxTableCell>
-              </div>
-            </RuxAccordionItem>
-          </RuxTableRow>
-        </RuxAccordion>
-        
-
-        
       </RuxTableBody>
     </RuxTable>
   );
