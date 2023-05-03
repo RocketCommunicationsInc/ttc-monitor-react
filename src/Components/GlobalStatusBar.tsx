@@ -41,7 +41,6 @@ const GlobalStatusBar = () => {
   const [notifications, setNotifications] = useState(0);
 
   const iconStatusHanlder = () => {
-    // alert("hello")
     setShowPopUp(true);
   };
 
