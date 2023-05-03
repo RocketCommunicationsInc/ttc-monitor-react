@@ -14,6 +14,7 @@ import {
   RuxAccordionItem,
 } from "@astrouxds/react";
 import "./AlertsList.css";
+import type { rowDataObject } from "../../Types/types";
 
 const styles = {
   investigateBtn: {
@@ -23,9 +24,17 @@ const styles = {
   },
   accordianLabel: {
     color: "white",
-    width: "458px",
   },
 };
+
+const alertsDataItem = {
+  status: "caution" as const,
+  Message: "Antenna VTS 1 - NOLOCK",
+  Category: "Software",
+  Time: "15:59:57",
+};
+
+const fixtureData = Array(6).fill(alertsDataItem);
 
 const AlertsList = () => {
   // const selectAllHandler = (event: any) => {
@@ -43,249 +52,41 @@ const AlertsList = () => {
             <RuxButton borderless size="small">
               Select All
             </RuxButton>
-            Message <span style={{ marginLeft: "7rem" }}>Category</span>{" "}
-            <span style={{ marginLeft: "1rem" }}>Time</span>
           </RuxTableHeaderCell>
+          {Object.keys(fixtureData[0]).map((key) => (
+            <RuxTableHeaderCell style={{ textAlign: "right" }}>
+              {key}
+            </RuxTableHeaderCell>
+          ))}
         </RuxTableHeaderRow>
       </RuxTableHeader>
-
       <RuxTableBody>
-        <RuxAccordion>
-          <RuxTableRow>
-            <RuxAccordionItem>
-              Red FEP 124 is degraded at 15:59:57. <br />
-              <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
-              <div slot="label" style={styles.accordianLabel}>
-                <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox  />
-                </RuxTableCell>
-                <RuxTableCell>
-                  <RuxStatus status="caution" />
-                </RuxTableCell>
-                <RuxTableCell>Black FEP 201 - Degraded</RuxTableCell>
-                <RuxTableCell>Software</RuxTableCell>
-                <RuxTableCell>15:59:57</RuxTableCell>
-              </div>
-            </RuxAccordionItem>
-          </RuxTableRow>
-        </RuxAccordion>
-
-        <RuxAccordion>
-          <RuxTableRow>
-            <RuxAccordionItem>
-              Red FEP 124 is degraded at 15:59:57.
-              <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
-              <div slot="label" style={styles.accordianLabel}>
-                <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox  />
-                </RuxTableCell>
-                <RuxTableCell>
-                  <RuxStatus status="serious" />
-                </RuxTableCell>
-                <RuxTableCell>Black FEP 201 - Degraded</RuxTableCell>
-                <RuxTableCell>Software</RuxTableCell>
-                <RuxTableCell>15:59:57</RuxTableCell>
-              </div>
-            </RuxAccordionItem>
-          </RuxTableRow>
-        </RuxAccordion>
-
-        <RuxAccordion>
-          <RuxTableRow>
-            <RuxAccordionItem>
-              Red FEP 124 is degraded at 15:59:57.
-              <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
-              <div slot="label" style={styles.accordianLabel}>
-                <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox  />
-                </RuxTableCell>
-                <RuxTableCell>
-                  <RuxStatus status="normal" />
-                </RuxTableCell>
-                <RuxTableCell>Black FEP 201 - Degraded</RuxTableCell>
-                <RuxTableCell>Software</RuxTableCell>
-                <RuxTableCell>15:59:57</RuxTableCell>
-              </div>
-            </RuxAccordionItem>
-          </RuxTableRow>
-        </RuxAccordion>
-        <RuxAccordion>
-          <RuxTableRow>
-            <RuxAccordionItem>
-              Red FEP 124 is degraded at 15:59:57. <br />
-              <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
-              <div slot="label" style={styles.accordianLabel}>
-                <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox  />
-                </RuxTableCell>
-                <RuxTableCell>
-                  <RuxStatus status="caution" />
-                </RuxTableCell>
-                <RuxTableCell>Black FEP 201 - Degraded</RuxTableCell>
-                <RuxTableCell>Software</RuxTableCell>
-                <RuxTableCell>15:59:57</RuxTableCell>
-              </div>
-            </RuxAccordionItem>
-          </RuxTableRow>
-        </RuxAccordion>
-
-        <RuxAccordion>
-          <RuxTableRow>
-            <RuxAccordionItem>
-              Red FEP 124 is degraded at 15:59:57.
-              <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
-              <div slot="label" style={styles.accordianLabel}>
-                <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox  />
-                </RuxTableCell>
-                <RuxTableCell>
-                  <RuxStatus status="serious" />
-                </RuxTableCell>
-                <RuxTableCell>Black FEP 201 - Degraded</RuxTableCell>
-                <RuxTableCell>Software</RuxTableCell>
-                <RuxTableCell>15:59:57</RuxTableCell>
-              </div>
-            </RuxAccordionItem>
-          </RuxTableRow>
-        </RuxAccordion>
-
-        <RuxAccordion>
-          <RuxTableRow>
-            <RuxAccordionItem>
-              Red FEP 124 is degraded at 15:59:57.
-              <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
-              <div slot="label" style={styles.accordianLabel}>
-                <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox  />
-                </RuxTableCell>
-                <RuxTableCell>
-                  <RuxStatus status="normal" />
-                </RuxTableCell>
-                <RuxTableCell>Black FEP 201 - Degraded</RuxTableCell>
-                <RuxTableCell>Software</RuxTableCell>
-                <RuxTableCell>15:59:57</RuxTableCell>
-              </div>
-            </RuxAccordionItem>
-          </RuxTableRow>
-        </RuxAccordion>
-        <RuxAccordion>
-          <RuxTableRow>
-            <RuxAccordionItem>
-              Red FEP 124 is degraded at 15:59:57. <br />
-              <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
-              <div slot="label" style={styles.accordianLabel}>
-                <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox  />
-                </RuxTableCell>
-                <RuxTableCell>
-                  <RuxStatus status="caution" />
-                </RuxTableCell>
-                <RuxTableCell>Black FEP 201 - Degraded</RuxTableCell>
-                <RuxTableCell>Software</RuxTableCell>
-                <RuxTableCell>15:59:57</RuxTableCell>
-              </div>
-            </RuxAccordionItem>
-          </RuxTableRow>
-        </RuxAccordion>
-
-        <RuxAccordion>
-          <RuxTableRow>
-            <RuxAccordionItem>
-              Red FEP 124 is degraded at 15:59:57.
-              <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
-              <div slot="label" style={styles.accordianLabel}>
-                <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox  />
-                </RuxTableCell>
-                <RuxTableCell>
-                  <RuxStatus status="serious" />
-                </RuxTableCell>
-                <RuxTableCell>Black FEP 201 - Degraded</RuxTableCell>
-                <RuxTableCell>Software</RuxTableCell>
-                <RuxTableCell>15:59:57</RuxTableCell>
-              </div>
-            </RuxAccordionItem>
-          </RuxTableRow>
-        </RuxAccordion>
-
-        <RuxAccordion>
-          <RuxTableRow>
-            <RuxAccordionItem>
-              Red FEP 124 is degraded at 15:59:57.
-              <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
-              <div slot="label" style={styles.accordianLabel}>
-                <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox  />
-                </RuxTableCell>
-                <RuxTableCell>
-                  <RuxStatus status="normal" />
-                </RuxTableCell>
-                <RuxTableCell>Black FEP 201 - Degraded</RuxTableCell>
-                <RuxTableCell>Software</RuxTableCell>
-                <RuxTableCell>15:59:57</RuxTableCell>
-              </div>
-            </RuxAccordionItem>
-          </RuxTableRow>
-        </RuxAccordion>
-        <RuxAccordion>
-          <RuxTableRow>
-            <RuxAccordionItem>
-              Red FEP 124 is degraded at 15:59:57. <br />
-              <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
-              <div slot="label" style={styles.accordianLabel}>
-                <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox  />
-                </RuxTableCell>
-                <RuxTableCell>
-                  <RuxStatus status="caution" />
-                </RuxTableCell>
-                <RuxTableCell>Black FEP 201 - Degraded</RuxTableCell>
-                <RuxTableCell>Software</RuxTableCell>
-                <RuxTableCell>15:59:57</RuxTableCell>
-              </div>
-            </RuxAccordionItem>
-          </RuxTableRow>
-        </RuxAccordion>
-
-        <RuxAccordion>
-          <RuxTableRow>
-            <RuxAccordionItem>
-              Red FEP 124 is degraded at 15:59:57.
-              <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
-              <div slot="label" style={styles.accordianLabel}>
-                <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox  />
-                </RuxTableCell>
-                <RuxTableCell>
-                  <RuxStatus status="serious" />
-                </RuxTableCell>
-                <RuxTableCell>Black FEP 201 - Degraded</RuxTableCell>
-                <RuxTableCell>Software</RuxTableCell>
-                <RuxTableCell>15:59:57</RuxTableCell>
-              </div>
-            </RuxAccordionItem>
-          </RuxTableRow>
-        </RuxAccordion>
-
-        <RuxAccordion>
-          <RuxTableRow>
-            <RuxAccordionItem>
-              Red FEP 124 is degraded at 15:59:57.
-              <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
-              <div slot="label" style={styles.accordianLabel}>
-                <RuxTableCell style={{ textAlign: "center" }}>
-                  <RuxCheckbox  />
-                </RuxTableCell>
-                <RuxTableCell>
-                  <RuxStatus status="normal" />
-                </RuxTableCell>
-                <RuxTableCell>Black FEP 201 - Degraded</RuxTableCell>
-                <RuxTableCell>Software</RuxTableCell>
-                <RuxTableCell>15:59:57</RuxTableCell>
-              </div>
-            </RuxAccordionItem>
-          </RuxTableRow>
-        </RuxAccordion>
+        {fixtureData.map((dataObj: rowDataObject) => (
+          <RuxAccordion>
+            <RuxTableRow>
+              <RuxAccordionItem>
+                Red FEP 124 is degraded at 15:59:57. <br />
+                <RuxButton style={styles.investigateBtn}>Investigate</RuxButton>
+                <div slot="label" style={styles.accordianLabel}>
+                  <RuxTableCell style={{ textAlign: "center" }}>
+                    <RuxCheckbox />
+                  </RuxTableCell>
+                  {Object.entries(dataObj).map(([key, value]) =>
+                    key === "status" ? (
+                      <RuxTableCell>
+                        <RuxStatus status={dataObj.status} />
+                      </RuxTableCell>
+                    ) : (
+                      <RuxTableCell style={{ textAlign: "right" }}>
+                        {value}
+                      </RuxTableCell>
+                    )
+                  )}
+                </div>
+              </RuxAccordionItem>
+            </RuxTableRow>
+          </RuxAccordion>
+        ))}
       </RuxTableBody>
     </RuxTable>
   );

@@ -1,64 +1,52 @@
-import { RuxTable, RuxTableHeader, RuxTableHeaderRow, RuxTableHeaderCell, RuxTableRow, RuxTableCell, RuxTableBody} from '@astrouxds/react'
+import {
+  RuxTable,
+  RuxTableHeader,
+  RuxTableHeaderRow,
+  RuxTableHeaderCell,
+  RuxTableRow,
+  RuxTableCell,
+  RuxTableBody,
+} from "@astrouxds/react";
+import type { rowDataObject } from "../Types/types";
+
+const constellationDataItem = {
+  Status: 19999999,
+  Satellite: "000011111",
+  "Next Pass": 450,
+  AOS: "Full",
+  LOS: "2020 158 01:23:45:678",
+  "Ground Station": "OBTYPE_5",
+  Azimuth: 150,
+  Elevation: 3500,
+  State: 7500,
+  Actions: 100,
+};
+
+const fixtureData = Array(6).fill(constellationDataItem);
 
 const CostellationList = () => {
-
   return (
-    
-<RuxTable>
-    <RuxTableHeader>
+    <RuxTable>
+      <RuxTableHeader>
         <RuxTableHeaderRow>
-            <RuxTableHeaderCell>Status</RuxTableHeaderCell>
-            <RuxTableHeaderCell>Satellite</RuxTableHeaderCell>
-            <RuxTableHeaderCell>Next Pass</RuxTableHeaderCell>
-            <RuxTableHeaderCell>AOS</RuxTableHeaderCell>
-            <RuxTableHeaderCell>LOS</RuxTableHeaderCell>
-            <RuxTableHeaderCell>Ground Station</RuxTableHeaderCell>
-            <RuxTableHeaderCell>Azimuth</RuxTableHeaderCell>
-            <RuxTableHeaderCell>Elevation</RuxTableHeaderCell>
-            <RuxTableHeaderCell>State</RuxTableHeaderCell>
-            <RuxTableHeaderCell>Actions</RuxTableHeaderCell>
+          {Object.keys(fixtureData[0]).map((key) => (
+            <RuxTableHeaderCell style={{ textAlign: "right" }}>
+              {key}
+            </RuxTableHeaderCell>
+          ))}
         </RuxTableHeaderRow>
-    </RuxTableHeader>
-    <RuxTableBody>
-        <RuxTableRow>
-            <RuxTableCell>19999999</RuxTableCell>
-            <RuxTableCell>000011111</RuxTableCell>
-            <RuxTableCell>450</RuxTableCell>
-            <RuxTableCell>Full</RuxTableCell>
-            <RuxTableCell>2020 158 01:23:45:678</RuxTableCell>
-            <RuxTableCell>OBTYPE_5</RuxTableCell>
-            <RuxTableCell>150</RuxTableCell>
-            <RuxTableCell>3500</RuxTableCell>
-            <RuxTableCell>7500</RuxTableCell>
-            <RuxTableCell>100</RuxTableCell>
-        </RuxTableRow>
-        <RuxTableRow>
-            <RuxTableCell>19999999</RuxTableCell>
-            <RuxTableCell>000011111</RuxTableCell>
-            <RuxTableCell>450</RuxTableCell>
-            <RuxTableCell>Full</RuxTableCell>
-            <RuxTableCell>2020 158 01:23:45:678</RuxTableCell>
-            <RuxTableCell>OBTYPE_5</RuxTableCell>
-            <RuxTableCell>150</RuxTableCell>
-            <RuxTableCell>3500</RuxTableCell>
-            <RuxTableCell>7500</RuxTableCell>
-            <RuxTableCell>100</RuxTableCell>
-        </RuxTableRow>
-        <RuxTableRow>
-            <RuxTableCell>19999999</RuxTableCell>
-            <RuxTableCell>000011111</RuxTableCell>
-            <RuxTableCell>450</RuxTableCell>
-            <RuxTableCell>Full</RuxTableCell>
-            <RuxTableCell>2020 158 01:23:45:678</RuxTableCell>
-            <RuxTableCell>OBTYPE_5</RuxTableCell>
-            <RuxTableCell>150</RuxTableCell>
-            <RuxTableCell>3500</RuxTableCell>
-            <RuxTableCell>7500</RuxTableCell>
-            <RuxTableCell>100</RuxTableCell>
-        </RuxTableRow>
-    </RuxTableBody>
-</RuxTable>
-  )
-}
+      </RuxTableHeader>
+      <RuxTableBody>
+        {fixtureData.map((dataObj: rowDataObject) => (
+          <RuxTableRow>
+            {Object.values(dataObj).map((value) => (
+              <RuxTableCell>{value}</RuxTableCell>
+            ))}
+          </RuxTableRow>
+        ))}
+      </RuxTableBody>
+    </RuxTable>
+  );
+};
 
-export default CostellationList
+export default CostellationList;

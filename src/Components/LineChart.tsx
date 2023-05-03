@@ -1,9 +1,5 @@
-
 const LineChart = () => {
+  return <div>IRON 4090</div>;
+};
 
-  return (
-    <div>IRON 4090</div>
-  )
-}
-
-export default LineChart
+export default LineChart;

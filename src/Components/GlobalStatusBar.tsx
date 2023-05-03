@@ -22,17 +22,17 @@ const styles = {
     display: "inline-block",
   },
   clock: {
-    marginLeft: "28rem"
-  }, 
+    marginLeft: "28rem",
+  },
   popUp: {
     position: "fixed",
     top: "93.3984375px",
     left: "1317.9921875px",
     zIndex: "10000",
-  }, 
+  },
   monitorIcons: {
-    marginInline: ".5rem"
-  }
+    marginInline: ".5rem",
+  },
 };
 
 const GlobalStatusBar = () => {
@@ -58,16 +58,16 @@ const GlobalStatusBar = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-     const randomStatus = Math.floor(Math.random() * (statusValuesArr.length))
-      setStatus(statusValuesArr[randomStatus] as any)
+      const randomStatus = Math.floor(Math.random() * statusValuesArr.length);
+      setStatus(statusValuesArr[randomStatus] as any);
     }, 3000);
     return () => clearInterval(interval);
   });
 
   useEffect(() => {
     const interval = setInterval(() => {
-     const randomNumber = Math.floor(Math.random() * (notificationsArr.length))
-   setNotifications(notificationsArr[randomNumber])
+      const randomNumber = Math.floor(Math.random() * notificationsArr.length);
+      setNotifications(notificationsArr[randomNumber]);
     }, 3000);
     return () => clearInterval(interval);
   });
@@ -81,9 +81,9 @@ const GlobalStatusBar = () => {
           <RuxMenuItem>Sign Out</RuxMenuItem>
         </RuxMenu>
       </RuxPopUp>
-      <RuxClock style={styles.clock}/>
+      <RuxClock style={styles.clock} />
 
-      <div style={styles.statusIndicators} >
+      <div style={styles.statusIndicators}>
         <RuxMonitoringIcon
           status={status as any}
           icon="antenna-off"
@@ -91,15 +91,13 @@ const GlobalStatusBar = () => {
           notifications={notifications}
           onClick={iconStatusHanlder}
           style={styles.monitorIcons}
-          >
-          {showPopUp && ( 
-          <RuxPopUp
-            style={styles.popUp}
-          >
-            <RuxMenu>
-              <RuxMenuItem>Investigate</RuxMenuItem>
-            </RuxMenu>
-          </RuxPopUp>
+        >
+          {showPopUp && (
+            <RuxPopUp style={styles.popUp}>
+              <RuxMenu>
+                <RuxMenuItem>Investigate</RuxMenuItem>
+              </RuxMenu>
+            </RuxPopUp>
           )}
         </RuxMonitoringIcon>
 
@@ -118,7 +116,6 @@ const GlobalStatusBar = () => {
           style={styles.monitorIcons}
         />
       </div>
-
     </RuxGlobalStatusBar>
   );
 };
