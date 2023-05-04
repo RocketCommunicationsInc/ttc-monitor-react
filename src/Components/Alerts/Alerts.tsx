@@ -1,5 +1,6 @@
 import { RuxContainer, RuxSelect, RuxOption } from "@astrouxds/react";
 import AlertsList from "./AlertsList";
+import useAlerts from "../../hooks/useAlerts";
 
 const styles = {
   activeAlerts: {
@@ -28,15 +29,16 @@ const styles = {
     alignItems: "center",
     textAlign: "center" as "center",
     marginRight: "auto",
-  }
+  },
 };
 
 const Alerts = () => {
+  const { alertIds } = useAlerts();
   return (
     <RuxContainer className="alerts">
       <div slot="header" style={styles.header}>
         <div style={styles.activeAlerts}>
-          <span style={styles.alertsNum}>123</span> Active Alerts
+          <span style={styles.alertsNum}>{alertIds.length}</span> Active Alerts
         </div>
         <div style={styles.selectMenusDiv}>
           <RuxSelect size="small" label="Severity" style={styles.select1}>

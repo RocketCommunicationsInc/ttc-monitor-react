@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   RuxTable,
   RuxTableHeader,
@@ -13,7 +13,7 @@ import {
   RuxAccordion,
   RuxAccordionItem,
 } from "@astrouxds/react";
-import type { rowDataObject } from "../../Types/types";
+import useAlerts from "../../hooks/useAlerts";
 
 const styles = {
   investigateBtn: {
@@ -36,15 +36,8 @@ const styles = {
 
 const AlertsList = () => {
   const [checked, setChecked] = useState(false);
-
-  const alertsDataItem = {
-    status: "caution" as const,
-    Message: "Antenna VTS 1 - NOLOCK",
-    Category: "Software",
-    Time: "15:59:57",
-  };
-
-  const fixtureData = Array(11).fill(alertsDataItem);
+  const { alerts, alertIds, generate, stopGenerating, initialize } =
+    useAlerts();
 
   const selectAllHandler = () => {
     const checkboxes: any = document.querySelectorAll(".checkboxes");
@@ -65,6 +58,15 @@ const AlertsList = () => {
   const investigateHandler = () => {
     alert("This feature has not been implemented.");
   };
+
+  useEffect(() => {
+    initialize();
+    generate();
+
+    return () => {
+      stopGenerating();
+    };
+  }, []);
 
   return (
     <RuxTable>
@@ -97,11 +99,11 @@ const AlertsList = () => {
         </RuxTableHeaderRow>
       </RuxTableHeader>
       <RuxTableBody>
-        {fixtureData.map((dataObj: rowDataObject) => (
-          <RuxAccordion>
+        {alertIds.map((alertId) => (
+          <RuxAccordion key={alertId}>
             <RuxTableRow>
               <RuxAccordionItem>
-                Red FEP 124 is degraded at 15:59:57. <br />
+                {alerts[alertId].message} <br />
                 <RuxButton
                   onClick={investigateHandler}
                   style={styles.investigateBtn}
@@ -115,17 +117,29 @@ const AlertsList = () => {
                       className="checkboxes"
                     />
                   </RuxTableCell>
-                  {Object.entries(dataObj).map(([key, value]) =>
+                  <RuxTableCell>
+                    <RuxStatus status={alerts[alertId].status} />
+                  </RuxTableCell>
+                  <RuxTableCell>{alerts[alertId].message}</RuxTableCell>
+                  <RuxTableCell>{alerts[alertId].category}</RuxTableCell>
+                  <RuxTableCell>{alerts[alertId].message}</RuxTableCell>
+                  <RuxTableCell>
+                    {new Date(alerts[alertId].timestamp)
+                      .toTimeString()
+                      .slice(0, 8)}
+                  </RuxTableCell>
+
+                  {/* {Object.entries(alerts[alertId]).map(([key, value]) =>
                     key === "status" ? (
                       <RuxTableCell>
-                        <RuxStatus status={dataObj.status} />
+                        <RuxStatus status={alerts[alertId].status} />
                       </RuxTableCell>
                     ) : (
                       <RuxTableCell style={{ textAlign: "right" }}>
                         {value}
                       </RuxTableCell>
                     )
-                  )}
+                  )} */}
                 </div>
               </RuxAccordionItem>
             </RuxTableRow>
