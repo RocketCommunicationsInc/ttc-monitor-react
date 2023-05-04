@@ -21,3 +21,9 @@ export type ModifyAlertParams = {
   expanded?: boolean;
   acknowledged: boolean;
 };
+
+export type GenerateAlertOptions = {
+  initial: number;
+  interval: number;
+  limit: number;
+};
