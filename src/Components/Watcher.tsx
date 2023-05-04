@@ -13,6 +13,7 @@ import {
   RuxCheckbox,
   RuxIcon,
 } from "@astrouxds/react";
+import type { Status } from "@astrouxds/astro-web-components/dist/types/common/commonTypes.module";
 import type { rowDataObject } from "../Types/types";
 import LineChart from "./LineChart";
 
@@ -66,7 +67,7 @@ const Watcher = () => {
           <RuxTableHeader>
             <RuxTableHeaderRow>
               {Object.keys(fixtureData[0]).map((key) => (
-                <RuxTableHeaderCell>
+                <RuxTableHeaderCell key={key}>
                   {key === "status" ? "" : key}
                 </RuxTableHeaderCell>
               ))}
@@ -74,36 +75,34 @@ const Watcher = () => {
           </RuxTableHeader>
           <RuxTableBody>
             {fixtureData.map((dataObj: rowDataObject) => (
-              <RuxTableRow>
+              <RuxTableRow key={dataObj.key}>
                 {Object.entries(dataObj).map(([key, value]) =>
                   key === "status" ? (
                     <RuxTableCell>
-                      <RuxStatus status={dataObj.status} />
+                      <RuxStatus status={dataObj.status as Status} />
                     </RuxTableCell>
                   ) : key === "Mneumonic" ? (
                     <RuxPopUp placement="right">
                       <RuxMenu>
                         <div style={styles.popUpMenuDiv}>
                           <span style={styles.boldPopUpWords}>PWBVTLM</span>
-                          <p>
-                            <div>
-                              Value
-                              <span style={styles.volts}>24.2 Volts</span>
-                            </div>
-                            <div>
-                              Subsystem
-                              <span style={styles.altitudeLink}>
-                                <a
-                                  href="https://ttc-investigate.astrouxds.com/?system=Attitude"
-                                  target="_blank"
-                                  rel="noreferrer"
-                                >
-                                  Altitude
-                                </a>
-                                <RuxIcon size="1rem" icon="launch" />
-                              </span>
-                            </div>
-                          </p>
+                          <div>
+                            Value
+                            <span style={styles.volts}>24.2 Volts</span>
+                          </div>
+                          <div>
+                            Subsystem
+                            <span style={styles.altitudeLink}>
+                              <a
+                                href="https://ttc-investigate.astrouxds.com/?system=Attitude"
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                Altitude
+                              </a>
+                              <RuxIcon size="1rem" icon="launch" />
+                            </span>
+                          </div>
                           <RuxCheckbox>
                             <span style={styles.boldPopUpWords}>
                               Add to Watcher
