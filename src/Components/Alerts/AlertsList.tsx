@@ -29,7 +29,7 @@ const styles = {
     paddingRight: "var(--spacing-4)",
   },
   selectNoneBtn: {
-    marginLeft: "-var(--spacing-4)",
+    marginLeft: "-1rem",
     marginRight: "-1.25rem",
   },
 };
@@ -73,7 +73,7 @@ const AlertsList = () => {
           <RuxTableHeaderCell>
             {checked !== true ? (
               <RuxButton
-                style={{ marginLeft: "-var(--spacing-4)" }}
+                style={{ marginLeft: "-1rem" }}
                 borderless
                 size="small"
                 onClick={selectAllHandler}
