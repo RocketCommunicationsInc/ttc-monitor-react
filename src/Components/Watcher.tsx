@@ -26,7 +26,7 @@ const watcherDataItem = {
   Actual: "Full",
 };
 
-const fixtureData = Array(6).fill(watcherDataItem);
+const fixtureData = Array(5).fill(watcherDataItem);
 
 const Watcher = () => {
   return (

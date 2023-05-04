@@ -28,7 +28,7 @@ const styles = {
     alignItems: "center",
     textAlign: "center" as "center",
     marginRight: "auto",
-  },
+  }
 };
 
 const Alerts = () => {

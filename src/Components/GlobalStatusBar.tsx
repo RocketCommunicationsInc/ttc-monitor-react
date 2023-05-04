@@ -7,30 +7,22 @@ import {
   RuxMenu,
   RuxMenuItem,
   RuxMonitoringIcon,
-  // RuxButton,
 } from "@astrouxds/react";
+import { rowDataValue } from "../Types/types";
 
 const styles = {
   statusIndicators: {
-    marginLeft: "27rem",
-    marginRight: "auto",
+    display: "flex",
   },
   clock: {
-    marginLeft: "28rem",
-  },
-  popUp: {
-    position: "fixed",
-    top: "93.3984375px",
-    left: "1317.9921875px",
-    zIndex: "10000",
+    marginInline: "auto",
   },
   monitorIcons: {
-    marginInline: "var(--spacing-2)",
+    marginInline: "var(--spacing-3)",
   },
 };
 
 const GlobalStatusBar = () => {
-  const [showPopUp, setShowPopUp] = useState(false);
   const [status1, setStatus1] = useState(0);
   const [status2, setStatus2] = useState(5);
   const [status3, setStatus3] = useState(3);
@@ -38,8 +30,8 @@ const GlobalStatusBar = () => {
   const [notifications2, setNotifications2] = useState(2);
   const [notifications3, setNotifications3] = useState(4);
 
-  const iconStatusHanlder = () => {
-    setShowPopUp(true);
+  const popupMenuHandler = () => {
+    alert("This feature has not been implemented.");
   };
 
   const statusValuesArr = [
@@ -58,15 +50,10 @@ const GlobalStatusBar = () => {
       const randomStatus = Math.floor(Math.random() * statusValuesArr.length);
       const randomStatus2 = Math.floor(Math.random() * statusValuesArr.length);
       const randomStatus3 = Math.floor(Math.random() * statusValuesArr.length);
-      setStatus1(statusValuesArr[randomStatus] as any);
-      setStatus2(statusValuesArr[randomStatus2] as any);
-      setStatus3(statusValuesArr[randomStatus3] as any);
-    }, 3000);
-    return () => clearInterval(interval);
-  });
+      setStatus1(statusValuesArr[randomStatus] as rowDataValue);
+      setStatus2(statusValuesArr[randomStatus2] as rowDataValue);
+      setStatus3(statusValuesArr[randomStatus3] as rowDataValue);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
       const randomNumber = Math.floor(Math.random() * notificationsArr.length);
       const randomNumber2 = Math.floor(Math.random() * notificationsArr.length);
       const randomNumber3 = Math.floor(Math.random() * notificationsArr.length);
@@ -82,44 +69,55 @@ const GlobalStatusBar = () => {
       <RuxPopUp placement="top-start" slot="left-side">
         <RuxIcon slot="trigger" size="small" icon="apps" />
         <RuxMenu>
-          <RuxMenuItem>Preferences</RuxMenuItem>
-          <RuxMenuItem>Sign Out</RuxMenuItem>
+          <RuxMenuItem onClick={popupMenuHandler}>Preferences</RuxMenuItem>
+          <RuxMenuItem onClick={popupMenuHandler}>Sign Out</RuxMenuItem>
         </RuxMenu>
       </RuxPopUp>
       <RuxClock style={styles.clock} />
 
       <div style={styles.statusIndicators}>
-        <RuxMonitoringIcon
-          status={status1 as any}
-          icon="antenna-off"
-          label="Ground"
-          notifications={notifications1}
-          onClick={iconStatusHanlder}
-          style={styles.monitorIcons}
-        >
-          {showPopUp && (
-            <RuxPopUp style={styles.popUp}>
-              <RuxMenu>
-                <RuxMenuItem>Investigate</RuxMenuItem>
-              </RuxMenu>
-            </RuxPopUp>
-          )}
-        </RuxMonitoringIcon>
 
-        <RuxMonitoringIcon
-          status={status2 as any}
-          icon="antenna-receive"
-          label="Comms"
-          notifications={notifications2}
-          style={styles.monitorIcons}
-        />
-        <RuxMonitoringIcon
-          status={status3 as any}
-          icon="processor"
-          label="Software"
-          notifications={notifications3}
-          style={styles.monitorIcons}
-        />
+        <RuxPopUp placement="bottom">
+          <RuxMenu>
+            <RuxMenuItem onClick={popupMenuHandler}>Investigate</RuxMenuItem>
+          </RuxMenu>
+          <RuxMonitoringIcon
+            status={status1 as rowDataValue}
+            icon="antenna-off"
+            label="Ground"
+            notifications={notifications1}
+            style={styles.monitorIcons}
+            slot="trigger"
+          ></RuxMonitoringIcon>
+        </RuxPopUp>
+
+        <RuxPopUp placement="bottom">
+          <RuxMenu>
+            <RuxMenuItem onClick={popupMenuHandler}>Investigate</RuxMenuItem>
+          </RuxMenu>
+          <RuxMonitoringIcon
+            status={status2 as rowDataValue}
+            icon="antenna-receive"
+            label="Comms"
+            notifications={notifications2}
+            style={styles.monitorIcons}
+            slot="trigger"
+          />
+        </RuxPopUp>
+
+        <RuxPopUp placement="bottom">
+          <RuxMenu>
+            <RuxMenuItem onClick={popupMenuHandler}>Investigate</RuxMenuItem>
+          </RuxMenu>
+          <RuxMonitoringIcon
+            status={status3 as rowDataValue}
+            icon="processor"
+            label="Software"
+            notifications={notifications3}
+            style={styles.monitorIcons}
+            slot="trigger"
+          />
+        </RuxPopUp>
       </div>
     </RuxGlobalStatusBar>
   );

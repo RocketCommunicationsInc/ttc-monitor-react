@@ -37,7 +37,8 @@ rux-container::part(body) {
 
 .background {
   height: 90vh;
-  padding: 10px;
+  padding-block: var(--spacing-3);
+  padding-inline: var(--spacing-2) ;
   background-color: var(--color-background-surface-default);
   width: 100vw;
   display: grid;
