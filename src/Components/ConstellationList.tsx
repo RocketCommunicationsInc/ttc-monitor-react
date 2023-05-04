@@ -22,7 +22,7 @@ const constellationDataItem = {
   Actions: 100,
 };
 
-const fixtureData = Array(6).fill(constellationDataItem);
+const fixtureData = Array(15).fill(constellationDataItem);
 
 const CostellationList = () => {
   return (

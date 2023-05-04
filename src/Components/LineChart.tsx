@@ -1,5 +1,5 @@
 const LineChart = () => {
-  return <div>IRON 4090</div>;
+  return <div className="line-chart">Line Chart Placeholder</div>;
 };
 
 export default LineChart;
