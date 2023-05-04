@@ -59,15 +59,3 @@ rux-container::part(body) {
 .watcher-body rux-table {
   flex-basis: 40%;
 }
-
-    /* flex-grow: 1;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    left: 0;
-    align-content: center;
-    background-color: var(--colorPrimaryDarken1, rgb(0, 68, 107));
-    color: var(--colorPrimaryLighten3, rgb(211, 234, 255));
-    padding: 0.5rem;
-    text-align: center;
-    width: 100%; */
