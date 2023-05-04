@@ -1,17 +1,58 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
+import {
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+  createContext,
+  useContext,
+  ReactNode,
+} from "react";
 import { generateAlert } from "../data/lib/alerts/generate-alert";
 
 import type { Alert, ModifyAlertParams } from "../Types/alerts";
 import type { SubscribeOptions } from "../data/types";
 import type { GenerateAlertOptions } from "../Types/alerts";
+import { generateAlerts } from "../data/lib/alerts/generate-alerts";
 
 const defaultOptions = {
   initial: 5,
   interval: 2,
-  limit: 236,
+  limit: 74,
 };
 
-const useAlerts = () => {
+type Children = {
+  children: ReactNode;
+};
+
+type PropTypes = {
+  alertIds: string[];
+  alerts: { [key: string]: Alert };
+  addAlert: () => void;
+  editAlert: (params: ModifyAlertParams) => void;
+  deleteAlert: (id: string) => void;
+  clearAlerts: () => void;
+  generate: (newGenerateOptions?: SubscribeOptions) => void;
+  stopGenerating: () => void;
+  initialize: () => void;
+};
+
+const AlertsContext = createContext<PropTypes>({
+  alertIds: [],
+  alerts: {},
+  addAlert: () => null,
+  editAlert: () => null,
+  deleteAlert: () => null,
+  clearAlerts: () => null,
+  generate: () => null,
+  stopGenerating: () => null,
+  initialize: () => null,
+});
+
+export default function useAlerts() {
+  return useContext(AlertsContext);
+}
+
+export const AlertsContextProvider = ({ children }: Children) => {
   const [alertIds, setAlertIds] = useState<string[]>([]);
   const [alerts, setAlerts] = useState<{ [key: string]: Alert }>({});
   const [generating, setGenerating] = useState(false);
@@ -20,9 +61,11 @@ const useAlerts = () => {
 
   const addAlert = useCallback(() => {
     const newAlert = generateAlert();
-    setAlertIds((prevState) => [...prevState, newAlert.id]);
-    setAlerts((prevState) => ({ ...prevState, [newAlert.id]: newAlert }));
-  }, []);
+    if (alertIds.length < generateOptions.limit) {
+      setAlertIds((prevState) => [...prevState, newAlert.id]);
+      setAlerts((prevState) => ({ ...prevState, [newAlert.id]: newAlert }));
+    }
+  }, [alertIds.length, generateOptions.limit]);
 
   const editAlert = useCallback((params: ModifyAlertParams) => {
     setAlerts((prevState) => {
@@ -53,6 +96,18 @@ const useAlerts = () => {
     setAlertIds([]);
     setAlerts({});
   };
+
+  const initialize = useCallback(() => {
+    const generatedAlerts = generateAlerts(4);
+    const newAlerts: { [key: string]: Alert } = {};
+    const newAlertIds: string[] = [];
+    generatedAlerts.forEach((alert) => {
+      newAlertIds.push(alert.id);
+      newAlerts[alert.id] = alert;
+    });
+    setAlertIds(newAlertIds);
+    setAlerts(newAlerts);
+  }, []);
 
   const generate = useCallback(
     (newGenerateOptions?: SubscribeOptions) => {
@@ -90,11 +145,12 @@ const useAlerts = () => {
       clearAlerts,
       generate,
       stopGenerating,
+      initialize,
     }),
-    [alertIds, alerts, addAlert, editAlert, deleteAlert, generate]
+    [alertIds, alerts, addAlert, editAlert, deleteAlert, generate, initialize]
   );
 
-  return value;
+  return (
+    <AlertsContext.Provider value={value}>{children}</AlertsContext.Provider>
+  );
 };
-
-export default useAlerts;
