@@ -1,4 +1,3 @@
-import React from "react";
 import Alerts from "./Components/Alerts/Alerts";
 import Constellation from "./Components/Constellation";
 import Watcher from "./Components/Watcher";

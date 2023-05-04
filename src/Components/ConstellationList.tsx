@@ -30,9 +30,7 @@ const CostellationList = () => {
       <RuxTableHeader>
         <RuxTableHeaderRow>
           {Object.keys(fixtureData[0]).map((key) => (
-            <RuxTableHeaderCell>
-              {key}
-            </RuxTableHeaderCell>
+            <RuxTableHeaderCell>{key}</RuxTableHeaderCell>
           ))}
         </RuxTableHeaderRow>
       </RuxTableHeader>
