@@ -7,7 +7,7 @@ import {
   RuxTableCell,
   RuxTableBody,
 } from "@astrouxds/react";
-import type { rowDataObject } from "../Types/types";
+import type { rowDataObject } from "../../Types/types";
 
 const constellationDataItem = {
   Status: 19999999,
