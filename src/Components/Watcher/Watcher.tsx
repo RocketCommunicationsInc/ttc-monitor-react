@@ -62,7 +62,9 @@ const Watcher = () => {
                       <MneumonicPopUp triggerValue={value} />
                     </RuxTableCell>
                   ) : (
-                        <RuxTableCell style={{textAlign: "right"}}>{value}</RuxTableCell>
+                    <RuxTableCell style={{ textAlign: "right" }}>
+                      {value}
+                    </RuxTableCell>
                   )
                 )}
               </RuxTableRow>
