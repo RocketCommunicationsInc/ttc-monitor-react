@@ -7,6 +7,7 @@ import {
   RuxMenu,
   RuxMenuItem,
   RuxMonitoringIcon,
+  RuxTooltip,
 } from "@astrouxds/react";
 import { rowDataValue } from "../Types/types";
 
@@ -23,9 +24,9 @@ const styles = {
 };
 
 const GlobalStatusBar = () => {
-  const [status1, setStatus1] = useState(0);
-  const [status2, setStatus2] = useState(5);
-  const [status3, setStatus3] = useState(3);
+  const [status1, setStatus1] = useState("off");
+  const [status2, setStatus2] = useState("normal");
+  const [status3, setStatus3] = useState("critical");
   const [notifications1, setNotifications1] = useState(0);
   const [notifications2, setNotifications2] = useState(2);
   const [notifications3, setNotifications3] = useState(4);
@@ -76,47 +77,53 @@ const GlobalStatusBar = () => {
       <RuxClock style={styles.clock} />
 
       <div style={styles.statusIndicators}>
-        <RuxPopUp placement="bottom">
-          <RuxMenu>
-            <RuxMenuItem onClick={popupMenuHandler}>Investigate</RuxMenuItem>
-          </RuxMenu>
-          <RuxMonitoringIcon
-            status={status1 as rowDataValue}
-            icon="antenna-off"
-            label="Ground"
-            notifications={notifications1}
-            style={styles.monitorIcons}
-            slot="trigger"
-          ></RuxMonitoringIcon>
-        </RuxPopUp>
+        <RuxTooltip title={`Ground ${notifications1}`}>
+          <RuxPopUp placement="bottom">
+            <RuxMenu>
+              <RuxMenuItem onClick={popupMenuHandler}>Investigate</RuxMenuItem>
+            </RuxMenu>
+            <RuxMonitoringIcon
+              status={status1 as rowDataValue}
+              icon="antenna-off"
+              label="Ground"
+              notifications={notifications1}
+              style={styles.monitorIcons}
+              slot="trigger"
+            ></RuxMonitoringIcon>
+          </RuxPopUp>
+        </RuxTooltip>
 
-        <RuxPopUp placement="bottom">
-          <RuxMenu>
-            <RuxMenuItem onClick={popupMenuHandler}>Investigate</RuxMenuItem>
-          </RuxMenu>
-          <RuxMonitoringIcon
-            status={status2 as rowDataValue}
-            icon="antenna-receive"
-            label="Comms"
-            notifications={notifications2}
-            style={styles.monitorIcons}
-            slot="trigger"
-          />
-        </RuxPopUp>
+        <RuxTooltip title={`Comms ${notifications2}`}>
+          <RuxPopUp placement="bottom">
+            <RuxMenu>
+              <RuxMenuItem onClick={popupMenuHandler}>Investigate</RuxMenuItem>
+            </RuxMenu>
+            <RuxMonitoringIcon
+              status={status2 as rowDataValue}
+              icon="antenna-receive"
+              label="Comms"
+              notifications={notifications2}
+              style={styles.monitorIcons}
+              slot="trigger"
+            />
+          </RuxPopUp>
+        </RuxTooltip>
 
-        <RuxPopUp placement="bottom">
-          <RuxMenu>
-            <RuxMenuItem onClick={popupMenuHandler}>Investigate</RuxMenuItem>
-          </RuxMenu>
-          <RuxMonitoringIcon
-            status={status3 as rowDataValue}
-            icon="processor"
-            label="Software"
-            notifications={notifications3}
-            style={styles.monitorIcons}
-            slot="trigger"
-          />
-        </RuxPopUp>
+        <RuxTooltip title={`Software ${notifications3}`}>
+          <RuxPopUp placement="bottom">
+            <RuxMenu>
+              <RuxMenuItem onClick={popupMenuHandler}>Investigate</RuxMenuItem>
+            </RuxMenu>
+            <RuxMonitoringIcon
+              status={status3 as rowDataValue}
+              icon="processor"
+              label="Software"
+              notifications={notifications3}
+              style={styles.monitorIcons}
+              slot="trigger"
+            />
+          </RuxPopUp>
+        </RuxTooltip>
       </div>
     </RuxGlobalStatusBar>
   );
