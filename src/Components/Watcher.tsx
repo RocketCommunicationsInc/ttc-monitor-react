@@ -22,7 +22,7 @@ const styles = {
 const watcherDataItem = {
   status: "caution" as const,
   Mneumonic: 19999999,
-  Unit: "000011111",
+  Unit: "Volts",
   Threshold: 450,
   Actual: "Full",
 };
@@ -62,7 +62,7 @@ const Watcher = () => {
                       <MneumonicPopUp triggerValue={value} />
                     </RuxTableCell>
                   ) : (
-                    <RuxTableCell>{value}</RuxTableCell>
+                        <RuxTableCell style={{textAlign: "right"}}>{value}</RuxTableCell>
                   )
                 )}
               </RuxTableRow>

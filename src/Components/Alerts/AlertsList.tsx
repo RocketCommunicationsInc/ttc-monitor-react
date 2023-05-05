@@ -23,7 +23,7 @@ const styles = {
   },
   accordianLabel: {
     color: "var(--color-palette-neutral-000)",
-    width: "28.625rem",
+    width: "100%",
   },
   checkboxes: {
     paddingRight: "var(--spacing-4)",
