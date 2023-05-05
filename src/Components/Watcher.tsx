@@ -14,7 +14,7 @@ import {
   RuxIcon,
 } from "@astrouxds/react";
 import type { rowDataObject } from "../Types/types";
-import LineChart from "./LineChart";
+import LineChart from "../Components/Watcher/LineChart"
 
 const styles = {
   container: {
