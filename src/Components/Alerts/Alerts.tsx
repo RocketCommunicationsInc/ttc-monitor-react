@@ -40,38 +40,16 @@ const styles = {
     textAlign: "center" as "center",
     marginRight: "auto",
   },
-  notificationBanner: {
-    // justifyContent: "center",
-    // fontSize: "var(--font-size-base)",
-    // display: "flex",
-    // flexFlow: "column",
-    // alignItems: "center",
-  },
 };
 
 const Alerts = () => {
   const [openBanner, setOpenBanner] = useState(false);
   const [selection, setSelection] = useState("");
 
-  const selectValues =
-    "Critical" ||
-    "Serious" ||
-    "Caution" ||
-    "Hardware" ||
-    "Software" ||
-    "Spacecraft";
-
   const selectionHandler = (e: any) => {
-    if (e.target.value === selectValues) {
-      setSelection(e.target.value);
-      setOpenBanner(true);
-    }
+    setSelection(e.target.value);
+    setOpenBanner(true);
   };
-
-  // const notificationHandler = () => {
-  //   // setSelection(selectValues)
-  //   setOpenBanner(true);
-  // };
 
   const handleClearFilter = () => {
     setSelection("All");
@@ -87,8 +65,7 @@ const Alerts = () => {
         <div style={styles.selectMenusDiv}>
           <RuxSelect
             value={selection}
-            onChange={selectionHandler}
-            onClick={selectionHandler}
+            onRuxchange={selectionHandler}
             size="small"
             label="Severity"
             style={styles.select1}
@@ -100,9 +77,8 @@ const Alerts = () => {
           </RuxSelect>
 
           <RuxSelect
-            // value={selection}
-            // onChange={selectionHandler}
-            // onClick={selectionHandler}
+            value={selection}
+            onRuxchange={selectionHandler}
             size="small"
             label="Category"
             style={styles.select2}
@@ -116,7 +92,7 @@ const Alerts = () => {
       </div>
 
       {selection && (
-        <RuxNotification open={openBanner} style={styles.notificationBanner}>
+        <RuxNotification open={openBanner}>
           You have one or more filters selected. <br />
           <RuxButton onClick={handleClearFilter} secondary borderless>
             Clear filters
