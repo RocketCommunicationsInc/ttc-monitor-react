@@ -37,11 +37,10 @@ const styles = {
     justifyContent: "center",
     borderTop: "1px solid var(--logHeaderBackgroundColor, rgb(20, 32, 44))",
     boxShadow: " 0 -0.5rem 1.25rem rgba(0, 0, 0, 0.25)",
-    width: "28.75rem",
     height: "3rem",
     padding: "2rem",
-    position: "absolute" as "absolute",
-    bottom: -2,
+    position: "sticky" as "sticky",
+    bottom: 0,
     backgroundColor: "#1B2D3E",
   },
 };
@@ -176,7 +175,7 @@ const AlertsList = () => {
           ))}
         </RuxTableBody>
       </RuxTable>
-      <div style={styles.footer}>
+      <div slot="header" style={styles.footer}>
         {checkedAll || checked ? (
           <div>
             <RuxButton
