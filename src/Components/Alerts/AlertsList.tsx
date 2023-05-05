@@ -23,7 +23,6 @@ const styles = {
   },
   accordianLabel: {
     color: "var(--color-palette-neutral-000)",
-    width: "100%",
   },
   checkboxes: {
     paddingRight: "var(--spacing-4)",
@@ -175,7 +174,7 @@ const AlertsList = () => {
           ))}
         </RuxTableBody>
       </RuxTable>
-      <div slot="header" style={styles.footer}>
+      <div style={styles.footer}>
         {checkedAll || checked ? (
           <div>
             <RuxButton

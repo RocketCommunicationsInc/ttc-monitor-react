@@ -110,3 +110,7 @@ rux-timeline::part(time-region-container) {
 rux-time-region::part(container) {
   border: 1px solid var(--color-border-interactive-muted);
 }
+
+rux-notification::part(container) {
+  border: 1px solid var(--color-border-interactive-muted);
+}
