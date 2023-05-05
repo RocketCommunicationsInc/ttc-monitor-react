@@ -76,7 +76,6 @@ const GlobalStatusBar = () => {
       <RuxClock style={styles.clock} />
 
       <div style={styles.statusIndicators}>
-
         <RuxPopUp placement="bottom">
           <RuxMenu>
             <RuxMenuItem onClick={popupMenuHandler}>Investigate</RuxMenuItem>

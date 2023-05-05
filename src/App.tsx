@@ -1,6 +1,6 @@
 import Alerts from "./Components/Alerts/Alerts";
-import Constellation from "./Components/Constellation";
-import Watcher from "./Components/Watcher";
+import Constellation from "./Components/Constellation/Constellation";
+import Watcher from "./Components/Watcher/Watcher";
 import GlobalStatusBar from "./Components/GlobalStatusBar";
 
 import "@astrouxds/astro-web-components/dist/astro-web-components/astro-web-components.css";

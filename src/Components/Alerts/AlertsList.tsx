@@ -23,7 +23,7 @@ const styles = {
   },
   accordianLabel: {
     color: "var(--color-palette-neutral-000)",
-    width: "28.625rem",
+    width: "100%",
   },
   checkboxes: {
     paddingRight: "var(--spacing-4)",
@@ -44,7 +44,7 @@ const AlertsList = () => {
     Time: "15:59:57",
   };
 
-  const fixtureData = Array(11).fill(alertsDataItem);
+  const fixtureData = Array(15).fill(alertsDataItem);
 
   const selectAllHandler = () => {
     const checkboxes: any = document.querySelectorAll(".checkboxes");
