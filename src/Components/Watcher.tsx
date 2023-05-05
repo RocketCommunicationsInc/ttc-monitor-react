@@ -19,6 +19,7 @@ import LineChart from "./LineChart";
 const styles = {
   container: {
     display: "flex",
+    fontWeight: "bold"
   },
   popUpMenuDiv: {
     paddingRight: "3rem",
@@ -40,6 +41,9 @@ const styles = {
     textDecorationStyle: "dashed",
     color: "var(--color-palette-brightblue-300)",
   },
+  popUpMargin: {
+    marginBlock: ".5rem"
+  }
 };
 
 const watcherDataItem = {
@@ -85,7 +89,7 @@ const Watcher = () => {
                       <RuxMenu>
                         <div style={styles.popUpMenuDiv}>
                           <span style={styles.boldPopUpWords}>PWBVTLM</span>
-                          <p>
+                          <div style={styles.popUpMargin}>
                             <div>
                               Value
                               <span style={styles.volts}>24.2 Volts</span>
@@ -103,7 +107,7 @@ const Watcher = () => {
                                 <RuxIcon size="1rem" icon="launch" />
                               </span>
                             </div>
-                          </p>
+                          </div>
                           <RuxCheckbox>
                             <span style={styles.boldPopUpWords}>
                               Add to Watcher

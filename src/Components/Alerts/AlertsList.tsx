@@ -58,9 +58,9 @@ const AlertsList = () => {
   };
 
   const fixtureData = Array(15).fill(alertsDataItem);
-  const checkboxes: any = document.querySelectorAll(".checkboxes");
 
   const selectAllHandler = () => {
+    const checkboxes: any = document.querySelectorAll(".checkboxes");
     for (let i = 0; i < checkboxes.length; i++) {
       checkboxes[i].checked = true;
       setCheckedAll(true);
@@ -69,6 +69,7 @@ const AlertsList = () => {
   };
 
   const selectNoneHandler = () => {
+    const checkboxes: any = document.querySelectorAll(".checkboxes");
     for (let i = 0; i < checkboxes.length; i++) {
       checkboxes[i].checked = false;
       setCheckedAll(false);
@@ -82,6 +83,28 @@ const AlertsList = () => {
 
   const investigateHandler = () => {
     alert("This feature has not been implemented.");
+  };
+
+  const acknowledgeHandler = () => {
+    // const accordionItemsToRemove: any[] = [];
+    // const accordionItems: any = document.querySelectorAll(
+    //   ".accordion-item"
+    // );
+    // let accordionId = accordionItems.id
+    // accordionId = Math.floor(Math.random() * 150)
+    // accordionItems.id = accordionId
+    // accordionItems.forEach(
+    //   (item: any) => {
+    //     if (item && (checked || checkedAll)) {
+    //       accordionItemsToRemove.push(accordionId);
+    //     }
+    //   }
+    // );
+    // accordionItemsToRemove.forEach((id) => {
+    //   const accordionIdToRemove = document.getElementById(id);
+    //   console.log(accordionId, "id")
+    //   accordionIdToRemove?.remove();
+    // });
   };
 
   return (
@@ -119,7 +142,7 @@ const AlertsList = () => {
           {fixtureData.map((dataObj: rowDataObject) => (
             <RuxAccordion>
               <RuxTableRow>
-                <RuxAccordionItem>
+                <RuxAccordionItem className="accordion-item">
                   Red FEP 124 is degraded at 15:59:57. <br />
                   <RuxButton
                     onClick={investigateHandler}
@@ -154,10 +177,15 @@ const AlertsList = () => {
         </RuxTableBody>
       </RuxTable>
       <div style={styles.footer}>
-        {checked ? (
+        {checkedAll || checked ? (
           <div>
-            <RuxButton style={{ marginRight: "1rem" }}>Acknowledge</RuxButton>
-            <RuxButton>Dismiss</RuxButton>
+            <RuxButton
+              style={{ marginRight: "1rem" }}
+              onClick={acknowledgeHandler}
+            >
+              Acknowledge
+            </RuxButton>
+            <RuxButton onClick={acknowledgeHandler}>Dismiss</RuxButton>
           </div>
         ) : (
           <div>
