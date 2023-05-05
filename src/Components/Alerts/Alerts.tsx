@@ -18,6 +18,7 @@ const styles = {
     display: "flex",
     flexFlow: "column nowrap",
     fontSize: "var(--font-size-base)",
+      marginRight: "8rem"
   },
   selectMenusDiv: {
     marginLeft: "auto",
@@ -40,6 +41,11 @@ const styles = {
     textAlign: "center" as "center",
     marginRight: "auto",
   },
+  notificationBanner: {
+    position: "sticky" as "sticky",
+    // display: "flex",
+    zIndex: 50
+  }
 };
 
 const Alerts = () => {
@@ -92,7 +98,7 @@ const Alerts = () => {
       </div>
 
       {selection && (
-        <RuxNotification open={openBanner}>
+        <RuxNotification open={openBanner} style={styles.notificationBanner}>
           You have one or more filters selected. <br />
           <RuxButton onClick={handleClearFilter} secondary borderless>
             Clear filters
