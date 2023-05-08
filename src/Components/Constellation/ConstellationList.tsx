@@ -9,7 +9,6 @@ import {
 } from "@astrouxds/react";
 import type { rowDataObject } from "../../Types";
 
-
 const constellationDataItem = {
   Status: 19999999,
   Satellite: "000011111",

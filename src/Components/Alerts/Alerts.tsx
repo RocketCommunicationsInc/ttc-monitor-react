@@ -6,8 +6,8 @@ import {
   RuxNotification,
 } from "@astrouxds/react";
 import AlertsList from "./AlertsList";
-import useAlerts from "../../hooks/useAlerts";
 import { useState } from "react";
+import useAlerts from "../../hooks/useAlerts";
 
 const styles = {
   container: {
@@ -44,6 +44,7 @@ const styles = {
   },
   notificationBanner: {
     position: "sticky" as "sticky",
+    // display: "flex",
     zIndex: 50,
   },
 };

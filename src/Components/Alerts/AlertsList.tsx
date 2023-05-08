@@ -103,13 +103,13 @@ const AlertsList = () => {
     // });
   };
 
-  document.addEventListener("DOMContentLoaded", function() {
-  const ruxScrollbar: any = document.querySelectorAll("webkit-scrollbar")
-  console.log(ruxScrollbar)
+  // document.addEventListener("DOMContentLoaded", function () {
+  //   const ruxScrollbar: any = document.querySelectorAll("webkit-scrollbar");
+  //   console.log(ruxScrollbar);
+  // });
 
-  })
+  // // ruxScrollbar.style.marginTop = "40px"
 
-  // ruxScrollbar.style.marginTop = "40px"
   useEffect(() => {
     initialize();
     generate();
@@ -139,35 +139,35 @@ const AlertsList = () => {
         <RuxTableBody>
           {alertIds.map((alertId) => (
             <RuxAccordion key={alertId}>
-                <RuxAccordionItem>
-                  {alerts[alertId].message} <br />
-                  <RuxButton
-                    onClick={investigateHandler}
-                    style={styles.investigateBtn}
-                  >
-                    Investigate
-                  </RuxButton>
-                  <div slot="label" style={styles.accordianLabel}>
-                    <RuxTableCell style={{ textAlign: "center" }}>
-                      <RuxCheckbox
-                        style={styles.checkboxes}
-                        className="checkboxes"
-                        onClick={checkboxHandler}
-                      />
-                    </RuxTableCell>
-                    <RuxTableCell>
-                      <RuxStatus status={alerts[alertId].status} />
-                    </RuxTableCell>
-                    <RuxTableCell>{alerts[alertId].message}</RuxTableCell>
-                    <RuxTableCell>{alerts[alertId].category}</RuxTableCell>
-                    <RuxTableCell>{alerts[alertId].message}</RuxTableCell>
-                    <RuxTableCell>
-                      {new Date(alerts[alertId].timestamp)
-                        .toTimeString()
-                        .slice(0, 8)}
-                    </RuxTableCell>
-                  </div>
-                </RuxAccordionItem>
+              <RuxAccordionItem className="accordion-item">
+                {alerts[alertId].message} <br />
+                <RuxButton
+                  onClick={investigateHandler}
+                  style={styles.investigateBtn}
+                >
+                  Investigate
+                </RuxButton>
+                <div slot="label" style={styles.accordianLabel}>
+                  <RuxTableCell style={{ textAlign: "center" }}>
+                    <RuxCheckbox
+                      style={styles.checkboxes}
+                      className="checkboxes"
+                      onClick={checkboxHandler}
+                    />
+                  </RuxTableCell>
+                  <RuxTableCell>
+                    <RuxStatus status={alerts[alertId].status} />
+                  </RuxTableCell>
+                  <RuxTableCell>{alerts[alertId].message}</RuxTableCell>
+                  <RuxTableCell>{alerts[alertId].category}</RuxTableCell>
+                  <RuxTableCell>{alerts[alertId].message}</RuxTableCell>
+                  <RuxTableCell>
+                    {new Date(alerts[alertId].timestamp)
+                      .toTimeString()
+                      .slice(0, 8)}
+                  </RuxTableCell>
+                </div>
+              </RuxAccordionItem>
             </RuxAccordion>
           ))}
         </RuxTableBody>
