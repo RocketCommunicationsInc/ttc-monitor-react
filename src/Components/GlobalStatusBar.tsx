@@ -7,6 +7,7 @@ import {
   RuxMenu,
   RuxMenuItem,
   RuxMonitoringIcon,
+  RuxTooltip,
 } from "@astrouxds/react";
 import type { Status } from "../Types";
 
@@ -76,47 +77,53 @@ const GlobalStatusBar = () => {
       <RuxClock style={styles.clock} />
 
       <div style={styles.statusIndicators}>
-        <RuxPopUp placement="bottom">
-          <RuxMenu>
-            <RuxMenuItem onClick={popupMenuHandler}>Investigate</RuxMenuItem>
-          </RuxMenu>
-          <RuxMonitoringIcon
-            status={status1}
-            icon="antenna-off"
-            label="Ground"
-            notifications={notifications1}
-            style={styles.monitorIcons}
-            slot="trigger"
-          ></RuxMonitoringIcon>
-        </RuxPopUp>
+        <RuxTooltip title={`Ground ${notifications1}`}>
+          <RuxPopUp placement="bottom">
+            <RuxMenu>
+              <RuxMenuItem onClick={popupMenuHandler}>Investigate</RuxMenuItem>
+            </RuxMenu>
+            <RuxMonitoringIcon
+              status={status1}
+              icon="antenna-off"
+              label="Ground"
+              notifications={notifications1}
+              style={styles.monitorIcons}
+              slot="trigger"
+            ></RuxMonitoringIcon>
+          </RuxPopUp>
+        </RuxTooltip>
 
-        <RuxPopUp placement="bottom">
-          <RuxMenu>
-            <RuxMenuItem onClick={popupMenuHandler}>Investigate</RuxMenuItem>
-          </RuxMenu>
-          <RuxMonitoringIcon
-            status={status2}
-            icon="antenna-receive"
-            label="Comms"
-            notifications={notifications2}
-            style={styles.monitorIcons}
-            slot="trigger"
-          />
-        </RuxPopUp>
+        <RuxTooltip title={`Comms ${notifications2}`}>
+          <RuxPopUp placement="bottom">
+            <RuxMenu>
+              <RuxMenuItem onClick={popupMenuHandler}>Investigate</RuxMenuItem>
+            </RuxMenu>
+            <RuxMonitoringIcon
+              status={status2}
+              icon="antenna-receive"
+              label="Comms"
+              notifications={notifications2}
+              style={styles.monitorIcons}
+              slot="trigger"
+            />
+          </RuxPopUp>
+        </RuxTooltip>
 
-        <RuxPopUp placement="bottom">
-          <RuxMenu>
-            <RuxMenuItem onClick={popupMenuHandler}>Investigate</RuxMenuItem>
-          </RuxMenu>
-          <RuxMonitoringIcon
-            status={status3}
-            icon="processor"
-            label="Software"
-            notifications={notifications3}
-            style={styles.monitorIcons}
-            slot="trigger"
-          />
-        </RuxPopUp>
+        <RuxTooltip title={`Software ${notifications3}`}>
+          <RuxPopUp placement="bottom">
+            <RuxMenu>
+              <RuxMenuItem onClick={popupMenuHandler}>Investigate</RuxMenuItem>
+            </RuxMenu>
+            <RuxMonitoringIcon
+              status={status3}
+              icon="processor"
+              label="Software"
+              notifications={notifications3}
+              style={styles.monitorIcons}
+              slot="trigger"
+            />
+          </RuxPopUp>
+        </RuxTooltip>
       </div>
     </RuxGlobalStatusBar>
   );

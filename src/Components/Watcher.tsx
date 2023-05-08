@@ -14,11 +14,12 @@ import {
   RuxIcon,
 } from "@astrouxds/react";
 import type { rowDataObject, Status } from "../Types";
-import LineChart from "./LineChart";
+import LineChart from "../Components/Watcher/LineChart";
 
 const styles = {
   container: {
     display: "flex",
+    fontWeight: "bold",
   },
   popUpMenuDiv: {
     paddingRight: "3rem",
@@ -39,6 +40,9 @@ const styles = {
     textDecoration: "underline",
     textDecorationStyle: "dashed",
     color: "var(--color-palette-brightblue-300)",
+  },
+  popUpMargin: {
+    marginBlock: ".5rem",
   },
 };
 
@@ -85,22 +89,24 @@ const Watcher = () => {
                       <RuxMenu>
                         <div style={styles.popUpMenuDiv}>
                           <span style={styles.boldPopUpWords}>PWBVTLM</span>
-                          <div>
-                            Value
-                            <span style={styles.volts}>24.2 Volts</span>
-                          </div>
-                          <div>
-                            Subsystem
-                            <span style={styles.altitudeLink}>
-                              <a
-                                href="https://ttc-investigate.astrouxds.com/?system=Attitude"
-                                target="_blank"
-                                rel="noreferrer"
-                              >
-                                Altitude
-                              </a>
-                              <RuxIcon size="1rem" icon="launch" />
-                            </span>
+                          <div style={styles.popUpMargin}>
+                            <div>
+                              Value
+                              <span style={styles.volts}>24.2 Volts</span>
+                            </div>
+                            <div>
+                              Subsystem
+                              <span style={styles.altitudeLink}>
+                                <a
+                                  href="https://ttc-investigate.astrouxds.com/?system=Attitude"
+                                  target="_blank"
+                                  rel="noreferrer"
+                                >
+                                  Altitude
+                                </a>
+                                <RuxIcon size="1rem" icon="launch" />
+                              </span>
+                            </div>
                           </div>
                           <RuxCheckbox>
                             <span style={styles.boldPopUpWords}>

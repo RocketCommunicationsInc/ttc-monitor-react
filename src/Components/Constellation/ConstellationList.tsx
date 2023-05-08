@@ -7,7 +7,17 @@ import {
   RuxTableCell,
   RuxTableBody,
 } from "@astrouxds/react";
-import type { rowDataObject } from "../Types";
+import type { rowDataObject } from "../../Types";
+
+//const styles = {
+// cutOffSpaceBar: {
+//   height: "2.5rem",
+//   width: "2rem",
+//   backgroundColor: "var(--gsb-color-background)",
+//   position: "fixed" as "fixed",
+//   left: "97.6%",
+// },
+//};
 
 const constellationDataItem = {
   Status: 19999999,
@@ -22,7 +32,7 @@ const constellationDataItem = {
   Actions: 100,
 };
 
-const fixtureData = Array(6).fill(constellationDataItem);
+const fixtureData = Array(15).fill(constellationDataItem);
 
 const CostellationList = () => {
   return (

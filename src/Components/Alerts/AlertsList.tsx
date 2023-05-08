@@ -23,7 +23,6 @@ const styles = {
   },
   accordianLabel: {
     color: "var(--color-palette-neutral-000)",
-    width: "28.625rem",
   },
   checkboxes: {
     paddingRight: "var(--spacing-4)",
@@ -32,9 +31,21 @@ const styles = {
     marginLeft: "-1rem",
     marginRight: "-1.25rem",
   },
+  footer: {
+    display: "flex",
+    justifyContent: "center",
+    borderTop: "1px solid var(--logHeaderBackgroundColor, rgb(20, 32, 44))",
+    boxShadow: " 0 -0.5rem 1.25rem rgba(0, 0, 0, 0.25)",
+    height: "3rem",
+    padding: "2rem",
+    position: "sticky" as "sticky",
+    bottom: 0,
+    backgroundColor: "#1B2D3E",
+  },
 };
 
 const AlertsList = () => {
+  const [checkedAll, setCheckedAll] = useState(false);
   const [checked, setChecked] = useState(false);
   const { alerts, alertIds, generate, stopGenerating, initialize } =
     useAlerts();
@@ -43,6 +54,7 @@ const AlertsList = () => {
     const checkboxes: any = document.querySelectorAll(".checkboxes");
     for (let i = 0; i < checkboxes.length; i++) {
       checkboxes[i].checked = true;
+      setCheckedAll(true);
       setChecked(true);
     }
   };
@@ -51,12 +63,39 @@ const AlertsList = () => {
     const checkboxes: any = document.querySelectorAll(".checkboxes");
     for (let i = 0; i < checkboxes.length; i++) {
       checkboxes[i].checked = false;
+      setCheckedAll(false);
       setChecked(false);
     }
   };
 
+  const checkboxHandler = () => {
+    setChecked(true);
+  };
+
   const investigateHandler = () => {
     alert("This feature has not been implemented.");
+  };
+
+  const acknowledgeHandler = () => {
+    // const accordionItemsToRemove: any[] = [];
+    // const accordionItems: any = document.querySelectorAll(
+    //   ".accordion-item"
+    // );
+    // let accordionId = accordionItems.id
+    // accordionId = Math.floor(Math.random() * 150)
+    // accordionItems.id = accordionId
+    // accordionItems.forEach(
+    //   (item: any) => {
+    //     if (item && (checked || checkedAll)) {
+    //       accordionItemsToRemove.push(accordionId);
+    //     }
+    //   }
+    // );
+    // accordionItemsToRemove.forEach((id) => {
+    //   const accordionIdToRemove = document.getElementById(id);
+    //   console.log(accordionId, "id")
+    //   accordionIdToRemove?.remove();
+    // });
   };
 
   useEffect(() => {
@@ -66,75 +105,98 @@ const AlertsList = () => {
     return () => {
       stopGenerating();
     };
-  }, []);
+  }, [initialize, generate, stopGenerating]);
 
   return (
-    <RuxTable>
-      <RuxTableHeader>
-        <RuxTableHeaderRow>
-          <RuxTableHeaderCell>
-            {checked !== true ? (
-              <RuxButton
-                style={{ marginLeft: "-1rem" }}
-                borderless
-                size="small"
-                onClick={selectAllHandler}
-              >
-                Select All
-              </RuxButton>
-            ) : (
-              <RuxButton
-                style={styles.selectNoneBtn}
-                borderless
-                size="small"
-                onClick={selectNoneHandler}
-              >
-                Select None
-              </RuxButton>
-            )}
-            <span style={{ marginLeft: "var(--spacing-4)" }}> Message</span>
-            <span style={{ marginLeft: "7.65rem" }}>Category</span>
-            <span style={{ marginLeft: "var(--spacing-4)" }}>Time</span>
-          </RuxTableHeaderCell>
-        </RuxTableHeaderRow>
-      </RuxTableHeader>
-      <RuxTableBody>
-        {alertIds.map((alertId) => (
-          <RuxAccordion key={alertId}>
-            <RuxTableRow>
-              <RuxAccordionItem>
-                {alerts[alertId].message} <br />
+    <div>
+      <RuxTable>
+        <RuxTableHeader>
+          <RuxTableHeaderRow>
+            <RuxTableHeaderCell>
+              {checkedAll !== true ? (
                 <RuxButton
-                  onClick={investigateHandler}
-                  style={styles.investigateBtn}
+                  style={{ marginLeft: "-1rem" }}
+                  borderless
+                  size="small"
+                  onClick={selectAllHandler}
                 >
-                  Investigate
+                  Select All
                 </RuxButton>
-                <div slot="label" style={styles.accordianLabel}>
-                  <RuxTableCell style={{ textAlign: "center" }}>
-                    <RuxCheckbox
-                      style={styles.checkboxes}
-                      className="checkboxes"
-                    />
-                  </RuxTableCell>
-                  <RuxTableCell>
-                    <RuxStatus status={alerts[alertId].status} />
-                  </RuxTableCell>
-                  <RuxTableCell>{alerts[alertId].message}</RuxTableCell>
-                  <RuxTableCell>{alerts[alertId].category}</RuxTableCell>
-                  <RuxTableCell>{alerts[alertId].message}</RuxTableCell>
-                  <RuxTableCell>
-                    {new Date(alerts[alertId].timestamp)
-                      .toTimeString()
-                      .slice(0, 8)}
-                  </RuxTableCell>
-                </div>
-              </RuxAccordionItem>
-            </RuxTableRow>
-          </RuxAccordion>
-        ))}
-      </RuxTableBody>
-    </RuxTable>
+              ) : (
+                <RuxButton
+                  style={styles.selectNoneBtn}
+                  borderless
+                  size="small"
+                  onClick={selectNoneHandler}
+                >
+                  Select None
+                </RuxButton>
+              )}
+              <span style={{ marginLeft: "var(--spacing-4)" }}> Message</span>
+              <span style={{ marginLeft: "7.65rem" }}>Category</span>
+              <span style={{ marginLeft: "var(--spacing-4)" }}>Time</span>
+            </RuxTableHeaderCell>
+          </RuxTableHeaderRow>
+        </RuxTableHeader>
+        <RuxTableBody>
+          {alertIds.map((alertId) => (
+            <RuxAccordion key={alertId}>
+              <RuxTableRow>
+                <RuxAccordionItem>
+                  {alerts[alertId].message} <br />
+                  <RuxButton
+                    onClick={investigateHandler}
+                    style={styles.investigateBtn}
+                  >
+                    Investigate
+                  </RuxButton>
+                  <div slot="label" style={styles.accordianLabel}>
+                    <RuxTableCell style={{ textAlign: "center" }}>
+                      <RuxCheckbox
+                        style={styles.checkboxes}
+                        className="checkboxes"
+                        onClick={checkboxHandler}
+                      />
+                    </RuxTableCell>
+                    <RuxTableCell>
+                      <RuxStatus status={alerts[alertId].status} />
+                    </RuxTableCell>
+                    <RuxTableCell>{alerts[alertId].message}</RuxTableCell>
+                    <RuxTableCell>{alerts[alertId].category}</RuxTableCell>
+                    <RuxTableCell>{alerts[alertId].message}</RuxTableCell>
+                    <RuxTableCell>
+                      {new Date(alerts[alertId].timestamp)
+                        .toTimeString()
+                        .slice(0, 8)}
+                    </RuxTableCell>
+                  </div>
+                </RuxAccordionItem>
+              </RuxTableRow>
+            </RuxAccordion>
+          ))}
+        </RuxTableBody>
+      </RuxTable>
+      <div style={styles.footer}>
+        {checkedAll || checked ? (
+          <div>
+            <RuxButton
+              style={{ marginRight: "1rem" }}
+              onClick={acknowledgeHandler}
+            >
+              Acknowledge
+            </RuxButton>
+            <RuxButton onClick={acknowledgeHandler}>Dismiss</RuxButton>
+          </div>
+        ) : (
+          <div>
+            <RuxButton disabled style={{ marginRight: "1rem" }}>
+              Acknowledge
+            </RuxButton>
+            <RuxButton disabled>Dismiss</RuxButton>
+          </div>
+        )}
+      </div>
+    </div>
   );
 };
 

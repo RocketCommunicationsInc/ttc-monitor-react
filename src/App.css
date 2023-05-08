@@ -1,21 +1,58 @@
 .app-container {
   height: 100%;
+  overflow: hidden;
+}
+
+.background {
+  height: calc(100% - var(--spacing-24));
+  padding-block: var(--spacing-3);
+  padding-inline: var(--spacing-2);
+  background-color: var(--color-background-surface);
+  display: grid;
+  gap: 15px 10px;
+  grid-template-columns: calc(30% - 10px) 1fr 1fr;
+  grid-template-rows: calc(55% - 7.5px) calc(45% - 7.5px);
+  grid-template-areas:
+    "alerts constellation constellation"
+    "alerts watcher watcher";
+}
+
+.background > * {
+  height: 100%;
+}
+
+rux-container {
+  border: 1px solid var(--color-border-interactive-muted);
+}
+
+rux-container::part(container) {
+  height: calc(100% - 2px);
+  overflow-y: hidden;
+}
+
+rux-container::part(body) {
+  padding: 0;
+  overflow-y: scroll;
+}
+
+rux-table-header {
+  top: 0;
+  position: sticky;
+  z-index: 10;
 }
 
 .alerts {
   grid-area: alerts;
 }
 
-rux-container {
-  border: 2px solid var(--color-background-surface-hover);
+.alerts::part(body) {
+  padding-bottom: 0px;
+  overflow-y: scroll;
+  height: 86%;
 }
 
-rux-container::part(container) {
-  height: 100%;
-}
-
-rux-container::part(body) {
-  padding: 0;
+rux-accordion rux-table-row {
+  width: 50px;
 }
 
 .constellation {
@@ -23,38 +60,57 @@ rux-container::part(body) {
   height: 100%;
 }
 
-.constellation::part(container) {
-  height: 100%;
+.constellation::part(body) {
+  padding-bottom: 0px;
+  overflow-y: scroll;
+  height: 84%;
 }
 
-.constellation::part(body) {
-  overflow-x: scroll;
+rux-timeline::part(time-region-container) {
+  height: 84%;
 }
 
 .watcher {
   grid-area: watcher;
-}
-
-.background {
-  height: 90vh;
-  padding-block: var(--spacing-3);
-  padding-inline: var(--spacing-2) ;
-  background-color: var(--color-background-surface-default);
-  width: 100vw;
-  display: grid;
-  gap: 15px 10px;
-  grid-template-columns: 30% 1fr 1fr;
-  grid-template-rows: 60% 40%;
-  grid-template-areas:
-    "alerts constellation constellation"
-    "alerts watcher watcher";
-}
-
-.watcher-body {
   display: flex;
-  height: 100%;
 }
 
-.watcher-body rux-table {
+.watcher rux-container {
   flex-basis: 40%;
+}
+
+.watcher rux-container::part(body) {
+  height: 67%;
+}
+
+.watcher rux-container::part(toolbar) {
+  background-color: var(--color-background-surface-selected);
+  padding: 10px;
+}
+
+.mneumonic-popup-value[slot="trigger"]:hover {
+  border-bottom: 1px solid var(--color-palette-brightblue-300);
+}
+
+.line-chart {
+  flex-basis: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.watcher rux-table-header-cell {
+  text-align: right;
+}
+
+.watcher rux-table-header-cell:nth-of-type(2) {
+  text-align: left;
+}
+
+rux-time-region::part(container) {
+  border: 1px solid var(--color-border-interactive-muted);
+}
+
+rux-notification::part(container) {
+  border: 1px solid var(--color-border-interactive-muted);
 }

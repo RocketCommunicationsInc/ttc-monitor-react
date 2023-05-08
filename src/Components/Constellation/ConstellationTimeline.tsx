@@ -5,7 +5,11 @@ import {
   RuxRuler,
 } from "@astrouxds/react";
 
-const ConstellationTimeline = () => {
+type PropTypes = {
+  zoomLevel: number;
+};
+
+const ConstellationTimeline = ({ zoomLevel }: PropTypes) => {
   return (
     <RuxTimeline
       timezone="America/New_York"
@@ -13,7 +17,7 @@ const ConstellationTimeline = () => {
       end="2021-02-03T00:00:00.000Z"
       playhead="2021-02-01T04:00:00.000Z"
       interval="hour"
-      zoom={2}
+      zoom={zoomLevel}
     >
       <RuxTrack slot="ruler">
         <RuxRuler />
