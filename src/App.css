@@ -42,7 +42,7 @@ rux-container::part(body) {
 } */
 
 rux-container::part(body)::-webkit-scrollbar:vertical {
-  scroll-margin-top: 40px;
+  margin-top: 40px !important;
 }
 
 /* rux-container::part(body), ::-webkit-scrollbar-track, ::-webkit-scrollbar-corner {
