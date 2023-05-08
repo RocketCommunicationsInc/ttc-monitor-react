@@ -117,7 +117,7 @@ const AlertsList = () => {
     return () => {
       stopGenerating();
     };
-  }, [initialize, generate, stopGenerating]);
+  }, []);
 
   return (
     <div>
@@ -138,7 +138,7 @@ const AlertsList = () => {
         </RuxTableHeader>
         <RuxTableBody>
           {alertIds.map((alertId) => (
-            <RuxAccordion key={alertId}>
+            <RuxAccordion>
               <RuxAccordionItem className="accordion-item">
                 {alerts[alertId].message} <br />
                 <RuxButton
@@ -155,7 +155,7 @@ const AlertsList = () => {
                       onClick={checkboxHandler}
                     />
                   </RuxTableCell>
-                  {/* <RuxTableCell>
+                  <RuxTableCell>
                     <RuxStatus status={alerts[alertId].status} />
                   </RuxTableCell>
                   <RuxTableCell>{alerts[alertId].message}</RuxTableCell>
@@ -165,7 +165,7 @@ const AlertsList = () => {
                     {new Date(alerts[alertId].timestamp)
                       .toTimeString()
                       .slice(0, 8)}
-                  </RuxTableCell> */}
+                  </RuxTableCell>
                 </div>
               </RuxAccordionItem>
             </RuxAccordion>
