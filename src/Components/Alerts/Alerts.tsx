@@ -6,7 +6,6 @@ import {
   RuxNotification,
 } from "@astrouxds/react";
 import AlertsList from "./AlertsList";
-import useAlerts from "../../hooks/useAlerts";
 import { useState } from "react";
 
 const styles = {
@@ -19,7 +18,7 @@ const styles = {
     display: "flex",
     flexFlow: "column nowrap",
     fontSize: "var(--font-size-base)",
-    marginRight: "8rem",
+      marginRight: "8rem"
   },
   selectMenusDiv: {
     marginLeft: "auto",
@@ -44,12 +43,12 @@ const styles = {
   },
   notificationBanner: {
     position: "sticky" as "sticky",
-    zIndex: 50,
-  },
+    // display: "flex",
+    zIndex: 50
+  }
 };
 
 const Alerts = () => {
-  const { alertIds } = useAlerts();
   const [openBanner, setOpenBanner] = useState(false);
   const [selection, setSelection] = useState("");
 
@@ -67,7 +66,7 @@ const Alerts = () => {
     <RuxContainer className="alerts" style={styles.container}>
       <div slot="header" style={styles.header}>
         <div style={styles.activeAlerts}>
-          <span style={styles.alertsNum}>{alertIds.length}</span> Active Alerts
+          <span style={styles.alertsNum}>123</span> Active Alerts
         </div>
         <div style={styles.selectMenusDiv}>
           <RuxSelect
