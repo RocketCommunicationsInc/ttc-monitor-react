@@ -12,14 +12,14 @@ function App() {
   return (
     <div className="app-container">
       <ContactsContextProvider>
-        <AlertsContextProvider>
-          <GlobalStatusBar />
-          <div className="background">
+        <GlobalStatusBar />
+        <div className="background">
+          <AlertsContextProvider>
             <Alerts />
-            <Constellation />
-            <Watcher />
-          </div>
-        </AlertsContextProvider>
+          </AlertsContextProvider>
+          <Constellation />
+          <Watcher />
+        </div>
       </ContactsContextProvider>
     </div>
   );
