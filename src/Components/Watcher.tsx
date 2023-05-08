@@ -13,13 +13,13 @@ import {
   RuxCheckbox,
   RuxIcon,
 } from "@astrouxds/react";
-import type { rowDataObject, Status } from "../Types";
-import LineChart from "../Components/Watcher/LineChart";
+import type { rowDataObject } from "../Types/types";
+import LineChart from "../Components/Watcher/LineChart"
 
 const styles = {
   container: {
     display: "flex",
-    fontWeight: "bold",
+    fontWeight: "bold"
   },
   popUpMenuDiv: {
     paddingRight: "3rem",
@@ -42,8 +42,8 @@ const styles = {
     color: "var(--color-palette-brightblue-300)",
   },
   popUpMargin: {
-    marginBlock: ".5rem",
-  },
+    marginBlock: ".5rem"
+  }
 };
 
 const watcherDataItem = {
@@ -70,7 +70,7 @@ const Watcher = () => {
           <RuxTableHeader>
             <RuxTableHeaderRow>
               {Object.keys(fixtureData[0]).map((key) => (
-                <RuxTableHeaderCell key={key}>
+                <RuxTableHeaderCell>
                   {key === "status" ? "" : key}
                 </RuxTableHeaderCell>
               ))}
@@ -78,11 +78,11 @@ const Watcher = () => {
           </RuxTableHeader>
           <RuxTableBody>
             {fixtureData.map((dataObj: rowDataObject) => (
-              <RuxTableRow key={dataObj.key}>
+              <RuxTableRow>
                 {Object.entries(dataObj).map(([key, value]) =>
                   key === "status" ? (
                     <RuxTableCell>
-                      <RuxStatus status={dataObj.status as Status} />
+                      <RuxStatus status={dataObj.status} />
                     </RuxTableCell>
                   ) : key === "Mneumonic" ? (
                     <RuxPopUp placement="right">
