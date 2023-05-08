@@ -128,18 +128,6 @@ const AlertsList = () => {
                       .toTimeString()
                       .slice(0, 8)}
                   </RuxTableCell>
-
-                  {/* {Object.entries(alerts[alertId]).map(([key, value]) =>
-                    key === "status" ? (
-                      <RuxTableCell>
-                        <RuxStatus status={alerts[alertId].status} />
-                      </RuxTableCell>
-                    ) : (
-                      <RuxTableCell style={{ textAlign: "right" }}>
-                        {value}
-                      </RuxTableCell>
-                    )
-                  )} */}
                 </div>
               </RuxAccordionItem>
             </RuxTableRow>
