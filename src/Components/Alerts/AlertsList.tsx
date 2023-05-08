@@ -4,7 +4,6 @@ import {
   RuxTableHeader,
   RuxTableHeaderRow,
   RuxTableHeaderCell,
-  RuxTableRow,
   RuxTableCell,
   RuxTableBody,
   RuxCheckbox,
@@ -27,9 +26,9 @@ const styles = {
   checkboxes: {
     paddingRight: "var(--spacing-4)",
   },
-  selectNoneBtn: {
-    marginLeft: "-1rem",
-    marginRight: "-1.25rem",
+  selectAllCheckbox: {
+    marginLeft: "1.25rem",
+    marginRight: "2.5rem",
   },
   footer: {
     display: "flex",
@@ -58,25 +57,31 @@ const AlertsList = () => {
   const fixtureData = Array(15).fill(alertsDataItem);
 
   const selectAllHandler = () => {
+    const selectAllCheckbox: any = document.querySelector(
+      ".select-all-checkbox"
+    );
     const checkboxes: any = document.querySelectorAll(".checkboxes");
     for (let i = 0; i < checkboxes.length; i++) {
       checkboxes[i].checked = true;
       setCheckedAll(true);
       setChecked(true);
-    }
-  };
 
-  const selectNoneHandler = () => {
-    const checkboxes: any = document.querySelectorAll(".checkboxes");
-    for (let i = 0; i < checkboxes.length; i++) {
-      checkboxes[i].checked = false;
-      setCheckedAll(false);
-      setChecked(false);
+      if (selectAllCheckbox.checked !== false) {
+        checkboxes[i].checked = false;
+        setCheckedAll(false);
+        setChecked(false);
+      }
     }
   };
 
   const checkboxHandler = () => {
     setChecked(true);
+    const checkboxes: any = document.querySelectorAll(".checkboxes");
+    checkboxes.forEach((checkbox: any) => {
+      if (checkbox.checked) {
+        setChecked(false);
+      }
+    });
   };
 
   const investigateHandler = () => {
@@ -111,25 +116,11 @@ const AlertsList = () => {
         <RuxTableHeader>
           <RuxTableHeaderRow>
             <RuxTableHeaderCell>
-              {checkedAll !== true ? (
-                <RuxButton
-                  style={{ marginLeft: "-1rem" }}
-                  borderless
-                  size="small"
-                  onClick={selectAllHandler}
-                >
-                  Select All
-                </RuxButton>
-              ) : (
-                <RuxButton
-                  style={styles.selectNoneBtn}
-                  borderless
-                  size="small"
-                  onClick={selectNoneHandler}
-                >
-                  Select None
-                </RuxButton>
-              )}
+              <RuxCheckbox
+                style={styles.selectAllCheckbox}
+                onClick={selectAllHandler}
+                className="select-all-checkbox"
+              ></RuxCheckbox>
               <span style={{ marginLeft: "var(--spacing-4)" }}> Message</span>
               <span style={{ marginLeft: "7.65rem" }}>Category</span>
               <span style={{ marginLeft: "var(--spacing-4)" }}>Time</span>
@@ -139,37 +130,35 @@ const AlertsList = () => {
         <RuxTableBody>
           {fixtureData.map((dataObj: rowDataObject) => (
             <RuxAccordion>
-              <RuxTableRow>
-                <RuxAccordionItem className="accordion-item">
-                  Red FEP 124 is degraded at 15:59:57. <br />
-                  <RuxButton
-                    onClick={investigateHandler}
-                    style={styles.investigateBtn}
-                  >
-                    Investigate
-                  </RuxButton>
-                  <div slot="label" style={styles.accordianLabel}>
-                    <RuxTableCell style={{ textAlign: "center" }}>
-                      <RuxCheckbox
-                        style={styles.checkboxes}
-                        className="checkboxes"
-                        onClick={checkboxHandler}
-                      />
-                    </RuxTableCell>
-                    {Object.entries(dataObj).map(([key, value]) =>
-                      key === "status" ? (
-                        <RuxTableCell>
-                          <RuxStatus status={dataObj.status} />
-                        </RuxTableCell>
-                      ) : (
-                        <RuxTableCell style={{ textAlign: "right" }}>
-                          {value}
-                        </RuxTableCell>
-                      )
-                    )}
-                  </div>
-                </RuxAccordionItem>
-              </RuxTableRow>
+              <RuxAccordionItem className="accordion-item">
+                Red FEP 124 is degraded at 15:59:57. <br />
+                <RuxButton
+                  onClick={investigateHandler}
+                  style={styles.investigateBtn}
+                >
+                  Investigate
+                </RuxButton>
+                <div slot="label" style={styles.accordianLabel}>
+                  <RuxTableCell style={{ textAlign: "center" }}>
+                    <RuxCheckbox
+                      style={styles.checkboxes}
+                      className="checkboxes"
+                      onClick={checkboxHandler}
+                    />
+                  </RuxTableCell>
+                  {Object.entries(dataObj).map(([key, value]) =>
+                    key === "status" ? (
+                      <RuxTableCell>
+                        <RuxStatus status={dataObj.status} />
+                      </RuxTableCell>
+                    ) : (
+                      <RuxTableCell style={{ textAlign: "right" }}>
+                        {value}
+                      </RuxTableCell>
+                    )
+                  )}
+                </div>
+              </RuxAccordionItem>
             </RuxAccordion>
           ))}
         </RuxTableBody>

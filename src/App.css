@@ -33,7 +33,21 @@ rux-container::part(container) {
 rux-container::part(body) {
   padding: 0;
   overflow-y: scroll;
+  /* scroll-margin-inline-start: 40px;
+  scroll-padding-inline: 40px; */
 }
+
+/* rux-container_body::part(body), ::scrollbar-corner element{
+  margin-top: 40px;
+} */
+
+rux-container::part(body)::-webkit-scrollbar:vertical {
+  scroll-margin-top: 40px;
+}
+
+/* rux-container::part(body), ::-webkit-scrollbar-track, ::-webkit-scrollbar-corner {
+  margin-top: 40px;
+} */
 
 rux-table-header {
   top: 0;
@@ -49,10 +63,7 @@ rux-table-header {
   padding-bottom: 0px;
   overflow-y: scroll;
   height: 86%;
-}
-
-rux-accordion rux-table-row {
-  width: 50px;
+  overflow-x: hidden;
 }
 
 .constellation {
@@ -108,9 +119,5 @@ rux-timeline::part(time-region-container) {
 }
 
 rux-time-region::part(container) {
-  border: 1px solid var(--color-border-interactive-muted);
-}
-
-rux-notification::part(container) {
   border: 1px solid var(--color-border-interactive-muted);
 }
