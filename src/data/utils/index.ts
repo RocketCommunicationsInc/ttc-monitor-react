@@ -1,12 +1,8 @@
 import { faker } from "@faker-js/faker";
 
-import dataOption from "../data/options";
-import percentages from "../data/percentages";
-import {
-  AlertsPercentage,
-  BetweenOptions,
-  RangeOptions,
-} from "../../Types/util";
+import dataOption from "../options/options";
+import percentages from "../options/percentages";
+import { AlertsPercentage, BetweenOptions, RangeOptions } from "../../Types";
 
 export const range = (options: RangeOptions): number[] => {
   if (typeof options === "number") {

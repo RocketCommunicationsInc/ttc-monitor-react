@@ -6,8 +6,8 @@ import {
   createContext,
   useContext,
 } from "react";
-import { generateAlert } from "../data/lib/alerts/generate-alert";
-import { generateAlerts } from "../data/lib/alerts/generate-alerts";
+import { generateAlert } from "../data/generators/alerts/generate-alert";
+import { generateAlerts } from "../data/generators/alerts/generate-alerts";
 import type {
   Alert,
   ModifyAlertParams,

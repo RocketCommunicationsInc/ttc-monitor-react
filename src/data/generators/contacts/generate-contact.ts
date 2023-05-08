@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
 
-import dataOption from "../../data/options";
-import percentages from "../../data/percentages";
+import dataOption from "../../options/options";
+import percentages from "../../options/percentages";
 import { generateAlert } from "../alerts/generate-alert";
 import {
   between,

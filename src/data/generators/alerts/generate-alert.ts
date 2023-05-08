@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 
-import dataOption from "../../data/options";
+import dataOption from "../../options/options";
 import { between, generateEquipment, shuffle } from "../../utils";
 
 import type { Alert, AlertOptions, Status } from "../../../Types";

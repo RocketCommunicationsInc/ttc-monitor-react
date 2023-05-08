@@ -6,8 +6,8 @@ import {
   createContext,
   useContext,
 } from "react";
-import { generateContact } from "../data/lib/contacts/generate-contact";
-import { generateContacts } from "../data/lib/contacts/generate-contacts";
+import { generateContact } from "../data/generators/contacts/generate-contact";
+import { generateContacts } from "../data/generators/contacts/generate-contacts";
 import type {
   Contact,
   ModifyContactParams,
