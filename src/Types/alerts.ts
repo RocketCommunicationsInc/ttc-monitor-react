@@ -22,8 +22,10 @@ export type ModifyAlertParams = {
   acknowledged: boolean;
 };
 
-export type GenerateAlertOptions = {
-  initial: number;
-  interval: number;
-  limit: number;
+export type AlertOptions = {
+  refId?: string;
+  equipment?: string;
+  start?: string | number | Date;
+  end?: string | number | Date;
+  createdRef?: string | number | Date;
 };

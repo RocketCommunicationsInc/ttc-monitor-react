@@ -1,5 +1,5 @@
-import { Alert } from './alert';
-import { AlertsPercentage, Status, SubscribeOptions } from './util';
+import { Alert } from "./alerts";
+import { AlertsPercentage, Status, SubscribeOptions } from "./util";
 
 export type ContactOptions = {
   alertsPercentage?: AlertsPercentage;
@@ -36,6 +36,7 @@ export type Contact = {
 };
 
 export type ModifyContactParams = {
+  id: string;
   ground?: string;
   satellite?: string;
   equipment?: string;

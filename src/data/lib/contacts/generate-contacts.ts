@@ -1,7 +1,7 @@
-import { ContactOptions } from '../../types';
-import { generateContact } from './generate-contact';
+import { generateContact } from "./generate-contact";
+import type { ContactOptions } from "../../../Types";
 
 export const generateContacts = (
   length: number = 100,
-  options?: ContactOptions,
+  options?: ContactOptions
 ) => Array.from({ length }, (_, i) => generateContact(i, options));

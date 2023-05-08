@@ -8,7 +8,7 @@ import {
   RuxMenuItem,
   RuxMonitoringIcon,
 } from "@astrouxds/react";
-import type { Status } from "@astrouxds/astro-web-components/dist/types/common/commonTypes.module";
+import type { Status } from "../Types";
 
 const styles = {
   statusIndicators: {

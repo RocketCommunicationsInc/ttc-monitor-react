@@ -5,23 +5,20 @@ import {
   useMemo,
   createContext,
   useContext,
-  ReactNode,
 } from "react";
 import { generateAlert } from "../data/lib/alerts/generate-alert";
-
-import type { Alert, ModifyAlertParams } from "../Types/alerts";
-import type { SubscribeOptions } from "../data/types";
-import type { GenerateAlertOptions } from "../Types/alerts";
 import { generateAlerts } from "../data/lib/alerts/generate-alerts";
+import type {
+  Alert,
+  ModifyAlertParams,
+  Children,
+  GenerateOptions,
+} from "../Types";
 
 const defaultOptions = {
   initial: 5,
   interval: 2,
   limit: 74,
-};
-
-type Children = {
-  children: ReactNode;
 };
 
 type PropTypes = {
@@ -31,7 +28,7 @@ type PropTypes = {
   editAlert: (params: ModifyAlertParams) => void;
   deleteAlert: (id: string) => void;
   clearAlerts: () => void;
-  generate: (newGenerateOptions?: SubscribeOptions) => void;
+  generate: (newGenerateOptions?: GenerateOptions) => void;
   stopGenerating: () => void;
   initialize: () => void;
 };
@@ -57,7 +54,7 @@ export const AlertsContextProvider = ({ children }: Children) => {
   const [alerts, setAlerts] = useState<{ [key: string]: Alert }>({});
   const [generating, setGenerating] = useState(false);
   const [generateOptions, setGenerateOptions] =
-    useState<GenerateAlertOptions>(defaultOptions);
+    useState<GenerateOptions>(defaultOptions);
 
   const addAlert = useCallback(() => {
     const newAlert = generateAlert();
@@ -110,7 +107,7 @@ export const AlertsContextProvider = ({ children }: Children) => {
   }, []);
 
   const generate = useCallback(
-    (newGenerateOptions?: SubscribeOptions) => {
+    (newGenerateOptions?: Partial<GenerateOptions>) => {
       if (newGenerateOptions && Object.keys(newGenerateOptions).length) {
         const newOptions = { ...generateOptions, newGenerateOptions };
         setGenerateOptions(newOptions);

@@ -1,9 +1,8 @@
-import { faker } from '@faker-js/faker';
+import { faker } from "@faker-js/faker";
 
-import dataOption from '../../data/options';
-import percentages from '../../data/percentages';
-import { Contact, ContactOptions, Status } from '../../types';
-import { generateAlert } from '../alerts/generate-alert';
+import dataOption from "../../data/options";
+import percentages from "../../data/percentages";
+import { generateAlert } from "../alerts/generate-alert";
 import {
   between,
   generateEquipment,
@@ -13,11 +12,12 @@ import {
   setModulus,
   setSecondModulus,
   shuffle,
-} from '../../utils';
+} from "../../utils";
+import type { Contact, ContactOptions, Status } from "../../../Types";
 
 export const generateContact = (
   index: number,
-  options?: ContactOptions,
+  options?: ContactOptions
 ): Contact => {
   if (options?.alertsPercentage) {
     const keys = Object.keys(percentages);
@@ -60,7 +60,7 @@ export const generateContact = (
     name: faker.datatype.number(),
     ground: shuffle(dataOption.grounds),
     rev: faker.datatype.number({ min: 1001, max: 9999 }),
-    satellite: 'USA-' + faker.random.alphaNumeric(5).toUpperCase(),
+    satellite: "USA-" + faker.random.alphaNumeric(5).toUpperCase(),
     equipment,
     state: shuffle(dataOption.states),
     step: shuffle(dataOption.steps),

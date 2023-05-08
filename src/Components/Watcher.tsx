@@ -13,8 +13,7 @@ import {
   RuxCheckbox,
   RuxIcon,
 } from "@astrouxds/react";
-import type { Status } from "@astrouxds/astro-web-components/dist/types/common/commonTypes.module";
-import type { rowDataObject } from "../Types/types";
+import type { rowDataObject, Status } from "../Types";
 import LineChart from "./LineChart";
 
 const styles = {
