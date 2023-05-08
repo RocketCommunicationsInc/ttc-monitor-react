@@ -103,13 +103,6 @@ const AlertsList = () => {
     // });
   };
 
-  // document.addEventListener("DOMContentLoaded", function () {
-  //   const ruxScrollbar: any = document.querySelectorAll("webkit-scrollbar");
-  //   console.log(ruxScrollbar);
-  // });
-
-  // // ruxScrollbar.style.marginTop = "40px"
-
   useEffect(() => {
     initialize();
     generate();
