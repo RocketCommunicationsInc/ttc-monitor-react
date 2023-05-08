@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   RuxTable,
   RuxTableHeader,
@@ -12,7 +12,7 @@ import {
   RuxAccordion,
   RuxAccordionItem,
 } from "@astrouxds/react";
-import type { rowDataObject } from "../../Types/types";
+import useAlerts from "../../hooks/useAlerts";
 
 const styles = {
   investigateBtn: {
@@ -46,15 +46,8 @@ const styles = {
 const AlertsList = () => {
   const [checkedAll, setCheckedAll] = useState(false);
   const [checked, setChecked] = useState(false);
-
-  const alertsDataItem = {
-    status: "caution" as const,
-    Message: "Antenna VTS 1 - NOLOCK",
-    Category: "Software",
-    Time: "15:59:57",
-  };
-
-  const fixtureData = Array(15).fill(alertsDataItem);
+  const { alerts, alertIds, generate, stopGenerating, initialize } =
+    useAlerts();
 
   const selectAllHandler = () => {
     const selectAllCheckbox: any = document.querySelector(
@@ -117,6 +110,14 @@ const AlertsList = () => {
   })
 
   // ruxScrollbar.style.marginTop = "40px"
+  useEffect(() => {
+    initialize();
+    generate();
+
+    return () => {
+      stopGenerating();
+    };
+  }, [initialize, generate, stopGenerating]);
 
   return (
     <div>
@@ -136,37 +137,37 @@ const AlertsList = () => {
           </RuxTableHeaderRow>
         </RuxTableHeader>
         <RuxTableBody>
-          {fixtureData.map((dataObj: rowDataObject) => (
-            <RuxAccordion>
-              <RuxAccordionItem className="accordion-item">
-                Red FEP 124 is degraded at 15:59:57. <br />
-                <RuxButton
-                  onClick={investigateHandler}
-                  style={styles.investigateBtn}
-                >
-                  Investigate
-                </RuxButton>
-                <div slot="label" style={styles.accordianLabel}>
-                  <RuxTableCell style={{ textAlign: "center" }}>
-                    <RuxCheckbox
-                      style={styles.checkboxes}
-                      className="checkboxes"
-                      onClick={checkboxHandler}
-                    />
-                  </RuxTableCell>
-                  {Object.entries(dataObj).map(([key, value]) =>
-                    key === "status" ? (
-                      <RuxTableCell>
-                        <RuxStatus status={dataObj.status} />
-                      </RuxTableCell>
-                    ) : (
-                      <RuxTableCell style={{ textAlign: "right" }}>
-                        {value}
-                      </RuxTableCell>
-                    )
-                  )}
-                </div>
-              </RuxAccordionItem>
+          {alertIds.map((alertId) => (
+            <RuxAccordion key={alertId}>
+                <RuxAccordionItem>
+                  {alerts[alertId].message} <br />
+                  <RuxButton
+                    onClick={investigateHandler}
+                    style={styles.investigateBtn}
+                  >
+                    Investigate
+                  </RuxButton>
+                  <div slot="label" style={styles.accordianLabel}>
+                    <RuxTableCell style={{ textAlign: "center" }}>
+                      <RuxCheckbox
+                        style={styles.checkboxes}
+                        className="checkboxes"
+                        onClick={checkboxHandler}
+                      />
+                    </RuxTableCell>
+                    <RuxTableCell>
+                      <RuxStatus status={alerts[alertId].status} />
+                    </RuxTableCell>
+                    <RuxTableCell>{alerts[alertId].message}</RuxTableCell>
+                    <RuxTableCell>{alerts[alertId].category}</RuxTableCell>
+                    <RuxTableCell>{alerts[alertId].message}</RuxTableCell>
+                    <RuxTableCell>
+                      {new Date(alerts[alertId].timestamp)
+                        .toTimeString()
+                        .slice(0, 8)}
+                    </RuxTableCell>
+                  </div>
+                </RuxAccordionItem>
             </RuxAccordion>
           ))}
         </RuxTableBody>
