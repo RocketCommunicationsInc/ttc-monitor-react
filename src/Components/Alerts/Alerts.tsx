@@ -18,7 +18,7 @@ const styles = {
     display: "flex",
     flexFlow: "column nowrap",
     fontSize: "var(--font-size-base)",
-      marginRight: "8rem"
+    marginRight: "8rem",
   },
   selectMenusDiv: {
     marginLeft: "auto",
@@ -44,8 +44,8 @@ const styles = {
   notificationBanner: {
     position: "sticky" as "sticky",
     // display: "flex",
-    zIndex: 50
-  }
+    zIndex: 50,
+  },
 };
 
 const Alerts = () => {

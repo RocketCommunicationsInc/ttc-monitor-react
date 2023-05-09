@@ -10,13 +10,13 @@ import {
 import type { rowDataObject } from "../../Types/types";
 
 //const styles = {
-  // cutOffSpaceBar: {
-  //   height: "2.5rem",
-  //   width: "2rem",
-  //   backgroundColor: "var(--gsb-color-background)",
-  //   position: "fixed" as "fixed",
-  //   left: "97.6%",
-  // },
+// cutOffSpaceBar: {
+//   height: "2.5rem",
+//   width: "2rem",
+//   backgroundColor: "var(--gsb-color-background)",
+//   position: "fixed" as "fixed",
+//   left: "97.6%",
+// },
 //};
 
 const constellationDataItem = {
