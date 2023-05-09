@@ -7,6 +7,7 @@ import {
 } from "@astrouxds/react";
 import AlertsList from "./AlertsList";
 import { useState } from "react";
+import useAlerts from "../../hooks/useAlerts";
 
 const styles = {
   container: {
@@ -49,6 +50,7 @@ const styles = {
 };
 
 const Alerts = () => {
+  const { alertIds } = useAlerts();
   const [openBanner, setOpenBanner] = useState(false);
   const [selection, setSelection] = useState("");
 
@@ -66,7 +68,7 @@ const Alerts = () => {
     <RuxContainer className="alerts" style={styles.container}>
       <div slot="header" style={styles.header}>
         <div style={styles.activeAlerts}>
-          <span style={styles.alertsNum}>123</span> Active Alerts
+          <span style={styles.alertsNum}>{alertIds.length}</span> Active Alerts
         </div>
         <div style={styles.selectMenusDiv}>
           <RuxSelect

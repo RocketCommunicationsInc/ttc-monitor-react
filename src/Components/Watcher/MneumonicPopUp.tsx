@@ -31,25 +31,23 @@ const MneumonicPopUp = ({ triggerValue }: PropTypes) => {
       <RuxMenu>
         <div style={styles.popUpMenuDiv}>
           <span style={styles.boldPopUpWords}>PWBVTLM</span>
-          <p>
-            <div>
-              Value
-              <span style={styles.volts}>24.2 Volts</span>
-            </div>
-            <div>
-              Subsystem
-              <span style={styles.altitudeLink}>
-                <a
-                  href="https://ttc-investigate.astrouxds.com/?system=Attitude"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Altitude
-                </a>
-                <RuxIcon size="1rem" icon="launch" />
-              </span>
-            </div>
-          </p>
+          <div style={{ marginTop: ".75rem" }}>
+            Value
+            <span style={styles.volts}>24.2 Volts</span>
+          </div>
+          <div style={{ marginBottom: ".75rem" }}>
+            Subsystem
+            <span style={styles.altitudeLink}>
+              <a
+                href="https://ttc-investigate.astrouxds.com/?system=Attitude"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Altitude
+              </a>
+              <RuxIcon size="1rem" icon="launch" />
+            </span>
+          </div>
           <RuxCheckbox>
             <span style={styles.boldPopUpWords}>Add to Watcher</span>
           </RuxCheckbox>
