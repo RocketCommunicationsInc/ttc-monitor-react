@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import {
   RuxTable,
@@ -22,6 +23,7 @@ const styles = {
   },
   accordianLabel: {
     color: "var(--color-palette-neutral-000)",
+    wordWrap: "break-word" as "break-word",
   },
   checkboxes: {
     paddingRight: "var(--spacing-4)",
@@ -41,6 +43,25 @@ const styles = {
     bottom: 0,
     backgroundColor: "#1B2D3E",
   },
+  alertMessage: {
+    minWidth: "9rem",
+    maxWidth: "9rem",
+    overflow: "hidden",
+  },
+  alertCategory: {
+    width: "4.75rem",
+    alignSelf: "center",
+    paddingLeft: "1.5rem",
+  },
+  alertTime: {
+    width: "1.75rem",
+    paddingLeft: ".7rem",
+    alignSelf: "left",
+  },
+  firstAccordionItem: {
+    backgroundColor: "#141f2c", 
+    color: "red"
+  }
 };
 
 const AlertsList = () => {
@@ -48,6 +69,8 @@ const AlertsList = () => {
   const [checked, setChecked] = useState(false);
   const { alerts, alertIds, generate, stopGenerating, initialize } =
     useAlerts();
+
+    // console.log(alerts)
 
   const selectAllHandler = () => {
     const selectAllCheckbox: any = document.querySelector(
@@ -71,6 +94,7 @@ const AlertsList = () => {
     setChecked(true);
     const checkboxes: any = document.querySelectorAll(".checkboxes");
     checkboxes.forEach((checkbox: any) => {
+      //check if any of the checkboxes are checked ( || checkboxes.checked.length)?
       if (checkbox.checked) {
         setChecked(false);
       }
@@ -81,26 +105,32 @@ const AlertsList = () => {
     alert("This feature has not been implemented.");
   };
 
+  const accordionItem: any = document.querySelectorAll(".accordion-item")
+
+   if(accordionItem && accordionItem[0] !== (null || "undefined")) {
+    // accordionItem[0].style.color = "red"
+    console.log(accordionItem[0])
+    // Object.assign(accordionItem?.style, styles.firstAccordionItem)
+   }
+
+
   const acknowledgeHandler = () => {
-    // const accordionItemsToRemove: any[] = [];
-    // const accordionItems: any = document.querySelectorAll(
-    //   ".accordion-item"
-    // );
-    // let accordionId = accordionItems.id
-    // accordionId = Math.floor(Math.random() * 150)
-    // accordionItems.id = accordionId
-    // accordionItems.forEach(
-    //   (item: any) => {
-    //     if (item && (checked || checkedAll)) {
-    //       accordionItemsToRemove.push(accordionId);
-    //     }
-    //   }
-    // );
-    // accordionItemsToRemove.forEach((id) => {
-    //   const accordionIdToRemove = document.getElementById(id);
-    //   console.log(accordionId, "id")
-    //   accordionIdToRemove?.remove();
+    const accordionItem: any = document.querySelectorAll(".accordion-item");
+    const accordionItemsToRemove: any[] = [];
+    
+
+    // accordionItem.forEach((item: any) => {
+    //   const alertId = item.dataset.id;
+
+      if (alerts.id && (checked || checkedAll)) {
+        accordionItemsToRemove.push(alerts.id);
+      }
     // });
+    accordionItemsToRemove.forEach((id) => {
+      const alertItem = document.getElementById(id);
+      console.log(alertItem, "item")
+      alertItem?.remove();
+    });
   };
 
   useEffect(() => {
@@ -124,8 +154,8 @@ const AlertsList = () => {
                 className="select-all-checkbox"
               ></RuxCheckbox>
               <span style={{ marginLeft: "var(--spacing-4)" }}> Message</span>
-              <span style={{ marginLeft: "7.65rem" }}>Category</span>
-              <span style={{ marginLeft: "var(--spacing-4)" }}>Time</span>
+              <span style={{ marginLeft: "6.25rem" }}>Category</span>
+              <span style={{ marginLeft: "var(--spacing-6)" }}>Time</span>
             </RuxTableHeaderCell>
           </RuxTableHeaderRow>
         </RuxTableHeader>
@@ -151,9 +181,13 @@ const AlertsList = () => {
                   <RuxTableCell>
                     <RuxStatus status={alerts[alertId].status} />
                   </RuxTableCell>
-                  <RuxTableCell>{alerts[alertId].message}</RuxTableCell>
-                  <RuxTableCell>{alerts[alertId].category}</RuxTableCell>
-                  <RuxTableCell>
+                  <RuxTableCell style={styles.alertMessage}>
+                    {alerts[alertId].message}
+                  </RuxTableCell>
+                  <RuxTableCell style={styles.alertCategory}>
+                    {alerts[alertId].category}
+                  </RuxTableCell>
+                  <RuxTableCell style={styles.alertTime}>
                     {new Date(alerts[alertId].timestamp)
                       .toTimeString()
                       .slice(0, 8)}

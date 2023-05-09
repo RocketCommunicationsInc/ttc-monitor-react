@@ -32,7 +32,7 @@ rux-container::part(container) {
 
 rux-container::part(body) {
   padding: 0;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 rux-table-header {
@@ -47,7 +47,7 @@ rux-table-header {
 
 .alerts::part(body) {
   padding-bottom: 0px;
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 86%;
 }
 
@@ -113,4 +113,28 @@ rux-time-region::part(container) {
 
 rux-notification::part(container) {
   border: 1px solid var(--color-border-interactive-muted);
+}
+//____________________________________________________________
+::-webkit-scrollbar:vertical {
+	margin-top: 40px !important;
+}
+
+::-webkit-scrollbar {
+	margin-top: 40px !important;
+}
+::-webkit-scrollbar-track:vertical {
+	margin-top: 40px !important;
+}
+
+rux-container::part(container)::-webkit-scrollbar-track:vertical {
+	margin-top: 40px !important;
+}
+
+rux-container::part(body)::-webkit-scrollbar-track:vertical {
+	margin-top: 40px !important;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+	margin-top: 40px !important;
 }
