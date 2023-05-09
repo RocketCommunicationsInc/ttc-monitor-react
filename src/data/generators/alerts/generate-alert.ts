@@ -2,7 +2,7 @@ import { faker } from "@faker-js/faker";
 
 import dataOption from "../../options/options";
 import { between, generateEquipment, shuffle } from "../../utils";
-import type { Alert, AlertOptions, Status} from "../../../Types";
+import type { Alert, AlertOptions, Status } from "../../../Types";
 
 export const generateAlert = (options?: AlertOptions): Alert => {
   let date = faker.date.recent(1, options?.createdRef);

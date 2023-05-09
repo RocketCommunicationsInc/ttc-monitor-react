@@ -131,7 +131,7 @@ const AlertsList = () => {
         </RuxTableHeader>
         <RuxTableBody>
           {alertIds.map((alertId) => (
-            <RuxAccordion>
+            <RuxAccordion key={alertId}>
               <RuxAccordionItem className="accordion-item">
                 {alerts[alertId].message} <br />
                 <RuxButton
