@@ -9,7 +9,7 @@ import {
   RuxTableCell,
   RuxTableBody,
 } from "@astrouxds/react";
-import type { rowDataObject } from "../../Types/types";
+import type { rowDataObject, Status } from "../../Types";
 import LineChart from "./LineChart";
 import MneumonicPopUp from "./MneumonicPopUp";
 
@@ -43,7 +43,7 @@ const Watcher = () => {
           <RuxTableHeader>
             <RuxTableHeaderRow>
               {Object.keys(fixtureData[0]).map((key) => (
-                <RuxTableHeaderCell>
+                <RuxTableHeaderCell key={key}>
                   {key === "status" ? "" : key}
                 </RuxTableHeaderCell>
               ))}
@@ -51,11 +51,11 @@ const Watcher = () => {
           </RuxTableHeader>
           <RuxTableBody>
             {fixtureData.map((dataObj: rowDataObject) => (
-              <RuxTableRow>
+              <RuxTableRow key={dataObj.key}>
                 {Object.entries(dataObj).map(([key, value]) =>
                   key === "status" ? (
                     <RuxTableCell>
-                      <RuxStatus status={dataObj.status} />
+                      <RuxStatus status={dataObj.status as Status} />
                     </RuxTableCell>
                   ) : key === "Mneumonic" ? (
                     <RuxTableCell>
