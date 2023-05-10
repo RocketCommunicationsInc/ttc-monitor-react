@@ -31,6 +31,7 @@ type PropTypes = {
   generate: (newGenerateOptions?: GenerateOptions) => void;
   stopGenerating: () => void;
   initialize: () => void;
+  toggleSelected: (id: string) => void;
 };
 
 const AlertsContext = createContext<PropTypes>({
@@ -43,6 +44,7 @@ const AlertsContext = createContext<PropTypes>({
   generate: () => null,
   stopGenerating: () => null,
   initialize: () => null,
+  toggleSelected: () => null,
 });
 
 export default function useAlerts() {
@@ -87,6 +89,18 @@ export const AlertsContextProvider = ({ children }: Children) => {
       }
     },
     [alerts, alertIds]
+  );
+
+  const toggleSelected = useCallback(
+    (id: string) => {
+      if (id in alerts) {
+        setAlerts((prevState) => {
+          prevState[id].selected = true;
+          return prevState;
+        });
+      }
+    },
+    [alerts]
   );
 
   const clearAlerts = () => {
@@ -143,8 +157,18 @@ export const AlertsContextProvider = ({ children }: Children) => {
       generate,
       stopGenerating,
       initialize,
+      toggleSelected,
     }),
-    [alertIds, alerts, addAlert, editAlert, deleteAlert, generate, initialize]
+    [
+      alertIds,
+      alerts,
+      addAlert,
+      editAlert,
+      deleteAlert,
+      generate,
+      initialize,
+      toggleSelected,
+    ]
   );
 
   return (

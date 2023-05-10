@@ -51,10 +51,10 @@ const styles = {
   alertCategory: {
     width: "4.75rem",
     alignSelf: "center",
-    paddingLeft: "1.5rem",
+    paddingLeft: "1.4rem",
   },
   alertTime: {
-    width: "1.75rem",
+    width: "1.7rem",
     paddingLeft: ".7rem",
     alignSelf: "left",
   },
@@ -67,6 +67,7 @@ const styles = {
 const AlertsList = () => {
   const [checkedAll, setCheckedAll] = useState(false);
   const [checked, setChecked] = useState(false);
+  //!new method on useAlerts to actually change it. Toggle selected?
   const {
     alerts,
     alertIds,
@@ -74,6 +75,7 @@ const AlertsList = () => {
     stopGenerating,
     initialize,
     deleteAlert,
+    toggleSelected,
   } = useAlerts();
 
   useEffect(() => {
@@ -103,69 +105,59 @@ const AlertsList = () => {
     }
   };
 
-  const checkboxHandler = () => {
+  const investigateHandler = () => {
+    alert("This feature has not been implemented.");
+  };
+
+  const checkboxHandler = (selected: any) => {
     setChecked(true);
     const checkboxes: any = document.querySelectorAll(".checkboxes");
     checkboxes.forEach((checkbox: any) => {
-      //check if any of the checkboxes are checked??
       if (checkbox.checked) {
-        console.log(checkbox.checked);
+        // checkbox = selected
+        toggleSelected(selected);
+        console.log((checkbox = selected));
         setChecked(false);
       }
     });
   };
 
-  const investigateHandler = () => {
-    alert("This feature has not been implemented.");
-  };
-
-  const checkboxes: any = document.querySelectorAll(".checkboxes");
-  const checkboxFunction = (checkboxes: any) => {
-  if(checkboxes.target.checked) {
-    const checkboxId = checkboxes.target.id
-    console.log(checkboxId, "checkbox Id")
-  }
-}
-
-  const accordionItem: any = document.querySelectorAll(".accordion-item");
-// console.log(accordionItem)
-  const accordionList: any[] = Array.from(accordionItem);
-  const accordionIds = accordionList.map((accordionList) => accordionList.id);
-  // console.log(accordionIds);
-  // console.log(checkboxes);
-  const checkboxList: any[] = Array.from(checkboxes)
-  const checkboxIds = checkboxList.map(checkboxList => checkboxList.id)
+  //!use checkbox to set selected boolean - hook it up. Changing the alert itself. I won't need to check ids from checkboxes, once you hit button, loop through the ids, (build array of ids that need to be deleted) all the alerts and if it's selected delete it.
 
 
-  // console.log(accordionItem)
+  // const accordionItem: any = document.querySelectorAll(".accordion-item");
+  // const accordionList: any[] = Array.from(accordionItem);
+  // const accordionIds = accordionList.map((accordionList) => accordionList.id);
 
-  // if (accordionItem && accordionItem[0] !== (null || "undefined")) {
-  //   // accordionItem[0].style.color = "red"
-  //   // console.log(accordionItem[0])
-  //   // Object.assign(accordionItem?.style, styles.firstAccordionItem)
-  // }
-
-  //  const accordionIds = accordionItem.map((accordionItem: { id: any; }) => accordionItem.id)
-  // console.log(accordionItem)
-
-  const acknowledgeHandler = () => {
+  const acknowledgeHandler = (selected: any) => {
     const accordionItemsToRemove: any[] = [];
+    const checkboxes: any = document.querySelectorAll(".checkboxes");
+    checkboxes.forEach((checkbox: any) => {
+      if (checkbox.checked) {
+        toggleSelected(selected);
+        checkbox = selected;
+        console.log(toggleSelected(selected), "2nd");
+        accordionItemsToRemove.push(checkbox);
+      }
+
+      console.log(accordionItemsToRemove, "items to remove");
+          accordionItemsToRemove.forEach((id) => {
+            console.log(id)
+      // const alertItem = document.getElementById(id);
+      // console.log(alertItem, "item");
+      deleteAlert(id);
+    });
+    });
     // const accordionId = Object.assign(accordionItem.id, alerts.id)
     // if (accordionIds === checkboxIds && checked || checkedAll) {
     //   deleteAlert(alertIds)
     // }
-    //     accordionItemsToRemove.forEach((id) => {
-    //   const alertItem = document.getElementById(id);
-    //   // console.log(alertItem, "item");
-    //   alertItem?.remove();
-    // });
-    
-    }
 
+  };
 
   return (
     <div>
-      <RuxTable style={{height: "37rem"}}>
+      <RuxTable style={{ height: "37rem" }}>
         <RuxTableHeader>
           <RuxTableHeaderRow>
             <RuxTableHeaderCell>
@@ -175,7 +167,7 @@ const AlertsList = () => {
                 className="select-all-checkbox"
               ></RuxCheckbox>
               <span style={{ marginLeft: "var(--spacing-4)" }}> Message</span>
-              <span style={{ marginLeft: "6.25rem" }}>Category</span>
+              <span style={{ marginLeft: "6.2rem" }}>Category</span>
               <span style={{ marginLeft: "var(--spacing-6)" }}>Time</span>
             </RuxTableHeaderCell>
           </RuxTableHeaderRow>
