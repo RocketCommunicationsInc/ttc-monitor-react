@@ -12,6 +12,7 @@ import {
   RuxButton,
   RuxAccordion,
   RuxAccordionItem,
+  RuxTableRow,
 } from "@astrouxds/react";
 import useAlerts from "../../hooks/useAlerts";
 
@@ -51,11 +52,11 @@ const styles = {
   alertCategory: {
     width: "4.75rem",
     alignSelf: "center",
-    paddingLeft: "1.4rem",
+    paddingLeft: "1.1rem",
   },
   alertTime: {
     width: "1.7rem",
-    paddingLeft: ".7rem",
+    paddingLeft: ".6rem",
     alignSelf: "left",
   },
   firstAccordionItem: {
@@ -110,21 +111,16 @@ const AlertsList = () => {
   };
 
   const checkboxHandler = (selected: any) => {
-    setChecked(true);
     const checkboxes: any = document.querySelectorAll(".checkboxes");
     checkboxes.forEach((checkbox: any) => {
       if (checkbox.checked) {
-        // checkbox = selected
+        console.log(checkbox = selected)
         toggleSelected(selected);
-        console.log((checkbox = selected));
-        setChecked(false);
+        // setChecked(false);
       }
+      setChecked(true);
     });
   };
-
-  //!use checkbox to set selected boolean - hook it up. Changing the alert itself. I won't need to check ids from checkboxes, once you hit button, loop through the ids, (build array of ids that need to be deleted) all the alerts and if it's selected delete it.
-
-
   // const accordionItem: any = document.querySelectorAll(".accordion-item");
   // const accordionList: any[] = Array.from(accordionItem);
   // const accordionIds = accordionList.map((accordionList) => accordionList.id);
@@ -134,30 +130,24 @@ const AlertsList = () => {
     const checkboxes: any = document.querySelectorAll(".checkboxes");
     checkboxes.forEach((checkbox: any) => {
       if (checkbox.checked) {
-        toggleSelected(selected);
+        // toggleSelected(selected);
         checkbox = selected;
-        console.log(toggleSelected(selected), "2nd");
+        console.log((checkbox = selected), "2nd");
         accordionItemsToRemove.push(checkbox);
       }
 
       console.log(accordionItemsToRemove, "items to remove");
-          accordionItemsToRemove.forEach((id) => {
-            console.log(id)
-      // const alertItem = document.getElementById(id);
-      // console.log(alertItem, "item");
-      deleteAlert(id);
+      accordionItemsToRemove.forEach((id) => {
+        console.log(id, "item to be deleted");
+        console.log(deleteAlert(id), "delete");
+        deleteAlert(id);
+      });
     });
-    });
-    // const accordionId = Object.assign(accordionItem.id, alerts.id)
-    // if (accordionIds === checkboxIds && checked || checkedAll) {
-    //   deleteAlert(alertIds)
-    // }
-
   };
 
   return (
     <div>
-      <RuxTable style={{ height: "37rem" }}>
+      <RuxTable style={{ height: "36.5rem" }}>
         <RuxTableHeader>
           <RuxTableHeaderRow>
             <RuxTableHeaderCell>
@@ -167,7 +157,7 @@ const AlertsList = () => {
                 className="select-all-checkbox"
               ></RuxCheckbox>
               <span style={{ marginLeft: "var(--spacing-4)" }}> Message</span>
-              <span style={{ marginLeft: "6.2rem" }}>Category</span>
+              <span style={{ marginLeft: "5.8rem" }}>Category</span>
               <span style={{ marginLeft: "var(--spacing-6)" }}>Time</span>
             </RuxTableHeaderCell>
           </RuxTableHeaderRow>
@@ -187,28 +177,30 @@ const AlertsList = () => {
                   Investigate
                 </RuxButton>
                 <div slot="label" style={styles.accordianLabel}>
-                  <RuxTableCell style={{ textAlign: "center" }}>
-                    <RuxCheckbox
-                      id={alerts[alertId].id + ""}
-                      style={styles.checkboxes}
-                      className="checkboxes"
-                      onClick={checkboxHandler}
-                    />
-                  </RuxTableCell>
-                  <RuxTableCell>
-                    <RuxStatus status={alerts[alertId].status} />
-                  </RuxTableCell>
-                  <RuxTableCell style={styles.alertMessage}>
-                    {alerts[alertId].message}
-                  </RuxTableCell>
-                  <RuxTableCell style={styles.alertCategory}>
-                    {alerts[alertId].category}
-                  </RuxTableCell>
-                  <RuxTableCell style={styles.alertTime}>
-                    {new Date(alerts[alertId].timestamp)
-                      .toTimeString()
-                      .slice(0, 8)}
-                  </RuxTableCell>
+                  <RuxTableRow>
+                    <RuxTableCell style={{ textAlign: "center" }}>
+                      <RuxCheckbox
+                        id={alerts[alertId].id + ""}
+                        style={styles.checkboxes}
+                        className="checkboxes"
+                        onClick={checkboxHandler}
+                      />
+                    </RuxTableCell>
+                    <RuxTableCell>
+                      <RuxStatus status={alerts[alertId].status} />
+                    </RuxTableCell>
+                    <RuxTableCell style={styles.alertMessage}>
+                      {alerts[alertId].message}
+                    </RuxTableCell>
+                    <RuxTableCell style={styles.alertCategory}>
+                      {alerts[alertId].category}
+                    </RuxTableCell>
+                    <RuxTableCell style={styles.alertTime}>
+                      {new Date(alerts[alertId].timestamp)
+                        .toTimeString()
+                        .slice(0, 8)}
+                    </RuxTableCell>
+                  </RuxTableRow>
                 </div>
               </RuxAccordionItem>
             </RuxAccordion>
@@ -219,19 +211,20 @@ const AlertsList = () => {
         {checkedAll || checked ? (
           <div>
             <RuxButton
-              style={{ marginRight: "1rem" }}
+              secondary
               onClick={acknowledgeHandler}
+              style={{ marginRight: "1rem" }}
             >
-              Acknowledge
+              Dismiss
             </RuxButton>
-            <RuxButton onClick={acknowledgeHandler}>Dismiss</RuxButton>
+            <RuxButton onClick={acknowledgeHandler}>Acknowledge</RuxButton>
           </div>
         ) : (
           <div>
-            <RuxButton disabled style={{ marginRight: "1rem" }}>
-              Acknowledge
+            <RuxButton secondary disabled style={{ marginRight: "1rem" }}>
+              Dismiss
             </RuxButton>
-            <RuxButton disabled>Dismiss</RuxButton>
+            <RuxButton disabled>Acknowledge</RuxButton>
           </div>
         )}
       </div>
