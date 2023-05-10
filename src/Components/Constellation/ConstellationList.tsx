@@ -20,13 +20,16 @@ type SortDirection = "ASC" | "DESC";
 
 const CostellationList = ({ contacts, contactIds }: PropTypes) => {
   const [sortDirection, setSortDirection] = useState<SortDirection>("ASC");
+  const [ sortProp, setSortProp] = useState<keyof Contact>("id")
   const [icon, setIcon] = useState<string>("");
   const [sortedContactIds, setSortedContactIds] =
     useState<string[]>(contactIds);
 
   const handleClick = (event: any) => {
-    const target = event.target as HTMLElement
+    const target = event.currentTarget as HTMLElement
     const sortProperty = target.dataset.sortprop as keyof Contact
+
+    setSortProp(sortProperty)
     sortContacts(sortProperty, sortDirection)
     setIconDirection(sortDirection)
   }
@@ -41,7 +44,7 @@ const CostellationList = ({ contacts, contactIds }: PropTypes) => {
     }
   }
 
-    const sortContacts = (property: keyof Contact, sortDirection: SortDirection) => {
+  const sortContacts = (property: keyof Contact, sortDirection: SortDirection) => {
     const newSortedContactIds = [...sortedContactIds].sort(
       (a: string, b: string) => {
         const firstContact = contacts[a];
@@ -61,50 +64,49 @@ const CostellationList = ({ contacts, contactIds }: PropTypes) => {
     );
     setSortedContactIds(newSortedContactIds);
   };
-
+  console.log(sortProp)
   return (
     <RuxTable>
       <RuxTableHeader>
         <RuxTableHeaderRow>
           <RuxTableHeaderCell data-sortprop="status" onClick={handleClick}>
             Status
-            <RuxIcon icon={icon} size="small" />
+            <RuxIcon icon={icon} size="small" className={sortProp === "status" ? "visible" : "hidden"} />
           </RuxTableHeaderCell>
           <RuxTableHeaderCell data-sortprop="satellite" onClick={handleClick}>
             Satellite
-            <RuxIcon icon={icon} size="small" />
+            <RuxIcon icon={icon} size="small" className={sortProp === "satellite" ? "visible" : "hidden"}/>
           </RuxTableHeaderCell>
           <RuxTableHeaderCell data-sortprop="rev" onClick={handleClick}>
             Next Pass
-            <RuxIcon icon={icon} size="small" />
+            <RuxIcon icon={icon} size="small" className={sortProp === "rev" ? "visible" : "hidden"} />
           </RuxTableHeaderCell>
           <RuxTableHeaderCell data-sortprop="aos" onClick={handleClick}>
             AOS
-            <RuxIcon icon={icon} size="small" />
+            <RuxIcon icon={icon} size="small" className={sortProp === "aos" ? "visible" : "hidden"}/>
           </RuxTableHeaderCell>
           <RuxTableHeaderCell data-sortprop="los" onClick={handleClick}>
             LOS
-            <RuxIcon icon={icon} size="small" />
+            <RuxIcon icon={icon} size="small" className={sortProp === "los" ? "visible" : "hidden"}/>
           </RuxTableHeaderCell>
           <RuxTableHeaderCell data-sortprop="ground" onClick={handleClick}>
             Ground Station
-            <RuxIcon icon={icon} size="small" />
+            <RuxIcon icon={icon} size="small" className={sortProp === "ground" ? "visible" : "hidden"}/>
           </RuxTableHeaderCell>
           <RuxTableHeaderCell data-sortprop="azimuth" onClick={handleClick}>
             Azimuth
-            <RuxIcon icon={icon} size="small" />
+            <RuxIcon icon={icon} size="small" className={sortProp === "azimuth" ? "visible" : "hidden"}/>
           </RuxTableHeaderCell>
           <RuxTableHeaderCell data-sortprop="elevation" onClick={handleClick}>
             Elevation
-            <RuxIcon icon={icon} size="small" />
+            <RuxIcon icon={icon} size="small" className={sortProp === "elevation" ? "visible" : "hidden"}/>
           </RuxTableHeaderCell>
           <RuxTableHeaderCell data-sortprop="state" onClick={handleClick}>
             State
-            <RuxIcon icon={icon} size="small" />
+            <RuxIcon icon={icon} size="small" className={sortProp === "state" ? "visible" : "hidden"}/>
           </RuxTableHeaderCell>
           <RuxTableHeaderCell>
             Actions
-            <RuxIcon icon={icon} size="small" />
           </RuxTableHeaderCell>
         </RuxTableHeaderRow>
       </RuxTableHeader>

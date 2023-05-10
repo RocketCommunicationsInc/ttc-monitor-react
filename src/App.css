@@ -115,6 +115,9 @@ rux-notification::part(container) {
   border: 1px solid var(--color-border-interactive-muted);
 }
 
-.constellation rux-icon::part(icon) {
-  transform: translateY(10px)
+.constellation .visible {
+  visibility: visible; 
+}
+.constellation .hidden {
+  visibility: hidden; 
 }
