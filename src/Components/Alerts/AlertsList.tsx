@@ -73,16 +73,16 @@ type PropTypes = {
 const AlertsList = ({ selectValue, selectHandler }: PropTypes) => {
   const [checkedAll, setCheckedAll] = useState(false);
   const [checked, setChecked] = useState(false);
-  const [selectedData, setSelectedData] = useState("");
+  // const [selectedData, setSelectedData] = useState("");
 
-    const selectOptions = [
-    { label: "Critical", value: "Critical" },
-    { label: "Caution", value: "Caution" },
-    { label: "Serious", value: "Serious" },
-    { label: "Hardware", value: "Hardware" },
-    { label: "Software", value: "Software" },
-    { label: "Spacecraft", value: "Spacecraft" },
-  ];
+  // const selectOptions = [
+  //   { label: "Critical", value: "Critical" },
+  //   { label: "Caution", value: "Caution" },
+  //   { label: "Serious", value: "Serious" },
+  //   { label: "Hardware", value: "Hardware" },
+  //   { label: "Software", value: "Software" },
+  //   { label: "Spacecraft", value: "Spacecraft" },
+  // ];
 
   // const sortedOptions = useMemo(() => {
   //   const newSortedOptions = [...alertIds];
@@ -136,37 +136,25 @@ const AlertsList = ({ selectValue, selectHandler }: PropTypes) => {
   };
 
   const checkboxHandler = (selected: any) => {
+    toggleSelected(selected.target.id);
     const checkboxes: any = document.querySelectorAll(".checkboxes");
     checkboxes.forEach((checkbox: any) => {
       if (checkbox.checked) {
-        toggleSelected(selected);
-        console.log(toggleSelected(selected));
-        // setChecked(false);
+        toggleSelected(selected.target.id);
       }
       setChecked(true);
     });
   };
-  // const accordionItem: any = document.querySelectorAll(".accordion-item");
-  // const accordionList: any[] = Array.from(accordionItem);
-  // const accordionIds = accordionList.map((accordionList) => accordionList.id);
 
-  const acknowledgeHandler = (selected: any) => {
-    const accordionItemsToRemove: any[] = [];
-    const checkboxes: any = document.querySelectorAll(".checkboxes");
-    checkboxes.forEach((checkbox: any) => {
-      if (checkbox.checked) {
-        // toggleSelected(selected);
-        checkbox = selected;
-        console.log((checkbox = selected), "2nd");
-        accordionItemsToRemove.push(checkbox);
+  const acknowledgeHandler = () => {
+    const accordionItemsToRemove: string[] = [];
+    alertIds.forEach((id: string) => {
+      if (alerts[id].selected === true) {
+        accordionItemsToRemove.push(id);
       }
-
-      console.log(accordionItemsToRemove, "items to remove");
-      accordionItemsToRemove.forEach((item) => {
-        console.log(item, "item to be deleted");
-        console.log(deleteAlert(item), "delete");
-        deleteAlert(item);
-      });
+    });
+    accordionItemsToRemove.forEach((item) => {
+      deleteAlert(item);
     });
   };
 
