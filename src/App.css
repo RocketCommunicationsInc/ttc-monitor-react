@@ -114,3 +114,15 @@ rux-time-region::part(container) {
 rux-notification::part(container) {
   border: 1px solid var(--color-border-interactive-muted);
 }
+
+.constellation rux-icon {
+  vertical-align: middle;
+  width: 32px;
+}
+
+.constellation .visible {
+  visibility: visible;
+}
+.constellation .hidden {
+  visibility: hidden;
+}
