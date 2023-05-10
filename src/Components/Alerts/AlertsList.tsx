@@ -23,7 +23,6 @@ const styles = {
   },
   accordianLabel: {
     color: "var(--color-palette-neutral-000)",
-    wordWrap: "break-word" as "break-word",
   },
   checkboxes: {
     paddingRight: "var(--spacing-4)",
@@ -47,6 +46,7 @@ const styles = {
     minWidth: "9rem",
     maxWidth: "9rem",
     overflow: "hidden",
+    textOverflow: "ellipsis",
   },
   alertCategory: {
     width: "4.75rem",
@@ -59,18 +59,31 @@ const styles = {
     alignSelf: "left",
   },
   firstAccordionItem: {
-    backgroundColor: "#141f2c", 
-    color: "red"
-  }
+    backgroundColor: "#141f2c",
+    color: "red",
+  },
 };
 
 const AlertsList = () => {
   const [checkedAll, setCheckedAll] = useState(false);
   const [checked, setChecked] = useState(false);
-  const { alerts, alertIds, generate, stopGenerating, initialize } =
-    useAlerts();
+  const {
+    alerts,
+    alertIds,
+    generate,
+    stopGenerating,
+    initialize,
+    deleteAlert,
+  } = useAlerts();
 
-    // console.log(alerts)
+  useEffect(() => {
+    initialize();
+    generate();
+
+    return () => {
+      stopGenerating();
+    };
+  }, []);
 
   const selectAllHandler = () => {
     const selectAllCheckbox: any = document.querySelector(
@@ -94,8 +107,9 @@ const AlertsList = () => {
     setChecked(true);
     const checkboxes: any = document.querySelectorAll(".checkboxes");
     checkboxes.forEach((checkbox: any) => {
-      //check if any of the checkboxes are checked ( || checkboxes.checked.length)?
+      //check if any of the checkboxes are checked??
       if (checkbox.checked) {
+        console.log(checkbox.checked);
         setChecked(false);
       }
     });
@@ -105,46 +119,53 @@ const AlertsList = () => {
     alert("This feature has not been implemented.");
   };
 
-  const accordionItem: any = document.querySelectorAll(".accordion-item")
+  const checkboxes: any = document.querySelectorAll(".checkboxes");
+  const checkboxFunction = (checkboxes: any) => {
+  if(checkboxes.target.checked) {
+    const checkboxId = checkboxes.target.id
+    console.log(checkboxId, "checkbox Id")
+  }
+}
 
-   if(accordionItem && accordionItem[0] !== (null || "undefined")) {
-    // accordionItem[0].style.color = "red"
-    console.log(accordionItem[0])
-    // Object.assign(accordionItem?.style, styles.firstAccordionItem)
-   }
+  const accordionItem: any = document.querySelectorAll(".accordion-item");
+// console.log(accordionItem)
+  const accordionList: any[] = Array.from(accordionItem);
+  const accordionIds = accordionList.map((accordionList) => accordionList.id);
+  // console.log(accordionIds);
+  // console.log(checkboxes);
+  const checkboxList: any[] = Array.from(checkboxes)
+  const checkboxIds = checkboxList.map(checkboxList => checkboxList.id)
 
+
+  // console.log(accordionItem)
+
+  // if (accordionItem && accordionItem[0] !== (null || "undefined")) {
+  //   // accordionItem[0].style.color = "red"
+  //   // console.log(accordionItem[0])
+  //   // Object.assign(accordionItem?.style, styles.firstAccordionItem)
+  // }
+
+  //  const accordionIds = accordionItem.map((accordionItem: { id: any; }) => accordionItem.id)
+  // console.log(accordionItem)
 
   const acknowledgeHandler = () => {
-    const accordionItem: any = document.querySelectorAll(".accordion-item");
     const accordionItemsToRemove: any[] = [];
-    
-
-    // accordionItem.forEach((item: any) => {
-    //   const alertId = item.dataset.id;
-
-      if (alerts.id && (checked || checkedAll)) {
-        accordionItemsToRemove.push(alerts.id);
-      }
+    // const accordionId = Object.assign(accordionItem.id, alerts.id)
+    // if (accordionIds === checkboxIds && checked || checkedAll) {
+    //   deleteAlert(alertIds)
+    // }
+    //     accordionItemsToRemove.forEach((id) => {
+    //   const alertItem = document.getElementById(id);
+    //   // console.log(alertItem, "item");
+    //   alertItem?.remove();
     // });
-    accordionItemsToRemove.forEach((id) => {
-      const alertItem = document.getElementById(id);
-      console.log(alertItem, "item")
-      alertItem?.remove();
-    });
-  };
+    
+    }
 
-  useEffect(() => {
-    initialize();
-    generate();
-
-    return () => {
-      stopGenerating();
-    };
-  }, []);
 
   return (
     <div>
-      <RuxTable>
+      <RuxTable style={{height: "37rem"}}>
         <RuxTableHeader>
           <RuxTableHeaderRow>
             <RuxTableHeaderCell>
@@ -162,7 +183,10 @@ const AlertsList = () => {
         <RuxTableBody>
           {alertIds.map((alertId) => (
             <RuxAccordion>
-              <RuxAccordionItem className="accordion-item">
+              <RuxAccordionItem
+                id={alerts[alertId].id + ""}
+                className="accordion-item"
+              >
                 {alerts[alertId].message} <br />
                 <RuxButton
                   onClick={investigateHandler}
@@ -173,6 +197,7 @@ const AlertsList = () => {
                 <div slot="label" style={styles.accordianLabel}>
                   <RuxTableCell style={{ textAlign: "center" }}>
                     <RuxCheckbox
+                      id={alerts[alertId].id + ""}
                       style={styles.checkboxes}
                       className="checkboxes"
                       onClick={checkboxHandler}
