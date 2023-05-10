@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   RuxContainer,
   RuxSegmentedButton,
@@ -11,6 +11,7 @@ import {
   RuxSegmentedButtonCustomEvent,
   RuxSliderCustomEvent,
 } from "@astrouxds/astro-web-components/dist/types/components";
+import useContacts from "../../hooks/useContacts";
 
 const styles = {
   slider: {
@@ -24,6 +25,8 @@ const Constellation = () => {
   const [content, setContent] = useState("List");
   const [zoomLevel, setZoomLevel] = useState(1);
 
+  const { contacts, contactIds, initialize } = useContacts();
+
   const handleButton = (e: RuxSegmentedButtonCustomEvent<string>) => {
     setContent(e.detail);
   };
@@ -31,6 +34,10 @@ const Constellation = () => {
   const handleSliderChange = (e: RuxSliderCustomEvent<number>) => {
     setZoomLevel(e.target.value);
   };
+
+  useEffect(() => {
+    initialize();
+  }, [initialize]);
 
   return (
     <RuxContainer className="constellation">
@@ -49,13 +56,17 @@ const Constellation = () => {
           </div>
         ) : null}
         <RuxSegmentedButton
-          style={content === "Timeline" ? { marginLeft: "1rem" } : { marginLeft: "auto" }}
+          style={
+            content === "Timeline"
+              ? { marginLeft: "1rem" }
+              : { marginLeft: "auto" }
+          }
           data={[{ label: "List" }, { label: "Timeline" }]}
           onRuxchange={handleButton}
         ></RuxSegmentedButton>
       </div>
-      {content === "List" ? (
-        <ConstellationList />
+      {content === "List" && contactIds.length ? (
+        <ConstellationList contacts={contacts} contactIds={contactIds} />
       ) : (
         <ConstellationTimeline zoomLevel={zoomLevel} />
       )}
