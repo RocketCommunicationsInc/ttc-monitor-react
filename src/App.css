@@ -138,3 +138,15 @@ rux-container::part(body)::-webkit-scrollbar-track:vertical {
 ::-webkit-scrollbar-corner {
 	margin-top: 40px !important;
 }
+//_______________________________________________________________
+.constellation rux-icon {
+  vertical-align: middle;
+  width: 32px;
+}
+
+.constellation .visible {
+  visibility: visible;
+}
+.constellation .hidden {
+  visibility: hidden;
+}

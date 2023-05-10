@@ -44,7 +44,6 @@ const styles = {
   },
   notificationBanner: {
     position: "sticky" as "sticky",
-    // display: "flex",
     zIndex: 50,
   },
 };
@@ -63,6 +62,7 @@ const Alerts = () => {
     setSelection("All");
     setOpenBanner(false);
   };
+
 
   return (
     <RuxContainer className="alerts" style={styles.container}>
@@ -108,7 +108,7 @@ const Alerts = () => {
           to display all alerts.
         </RuxNotification>
       )}
-      <AlertsList />
+      <AlertsList selectHandler={""} selectValue={""}/>
     </RuxContainer>
   );
 };

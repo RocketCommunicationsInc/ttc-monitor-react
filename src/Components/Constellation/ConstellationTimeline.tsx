@@ -19,9 +19,6 @@ const ConstellationTimeline = ({ zoomLevel }: PropTypes) => {
       interval="hour"
       zoom={zoomLevel}
     >
-      <RuxTrack slot="ruler">
-        <RuxRuler />
-      </RuxTrack>
       <RuxTrack>
         <div slot="label">Region 1</div>
         <RuxTimeRegion
@@ -91,6 +88,9 @@ const ConstellationTimeline = ({ zoomLevel }: PropTypes) => {
         >
           Event 7.1
         </RuxTimeRegion>
+      </RuxTrack>
+      <RuxTrack slot="ruler">
+        <RuxRuler />
       </RuxTrack>
     </RuxTimeline>
   );

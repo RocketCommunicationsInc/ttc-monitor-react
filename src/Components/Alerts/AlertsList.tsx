@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   RuxTable,
   RuxTableHeader,
@@ -65,10 +65,35 @@ const styles = {
   },
 };
 
-const AlertsList = () => {
+type PropTypes = {
+  selectValue: any;
+  selectHandler: any;
+};
+
+const AlertsList = ({ selectValue, selectHandler }: PropTypes) => {
   const [checkedAll, setCheckedAll] = useState(false);
   const [checked, setChecked] = useState(false);
-  //!new method on useAlerts to actually change it. Toggle selected?
+  const [selectedData, setSelectedData] = useState("");
+
+    const selectOptions = [
+    { label: "Critical", value: "Critical" },
+    { label: "Caution", value: "Caution" },
+    { label: "Serious", value: "Serious" },
+    { label: "Hardware", value: "Hardware" },
+    { label: "Software", value: "Software" },
+    { label: "Spacecraft", value: "Spacecraft" },
+  ];
+
+  // const sortedOptions = useMemo(() => {
+  //   const newSortedOptions = [...alertIds];
+  //   newSortedOptions.sort((a, b) => {
+  //     return alerts[a][selectedData].localeCompare(
+  //       alerts[b][selectedData]
+  //     );
+  //   });
+  //   return newSortedOptions;
+  // }, [alertIds, selectedData]);
+
   const {
     alerts,
     alertIds,
@@ -114,8 +139,8 @@ const AlertsList = () => {
     const checkboxes: any = document.querySelectorAll(".checkboxes");
     checkboxes.forEach((checkbox: any) => {
       if (checkbox.checked) {
-        console.log(checkbox = selected)
         toggleSelected(selected);
+        console.log(toggleSelected(selected));
         // setChecked(false);
       }
       setChecked(true);
@@ -137,10 +162,10 @@ const AlertsList = () => {
       }
 
       console.log(accordionItemsToRemove, "items to remove");
-      accordionItemsToRemove.forEach((id) => {
-        console.log(id, "item to be deleted");
-        console.log(deleteAlert(id), "delete");
-        deleteAlert(id);
+      accordionItemsToRemove.forEach((item) => {
+        console.log(item, "item to be deleted");
+        console.log(deleteAlert(item), "delete");
+        deleteAlert(item);
       });
     });
   };
