@@ -20,31 +20,34 @@ type SortDirection = "ASC" | "DESC";
 
 const CostellationList = ({ contacts, contactIds }: PropTypes) => {
   const [sortDirection, setSortDirection] = useState<SortDirection>("ASC");
-  const [ sortProp, setSortProp] = useState<keyof Contact>("id")
-  const [icon, setIcon] = useState<string>("");
+  const [sortProp, setSortProp] = useState<keyof Contact>("id");
   const [sortedContactIds, setSortedContactIds] =
     useState<string[]>(contactIds);
 
   const handleClick = (event: any) => {
-    const target = event.currentTarget as HTMLElement
-    const sortProperty = target.dataset.sortprop as keyof Contact
-
-    setSortProp(sortProperty)
-    sortContacts(sortProperty, sortDirection)
-    setIconDirection(sortDirection)
-  }
-
-  const setIconDirection = (sortDirection: SortDirection) => { 
-    if (sortDirection !== "ASC") {
-      setSortDirection("ASC");
-      setIcon("arrow-drop-down");
+    const target = event.currentTarget as HTMLElement;
+    const sortProperty = target.dataset.sortprop as keyof Contact;
+    if (sortProperty === sortProp) {
+      // clicked same currently sorted column
+      if (sortDirection === "ASC") {
+        setSortDirection("DESC");
+        sortContacts(sortProperty, "DESC");
+      } else {
+        setSortDirection("ASC");
+        sortContacts(sortProperty, "ASC");
+      }
     } else {
-      setSortDirection("DESC");
-      setIcon("arrow-drop-up");
+      // clicked new column
+      setSortProp(sortProperty);
+      sortContacts(sortProperty, "ASC");
+      setSortDirection("ASC");
     }
-  }
+  };
 
-  const sortContacts = (property: keyof Contact, sortDirection: SortDirection) => {
+  const sortContacts = (
+    property: keyof Contact,
+    sortDirection: SortDirection
+  ) => {
     const newSortedContactIds = [...sortedContactIds].sort(
       (a: string, b: string) => {
         const firstContact = contacts[a];
@@ -64,50 +67,102 @@ const CostellationList = ({ contacts, contactIds }: PropTypes) => {
     );
     setSortedContactIds(newSortedContactIds);
   };
-  console.log(sortProp)
+
   return (
     <RuxTable>
       <RuxTableHeader>
         <RuxTableHeaderRow>
           <RuxTableHeaderCell data-sortprop="status" onClick={handleClick}>
             Status
-            <RuxIcon icon={icon} size="small" className={sortProp === "status" ? "visible" : "hidden"} />
+            <RuxIcon
+              icon={
+                sortDirection === "ASC" ? "arrow-drop-down" : "arrow-drop-up"
+              }
+              size="small"
+              className={sortProp === "status" ? "visible" : "hidden"}
+            />
           </RuxTableHeaderCell>
           <RuxTableHeaderCell data-sortprop="satellite" onClick={handleClick}>
             Satellite
-            <RuxIcon icon={icon} size="small" className={sortProp === "satellite" ? "visible" : "hidden"}/>
+            <RuxIcon
+              icon={
+                sortDirection === "ASC" ? "arrow-drop-down" : "arrow-drop-up"
+              }
+              size="small"
+              className={sortProp === "satellite" ? "visible" : "hidden"}
+            />
           </RuxTableHeaderCell>
           <RuxTableHeaderCell data-sortprop="rev" onClick={handleClick}>
             Next Pass
-            <RuxIcon icon={icon} size="small" className={sortProp === "rev" ? "visible" : "hidden"} />
+            <RuxIcon
+              icon={
+                sortDirection === "ASC" ? "arrow-drop-down" : "arrow-drop-up"
+              }
+              size="small"
+              className={sortProp === "rev" ? "visible" : "hidden"}
+            />
           </RuxTableHeaderCell>
           <RuxTableHeaderCell data-sortprop="aos" onClick={handleClick}>
             AOS
-            <RuxIcon icon={icon} size="small" className={sortProp === "aos" ? "visible" : "hidden"}/>
+            <RuxIcon
+              icon={
+                sortDirection === "ASC" ? "arrow-drop-down" : "arrow-drop-up"
+              }
+              size="small"
+              className={sortProp === "aos" ? "visible" : "hidden"}
+            />
           </RuxTableHeaderCell>
           <RuxTableHeaderCell data-sortprop="los" onClick={handleClick}>
             LOS
-            <RuxIcon icon={icon} size="small" className={sortProp === "los" ? "visible" : "hidden"}/>
+            <RuxIcon
+              icon={
+                sortDirection === "ASC" ? "arrow-drop-down" : "arrow-drop-up"
+              }
+              size="small"
+              className={sortProp === "los" ? "visible" : "hidden"}
+            />
           </RuxTableHeaderCell>
           <RuxTableHeaderCell data-sortprop="ground" onClick={handleClick}>
             Ground Station
-            <RuxIcon icon={icon} size="small" className={sortProp === "ground" ? "visible" : "hidden"}/>
+            <RuxIcon
+              icon={
+                sortDirection === "ASC" ? "arrow-drop-down" : "arrow-drop-up"
+              }
+              size="small"
+              className={sortProp === "ground" ? "visible" : "hidden"}
+            />
           </RuxTableHeaderCell>
           <RuxTableHeaderCell data-sortprop="azimuth" onClick={handleClick}>
             Azimuth
-            <RuxIcon icon={icon} size="small" className={sortProp === "azimuth" ? "visible" : "hidden"}/>
+            <RuxIcon
+              icon={
+                sortDirection === "ASC" ? "arrow-drop-down" : "arrow-drop-up"
+              }
+              size="small"
+              className={sortProp === "azimuth" ? "visible" : "hidden"}
+            />
           </RuxTableHeaderCell>
           <RuxTableHeaderCell data-sortprop="elevation" onClick={handleClick}>
             Elevation
-            <RuxIcon icon={icon} size="small" className={sortProp === "elevation" ? "visible" : "hidden"}/>
+            <RuxIcon
+              icon={
+                sortDirection === "ASC" ? "arrow-drop-down" : "arrow-drop-up"
+              }
+              size="small"
+              className={sortProp === "elevation" ? "visible" : "hidden"}
+            />
           </RuxTableHeaderCell>
           <RuxTableHeaderCell data-sortprop="state" onClick={handleClick}>
             State
-            <RuxIcon icon={icon} size="small" className={sortProp === "state" ? "visible" : "hidden"}/>
+            <RuxIcon
+              icon={
+                sortDirection === "ASC" ? "arrow-drop-down" : "arrow-drop-up"
+              }
+              size="small"
+              className={sortProp === "state" ? "visible" : "hidden"}
+            />
           </RuxTableHeaderCell>
-          <RuxTableHeaderCell>
-            Actions
-          </RuxTableHeaderCell>
+          <RuxTableHeaderCell>Actions</RuxTableHeaderCell>
         </RuxTableHeaderRow>
       </RuxTableHeader>
       <RuxTableBody>
