@@ -8,6 +8,7 @@ import {
 import AlertsList from "./AlertsList";
 import { useState } from "react";
 import useAlerts from "../../hooks/useAlerts";
+import { Alert } from "../../Types";
 
 const styles = {
   container: {
@@ -52,6 +53,7 @@ const Alerts = () => {
   const { alertIds } = useAlerts();
   const [openBanner, setOpenBanner] = useState(false);
   const [selection, setSelection] = useState("");
+  const [filteredAlerts, setFilteredAlerts] = useState<Alert[]>([]);
 
   const selectionHandler = (e: any) => {
     setSelection(e.target.value);
@@ -62,6 +64,9 @@ const Alerts = () => {
     setSelection("All");
     setOpenBanner(false);
   };
+
+  //have filtered state for the filtered alerts, have state for unfiltered alerts, then were going to pass that array of alerts right down to the list component. we wont need to map over the list, we just need to pass the array of filtered items to alert list component and then it will map over those. Since we don't have an item component, we just have a big list component.
+  //what makes it in to an alert list as a prop will never be anything from the hook. It will only be the filtered state. If we filter by none then we pass it all- either way we're passing filtered data.
 
   return (
     <RuxContainer className="alerts" style={styles.container}>
@@ -107,7 +112,7 @@ const Alerts = () => {
           to display all alerts.
         </RuxNotification>
       )}
-      <AlertsList />
+      <AlertsList selectValue={""} alertsArr={[]} />
     </RuxContainer>
   );
 };

@@ -16,6 +16,7 @@ import {
   RuxTableRow,
 } from "@astrouxds/react";
 import useAlerts from "../../hooks/useAlerts";
+import { Alert } from "../../Types";
 
 const styles = {
   investigateBtn: {
@@ -66,9 +67,38 @@ const styles = {
   },
 };
 
-const AlertsList = () => {
+type PropTypes = {
+  selectValue: any;
+  alertsArr: Alert[];
+};
+
+const AlertsList = ({ selectValue, alertsArr }: PropTypes) => {
   const [checkedAll, setCheckedAll] = useState(false);
   const [checked, setChecked] = useState(false);
+  const [filteredAlerts, setFilteredAlerts] = useState("");
+
+  //all alerts will be coming from props, not the hook. Alerts itself will need a piece of state. The hook will have all alerts, but the alerts.tsx component will have a piece of state that will initially populate all alerts, but then have the lists to change it, and then pass the filtered lists down to the alerts component. You can still use the hook you just wont get alerts from the hook- they can still be edited.
+
+  //down in render loop over alerts
+
+  const selectOptions = [
+    { label: "Critical", value: "Critical" },
+    { label: "Caution", value: "Caution" },
+    { label: "Serious", value: "Serious" },
+    { label: "Hardware", value: "Hardware" },
+    { label: "Software", value: "Software" },
+    { label: "Spacecraft", value: "Spacecraft" },
+  ];
+
+  // const filteredOptions = useMemo(() => {
+  //   const newSortedOptions = [...alertIds];
+  //   newSortedOptions.sort((a, b) => {
+  //     return alerts[a][filteredAlerts].localeCompare(
+  //       alerts[b][filteredAlerts]
+  //     );
+  //   });
+  //   return newSortedOptions;
+  // }, [alertIds, filteredAlerts]);
 
   const {
     alerts,
