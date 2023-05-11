@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -15,6 +16,7 @@ import {
   RuxTableRow,
 } from "@astrouxds/react";
 import useAlerts from "../../hooks/useAlerts";
+import { Alert } from "../../Types";
 
 const styles = {
   investigateBtn: {
@@ -65,12 +67,17 @@ const styles = {
   },
 };
 
+//pass an array of alerts down to the alerts list and thats it, so the filt
+
 type PropTypes = {
   selectValue: any;
-  selectHandler: any;
+  alertsArr: Alert[];
 };
+//all alerts will be coming from props, not the hook. Alerts itself will need a piece of state. The hook will have all alerts, but the alerts.tsx component will have a piece of state that will initially populate all alerts, but then have the lists to change it, and then pass the filtered lists down to the alerts component. You can still use the hook you just wont get alerts from the hook- they can still be edited.
 
-const AlertsList = ({ selectValue, selectHandler }: PropTypes) => {
+//down in render loop over alerts
+
+const AlertsList = ({ selectValue, alertsArr }: PropTypes) => {
   const [checkedAll, setCheckedAll] = useState(false);
   const [checked, setChecked] = useState(false);
   // const [selectedData, setSelectedData] = useState("");
@@ -84,7 +91,7 @@ const AlertsList = ({ selectValue, selectHandler }: PropTypes) => {
   //   { label: "Spacecraft", value: "Spacecraft" },
   // ];
 
-  // const sortedOptions = useMemo(() => {
+  // const filteredOptions = useMemo(() => {
   //   const newSortedOptions = [...alertIds];
   //   newSortedOptions.sort((a, b) => {
   //     return alerts[a][selectedData].localeCompare(
@@ -100,7 +107,7 @@ const AlertsList = ({ selectValue, selectHandler }: PropTypes) => {
     generate,
     stopGenerating,
     initialize,
-    deleteAlert,
+    deleteAlerts,
     toggleSelected,
   } = useAlerts();
 
@@ -113,22 +120,16 @@ const AlertsList = ({ selectValue, selectHandler }: PropTypes) => {
     };
   }, []);
 
-  const selectAllHandler = () => {
-    const selectAllCheckbox: any = document.querySelector(
-      ".select-all-checkbox"
-    );
-    const checkboxes: any = document.querySelectorAll(".checkboxes");
-    for (let i = 0; i < checkboxes.length; i++) {
-      checkboxes[i].checked = true;
-      setCheckedAll(true);
-      setChecked(true);
+  // alertIds.forEach
+  //loop through and do Object.values loop through all alerts and set all properties to true
 
-      if (selectAllCheckbox.checked !== false) {
-        checkboxes[i].checked = false;
-        setCheckedAll(false);
-        setChecked(false);
-      }
-    }
+  const selectAllHandler = () => {
+    const alertObj: any = Object.values(alerts).map((alertObj) => alertObj);
+    alertObj.map((alertId: { selected: boolean }) => {
+      alertId.selected = true;
+    });
+    setCheckedAll(true);
+    setChecked(true);
   };
 
   const investigateHandler = () => {
@@ -147,15 +148,13 @@ const AlertsList = ({ selectValue, selectHandler }: PropTypes) => {
   };
 
   const acknowledgeHandler = () => {
-    const accordionItemsToRemove: string[] = [];
-    alertIds.forEach((id: string) => {
+    const alertsToRemove: string[] = [];
+    alertIds.forEach((id) => {
       if (alerts[id].selected === true) {
-        accordionItemsToRemove.push(id);
+        alertsToRemove.push(id);
       }
     });
-    accordionItemsToRemove.forEach((item) => {
-      deleteAlert(item);
-    });
+    deleteAlerts(alertsToRemove);
   };
 
   return (
@@ -168,6 +167,7 @@ const AlertsList = ({ selectValue, selectHandler }: PropTypes) => {
                 style={styles.selectAllCheckbox}
                 onClick={selectAllHandler}
                 className="select-all-checkbox"
+                checked={Object.values(alerts).every((alert) => alert.selected)}
               ></RuxCheckbox>
               <span style={{ marginLeft: "var(--spacing-4)" }}> Message</span>
               <span style={{ marginLeft: "5.8rem" }}>Category</span>
@@ -196,6 +196,7 @@ const AlertsList = ({ selectValue, selectHandler }: PropTypes) => {
                         id={alerts[alertId].id + ""}
                         style={styles.checkboxes}
                         className="checkboxes"
+                        checked={alerts[alertId].selected}
                         onClick={checkboxHandler}
                       />
                     </RuxTableCell>

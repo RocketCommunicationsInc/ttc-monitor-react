@@ -26,7 +26,7 @@ type PropTypes = {
   alerts: { [key: string]: Alert };
   addAlert: () => void;
   editAlert: (params: ModifyAlertParams) => void;
-  deleteAlert: (id: string) => void;
+  deleteAlerts: (id: string[]) => void;
   clearAlerts: () => void;
   generate: (newGenerateOptions?: GenerateOptions) => void;
   stopGenerating: () => void;
@@ -39,7 +39,7 @@ const AlertsContext = createContext<PropTypes>({
   alerts: {},
   addAlert: () => null,
   editAlert: () => null,
-  deleteAlert: () => null,
+  deleteAlerts: () => null,
   clearAlerts: () => null,
   generate: () => null,
   stopGenerating: () => null,
@@ -77,16 +77,19 @@ export const AlertsContextProvider = ({ children }: Children) => {
     });
   }, []);
 
-  const deleteAlert = useCallback(
-    (id: string) => {
-      if (id in alerts) {
-        const alertIdIndex = alertIds.findIndex((alertId) => alertId === id);
-        const { [id]: value, ...newAlerts } = alerts;
-        const newAlertIds = [...alertIds];
-        newAlertIds.splice(alertIdIndex, 1);
-        setAlertIds(newAlertIds);
-        setAlerts(newAlerts);
-      }
+  const deleteAlerts = useCallback(
+    (ids: string[]) => {
+      const idArr = [...alertIds];
+      const newAlerts = { ...alerts };
+      ids.forEach((id) => {
+        if (id in newAlerts) {
+          const alertIdIndex = idArr.findIndex((alertId) => alertId === id);
+          delete newAlerts[id];
+          idArr.splice(alertIdIndex, 1);
+          setAlertIds(idArr);
+          setAlerts(newAlerts);
+        }
+      });
     },
     [alerts, alertIds]
   );
@@ -152,7 +155,7 @@ export const AlertsContextProvider = ({ children }: Children) => {
       alerts,
       addAlert,
       editAlert,
-      deleteAlert,
+      deleteAlerts,
       clearAlerts,
       generate,
       stopGenerating,
@@ -164,7 +167,7 @@ export const AlertsContextProvider = ({ children }: Children) => {
       alerts,
       addAlert,
       editAlert,
-      deleteAlert,
+      deleteAlerts,
       generate,
       initialize,
       toggleSelected,
