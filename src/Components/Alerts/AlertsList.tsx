@@ -1,6 +1,6 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   RuxTable,
   RuxTableHeader,
@@ -16,7 +16,6 @@ import {
   RuxTableRow,
 } from "@astrouxds/react";
 import useAlerts from "../../hooks/useAlerts";
-import { Alert } from "../../Types";
 
 const styles = {
   investigateBtn: {
@@ -67,39 +66,9 @@ const styles = {
   },
 };
 
-//pass an array of alerts down to the alerts list and thats it, so the filt
-
-type PropTypes = {
-  selectValue: any;
-  alertsArr: Alert[];
-};
-//all alerts will be coming from props, not the hook. Alerts itself will need a piece of state. The hook will have all alerts, but the alerts.tsx component will have a piece of state that will initially populate all alerts, but then have the lists to change it, and then pass the filtered lists down to the alerts component. You can still use the hook you just wont get alerts from the hook- they can still be edited.
-
-//down in render loop over alerts
-
-const AlertsList = ({ selectValue, alertsArr }: PropTypes) => {
+const AlertsList = () => {
   const [checkedAll, setCheckedAll] = useState(false);
   const [checked, setChecked] = useState(false);
-  // const [selectedData, setSelectedData] = useState("");
-
-  // const selectOptions = [
-  //   { label: "Critical", value: "Critical" },
-  //   { label: "Caution", value: "Caution" },
-  //   { label: "Serious", value: "Serious" },
-  //   { label: "Hardware", value: "Hardware" },
-  //   { label: "Software", value: "Software" },
-  //   { label: "Spacecraft", value: "Spacecraft" },
-  // ];
-
-  // const filteredOptions = useMemo(() => {
-  //   const newSortedOptions = [...alertIds];
-  //   newSortedOptions.sort((a, b) => {
-  //     return alerts[a][selectedData].localeCompare(
-  //       alerts[b][selectedData]
-  //     );
-  //   });
-  //   return newSortedOptions;
-  // }, [alertIds, selectedData]);
 
   const {
     alerts,
@@ -120,13 +89,29 @@ const AlertsList = ({ selectValue, alertsArr }: PropTypes) => {
     };
   }, []);
 
-  const selectAllCheckbox: any = document.querySelector(".select-all-checkbox");
+  const investigateHandler = () => {
+    alert("This feature has not been implemented.");
+  };
+
+  const checkboxHandler = (checkbox: any) => {
+    toggleSelected(checkbox.target.id);
+    const checkboxes = document.querySelectorAll(".checkboxes");
+    checkboxes.forEach((checkbox: any) => {
+      if (checkbox.checked) {
+        toggleSelected(checkbox.target.id);
+      }
+      setChecked(true);
+    });
+  };
+
+  const selectAllCheckbox: HTMLInputElement = document.querySelector(
+    ".select-all-checkbox"
+  ) as HTMLInputElement;
 
   const selectAllHandler = () => {
-    const alertObj: any = Object.values(alerts).map((alertObj) => alertObj);
+    const alertObj = Object.values(alerts).map((alertObj) => alertObj);
     alertObj.map((alertId: { selected: boolean }) => {
       alertId.selected = true;
-      console.log(alertId.selected);
       setCheckedAll(true);
       setChecked(true);
       if (selectAllCheckbox.checked !== false) {
@@ -134,21 +119,6 @@ const AlertsList = ({ selectValue, alertsArr }: PropTypes) => {
         setCheckedAll(false);
         setChecked(false);
       }
-    });
-  };
-
-  const investigateHandler = () => {
-    alert("This feature has not been implemented.");
-  };
-
-  const checkboxHandler = (selected: any) => {
-    toggleSelected(selected.target.id);
-    const checkboxes: any = document.querySelectorAll(".checkboxes");
-    checkboxes.forEach((checkbox: any) => {
-      if (checkbox.checked) {
-        toggleSelected(selected.target.id);
-      }
-      setChecked(true);
     });
   };
 
