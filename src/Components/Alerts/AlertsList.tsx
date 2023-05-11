@@ -120,16 +120,21 @@ const AlertsList = ({ selectValue, alertsArr }: PropTypes) => {
     };
   }, []);
 
-  // alertIds.forEach
-  //loop through and do Object.values loop through all alerts and set all properties to true
+  const selectAllCheckbox: any = document.querySelector(".select-all-checkbox");
 
   const selectAllHandler = () => {
     const alertObj: any = Object.values(alerts).map((alertObj) => alertObj);
     alertObj.map((alertId: { selected: boolean }) => {
       alertId.selected = true;
+      console.log(alertId.selected);
+      setCheckedAll(true);
+      setChecked(true);
+      if (selectAllCheckbox.checked !== false) {
+        alertId.selected = false;
+        setCheckedAll(false);
+        setChecked(false);
+      }
     });
-    setCheckedAll(true);
-    setChecked(true);
   };
 
   const investigateHandler = () => {
@@ -155,6 +160,9 @@ const AlertsList = ({ selectValue, alertsArr }: PropTypes) => {
       }
     });
     deleteAlerts(alertsToRemove);
+    if (selectAllCheckbox.checked !== false) {
+      selectAllCheckbox.checked = false;
+    }
   };
 
   return (
@@ -167,7 +175,6 @@ const AlertsList = ({ selectValue, alertsArr }: PropTypes) => {
                 style={styles.selectAllCheckbox}
                 onClick={selectAllHandler}
                 className="select-all-checkbox"
-                checked={Object.values(alerts).every((alert) => alert.selected)}
               ></RuxCheckbox>
               <span style={{ marginLeft: "var(--spacing-4)" }}> Message</span>
               <span style={{ marginLeft: "5.8rem" }}>Category</span>
