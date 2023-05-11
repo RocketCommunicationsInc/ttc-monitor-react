@@ -6,6 +6,7 @@ import {
   PointElement,
   LineElement,
   Title,
+  SubTitle,
   Tooltip,
   Legend,
 } from 'chart.js';
@@ -18,6 +19,7 @@ ChartJS.register(
   PointElement,
   LineElement,
   Title,
+  SubTitle,
   Tooltip,
   Legend,
   annotationPlugin
@@ -26,16 +28,47 @@ ChartJS.register(
 const labels = [800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600];
 
 
+const randomNumber = () => Math.floor(Math.random() * 100);
 
-export const options = {
+type PropTypes = {
+  subtitle: string
+}
+
+const LineChart = ({subtitle}: PropTypes) => {
+  const dataObj = {
+    labels,
+    datasets: [
+      {
+        label: 'Dataset 1',
+        data: Array(9).fill(1).map(()=> randomNumber()),
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      },
+    ]
+  };
+
+const options = {
   responsive: true,
+  scales: {
+    y: {
+      max: 110,
+      min: 0,
+      ticks: {
+          stepSize: 10
+      }
+    }
+  },
   plugins: {
     legend: {
-      position: 'top' as const,
+        display: false
     },
     title: {
       display: true,
-      text: 'Chart.js Line Chart',
+      text: 'IRON 4090',
+    },
+    subtitle: {
+      display: true,
+      text: subtitle
     },
     annotation: {
       annotations: {
@@ -68,22 +101,6 @@ export const options = {
   },
 };
 
-const randomNumber = () => Math.floor(Math.random() * 100);
-
-
-const LineChart = () => {
-  const dataObj = {
-    labels,
-    datasets: [
-      {
-        label: 'Dataset 1',
-        data: Array(8).fill(1).map(()=> randomNumber()),
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-      },
-    ]
-
-  };
 
   return (
     <Line

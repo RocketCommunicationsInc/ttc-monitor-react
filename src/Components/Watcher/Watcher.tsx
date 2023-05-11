@@ -72,7 +72,7 @@ const Watcher = () => {
           </RuxTableBody>
         </RuxTable>
       </RuxContainer>
-      <LineChart />
+      <LineChart subtitle={watcherDataItem.mneumonic} />
     </div>
   );
 };
