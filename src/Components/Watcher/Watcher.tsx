@@ -21,10 +21,10 @@ const styles = {
 
 const watcherDataItem = {
   status: "caution" as const,
-  Mneumonic: 19999999,
-  Unit: "Volts",
-  Threshold: 450,
-  Actual: "Full",
+  mneumonic: "PWST2IA",
+  unit: "Volts",
+  threshold: 45.6,
+  actual: 32.2,
 };
 
 const fixtureData = Array(10).fill(watcherDataItem);
