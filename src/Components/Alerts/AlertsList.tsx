@@ -1,19 +1,13 @@
-/* eslint-disable array-callback-return */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   RuxTable,
   RuxTableHeader,
   RuxTableHeaderRow,
   RuxTableHeaderCell,
-  RuxTableCell,
   RuxTableBody,
   RuxCheckbox,
-  RuxStatus,
   RuxButton,
-  RuxAccordion,
-  RuxAccordionItem,
-  RuxTableRow,
 } from "@astrouxds/react";
 import AlertListItem from "./AlertListItem";
 import useAlerts from "../../hooks/useAlerts";
@@ -61,52 +55,34 @@ const styles = {
     paddingLeft: ".6rem",
     alignSelf: "left",
   },
-  firstAccordionItem: {
-    backgroundColor: "#141f2c",
-    color: "red",
-  },
 };
 
 const AlertsList = () => {
-  // const [checkedAll, setCheckedAll] = useState(false);
-  // const [checked, setChecked] = useState(false);
-
   const {
     alerts,
     alertIds,
     initialize,
     deleteAlerts,
     selectAll,
+    selectNone,
     allSelected,
     anySelected,
+    stopGenerating,
+    generate,
   } = useAlerts();
 
   useEffect(() => {
     initialize();
-    // generate();
+    generate();
 
-    // return () => {
-    //   stopGenerating();
-    // };
+    return () => {
+      stopGenerating();
+    };
   }, []);
 
   const selectAllCheckbox: HTMLInputElement = document.querySelector(
     ".select-all-checkbox"
   ) as HTMLInputElement;
-
-  // const selectAllHandler = () => {
-  //   const alertObj = Object.values(alerts).map((alertObj) => alertObj);
-  //   alertObj.map((alertId: { selected: boolean }) => {
-  //     alertId.selected = true;
-  //     // setCheckedAll(true);
-  //     // setChecked(true);
-  //     if (selectAllCheckbox.checked !== false) {
-  //       alertId.selected = false;
-  //       // setCheckedAll(false);
-  //       // setChecked(false);
-  //     }
-  //   });
-  // };
 
   const acknowledgeHandler = () => {
     const alertsToRemove: string[] = [];
@@ -121,6 +97,14 @@ const AlertsList = () => {
     }
   };
 
+  const selectAllHandler = () => {
+    if (selectAllCheckbox.checked === true) {
+      selectAll();
+    } else {
+      selectNone();
+    }
+  };
+
   return (
     <div>
       <RuxTable style={{ height: "36.5rem" }}>
@@ -129,7 +113,7 @@ const AlertsList = () => {
             <RuxTableHeaderCell>
               <RuxCheckbox
                 style={styles.selectAllCheckbox}
-                onRuxchange={selectAll}
+                onRuxchange={selectAllHandler}
                 className="select-all-checkbox"
                 checked={allSelected ? true : false}
               />

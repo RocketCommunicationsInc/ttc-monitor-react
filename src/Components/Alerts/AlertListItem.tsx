@@ -49,6 +49,11 @@ const AlertListItem = ({ alertItem }: PropTypes) => {
 
   const checkboxHandler = () => {
     toggleSelected(alertItem.id);
+    if (alertItem.selected) {
+      alertItem.selected = false;
+    } else {
+      alertItem.selected = true;
+    }
   };
 
   const investigateHandler = () => {
@@ -57,7 +62,7 @@ const AlertListItem = ({ alertItem }: PropTypes) => {
 
   return (
     <RuxAccordion>
-      <RuxAccordionItem id={alertItem.id + ""} className="accordion-item">
+      <RuxAccordionItem id={alertItem.id} className="accordion-item">
         {alertItem.message} <br />
         <RuxButton onClick={investigateHandler} style={styles.investigateBtn}>
           Investigate

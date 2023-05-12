@@ -33,6 +33,7 @@ type PropTypes = {
   initialize: () => void;
   toggleSelected: (id: string) => void;
   selectAll: () => void;
+  selectNone: () => void;
   allSelected: boolean;
   anySelected: boolean;
 };
@@ -49,6 +50,7 @@ const AlertsContext = createContext<PropTypes>({
   initialize: () => null,
   toggleSelected: () => null,
   selectAll: () => null,
+  selectNone: () => null,
   allSelected: false,
   anySelected: false,
 });
@@ -128,6 +130,14 @@ export const AlertsContextProvider = ({ children }: Children) => {
     setAlerts(newAlerts);
   }, [alerts]);
 
+    const selectNone = useCallback(() => {
+    const newAlerts = { ...alerts };
+    for (const id in newAlerts) {
+      newAlerts[id].selected = false;
+    }
+    setAlerts(newAlerts);
+  }, [alerts]);
+
   const clearAlerts = () => {
     setAlertIds([]);
     setAlerts({});
@@ -184,6 +194,7 @@ export const AlertsContextProvider = ({ children }: Children) => {
       initialize,
       toggleSelected,
       selectAll,
+      selectNone,
       allSelected,
       anySelected,
     }),
@@ -197,6 +208,7 @@ export const AlertsContextProvider = ({ children }: Children) => {
       initialize,
       toggleSelected,
       selectAll,
+      selectNone,
       allSelected,
       anySelected,
     ]
