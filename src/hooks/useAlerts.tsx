@@ -66,7 +66,10 @@ export const AlertsContextProvider = ({ children }: Children) => {
   const [generateOptions, setGenerateOptions] =
     useState<GenerateOptions>(defaultOptions);
 
-  const allSelected = Object.values(alerts).every((alert) => alert.selected);
+  const allSelected = useMemo(
+    () => Object.values(alerts).every((alert) => alert.selected),
+    [alerts]
+  );
   const anySelected = !Object.values(alerts).every((alert) => !alert.selected);
 
   const addAlert = useCallback(() => {
@@ -126,7 +129,7 @@ export const AlertsContextProvider = ({ children }: Children) => {
     setAlerts(newAlerts);
   }, [alerts]);
 
-    const selectNone = useCallback(() => {
+  const selectNone = useCallback(() => {
     const newAlerts = { ...alerts };
     for (const id in newAlerts) {
       newAlerts[id].selected = false;
