@@ -27,7 +27,7 @@ ChartJS.register(
 
 const randomNumber = () => Math.floor(Math.random() * 100);
 
-const labels = [800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600];
+const labels = [800, 900, 1000, 1100, 1200, 1300, 1400, 1500];
 
 const dataObj = {
   labels,
@@ -57,11 +57,12 @@ const LineChart = ({ subtitle }: PropTypes) => {
     layout: {
       padding: {
         top: 10,
-        left: 5,
+        left: 3,
       },
     },
     scales: {
       x: {
+        fill: true,
         border: {
           display: true,
           color: "white",
@@ -74,12 +75,14 @@ const LineChart = ({ subtitle }: PropTypes) => {
         },
       },
       y: {
+        fill: true,
         border: {
           display: true,
           color: "white",
         },
         grid: {
           color: "grey",
+          drawTicks: false,
         },
         title: {
           display: true,
@@ -88,6 +91,7 @@ const LineChart = ({ subtitle }: PropTypes) => {
         },
         ticks: {
           color: "white",
+          padding: 7,
         },
         scaleLabel: {
           display: true,
@@ -100,7 +104,7 @@ const LineChart = ({ subtitle }: PropTypes) => {
       },
       title: {
         display: true,
-        text: "           IRON 4090",
+        text: "            IRON 4090",
         color: "white",
         align: "start",
         font: {
@@ -109,7 +113,7 @@ const LineChart = ({ subtitle }: PropTypes) => {
       },
       subtitle: {
         display: true,
-        text: `              ${subtitle}`,
+        text: `               ${subtitle}`,
         color: "white",
         align: "start",
         font: {
@@ -133,14 +137,17 @@ const LineChart = ({ subtitle }: PropTypes) => {
             borderColor: "white",
             borderWidth: 2.5,
             borderDash: [1, 2],
-            
+
             label: {
               color: "#fff",
               content: "Upper Limit",
               display: true,
               backgroundColor: "#172635",
-               opacity: .5,
-              font: "8px",
+              opacity: 0.5,
+              font: {
+                size: 10.5,
+                weight: "normal",
+              },
             },
           },
           lowerThreshold: {
@@ -155,7 +162,10 @@ const LineChart = ({ subtitle }: PropTypes) => {
               content: "Lower Limit",
               display: true,
               backgroundColor: "#172635",
-              font: "8px",
+              font: {
+                size: 10.5,
+                weight: "normal",
+              },
             },
           },
         },
