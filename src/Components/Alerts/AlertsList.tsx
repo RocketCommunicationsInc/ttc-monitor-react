@@ -115,7 +115,7 @@ const AlertsList = () => {
                 style={styles.selectAllCheckbox}
                 onRuxchange={selectAllHandler}
                 className="select-all-checkbox"
-                checked={allSelected ? true : false}
+                checked={allSelected}
               />
               <span style={{ marginLeft: "var(--spacing-4)" }}> Message</span>
               <span style={{ marginLeft: "5.8rem" }}>Category</span>

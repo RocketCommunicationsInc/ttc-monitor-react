@@ -65,7 +65,6 @@ export const AlertsContextProvider = ({ children }: Children) => {
   const [generating, setGenerating] = useState(false);
   const [generateOptions, setGenerateOptions] =
     useState<GenerateOptions>(defaultOptions);
-  // const [allSelected, setA]
 
   const allSelected = Object.values(alerts).every((alert) => alert.selected);
   const anySelected = !Object.values(alerts).every((alert) => !alert.selected);
@@ -106,15 +105,12 @@ export const AlertsContextProvider = ({ children }: Children) => {
     [alerts, alertIds]
   );
 
-  //
   const toggleSelected = useCallback(
     (id: string) => {
-      console.log("values", alerts[id].selected);
       if (id in alerts) {
         setAlerts((prevState) => {
           const newState = { ...prevState };
           newState[id].selected = !alerts[id].selected;
-          console.log(newState);
           return newState;
         });
       }
