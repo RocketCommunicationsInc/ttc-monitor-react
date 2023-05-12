@@ -73,6 +73,7 @@ rux-timeline::part(time-region-container) {
 .watcher {
   grid-area: watcher;
   display: flex;
+  background-color: var(--color-palette-darkblue-900);
 }
 
 .watcher rux-container {
