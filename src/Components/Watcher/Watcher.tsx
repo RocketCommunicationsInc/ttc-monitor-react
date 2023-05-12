@@ -11,7 +11,7 @@ import {
 } from "@astrouxds/react";
 import type { rowDataObject, Status } from "../../Types";
 import LineChart from "./LineChart";
-import MneumonicPopUp from "./MneumonicPopUp";
+import MnemonicPopUp from "./MnemonicPopUp";
 
 const styles = {
   container: {
@@ -21,7 +21,7 @@ const styles = {
 
 const watcherDataItem = {
   status: "caution" as const,
-  mneumonic: "PWST2IA",
+  mnemonic: "PWST2IA",
   unit: "Volts",
   threshold: 45.6,
   actual: 32.2,
@@ -42,11 +42,13 @@ const Watcher = () => {
         <RuxTable>
           <RuxTableHeader>
             <RuxTableHeaderRow>
-              {Object.keys(fixtureData[0]).map((key) => (
-                <RuxTableHeaderCell key={key}>
-                  {key === "status" ? "" : key}
-                </RuxTableHeaderCell>
-              ))}
+              <RuxTableHeaderCell>
+                {/* placeholder for status icon column */}
+              </RuxTableHeaderCell>
+              <RuxTableHeaderCell>Mnemonic</RuxTableHeaderCell>
+              <RuxTableHeaderCell>Unit</RuxTableHeaderCell>
+              <RuxTableHeaderCell>Threshold</RuxTableHeaderCell>
+              <RuxTableHeaderCell>Actual</RuxTableHeaderCell>
             </RuxTableHeaderRow>
           </RuxTableHeader>
           <RuxTableBody>
@@ -57,9 +59,9 @@ const Watcher = () => {
                     <RuxTableCell>
                       <RuxStatus status={dataObj.status as Status} />
                     </RuxTableCell>
-                  ) : key === "Mneumonic" ? (
+                  ) : key === "mnemonic" ? (
                     <RuxTableCell>
-                      <MneumonicPopUp triggerValue={value} />
+                      <MnemonicPopUp triggerValue={value} />
                     </RuxTableCell>
                   ) : (
                     <RuxTableCell style={{ textAlign: "right" }}>
@@ -72,7 +74,7 @@ const Watcher = () => {
           </RuxTableBody>
         </RuxTable>
       </RuxContainer>
-      <LineChart subtitle={watcherDataItem.mneumonic} />
+      <LineChart subtitle={watcherDataItem.mnemonic} />
     </div>
   );
 };
