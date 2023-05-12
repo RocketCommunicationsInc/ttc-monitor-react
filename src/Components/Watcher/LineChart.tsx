@@ -29,6 +29,10 @@ const randomNumber = () => Math.floor(Math.random() * 110);
 
 const labels = [800, 900, 1000, 1100, 1200, 1300, 1400, 1500];
 
+const tooltipTitle = () => {
+  return "";
+};
+
 const dataObj = {
   labels,
   datasets: [
@@ -45,10 +49,6 @@ const dataObj = {
       },
     },
   ],
-};
-
-const tooltipTitle = () => {
-  return "";
 };
 
 type PropTypes = {
