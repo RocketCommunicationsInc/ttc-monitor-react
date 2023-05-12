@@ -114,31 +114,7 @@ rux-time-region::part(container) {
 rux-notification::part(container) {
   border: 1px solid var(--color-border-interactive-muted);
 }
-//____________________________________________________________
-::-webkit-scrollbar:vertical {
-	margin-top: 40px !important;
-}
 
-::-webkit-scrollbar {
-	margin-top: 40px !important;
-}
-::-webkit-scrollbar-track:vertical {
-	margin-top: 40px !important;
-}
-
-rux-container::part(container)::-webkit-scrollbar-track:vertical {
-	margin-top: 40px !important;
-}
-
-rux-container::part(body)::-webkit-scrollbar-track:vertical {
-	margin-top: 40px !important;
-}
-
-::-webkit-scrollbar-track,
-::-webkit-scrollbar-corner {
-	margin-top: 40px !important;
-}
-//_______________________________________________________________
 .constellation rux-icon {
   vertical-align: middle;
   width: 32px;
