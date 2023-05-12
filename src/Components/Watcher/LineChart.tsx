@@ -40,7 +40,7 @@ const dataObj = {
       borderColor: "rgb(77, 172, 255)",
       pointRadius: 0,
       gridLines: {
-        color: "white",
+        color: "#455D6E",
         display: true,
       },
     },
@@ -57,28 +57,40 @@ const LineChart = ({ subtitle }: PropTypes) => {
     layout: {
       padding: {
         top: 10,
-        left: 10,
+        left: 5,
       },
     },
-    //  scales: {
-    //  xAxes: [{
-    //       gridLines: {
-    //          display: false,
-    //          color: "white"
-    //       }
-    //    }],
-    //    yAxes: [{
-    //       gridLines: {
-    //          display: true
-    //       }
-    //    }]
-    //   }
     scales: {
-      y: {
-        max: 110,
-        min: 0,
+      x: {
+        border: {
+          display: true,
+          color: "white",
+        },
         ticks: {
-          stepSize: 10,
+          color: "white",
+        },
+        scaleLabel: {
+          display: true,
+        },
+      },
+      y: {
+        border: {
+          display: true,
+          color: "white",
+        },
+        grid: {
+          color: "grey",
+        },
+        title: {
+          display: true,
+          color: "white",
+          text: "Volts",
+        },
+        ticks: {
+          color: "white",
+        },
+        scaleLabel: {
+          display: true,
         },
       },
     },
@@ -88,7 +100,7 @@ const LineChart = ({ subtitle }: PropTypes) => {
       },
       title: {
         display: true,
-        text: "IRON 4090",
+        text: "           IRON 4090",
         color: "white",
         align: "start",
         font: {
@@ -97,7 +109,7 @@ const LineChart = ({ subtitle }: PropTypes) => {
       },
       subtitle: {
         display: true,
-        text: subtitle,
+        text: `              ${subtitle}`,
         color: "white",
         align: "start",
         font: {
@@ -108,20 +120,26 @@ const LineChart = ({ subtitle }: PropTypes) => {
           bottom: 25,
         },
       },
+      tooltip: {
+        mode: "index",
+        intersect: false,
+      },
       annotation: {
         annotations: {
           upperThreshold: {
             type: "line" as ChartType,
             yMin: 100,
             yMax: 100,
-            borderColor: "rgb(77, 172, 255)",
-            borderWidth: 2,
+            borderColor: "white",
+            borderWidth: 2.5,
             borderDash: [1, 2],
+            
             label: {
               color: "#fff",
               content: "Upper Limit",
               display: true,
               backgroundColor: "#172635",
+               opacity: .5,
               font: "8px",
             },
           },
@@ -129,8 +147,8 @@ const LineChart = ({ subtitle }: PropTypes) => {
             type: "line" as ChartType,
             yMin: 20,
             yMax: 20,
-            borderColor: "rgb(77, 172, 255)",
-            borderWidth: 2,
+            borderColor: "white",
+            borderWidth: 2.5,
             borderDash: [1, 2],
             label: {
               color: "#fff",
@@ -142,6 +160,10 @@ const LineChart = ({ subtitle }: PropTypes) => {
           },
         },
       },
+    },
+    hover: {
+      mode: "nearest",
+      intersect: false, //this is the point on the graph for tooltip
     },
   };
 
