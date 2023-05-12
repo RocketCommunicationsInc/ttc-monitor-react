@@ -25,22 +25,26 @@ ChartJS.register(
   annotationPlugin
 );
 
-const randomNumber = () => Math.floor(Math.random() * 100);
+const randomNumber = () => Math.floor(Math.random() * 110);
 
-const labels = [800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600];
+const labels = [800, 900, 1000, 1100, 1200, 1300, 1400, 1500];
+
+const tooltipTitle = () => {
+  return "";
+};
 
 const dataObj = {
   labels,
   datasets: [
     {
-      label: "Dataset 1",
+      label: "Value",
       data: Array(8)
         .fill(1)
         .map(() => randomNumber()),
       borderColor: "rgb(77, 172, 255)",
       pointRadius: 0,
       gridLines: {
-        color: "white",
+        color: "#455D6E",
         display: true,
       },
     },
@@ -56,30 +60,50 @@ const LineChart = ({ subtitle }: PropTypes) => {
     responsive: true,
     layout: {
       padding: {
-        top: 10,
-        left: 10,
+        top: 5,
+        left: 3,
       },
     },
-    //  scales: {
-    //  xAxes: [{
-    //       gridLines: {
-    //          display: false,
-    //          color: "white"
-    //       }
-    //    }],
-    //    yAxes: [{
-    //       gridLines: {
-    //          display: true
-    //       }
-    //    }]
-    //   }
     scales: {
-      y: {
-        max: 110,
-        min: 0,
+      x: {
+        fill: true,
+        border: {
+          display: true,
+          color: "white",
+        },
         ticks: {
+          color: "white",
+        },
+        scaleLabel: {
+          display: true,
+        },
+      },
+      y: {
+        fill: true,
+        border: {
+          display: true,
+          color: "white",
+        },
+        grid: {
+          color: "grey",
+          drawTicks: false,
+        },
+        title: {
+          display: true,
+          color: "white",
+          text: "Volts",
+        },
+        ticks: {
+          color: "white",
+          padding: 7,
           stepSize: 10,
         },
+        scaleLabel: {
+          display: true,
+        },
+        min: 0,
+        max: 110,
+        autoSkip: false,
       },
     },
     plugins: {
@@ -88,7 +112,7 @@ const LineChart = ({ subtitle }: PropTypes) => {
       },
       title: {
         display: true,
-        text: "IRON 4090",
+        text: "            IRON 4090",
         color: "white",
         align: "start",
         font: {
@@ -97,7 +121,7 @@ const LineChart = ({ subtitle }: PropTypes) => {
       },
       subtitle: {
         display: true,
-        text: subtitle,
+        text: `               ${subtitle}`,
         color: "white",
         align: "start",
         font: {
@@ -108,40 +132,61 @@ const LineChart = ({ subtitle }: PropTypes) => {
           bottom: 25,
         },
       },
+      tooltip: {
+        mode: "index",
+        intersect: false,
+        yAlign: "bottom",
+        displayColors: false,
+        titleMarginBottom: 0,
+        callbacks: {
+          title: tooltipTitle,
+        },
+      },
       annotation: {
         annotations: {
           upperThreshold: {
             type: "line" as ChartType,
             yMin: 100,
             yMax: 100,
-            borderColor: "rgb(77, 172, 255)",
-            borderWidth: 2,
+            borderColor: "white",
+            borderWidth: 2.5,
             borderDash: [1, 2],
             label: {
               color: "#fff",
               content: "Upper Limit",
               display: true,
               backgroundColor: "#172635",
-              font: "8px",
+              opacity: 0.5,
+              font: {
+                size: 10.5,
+                weight: "normal",
+              },
             },
           },
           lowerThreshold: {
             type: "line" as ChartType,
             yMin: 20,
             yMax: 20,
-            borderColor: "rgb(77, 172, 255)",
-            borderWidth: 2,
+            borderColor: "white",
+            borderWidth: 2.5,
             borderDash: [1, 2],
             label: {
               color: "#fff",
               content: "Lower Limit",
               display: true,
               backgroundColor: "#172635",
-              font: "8px",
+              font: {
+                size: 10.5,
+                weight: "normal",
+              },
             },
           },
         },
       },
+    },
+    hover: {
+      mode: "nearest",
+      intersect: false, //this is the point on the graph for tooltip
     },
   };
 
