@@ -15,6 +15,7 @@ import {
   RuxAccordionItem,
   RuxTableRow,
 } from "@astrouxds/react";
+import AlertListItem from "./AlertListItem";
 import useAlerts from "../../hooks/useAlerts";
 
 const styles = {
@@ -67,60 +68,45 @@ const styles = {
 };
 
 const AlertsList = () => {
-  const [checkedAll, setCheckedAll] = useState(false);
-  const [checked, setChecked] = useState(false);
+  // const [checkedAll, setCheckedAll] = useState(false);
+  // const [checked, setChecked] = useState(false);
 
   const {
     alerts,
     alertIds,
-    generate,
-    stopGenerating,
     initialize,
     deleteAlerts,
-    toggleSelected,
+    selectAll,
+    allSelected,
+    anySelected,
   } = useAlerts();
 
   useEffect(() => {
     initialize();
-    generate();
+    // generate();
 
-    return () => {
-      stopGenerating();
-    };
+    // return () => {
+    //   stopGenerating();
+    // };
   }, []);
-
-  const investigateHandler = () => {
-    alert("This feature has not been implemented.");
-  };
-
-  const checkboxHandler = (checkbox: any) => {
-    toggleSelected(checkbox.target.id);
-    const checkboxes = document.querySelectorAll(".checkboxes");
-    checkboxes.forEach((checkbox: any) => {
-      if (checkbox.checked) {
-        toggleSelected(checkbox.target.id);
-      }
-      setChecked(true);
-    });
-  };
 
   const selectAllCheckbox: HTMLInputElement = document.querySelector(
     ".select-all-checkbox"
   ) as HTMLInputElement;
 
-  const selectAllHandler = () => {
-    const alertObj = Object.values(alerts).map((alertObj) => alertObj);
-    alertObj.map((alertId: { selected: boolean }) => {
-      alertId.selected = true;
-      setCheckedAll(true);
-      setChecked(true);
-      if (selectAllCheckbox.checked !== false) {
-        alertId.selected = false;
-        setCheckedAll(false);
-        setChecked(false);
-      }
-    });
-  };
+  // const selectAllHandler = () => {
+  //   const alertObj = Object.values(alerts).map((alertObj) => alertObj);
+  //   alertObj.map((alertId: { selected: boolean }) => {
+  //     alertId.selected = true;
+  //     // setCheckedAll(true);
+  //     // setChecked(true);
+  //     if (selectAllCheckbox.checked !== false) {
+  //       alertId.selected = false;
+  //       // setCheckedAll(false);
+  //       // setChecked(false);
+  //     }
+  //   });
+  // };
 
   const acknowledgeHandler = () => {
     const alertsToRemove: string[] = [];
@@ -143,9 +129,10 @@ const AlertsList = () => {
             <RuxTableHeaderCell>
               <RuxCheckbox
                 style={styles.selectAllCheckbox}
-                onClick={selectAllHandler}
+                onRuxchange={selectAll}
                 className="select-all-checkbox"
-              ></RuxCheckbox>
+                checked={allSelected ? true : false}
+              />
               <span style={{ marginLeft: "var(--spacing-4)" }}> Message</span>
               <span style={{ marginLeft: "5.8rem" }}>Category</span>
               <span style={{ marginLeft: "var(--spacing-6)" }}>Time</span>
@@ -154,70 +141,24 @@ const AlertsList = () => {
         </RuxTableHeader>
         <RuxTableBody>
           {alertIds.map((alertId) => (
-            <RuxAccordion>
-              <RuxAccordionItem
-                id={alerts[alertId].id + ""}
-                className="accordion-item"
-              >
-                {alerts[alertId].message} <br />
-                <RuxButton
-                  onClick={investigateHandler}
-                  style={styles.investigateBtn}
-                >
-                  Investigate
-                </RuxButton>
-                <div slot="label" style={styles.accordianLabel}>
-                  <RuxTableRow>
-                    <RuxTableCell style={{ textAlign: "center" }}>
-                      <RuxCheckbox
-                        id={alerts[alertId].id + ""}
-                        style={styles.checkboxes}
-                        className="checkboxes"
-                        checked={alerts[alertId].selected}
-                        onClick={checkboxHandler}
-                      />
-                    </RuxTableCell>
-                    <RuxTableCell>
-                      <RuxStatus status={alerts[alertId].status} />
-                    </RuxTableCell>
-                    <RuxTableCell style={styles.alertMessage}>
-                      {alerts[alertId].message}
-                    </RuxTableCell>
-                    <RuxTableCell style={styles.alertCategory}>
-                      {alerts[alertId].category}
-                    </RuxTableCell>
-                    <RuxTableCell style={styles.alertTime}>
-                      {new Date(alerts[alertId].timestamp)
-                        .toTimeString()
-                        .slice(0, 8)}
-                    </RuxTableCell>
-                  </RuxTableRow>
-                </div>
-              </RuxAccordionItem>
-            </RuxAccordion>
+            <AlertListItem alertItem={alerts[alertId]} />
           ))}
         </RuxTableBody>
       </RuxTable>
       <div style={styles.footer}>
-        {checkedAll || checked ? (
-          <div>
-            <RuxButton
-              secondary
-              onClick={acknowledgeHandler}
-              style={{ marginRight: "1rem" }}
-            >
-              Dismiss
-            </RuxButton>
-            <RuxButton onClick={acknowledgeHandler}>Acknowledge</RuxButton>
-          </div>
-        ) : (
-          <div>
-            <RuxButton secondary disabled style={{ marginRight: "1rem" }}>
-              Dismiss
-            </RuxButton>
-            <RuxButton disabled>Acknowledge</RuxButton>
-          </div>
-        )}
+        <div>
+          <RuxButton
+            secondary
+            onClick={acknowledgeHandler}
+            style={{ marginRight: "1rem" }}
+            disabled={!anySelected}
+          >
+            Dismiss
+          </RuxButton>
+          <RuxButton onClick={acknowledgeHandler} disabled={!anySelected}>
+            Acknowledge
+          </RuxButton>
+        </div>
       </div>
     </div>
   );
