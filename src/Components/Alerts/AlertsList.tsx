@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import {
   RuxTable,
   RuxTableHeader,
@@ -65,11 +65,17 @@ const AlertsList = () => {
     deleteAlerts,
     selectAll,
     selectNone,
-    //allSelected,
-    anySelected,
     stopGenerating,
     generate,
   } = useAlerts();
+  const allSelected = useMemo(
+    () => Object.values(alerts).every((alert) => alert && alert.selected),
+    [alerts]
+  );
+  const anySelected = useMemo(
+    () => !Object.values(alerts).every((alert) => !alert.selected),
+    [alerts]
+  );
 
   useEffect(() => {
     initialize();
@@ -115,7 +121,7 @@ const AlertsList = () => {
                 style={styles.selectAllCheckbox}
                 onRuxchange={selectAllHandler}
                 className="select-all-checkbox"
-                // checked={allSelected ? true : false}
+                checked={allSelected}
               />
               <span style={{ marginLeft: "var(--spacing-4)" }}> Message</span>
               <span style={{ marginLeft: "5.8rem" }}>Category</span>
