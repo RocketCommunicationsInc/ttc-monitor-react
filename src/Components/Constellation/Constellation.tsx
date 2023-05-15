@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   RuxContainer,
   RuxSegmentedButton,
@@ -39,10 +39,13 @@ const Constellation = () => {
     setZoomLevel(e.target.value);
   };
 
-  const toggleDrawer = (id?: string) => {
-    if (id) setDrawerContact(contacts[id]);
-    setDrawerOpen((prevState) => !prevState);
-  };
+  const toggleDrawer = useCallback(
+    (id?: string) => {
+      if (id) setDrawerContact(contacts[id]);
+      setDrawerOpen((prevState) => !prevState);
+    },
+    [contacts]
+  );
 
   useEffect(() => {
     initialize();
