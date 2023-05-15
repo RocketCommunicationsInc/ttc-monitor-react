@@ -77,7 +77,7 @@ rux-timeline::part(time-region-container) {
 }
 
 .watcher rux-container {
-  flex-basis: 40%;
+  width: 40%;
 }
 
 .watcher rux-container::part(body) {
@@ -91,13 +91,6 @@ rux-timeline::part(time-region-container) {
 
 .mneumonic-popup-value[slot="trigger"]:hover {
   border-bottom: 1px solid var(--color-palette-brightblue-300);
-}
-
-.line-chart {
-  flex-basis: 60%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .watcher rux-table-header-cell {
@@ -122,4 +115,8 @@ rux-time-region::part(container) {
 }
 .constellation .hidden {
   visibility: hidden;
+}
+
+.watcher .canvas-wrapper {
+  width: 60%;
 }

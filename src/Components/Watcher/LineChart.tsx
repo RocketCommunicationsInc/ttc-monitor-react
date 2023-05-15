@@ -27,7 +27,7 @@ ChartJS.register(
 
 const randomNumber = () => Math.floor(Math.random() * 110);
 
-const labels = [800, 900, 1000, 1100, 1200, 1300, 1400, 1500];
+const labels = [800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600];
 
 const tooltipTitle = () => {
   return "";
@@ -38,7 +38,7 @@ const dataObj = {
   datasets: [
     {
       label: "Value",
-      data: Array(8)
+      data: Array(9)
         .fill(1)
         .map(() => randomNumber()),
       borderColor: "rgb(77, 172, 255)",
@@ -58,6 +58,7 @@ type PropTypes = {
 const LineChart = ({ subtitle }: PropTypes) => {
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     layout: {
       padding: {
         top: 5,
@@ -88,11 +89,11 @@ const LineChart = ({ subtitle }: PropTypes) => {
           color: "grey",
           drawTicks: false,
         },
-        title: {
-          display: true,
-          color: "white",
-          text: "Volts",
-        },
+        // title: {
+        //   display: true,
+        //   color: "white",
+        //   text: "Volts",
+        // },
         ticks: {
           color: "white",
           padding: 7,
