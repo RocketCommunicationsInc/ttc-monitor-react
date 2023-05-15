@@ -72,7 +72,7 @@ const Alerts = () => {
         <div style={styles.selectMenusDiv}>
           <RuxSelect
             value={selection}
-            onRuxchange={(e) => selectionHandler(e)}
+            onRuxchange={selectionHandler}
             size="small"
             label="Severity"
             style={styles.select1}

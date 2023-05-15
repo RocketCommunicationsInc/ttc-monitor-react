@@ -13,17 +13,6 @@ import AlertListItem from "./AlertListItem";
 import useAlerts from "../../hooks/useAlerts";
 
 const styles = {
-  investigateBtn: {
-    display: "flex",
-    justifyContent: "center",
-    paddingBlock: "var(--spacing-2)",
-  },
-  accordianLabel: {
-    color: "var(--color-palette-neutral-000)",
-  },
-  checkboxes: {
-    paddingRight: "var(--spacing-4)",
-  },
   selectAllCheckbox: {
     marginLeft: "1.25rem",
     marginRight: "2.5rem",
@@ -38,22 +27,6 @@ const styles = {
     position: "sticky" as "sticky",
     bottom: 0,
     backgroundColor: "#1B2D3E",
-  },
-  alertMessage: {
-    minWidth: "9rem",
-    maxWidth: "9rem",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-  },
-  alertCategory: {
-    width: "4.75rem",
-    alignSelf: "center",
-    paddingLeft: "1.1rem",
-  },
-  alertTime: {
-    width: "1.7rem",
-    paddingLeft: ".6rem",
-    alignSelf: "left",
   },
 };
 
