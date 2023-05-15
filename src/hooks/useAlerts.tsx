@@ -212,3 +212,4 @@ export const AlertsContextProvider = ({ children }: Children) => {
     <AlertsContext.Provider value={value}>{children}</AlertsContext.Provider>
   );
 };
+
