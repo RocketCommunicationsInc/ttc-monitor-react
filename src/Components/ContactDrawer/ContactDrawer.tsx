@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { RuxButton, RuxIcon, RuxStatus } from "@astrouxds/react";
+import { useCallback, useEffect } from "react";
+import { RuxButton, RuxStatus } from "@astrouxds/react";
 
 import { Contact } from "../../Types";
 import "./ContactDrawer.css";
@@ -20,21 +20,17 @@ type PropTypes = {
   contact: Contact | null;
 };
 
-// const styles = {
-//   drawer: {
-//     display: "none",
-//   },
-//   drawer_overlay: {},
-// };
-
 const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
   console.log("contact", contact);
 
-  const keydownHandler = (event: KeyboardEvent) => {
-    if (event.key === "Escape") {
-      toggle();
-    }
-  };
+  const keydownHandler = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        toggle();
+      }
+    },
+    [toggle]
+  );
 
   const openDrawer = () => {
     // Find target
@@ -60,10 +56,6 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
 
   const closeDrawer = () => {
     // Find target
-    // var closestParent = event.closest(settings.selectorTarget),
-    //   childrenTrigger = document.querySelector(
-    //     '[aria-controls="' + closestParent.id + '"'
-    //   );
     var target = document.getElementById("contact-drawer");
 
     if (target) {
@@ -86,10 +78,13 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
   useEffect(() => {
     if (open) {
       openDrawer();
+      document.addEventListener("keydown", keydownHandler);
     } else {
       closeDrawer();
     }
-  }, [open]);
+
+    return () => document.removeEventListener("keydown", keydownHandler);
+  }, [open, keydownHandler]);
 
   return (
     <section className="drawer" id="contact-drawer" data-drawer-target>
@@ -105,17 +100,14 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
               {contact.satellite}
             </div>
             <RuxButton
-              //   className="drawer__close"
               borderless
               size="small"
               data-drawer-close
               aria-label="Close Drawer"
-              onClick={closeDrawer}
+              onClick={() => toggle()}
               icon="keyboard-arrow-right"
             >
               Close
-              {/* <RuxIcon icon="keyboard-arrow-left" size="extra-small" />
-              <RuxIcon icon="keyboard-arrow-left" size="extra-small" /> */}
             </RuxButton>
           </div>
           <div className="drawer__content">

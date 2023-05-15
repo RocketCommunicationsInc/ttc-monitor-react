@@ -104,6 +104,7 @@
     .drawer.is-visible .drawer__wrapper {
       -webkit-transform: translate3d(0, 0, 0);
       transform: translate3d(0, 0, 0);
+        transition: transform 0.3s;
     }
 
     .drawer.is-visible .drawer__overlay {
