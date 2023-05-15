@@ -26,7 +26,7 @@ type PropTypes = {
   alerts: { [key: string]: Alert };
   addAlert: () => void;
   editAlert: (params: ModifyAlertParams) => void;
-  deleteAlerts: (id: string[]) => void;
+  deleteSelectedAlerts: () => void;
   clearAlerts: () => void;
   generate: (newGenerateOptions?: GenerateOptions) => void;
   stopGenerating: () => void;
@@ -43,7 +43,7 @@ const AlertsContext = createContext<PropTypes>({
   alerts: {},
   addAlert: () => null,
   editAlert: () => null,
-  deleteAlerts: () => null,
+  deleteSelectedAlerts: () => null,
   clearAlerts: () => null,
   generate: () => null,
   stopGenerating: () => null,
@@ -90,21 +90,17 @@ export const AlertsContextProvider = ({ children }: Children) => {
     });
   }, []);
 
-  const deleteAlerts = useCallback(
-    (ids: string[]) => {
-      const idArr = [...alertIds];
-      const newAlerts = { ...alerts };
-      ids.forEach((id) => {
-        if (id in newAlerts) {
-          const alertIdIndex = idArr.findIndex((alertId) => alertId === id);
-          delete newAlerts[id];
-          idArr.splice(alertIdIndex, 1);
-        }
-      });
-      setAlertIds(idArr);
-      setAlerts(newAlerts);
+  const deleteSelectedAlerts = useCallback(
+    () => {
+      const filteredAlerts = {...alerts}
+      Object.entries(filteredAlerts).forEach(([alertId, alert]: [string, Alert]) => { 
+        if (alert.selected) delete filteredAlerts[alertId]
+      })
+      const filteredAlertIds = Object.keys(filteredAlerts)
+      setAlertIds(filteredAlertIds);
+      setAlerts(filteredAlerts);
     },
-    [alerts, alertIds]
+    [alerts]
   );
 
   const toggleSelected = useCallback(
@@ -185,7 +181,7 @@ export const AlertsContextProvider = ({ children }: Children) => {
       alerts,
       addAlert,
       editAlert,
-      deleteAlerts,
+      deleteSelectedAlerts,
       clearAlerts,
       generate,
       stopGenerating,
@@ -201,7 +197,7 @@ export const AlertsContextProvider = ({ children }: Children) => {
       alerts,
       addAlert,
       editAlert,
-      deleteAlerts,
+      deleteSelectedAlerts,
       generate,
       initialize,
       toggleSelected,

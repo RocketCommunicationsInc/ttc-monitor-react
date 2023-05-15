@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import {
   RuxTable,
   RuxTableHeader,
@@ -35,7 +35,7 @@ const AlertsList = () => {
     alerts,
     alertIds,
     initialize,
-    deleteAlerts,
+    deleteSelectedAlerts,
     selectAll,
     selectNone,
     stopGenerating,
@@ -43,14 +43,6 @@ const AlertsList = () => {
     allSelected,
     anySelected
   } = useAlerts();
-  // const allSelected = useMemo(
-  //   () => Object.values(alerts).every((alert) => alert && alert.selected),
-  //   [alerts]
-  // );
-  // const anySelected = useMemo(
-  //   () => !Object.values(alerts).every((alert) => !alert.selected),
-  //   [alerts]
-  // );
 
   useEffect(() => {
     initialize();
@@ -66,13 +58,7 @@ const AlertsList = () => {
   ) as HTMLInputElement;
 
   const acknowledgeHandler = () => {
-    const alertsToRemove: string[] = [];
-    alertIds.forEach((id) => {
-      if (alerts[id].selected === true) {
-        alertsToRemove.push(id);
-      }
-    });
-    deleteAlerts(alertsToRemove);
+    deleteSelectedAlerts();
     if (selectAllCheckbox.checked !== false) {
       selectAllCheckbox.checked = false;
     }
