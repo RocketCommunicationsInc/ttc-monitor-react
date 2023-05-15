@@ -34,6 +34,8 @@ type PropTypes = {
   toggleSelected: (id: string) => void;
   selectAll: () => void;
   selectNone: () => void;
+  allSelected: boolean;
+  anySelected: boolean;
 };
 
 const AlertsContext = createContext<PropTypes>({
@@ -49,6 +51,8 @@ const AlertsContext = createContext<PropTypes>({
   toggleSelected: () => null,
   selectAll: () => null,
   selectNone: () => null,
+  allSelected: false,
+  anySelected: false
 });
 
 export default function useAlerts() {
@@ -62,6 +66,11 @@ export const AlertsContextProvider = ({ children }: Children) => {
   const [generateOptions, setGenerateOptions] =
     useState<GenerateOptions>(defaultOptions);
 
+  const allSelected = Object.values(alerts).every((alert) => alert && alert.selected)
+
+  const anySelected = !Object.values(alerts).every((alert) => !alert.selected)
+
+  
   const addAlert = useCallback(() => {
     const newAlert = generateAlert();
     if (alertIds.length < generateOptions.limit) {
@@ -184,6 +193,8 @@ export const AlertsContextProvider = ({ children }: Children) => {
       toggleSelected,
       selectAll,
       selectNone,
+      allSelected,
+      anySelected,
     }),
     [
       alertIds,
@@ -196,6 +207,8 @@ export const AlertsContextProvider = ({ children }: Children) => {
       toggleSelected,
       selectAll,
       selectNone,
+      allSelected,
+      anySelected
     ]
   );
 

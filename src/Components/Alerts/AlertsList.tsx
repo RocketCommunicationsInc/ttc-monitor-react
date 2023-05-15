@@ -40,15 +40,17 @@ const AlertsList = () => {
     selectNone,
     stopGenerating,
     generate,
+    allSelected,
+    anySelected
   } = useAlerts();
-  const allSelected = useMemo(
-    () => Object.values(alerts).every((alert) => alert && alert.selected),
-    [alerts]
-  );
-  const anySelected = useMemo(
-    () => !Object.values(alerts).every((alert) => !alert.selected),
-    [alerts]
-  );
+  // const allSelected = useMemo(
+  //   () => Object.values(alerts).every((alert) => alert && alert.selected),
+  //   [alerts]
+  // );
+  // const anySelected = useMemo(
+  //   () => !Object.values(alerts).every((alert) => !alert.selected),
+  //   [alerts]
+  // );
 
   useEffect(() => {
     initialize();
