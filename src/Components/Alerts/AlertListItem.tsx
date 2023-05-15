@@ -47,6 +47,7 @@ type PropTypes = {
 const AlertListItem = ({ alertItem }: PropTypes) => {
   const { toggleSelected } = useAlerts();
 
+
   const checkboxHandler = () => {
     toggleSelected(alertItem.id);
     if (alertItem.selected) {

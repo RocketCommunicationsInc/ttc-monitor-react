@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   RuxTable,
   RuxTableHeader,
@@ -11,6 +11,7 @@ import {
 } from "@astrouxds/react";
 import AlertListItem from "./AlertListItem";
 import useAlerts from "../../hooks/useAlerts";
+import { Alert } from "../../Types";
 
 const styles = {
   investigateBtn: {
@@ -57,7 +58,15 @@ const styles = {
   },
 };
 
-const AlertsList = () => {
+type PropTypes = {
+  selectValue: any;
+  alertsArr: Alert[];
+};
+
+  //all alerts will be coming from props, not the hook. Alerts itself will need a piece of state. The hook will have all alerts, but the alerts.tsx component will have a piece of state that will initially populate all alerts, but then have the lists to change it, and then pass the filtered lists down to the alerts component. You can still use the hook you just wont get alerts from the hook- they can still be edited.
+  //down in render loop over alerts
+
+const AlertsList = ({ selectValue, alertsArr }: PropTypes) => {
   const {
     alerts,
     alertIds,
@@ -68,6 +77,7 @@ const AlertsList = () => {
     stopGenerating,
     generate,
   } = useAlerts();
+
   const allSelected = useMemo(
     () => Object.values(alerts).every((alert) => alert && alert.selected),
     [alerts]
@@ -85,6 +95,50 @@ const AlertsList = () => {
       stopGenerating();
     };
   }, []);
+
+  const [filteredAlerts, setFilteredAlerts] = useState("All");
+
+      const selectOptions = [
+    { label: "Critical", value: "critical" },
+    { label: "Caution", value: "caution" },
+    { label: "Serious", value: "serious" },
+    { label: "Hardware", value: "Hardware" },
+    { label: "Software", value: "Software" },
+    { label: "Spacecraft", value: "Spacecraft" },
+  ];
+
+  //   const filteredAlertIds = useMemo(() => {
+  //   const newSortedOptions = [...alertIds];
+  //   if(alerts.category) {
+  //   newSortedOptions.sort((a, b) => {
+  //     //@ts-expect-error error
+  //     return alerts.category[a][filteredAlerts] - (
+  //       //@ts-expect-error error
+  //       alerts.category[b][filteredAlerts]
+  //     );
+  //   }) } else {
+  //      newSortedOptions.sort((a, b) => {
+  //     //@ts-expect-error error
+  //     return alerts.status[a][filteredAlerts] - (
+  //       //@ts-expect-error error
+  //       alerts.status[b][filteredAlerts]
+  //     );
+  //   })
+  //   }
+  //   return newSortedOptions;
+  // }, [alertIds, filteredAlerts]);
+
+  //  const filteredAlertIds = useMemo(() => {
+  //   const newSortedOptions = [...alertIds];
+  //   newSortedOptions.sort((a, b) => {
+  //     //@ts-expect-error error
+  //     return a.alerts[filteredAlerts] - (
+  //       //@ts-expect-error error
+  //       b.alerts[filteredAlerts]
+  //     );
+  //   });
+  //   return newSortedOptions;
+  // }, [alertIds, filteredAlerts]);
 
   const selectAllCheckbox: HTMLInputElement = document.querySelector(
     ".select-all-checkbox"
