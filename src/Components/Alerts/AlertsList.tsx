@@ -92,7 +92,7 @@ const AlertsList = () => {
         </RuxTableHeader>
         <RuxTableBody>
           {alertIds.map((alertId) => (
-            <AlertListItem alertItem={alerts[alertId]} />
+            <AlertListItem alertItem={alerts[alertId]} key={alertId} />
           ))}
         </RuxTableBody>
       </RuxTable>
