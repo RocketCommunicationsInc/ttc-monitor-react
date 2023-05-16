@@ -90,16 +90,13 @@ const AlertsList = () => {
         <div>
           <RuxButton
             secondary
-            onClick={() => deleteSelectedAlerts()}
+            onClick={deleteSelectedAlerts}
             style={{ marginRight: "1rem" }}
             disabled={!anySelected}
           >
             Dismiss
           </RuxButton>
-          <RuxButton
-            onClick={() => deleteSelectedAlerts()}
-            disabled={!anySelected}
-          >
+          <RuxButton onClick={deleteSelectedAlerts} disabled={!anySelected}>
             Acknowledge
           </RuxButton>
         </div>
