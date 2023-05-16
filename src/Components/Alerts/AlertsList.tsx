@@ -59,18 +59,15 @@ const styles = {
 };
 
 type PropTypes = {
-  selectValue: any;
+  selection: string;
   alertsArr: Alert[];
 };
 
-  //all alerts will be coming from props, not the hook. Alerts itself will need a piece of state. The hook will have all alerts, but the alerts.tsx component will have a piece of state that will initially populate all alerts, but then have the lists to change it, and then pass the filtered lists down to the alerts component. You can still use the hook you just wont get alerts from the hook- they can still be edited.
-  //down in render loop over alerts
-
-const AlertsList = ({ selectValue, alertsArr }: PropTypes) => {
+const AlertsList = ({ selection, alertsArr }: PropTypes) => {
   const {
     alerts,
     alertIds,
-    initialize,
+    initialize, 
     deleteAlerts,
     selectAll,
     selectNone,
@@ -96,49 +93,40 @@ const AlertsList = ({ selectValue, alertsArr }: PropTypes) => {
     };
   }, []);
 
-  const [filteredAlerts, setFilteredAlerts] = useState("All");
+  const alertValue = Object.values(alerts);
 
-      const selectOptions = [
-    { label: "Critical", value: "critical" },
-    { label: "Caution", value: "caution" },
-    { label: "Serious", value: "serious" },
-    { label: "Hardware", value: "Hardware" },
-    { label: "Software", value: "Software" },
-    { label: "Spacecraft", value: "Spacecraft" },
-  ];
+  const filteredAlertIds = useMemo(() => {
+    const alertIdsArr = [...alertIds];
+    if (
+      selection === "All"
+    ) {
+      return alertIds;
+    }
+    if (selection === "critical") {
+      alertValue.filter((alert) => alert.status === "critical").map((alert) => alert.id);
+    }
+    if (selection === "caution") {
+      return alertValue.filter((alert) => alert.status === "caution").map((alert) => alert.id);
+    }
+    if (selection === "serious") {
+      return alertValue.filter((alert) => alert.status === "serious").map((alert) => alert.id);
+    }
+    if (selection === "hardware") {
+      return alertValue.filter((alert) => alert.category === "hardware").map((alert) => alert.id);
+    }
+    if (selection === "software") {
+      return alertValue.filter((alert) => alert.category === "software").map((alert) => alert.id);
+    }
+    if (selection === "spacecraft") {
+      return alertValue.filter((alert) => alert.category === "spacecraft").map((alert) => alert.id);
+    }
+    return alertIdsArr;
+  }, [selection, alertValue]);
 
-  //   const filteredAlertIds = useMemo(() => {
-  //   const newSortedOptions = [...alertIds];
-  //   if(alerts.category) {
-  //   newSortedOptions.sort((a, b) => {
-  //     //@ts-expect-error error
-  //     return alerts.category[a][filteredAlerts] - (
-  //       //@ts-expect-error error
-  //       alerts.category[b][filteredAlerts]
-  //     );
-  //   }) } else {
-  //      newSortedOptions.sort((a, b) => {
-  //     //@ts-expect-error error
-  //     return alerts.status[a][filteredAlerts] - (
-  //       //@ts-expect-error error
-  //       alerts.status[b][filteredAlerts]
-  //     );
-  //   })
-  //   }
-  //   return newSortedOptions;
-  // }, [alertIds, filteredAlerts]);
+  useMemo(() => {
+    alertsArr.map(alertValue => alertValue.id)
+  }, [alertsArr, filteredAlertIds]);
 
-  //  const filteredAlertIds = useMemo(() => {
-  //   const newSortedOptions = [...alertIds];
-  //   newSortedOptions.sort((a, b) => {
-  //     //@ts-expect-error error
-  //     return a.alerts[filteredAlerts] - (
-  //       //@ts-expect-error error
-  //       b.alerts[filteredAlerts]
-  //     );
-  //   });
-  //   return newSortedOptions;
-  // }, [alertIds, filteredAlerts]);
 
   const selectAllCheckbox: HTMLInputElement = document.querySelector(
     ".select-all-checkbox"
@@ -184,8 +172,8 @@ const AlertsList = ({ selectValue, alertsArr }: PropTypes) => {
           </RuxTableHeaderRow>
         </RuxTableHeader>
         <RuxTableBody>
-          {alertIds.map((alertId) => (
-            <AlertListItem alertItem={alerts[alertId]} />
+          {filteredAlertIds.map((alertId) => (
+            <AlertListItem alertItem={alerts[alertId]} key={alertId} />
           ))}
         </RuxTableBody>
       </RuxTable>
