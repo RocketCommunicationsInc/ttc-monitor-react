@@ -101,6 +101,11 @@
   display: block;
 }
 
+.drawer.is-visible .drawer__wrapper {
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
 .drawer.is-visible .drawer__overlay {
   opacity: 0.5;
 }
