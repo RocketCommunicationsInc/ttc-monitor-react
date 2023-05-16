@@ -109,3 +109,54 @@
 .drawer.is-visible .drawer__overlay {
   opacity: 0.5;
 }
+
+.tabs-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.contact-details-wrapper {
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-details-wrapper div:last-child {
+  margin-top: 1rem;
+}
+
+.contact-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 4fr 4fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+}
+
+.contact-details-grid p {
+  margin: 0;
+}
+
+.contact-details-icon {
+  grid-column: 1;
+  grid-row: 1;
+  margin: auto;
+}
+
+.col-2 {
+  grid-column: 2;
+}
+
+.col-3 {
+  grid-column: 3;
+}
+
+.row-1 {
+  grid-row: 1;
+}
+
+.row-2 {
+  grid-row: 2;
+}
+
+.row-3 {
+  grid-row: 3;
+}

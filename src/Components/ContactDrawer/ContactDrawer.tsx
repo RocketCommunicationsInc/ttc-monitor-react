@@ -1,5 +1,13 @@
 import { useCallback, useEffect, useRef } from "react";
-import { RuxButton, RuxStatus } from "@astrouxds/react";
+import {
+  RuxButton,
+  RuxStatus,
+  RuxTabs,
+  RuxTab,
+  RuxTabPanels,
+  RuxTabPanel,
+  RuxIcon,
+} from "@astrouxds/react";
 
 import { Contact } from "../../Types";
 import "./ContactDrawer.css";
@@ -70,6 +78,8 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
     return () => document.removeEventListener("keydown", keydownHandler);
   }, [open, keydownHandler]);
 
+  console.log("contact", contact);
+
   return (
     <section className={"drawer"} id="contact-drawer" ref={contactDrawer}>
       <div className="drawer__overlay" tabIndex={-1}></div>
@@ -94,7 +104,49 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
             </RuxButton>
           </div>
           <div className="drawer__content">
-            <p>
+            <div className="tabs-wrapper">
+              <RuxTabs small id="contact-drawer-tabs">
+                <RuxTab id="contact-details-tab">Contact Details</RuxTab>
+                <RuxTab id="pass-plan-tab">Pass Plan</RuxTab>
+              </RuxTabs>
+            </div>
+
+            <RuxTabPanels aria-labelledby="contact-drawer-tabs">
+              <RuxTabPanel aria-labelledby="contact-details-tab">
+                <div className="contact-details-wrapper">
+                  <div className="contact-details-grid">
+                    <RuxIcon
+                      icon="schedule"
+                      size="extra-small"
+                      className="contact-details-icon"
+                    />
+                    <p className="col-2 row-1">Next Pass</p>
+                    <p className="col-2 row-2">AOS</p>
+                    <p className="col-2 row-3">LOS</p>
+                    <p className="col-2 row-4">State</p>
+                    <p className="col-3 row-1">{contact.beginTimestamp}</p>
+                    <p className="col-3 row-2">{contact.aos}</p>
+                    <p className="col-3 row-3">{contact.los}</p>
+                    <p className="col-3 row-4">{contact.state}</p>
+                  </div>
+                  <div className="contact-details-grid">
+                    <RuxIcon
+                      icon="antenna-off"
+                      size="small"
+                      className="contact-details-icon"
+                    />
+                    <p className="col-2 row-1">Ground Station</p>
+                    <p className="col-2 row-2">Azimuth</p>
+                    <p className="col-2 row-3">Elevation</p>
+                    <p className="col-3 row-1">{contact.ground}</p>
+                    <p className="col-3 row-2">{contact.azimuth}</p>
+                    <p className="col-3 row-3">{contact.elevation}</p>
+                  </div>
+                </div>
+              </RuxTabPanel>
+              <RuxTabPanel aria-labelledby="pass-plan-tab">Tab 2</RuxTabPanel>
+            </RuxTabPanels>
+            {/* <p>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem in
               aliquid nulla, sed veritatis, officiis ea aut natus quas
               voluptates perferendis ratione modi ab qui omnis cum labore alias
@@ -127,7 +179,7 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
               exercitationem laborum vero tenetur officiis facilis eveniet sunt
               quo voluptatibus sit reiciendis, iusto quia et quidem? Dolores
               dolor et necessitatibus.
-            </p>
+            </p> */}
           </div>
         </div>
       ) : null}
