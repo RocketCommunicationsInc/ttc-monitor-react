@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   RuxContainer,
   RuxSelect,
@@ -6,7 +7,6 @@ import {
   RuxNotification,
 } from "@astrouxds/react";
 import AlertsList from "./AlertsList";
-import { useState } from "react";
 import useAlerts from "../../hooks/useAlerts";
 
 const styles = {

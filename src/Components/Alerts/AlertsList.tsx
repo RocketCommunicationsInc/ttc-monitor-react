@@ -54,7 +54,6 @@ type PropTypes = {
 const AlertsList = ({ selection1, selection2 }: PropTypes) => {
   const {
     alerts,
-    alertIds,
     initialize,
     deleteSelectedAlerts,
     selectAll,
@@ -76,11 +75,8 @@ const AlertsList = ({ selection1, selection2 }: PropTypes) => {
 
   const alertValue = Object.values(alerts);
 
-  const filteredAlertIds = useMemo(() => {
+  const filteredAlertData = useMemo(() => {
     const filteredAlerts = alertValue.filter((alert) => {
-      if (selection1 === "all" && selection2 === "all") {
-        return alertIds;
-      }
       if (selection1.includes("critical") && alert.status !== "critical") {
         return false;
       }
@@ -131,7 +127,7 @@ const AlertsList = ({ selection1, selection2 }: PropTypes) => {
           </RuxTableHeaderRow>
         </RuxTableHeader>
         <RuxTableBody>
-          {filteredAlertIds.map((alertId) => (
+          {filteredAlertData.map((alertId) => (
             <AlertListItem alertItem={alerts[alertId]} key={alertId} />
           ))}
         </RuxTableBody>
