@@ -8,7 +8,7 @@ export const generateAlert = (options?: AlertOptions): Alert => {
   let date = faker.date.recent({ days: 1, refDate: options?.createdRef });
 
   if (options?.start && options?.end && !options.createdRef) {
-    date = faker.date.between(options.start, options.end);
+    date = faker.date.between({ from: options.start, to: options.end });
   }
 
   const equipments = (options?.equipment || generateEquipment()).split(" ");
