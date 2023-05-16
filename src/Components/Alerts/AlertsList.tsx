@@ -47,10 +47,11 @@ const styles = {
 };
 
 type PropTypes = {
-  selection: string;
+  selection1: string;
+  selection2: string;
 };
 
-const AlertsList = ({ selection }: PropTypes) => {
+const AlertsList = ({ selection1, selection2 }: PropTypes) => {
   const {
     alerts,
     alertIds,
@@ -76,42 +77,31 @@ const AlertsList = ({ selection }: PropTypes) => {
   const alertValue = Object.values(alerts);
 
   const filteredAlertIds = useMemo(() => {
-    const alertIdsArr = [...alertIds];
-    if (selection === "all") {
-      return alertIds;
-    }
-    if (selection.includes("critical")) {
-      return alertValue
-        .filter((alert) => alert.status === "critical")
-        .map((alert) => alert.id);
-    }
-    if (selection.includes("caution")) {
-      return alertValue
-        .filter((alert) => alert.status === "caution")
-        .map((alert) => alert.id);
-    }
-    if (selection.includes("serious")) {
-      return alertValue
-        .filter((alert) => alert.status === "serious")
-        .map((alert) => alert.id);
-    }
-    if (selection.includes("hardware")) {
-      return alertValue
-        .filter((alert) => alert.category === "hardware")
-        .map((alert) => alert.id);
-    }
-    if (selection.includes("software")) {
-      return alertValue
-        .filter((alert) => alert.category === "software")
-        .map((alert) => alert.id);
-    }
-    if (selection.includes("spacecraft")) {
-      return alertValue
-        .filter((alert) => alert.category === "spacecraft")
-        .map((alert) => alert.id);
-    }
-    return alertIdsArr;
-  }, [selection, alertValue]);
+    const filteredAlerts = alertValue.filter((alert) => {
+      if (selection1 === "all" && selection2 === "all") {
+        return alertIds;
+      }
+      if (selection1.includes("critical") && alert.status !== "critical") {
+        return false;
+      }
+      if (selection1.includes("caution") && alert.status !== "caution") {
+        return false;
+      }
+      if (selection1.includes("serious") && alert.status !== "serious") {
+        return false;
+      }
+      if (
+        (selection2.includes("hardware") && alert.category !== "hardware") ||
+        (selection2.includes("software") && alert.category !== "software") ||
+        (selection2.includes("spacecraft") && alert.category !== "spacecraft")
+      ) {
+        return false;
+      }
+      return true;
+    });
+
+    return filteredAlerts.map((alert) => alert.id);
+  }, [selection1, selection2, alertValue]);
 
   const selectAllHandler = (e: CustomEvent) => {
     const checkbox = e.target as HTMLRuxCheckboxElement;
