@@ -72,7 +72,11 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
 
   return (
     <section className={"drawer"} id="contact-drawer" ref={contactDrawer}>
-      <div className="drawer__overlay" tabIndex={-1}></div>
+      <div
+        className="drawer__overlay"
+        tabIndex={-1}
+        onClick={() => toggle()}
+      ></div>
       {contact ? (
         <div className="drawer__wrapper">
           <div className="drawer__header">
