@@ -7,7 +7,6 @@ import {
   RuxTableHeaderCell,
   RuxTableBody,
   RuxCheckbox,
-  RuxContainer,
 } from "@astrouxds/react";
 import AlertListItem from "./AlertListItem";
 import useAlerts from "../../hooks/useAlerts";
@@ -61,7 +60,7 @@ const AlertsList = () => {
   };
 
   return (
-    <div style={{ height: "36.5rem", overflowY: "auto" }}>
+    <div style={{ height: "37.5rem", overflowY: "auto" }}>
       <RuxTable>
         <RuxTableHeader>
           <RuxTableHeaderRow>

@@ -43,17 +43,6 @@ const styles = {
     position: "sticky" as "sticky",
     zIndex: 50,
   },
-  footer: {
-    display: "flex",
-    justifyContent: "center",
-    borderTop: "1px solid var(--logHeaderBackgroundColor, rgb(20, 32, 44))",
-    boxShadow: " 0 -0.5rem 1.25rem rgba(0, 0, 0, 0.25)",
-    height: "3rem",
-    padding: "2rem",
-    position: "sticky" as "sticky",
-    bottom: 0,
-    backgroundColor: "#1B2D3E",
-  },
 };
 
 const Alerts = () => {
@@ -72,7 +61,7 @@ const Alerts = () => {
   };
 
   return (
-    <RuxContainer className="alerts">
+    <RuxContainer className="alerts" style={{overflowY: "hidden !important", overFlow: "hidden !important"}}>
       <div slot="header" style={styles.header}>
         <div style={styles.activeAlerts}>
           <span style={styles.alertsNum}>{alertIds.length}</span> Active Alerts
@@ -105,8 +94,6 @@ const Alerts = () => {
           </RuxSelect>
         </div>
       </div>
-
-      {selection && (
         <RuxNotification open={openBanner} style={styles.notificationBanner}>
           You have one or more filters selected. <br />
           <RuxButton onClick={handleClearFilter} secondary borderless>
@@ -114,7 +101,6 @@ const Alerts = () => {
           </RuxButton>
           to display all alerts.
         </RuxNotification>
-      )}
       <AlertsList />
       <AlertsFooter />
     </RuxContainer>
