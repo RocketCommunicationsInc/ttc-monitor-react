@@ -41,7 +41,7 @@ const AlertsList = () => {
     stopGenerating,
     generate,
     allSelected,
-    anySelected
+    anySelected,
   } = useAlerts();
 
   useEffect(() => {
@@ -53,19 +53,9 @@ const AlertsList = () => {
     };
   }, []);
 
-  const selectAllCheckbox: HTMLInputElement = document.querySelector(
-    ".select-all-checkbox"
-  ) as HTMLInputElement;
-
-  const acknowledgeHandler = () => {
-    deleteSelectedAlerts();
-    if (selectAllCheckbox.checked !== false) {
-      selectAllCheckbox.checked = false;
-    }
-  };
-
-  const selectAllHandler = () => {
-    if (selectAllCheckbox.checked === true) {
+  const selectAllHandler = (e: CustomEvent) => {
+    const checkbox = e.target as HTMLRuxCheckboxElement;
+    if (checkbox.checked === true) {
       selectAll();
     } else {
       selectNone();
@@ -100,13 +90,16 @@ const AlertsList = () => {
         <div>
           <RuxButton
             secondary
-            onClick={acknowledgeHandler}
+            onClick={() => deleteSelectedAlerts()}
             style={{ marginRight: "1rem" }}
             disabled={!anySelected}
           >
             Dismiss
           </RuxButton>
-          <RuxButton onClick={acknowledgeHandler} disabled={!anySelected}>
+          <RuxButton
+            onClick={() => deleteSelectedAlerts()}
+            disabled={!anySelected}
+          >
             Acknowledge
           </RuxButton>
         </div>
