@@ -124,10 +124,20 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
                     <p className="col-2 row-2">AOS</p>
                     <p className="col-2 row-3">LOS</p>
                     <p className="col-2 row-4">State</p>
-                    <p className="col-3 row-1">{contact.beginTimestamp}</p>
-                    <p className="col-3 row-2">{contact.aos}</p>
-                    <p className="col-3 row-3">{contact.los}</p>
-                    <p className="col-3 row-4">{contact.state}</p>
+                    <p className="col-3 row-1 rux-body-1-bold">
+                      {new Date(contact.beginTimestamp)
+                        .toTimeString()
+                        .slice(0, 8)}
+                    </p>
+                    <p className="col-3 row-2 rux-body-1-bold">
+                      {new Date(contact.aos).toTimeString().slice(0, 8)}
+                    </p>
+                    <p className="col-3 row-3 rux-body-1-bold">
+                      {new Date(contact.los).toTimeString().slice(0, 8)}
+                    </p>
+                    <p className="col-3 row-4 rux-body-1-bold">
+                      {contact.state}
+                    </p>
                   </div>
                   <div className="contact-details-grid">
                     <RuxIcon
@@ -138,9 +148,15 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
                     <p className="col-2 row-1">Ground Station</p>
                     <p className="col-2 row-2">Azimuth</p>
                     <p className="col-2 row-3">Elevation</p>
-                    <p className="col-3 row-1">{contact.ground}</p>
-                    <p className="col-3 row-2">{contact.azimuth}</p>
-                    <p className="col-3 row-3">{contact.elevation}</p>
+                    <p className="col-3 row-1 rux-body-1-bold">
+                      {contact.ground}
+                    </p>
+                    <p className="col-3 row-2 rux-body-1-bold">
+                      {contact.azimuth}
+                    </p>
+                    <p className="col-3 row-3 rux-body-1-bold">
+                      {contact.elevation}
+                    </p>
                   </div>
                 </div>
               </RuxTabPanel>
