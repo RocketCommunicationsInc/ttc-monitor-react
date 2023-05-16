@@ -9,9 +9,6 @@ const settings = {
   speedClose: 350,
   activeClass: "is-active",
   visibleClass: "is-visible",
-  selectorTarget: "[data-drawer-target]",
-  selectorTrigger: "[data-drawer-trigger]",
-  selectorClose: "[data-drawer-close]",
 };
 
 type PropTypes = {
@@ -21,8 +18,6 @@ type PropTypes = {
 };
 
 const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
-  console.log("contact", contact);
-
   const keydownHandler = useCallback(
     (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -87,8 +82,8 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
   }, [open, keydownHandler]);
 
   return (
-    <section className="drawer" id="contact-drawer" data-drawer-target>
-      <div className="drawer__overlay" data-drawer-close tabIndex={-1}></div>
+    <section className={"drawer"} id="contact-drawer">
+      <div className="drawer__overlay" tabIndex={-1}></div>
       {contact ? (
         <div className="drawer__wrapper">
           <div className="drawer__header">
@@ -102,7 +97,6 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
             <RuxButton
               borderless
               size="small"
-              data-drawer-close
               aria-label="Close Drawer"
               onClick={() => toggle()}
               icon="keyboard-arrow-right"
