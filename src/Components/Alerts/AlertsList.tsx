@@ -77,13 +77,11 @@ const AlertsList = ({ selection1, selection2 }: PropTypes) => {
 
   const filteredAlertData = useMemo(() => {
     const filteredAlerts = alertValue.filter((alert) => {
-      if (selection1 === "critical" && alert.status !== "critical") {
-        return false;
-      }
-      if (selection1 === "caution" && alert.status !== "caution") {
-        return false;
-      }
-      if (selection1 === "serious" && alert.status !== "serious") {
+      if (
+        (selection1 === "critical" && alert.status !== "critical") ||
+        (selection1 === "caution" && alert.status !== "caution") ||
+        (selection1 === "serious" && alert.status !== "serious")
+      ) {
         return false;
       }
       if (
@@ -127,7 +125,7 @@ const AlertsList = ({ selection1, selection2 }: PropTypes) => {
         </RuxTableHeader>
         <RuxTableBody>
           {filteredAlertData.map((alertId) => (
-            <AlertListItem alertItem={alerts[alertId]} />
+            <AlertListItem alertItem={alerts[alertId]} key={alertId} />
           ))}
         </RuxTableBody>
       </RuxTable>
