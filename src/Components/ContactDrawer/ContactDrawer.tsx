@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { RuxButton, RuxStatus } from "@astrouxds/react";
 
 import { Contact } from "../../Types";
@@ -18,6 +18,7 @@ type PropTypes = {
 };
 
 const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
+  const contactDrawer = useRef<HTMLElement | null>(null);
   const keydownHandler = useCallback(
     (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -28,12 +29,9 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
   );
 
   const openDrawer = () => {
-    // Find target
-    var target = document.getElementById("contact-drawer");
-
-    if (target) {
+    if (contactDrawer.current) {
       // Make it active
-      target.classList.add(settings.activeClass);
+      contactDrawer.current.classList.add(settings.activeClass);
 
       // Make body overflow hidden so it's not scrollable
       document.documentElement.style.overflow = "hidden";
@@ -43,19 +41,16 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
 
       // Make it visible
       setTimeout(() => {
-        target?.classList.add(settings.visibleClass);
+        contactDrawer.current?.classList.add(settings.visibleClass);
         // trapFocus(target);
       }, settings.speedOpen);
     }
   };
 
   const closeDrawer = () => {
-    // Find target
-    var target = document.getElementById("contact-drawer");
-
-    if (target) {
+    if (contactDrawer.current) {
       // Make it not visible
-      target.classList.remove(settings.visibleClass);
+      contactDrawer.current.classList.remove(settings.visibleClass);
 
       // Remove body overflow hidden
       document.documentElement.style.overflow = "";
@@ -65,7 +60,7 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
 
       // Make it not active
       setTimeout(function () {
-        target?.classList.remove(settings.activeClass);
+        contactDrawer.current?.classList.remove(settings.activeClass);
       }, settings.speedClose);
     }
   };
@@ -82,7 +77,7 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
   }, [open, keydownHandler]);
 
   return (
-    <section className={"drawer"} id="contact-drawer">
+    <section className={"drawer"} id="contact-drawer" ref={contactDrawer}>
       <div className="drawer__overlay" tabIndex={-1}></div>
       {contact ? (
         <div className="drawer__wrapper">
