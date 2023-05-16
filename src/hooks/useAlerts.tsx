@@ -52,7 +52,7 @@ const AlertsContext = createContext<PropTypes>({
   selectAll: () => null,
   selectNone: () => null,
   allSelected: false,
-  anySelected: false
+  anySelected: false,
 });
 
 export default function useAlerts() {
@@ -66,11 +66,17 @@ export const AlertsContextProvider = ({ children }: Children) => {
   const [generateOptions, setGenerateOptions] =
     useState<GenerateOptions>(defaultOptions);
 
-  const allSelected = Object.values(alerts).every((alert) => alert && alert.selected)
+  const allSelected = useMemo(() => {
+    const alertsArray = Object.values(alerts);
+    if (alertsArray.length) return alertsArray.every((alert) => alert.selected);
+    else return false;
+  }, [alerts]);
 
-  const anySelected = !Object.values(alerts).every((alert) => !alert.selected)
+  const anySelected = useMemo(
+    () => !Object.values(alerts).every((alert) => !alert.selected),
+    [alerts]
+  );
 
-  
   const addAlert = useCallback(() => {
     const newAlert = generateAlert();
     if (alertIds.length < generateOptions.limit) {
@@ -90,18 +96,17 @@ export const AlertsContextProvider = ({ children }: Children) => {
     });
   }, []);
 
-  const deleteSelectedAlerts = useCallback(
-    () => {
-      const filteredAlerts = {...alerts}
-      Object.entries(filteredAlerts).forEach(([alertId, alert]: [string, Alert]) => { 
-        if (alert.selected) delete filteredAlerts[alertId]
-      })
-      const filteredAlertIds = Object.keys(filteredAlerts)
-      setAlertIds(filteredAlertIds);
-      setAlerts(filteredAlerts);
-    },
-    [alerts]
-  );
+  const deleteSelectedAlerts = useCallback(() => {
+    const filteredAlerts = { ...alerts };
+    Object.entries(filteredAlerts).forEach(
+      ([alertId, alert]: [string, Alert]) => {
+        if (alert.selected) delete filteredAlerts[alertId];
+      }
+    );
+    const filteredAlertIds = Object.keys(filteredAlerts);
+    setAlertIds(filteredAlertIds);
+    setAlerts(filteredAlerts);
+  }, [alerts]);
 
   const toggleSelected = useCallback(
     (id: string) => {
@@ -204,7 +209,7 @@ export const AlertsContextProvider = ({ children }: Children) => {
       selectAll,
       selectNone,
       allSelected,
-      anySelected
+      anySelected,
     ]
   );
 
@@ -212,4 +217,3 @@ export const AlertsContextProvider = ({ children }: Children) => {
     <AlertsContext.Provider value={value}>{children}</AlertsContext.Provider>
   );
 };
-
