@@ -51,7 +51,7 @@ const styles = {
 const Alerts = () => {
   const { alertIds } = useAlerts();
   const [openBanner, setOpenBanner] = useState(false);
-  const [selection, setSelection] = useState("All");
+  const [selection, setSelection] = useState("all");
 
   const selectionHandler = (e: any) => {
     setSelection(e.target.value);
@@ -77,7 +77,7 @@ const Alerts = () => {
             label="Severity"
             style={styles.select1}
           >
-            <RuxOption label="All" value="All" />
+            <RuxOption label="All" value="all" />
             <RuxOption label="Critical" value="critical" />
             <RuxOption label="Caution" value="caution" />
             <RuxOption label="Serious" value="serious" />
@@ -90,7 +90,7 @@ const Alerts = () => {
             label="Category"
             style={styles.select2}
           >
-            <RuxOption label="All" value="All" />
+            <RuxOption label="All" value="all" />
             <RuxOption label="Hardware" value="hardware" />
             <RuxOption label="Software" value="software" />
             <RuxOption label="Spacecraft" value="spacecraft" />

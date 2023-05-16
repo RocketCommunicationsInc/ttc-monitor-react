@@ -73,6 +73,8 @@ const AlertsList = ({ selection }: PropTypes) => {
     generate,
   } = useAlerts();
 
+  console.log(alerts);
+
   const allSelected = useMemo(
     () => Object.values(alerts).every((alert) => alert && alert.selected),
     [alerts]
@@ -95,35 +97,35 @@ const AlertsList = ({ selection }: PropTypes) => {
 
   const filteredAlertIds = useMemo(() => {
     const alertIdsArr = [...alertIds];
-    if (selection === "All") {
+    if (selection === "all") {
       return alertIds;
     }
-    if (selection === "critical") {
-      alertValue
+    if (selection.includes("critical")) {
+      return alertValue
         .filter((alert) => alert.status === "critical")
         .map((alert) => alert.id);
     }
-    if (selection === "caution") {
+    if (selection.includes("caution")) {
       return alertValue
         .filter((alert) => alert.status === "caution")
         .map((alert) => alert.id);
     }
-    if (selection === "serious") {
+    if (selection.includes("serious")) {
       return alertValue
         .filter((alert) => alert.status === "serious")
         .map((alert) => alert.id);
     }
-    if (selection === "hardware") {
+    if (selection.includes("hardware")) {
       return alertValue
         .filter((alert) => alert.category === "hardware")
         .map((alert) => alert.id);
     }
-    if (selection === "software") {
+    if (selection.includes("software")) {
       return alertValue
         .filter((alert) => alert.category === "software")
         .map((alert) => alert.id);
     }
-    if (selection === "spacecraft") {
+    if (selection.includes("spacecraft")) {
       return alertValue
         .filter((alert) => alert.category === "spacecraft")
         .map((alert) => alert.id);
@@ -176,7 +178,7 @@ const AlertsList = ({ selection }: PropTypes) => {
         </RuxTableHeader>
         <RuxTableBody>
           {filteredAlertIds.map((alertId) => (
-            <AlertListItem alertItem={alerts[alertId]} key={alertId} />
+            <AlertListItem alertItem={alerts[alertId]} />
           ))}
         </RuxTableBody>
       </RuxTable>
