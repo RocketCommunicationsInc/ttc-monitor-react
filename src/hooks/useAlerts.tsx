@@ -26,7 +26,7 @@ type PropTypes = {
   alerts: { [key: string]: Alert };
   addAlert: () => void;
   editAlert: (params: ModifyAlertParams) => void;
-  deleteAlerts: (id: string[]) => void;
+  deleteSelectedAlerts: () => void;
   clearAlerts: () => void;
   generate: (newGenerateOptions?: GenerateOptions) => void;
   stopGenerating: () => void;
@@ -34,6 +34,8 @@ type PropTypes = {
   toggleSelected: (id: string) => void;
   selectAll: () => void;
   selectNone: () => void;
+  allSelected: boolean;
+  anySelected: boolean;
 };
 
 const AlertsContext = createContext<PropTypes>({
@@ -41,7 +43,7 @@ const AlertsContext = createContext<PropTypes>({
   alerts: {},
   addAlert: () => null,
   editAlert: () => null,
-  deleteAlerts: () => null,
+  deleteSelectedAlerts: () => null,
   clearAlerts: () => null,
   generate: () => null,
   stopGenerating: () => null,
@@ -49,6 +51,8 @@ const AlertsContext = createContext<PropTypes>({
   toggleSelected: () => null,
   selectAll: () => null,
   selectNone: () => null,
+  allSelected: false,
+  anySelected: false,
 });
 
 export default function useAlerts() {
@@ -61,6 +65,17 @@ export const AlertsContextProvider = ({ children }: Children) => {
   const [generating, setGenerating] = useState(false);
   const [generateOptions, setGenerateOptions] =
     useState<GenerateOptions>(defaultOptions);
+
+  const allSelected = useMemo(() => {
+    const alertsArray = Object.values(alerts);
+    if (alertsArray.length) return alertsArray.every((alert) => alert.selected);
+    else return false;
+  }, [alerts]);
+
+  const anySelected = useMemo(
+    () => !Object.values(alerts).every((alert) => !alert.selected),
+    [alerts]
+  );
 
   const addAlert = useCallback(() => {
     const newAlert = generateAlert();
@@ -81,22 +96,17 @@ export const AlertsContextProvider = ({ children }: Children) => {
     });
   }, []);
 
-  const deleteAlerts = useCallback(
-    (ids: string[]) => {
-      const idArr = [...alertIds];
-      const newAlerts = { ...alerts };
-      ids.forEach((id) => {
-        if (id in newAlerts) {
-          const alertIdIndex = idArr.findIndex((alertId) => alertId === id);
-          delete newAlerts[id];
-          idArr.splice(alertIdIndex, 1);
-        }
-      });
-      setAlertIds(idArr);
-      setAlerts(newAlerts);
-    },
-    [alerts, alertIds]
-  );
+  const deleteSelectedAlerts = useCallback(() => {
+    const filteredAlerts = { ...alerts };
+    Object.entries(filteredAlerts).forEach(
+      ([alertId, alert]: [string, Alert]) => {
+        if (alert.selected) delete filteredAlerts[alertId];
+      }
+    );
+    const filteredAlertIds = Object.keys(filteredAlerts);
+    setAlertIds(filteredAlertIds);
+    setAlerts(filteredAlerts);
+  }, [alerts]);
 
   const toggleSelected = useCallback(
     (id: string) => {
@@ -176,7 +186,7 @@ export const AlertsContextProvider = ({ children }: Children) => {
       alerts,
       addAlert,
       editAlert,
-      deleteAlerts,
+      deleteSelectedAlerts,
       clearAlerts,
       generate,
       stopGenerating,
@@ -184,18 +194,22 @@ export const AlertsContextProvider = ({ children }: Children) => {
       toggleSelected,
       selectAll,
       selectNone,
+      allSelected,
+      anySelected,
     }),
     [
       alertIds,
       alerts,
       addAlert,
       editAlert,
-      deleteAlerts,
+      deleteSelectedAlerts,
       generate,
       initialize,
       toggleSelected,
       selectAll,
       selectNone,
+      allSelected,
+      anySelected,
     ]
   );
 

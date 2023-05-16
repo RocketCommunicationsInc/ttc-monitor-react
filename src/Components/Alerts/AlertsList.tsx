@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import {
   RuxTable,
   RuxTableHeader,
@@ -35,20 +35,14 @@ const AlertsList = () => {
     alerts,
     alertIds,
     initialize,
-    deleteAlerts,
+    deleteSelectedAlerts,
     selectAll,
     selectNone,
     stopGenerating,
     generate,
+    allSelected,
+    anySelected,
   } = useAlerts();
-  const allSelected = useMemo(
-    () => Object.values(alerts).every((alert) => alert && alert.selected),
-    [alerts]
-  );
-  const anySelected = useMemo(
-    () => !Object.values(alerts).every((alert) => !alert.selected),
-    [alerts]
-  );
 
   useEffect(() => {
     initialize();
@@ -59,25 +53,9 @@ const AlertsList = () => {
     };
   }, []);
 
-  const selectAllCheckbox: HTMLInputElement = document.querySelector(
-    ".select-all-checkbox"
-  ) as HTMLInputElement;
-
-  const acknowledgeHandler = () => {
-    const alertsToRemove: string[] = [];
-    alertIds.forEach((id) => {
-      if (alerts[id].selected === true) {
-        alertsToRemove.push(id);
-      }
-    });
-    deleteAlerts(alertsToRemove);
-    if (selectAllCheckbox.checked !== false) {
-      selectAllCheckbox.checked = false;
-    }
-  };
-
-  const selectAllHandler = () => {
-    if (selectAllCheckbox.checked === true) {
+  const selectAllHandler = (e: CustomEvent) => {
+    const checkbox = e.target as HTMLRuxCheckboxElement;
+    if (checkbox.checked === true) {
       selectAll();
     } else {
       selectNone();
@@ -104,7 +82,7 @@ const AlertsList = () => {
         </RuxTableHeader>
         <RuxTableBody>
           {alertIds.map((alertId) => (
-            <AlertListItem alertItem={alerts[alertId]} />
+            <AlertListItem alertItem={alerts[alertId]} key={alertId} />
           ))}
         </RuxTableBody>
       </RuxTable>
@@ -112,13 +90,13 @@ const AlertsList = () => {
         <div>
           <RuxButton
             secondary
-            onClick={acknowledgeHandler}
+            onClick={deleteSelectedAlerts}
             style={{ marginRight: "1rem" }}
             disabled={!anySelected}
           >
             Dismiss
           </RuxButton>
-          <RuxButton onClick={acknowledgeHandler} disabled={!anySelected}>
+          <RuxButton onClick={deleteSelectedAlerts} disabled={!anySelected}>
             Acknowledge
           </RuxButton>
         </div>
