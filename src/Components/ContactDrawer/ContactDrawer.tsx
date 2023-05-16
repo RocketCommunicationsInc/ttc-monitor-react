@@ -36,9 +36,6 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
       // Make body overflow hidden so it's not scrollable
       document.documentElement.style.overflow = "hidden";
 
-      // Toggle accessibility
-      // toggleAccessibility(trigger);
-
       // Make it visible
       setTimeout(() => {
         contactDrawer.current?.classList.add(settings.visibleClass);
@@ -54,9 +51,6 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
 
       // Remove body overflow hidden
       document.documentElement.style.overflow = "";
-
-      // Toggle accessibility
-      // toggleAccessibility(childrenTrigger);
 
       // Make it not active
       setTimeout(function () {
