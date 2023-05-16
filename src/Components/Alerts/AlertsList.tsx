@@ -77,23 +77,22 @@ const AlertsList = ({ selection1, selection2 }: PropTypes) => {
 
   const filteredAlertData = useMemo(() => {
     const filteredAlerts = alertValue.filter((alert) => {
-      if (selection1.includes("critical") && alert.status !== "critical") {
+      if (selection1 === "critical" && alert.status !== "critical") {
         return false;
       }
-      if (selection1.includes("caution") && alert.status !== "caution") {
+      if (selection1 === "caution" && alert.status !== "caution") {
         return false;
       }
-      if (selection1.includes("serious") && alert.status !== "serious") {
+      if (selection1 === "serious" && alert.status !== "serious") {
         return false;
       }
       if (
-        (selection2.includes("hardware") && alert.category !== "hardware") ||
-        (selection2.includes("software") && alert.category !== "software") ||
-        (selection2.includes("spacecraft") && alert.category !== "spacecraft")
+        (selection2 === "hardware" && alert.category !== "hardware") ||
+        (selection2 === "software" && alert.category !== "software") ||
+        (selection2 === "spacecraft" && alert.category !== "spacecraft")
       ) {
         return false;
-      }
-      return true;
+      } else return true;
     });
 
     return filteredAlerts.map((alert) => alert.id);
@@ -128,7 +127,7 @@ const AlertsList = ({ selection1, selection2 }: PropTypes) => {
         </RuxTableHeader>
         <RuxTableBody>
           {filteredAlertData.map((alertId) => (
-            <AlertListItem alertItem={alerts[alertId]} key={alertId} />
+            <AlertListItem alertItem={alerts[alertId]} />
           ))}
         </RuxTableBody>
       </RuxTable>
