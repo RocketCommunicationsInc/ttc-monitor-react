@@ -8,12 +8,9 @@ import {
 import AlertsList from "./AlertsList";
 import { useState } from "react";
 import useAlerts from "../../hooks/useAlerts";
+import AlertsFooter from "./AlertsFooter";
 
 const styles = {
-  container: {
-    overflowY: "auto",
-    overflowX: "hidden",
-  },
   activeAlerts: {
     flex: "auto",
     display: "flex",
@@ -46,6 +43,17 @@ const styles = {
     position: "sticky" as "sticky",
     zIndex: 50,
   },
+  footer: {
+    display: "flex",
+    justifyContent: "center",
+    borderTop: "1px solid var(--logHeaderBackgroundColor, rgb(20, 32, 44))",
+    boxShadow: " 0 -0.5rem 1.25rem rgba(0, 0, 0, 0.25)",
+    height: "3rem",
+    padding: "2rem",
+    position: "sticky" as "sticky",
+    bottom: 0,
+    backgroundColor: "#1B2D3E",
+  },
 };
 
 const Alerts = () => {
@@ -64,7 +72,7 @@ const Alerts = () => {
   };
 
   return (
-    <RuxContainer className="alerts" style={styles.container}>
+    <RuxContainer className="alerts">
       <div slot="header" style={styles.header}>
         <div style={styles.activeAlerts}>
           <span style={styles.alertsNum}>{alertIds.length}</span> Active Alerts
@@ -108,6 +116,7 @@ const Alerts = () => {
         </RuxNotification>
       )}
       <AlertsList />
+      <AlertsFooter />
     </RuxContainer>
   );
 };

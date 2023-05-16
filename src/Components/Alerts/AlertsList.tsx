@@ -7,7 +7,7 @@ import {
   RuxTableHeaderCell,
   RuxTableBody,
   RuxCheckbox,
-  RuxButton,
+  RuxContainer,
 } from "@astrouxds/react";
 import AlertListItem from "./AlertListItem";
 import useAlerts from "../../hooks/useAlerts";
@@ -35,13 +35,11 @@ const AlertsList = () => {
     alerts,
     alertIds,
     initialize,
-    deleteSelectedAlerts,
     selectAll,
     selectNone,
     stopGenerating,
     generate,
     allSelected,
-    anySelected,
   } = useAlerts();
 
   useEffect(() => {
@@ -63,8 +61,8 @@ const AlertsList = () => {
   };
 
   return (
-    <div>
-      <RuxTable style={{ height: "36.5rem" }}>
+    <div style={{ height: "36.5rem", overflowY: "auto" }}>
+      <RuxTable>
         <RuxTableHeader>
           <RuxTableHeaderRow>
             <RuxTableHeaderCell>
@@ -86,21 +84,6 @@ const AlertsList = () => {
           ))}
         </RuxTableBody>
       </RuxTable>
-      <div style={styles.footer}>
-        <div>
-          <RuxButton
-            secondary
-            onClick={deleteSelectedAlerts}
-            style={{ marginRight: "1rem" }}
-            disabled={!anySelected}
-          >
-            Dismiss
-          </RuxButton>
-          <RuxButton onClick={deleteSelectedAlerts} disabled={!anySelected}>
-            Acknowledge
-          </RuxButton>
-        </div>
-      </div>
     </div>
   );
 };
