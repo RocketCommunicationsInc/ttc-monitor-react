@@ -32,7 +32,7 @@ rux-container::part(container) {
 
 rux-container::part(body) {
   padding: 0;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 rux-table-header {
@@ -47,7 +47,7 @@ rux-table-header {
 
 .alerts::part(body) {
   padding-bottom: 0px;
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 86%;
 }
 

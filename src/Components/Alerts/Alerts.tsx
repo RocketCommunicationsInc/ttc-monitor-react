@@ -44,7 +44,6 @@ const styles = {
   },
   notificationBanner: {
     position: "sticky" as "sticky",
-    // display: "flex",
     zIndex: 50,
   },
 };
