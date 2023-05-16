@@ -13,17 +13,6 @@ import AlertListItem from "./AlertListItem";
 import useAlerts from "../../hooks/useAlerts";
 
 const styles = {
-  investigateBtn: {
-    display: "flex",
-    justifyContent: "center",
-    paddingBlock: "var(--spacing-2)",
-  },
-  accordianLabel: {
-    color: "var(--color-palette-neutral-000)",
-  },
-  checkboxes: {
-    paddingRight: "var(--spacing-4)",
-  },
   selectAllCheckbox: {
     marginLeft: "1.25rem",
     marginRight: "2.5rem",
@@ -66,23 +55,14 @@ const AlertsList = ({ selection }: PropTypes) => {
     alerts,
     alertIds,
     initialize,
-    deleteAlerts,
+    deleteSelectedAlerts,
     selectAll,
     selectNone,
     stopGenerating,
     generate,
+    allSelected,
+    anySelected,
   } = useAlerts();
-
-  console.log(alerts);
-
-  const allSelected = useMemo(
-    () => Object.values(alerts).every((alert) => alert && alert.selected),
-    [alerts]
-  );
-  const anySelected = useMemo(
-    () => !Object.values(alerts).every((alert) => !alert.selected),
-    [alerts]
-  );
 
   useEffect(() => {
     initialize();
@@ -133,25 +113,9 @@ const AlertsList = ({ selection }: PropTypes) => {
     return alertIdsArr;
   }, [selection, alertValue]);
 
-  const selectAllCheckbox: HTMLInputElement = document.querySelector(
-    ".select-all-checkbox"
-  ) as HTMLInputElement;
-
-  const acknowledgeHandler = () => {
-    const alertsToRemove: string[] = [];
-    alertIds.forEach((id) => {
-      if (alerts[id].selected === true) {
-        alertsToRemove.push(id);
-      }
-    });
-    deleteAlerts(alertsToRemove);
-    if (selectAllCheckbox.checked !== false) {
-      selectAllCheckbox.checked = false;
-    }
-  };
-
-  const selectAllHandler = () => {
-    if (selectAllCheckbox.checked === true) {
+  const selectAllHandler = (e: CustomEvent) => {
+    const checkbox = e.target as HTMLRuxCheckboxElement;
+    if (checkbox.checked === true) {
       selectAll();
     } else {
       selectNone();
@@ -178,7 +142,7 @@ const AlertsList = ({ selection }: PropTypes) => {
         </RuxTableHeader>
         <RuxTableBody>
           {filteredAlertIds.map((alertId) => (
-            <AlertListItem alertItem={alerts[alertId]} />
+            <AlertListItem alertItem={alerts[alertId]} key={alertId} />
           ))}
         </RuxTableBody>
       </RuxTable>
@@ -186,13 +150,13 @@ const AlertsList = ({ selection }: PropTypes) => {
         <div>
           <RuxButton
             secondary
-            onClick={acknowledgeHandler}
+            onClick={deleteSelectedAlerts}
             style={{ marginRight: "1rem" }}
             disabled={!anySelected}
           >
             Dismiss
           </RuxButton>
-          <RuxButton onClick={acknowledgeHandler} disabled={!anySelected}>
+          <RuxButton onClick={deleteSelectedAlerts} disabled={!anySelected}>
             Acknowledge
           </RuxButton>
         </div>
