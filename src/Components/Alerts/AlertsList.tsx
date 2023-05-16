@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import {
   RuxTable,
   RuxTableHeader,
@@ -11,7 +11,6 @@ import {
 } from "@astrouxds/react";
 import AlertListItem from "./AlertListItem";
 import useAlerts from "../../hooks/useAlerts";
-import { Alert } from "../../Types";
 
 const styles = {
   investigateBtn: {
@@ -60,14 +59,13 @@ const styles = {
 
 type PropTypes = {
   selection: string;
-  alertsArr: Alert[];
 };
 
-const AlertsList = ({ selection, alertsArr }: PropTypes) => {
+const AlertsList = ({ selection }: PropTypes) => {
   const {
     alerts,
     alertIds,
-    initialize, 
+    initialize,
     deleteAlerts,
     selectAll,
     selectNone,
@@ -97,36 +95,41 @@ const AlertsList = ({ selection, alertsArr }: PropTypes) => {
 
   const filteredAlertIds = useMemo(() => {
     const alertIdsArr = [...alertIds];
-    if (
-      selection === "All"
-    ) {
+    if (selection === "All") {
       return alertIds;
     }
     if (selection === "critical") {
-      alertValue.filter((alert) => alert.status === "critical").map((alert) => alert.id);
+      alertValue
+        .filter((alert) => alert.status === "critical")
+        .map((alert) => alert.id);
     }
     if (selection === "caution") {
-      return alertValue.filter((alert) => alert.status === "caution").map((alert) => alert.id);
+      return alertValue
+        .filter((alert) => alert.status === "caution")
+        .map((alert) => alert.id);
     }
     if (selection === "serious") {
-      return alertValue.filter((alert) => alert.status === "serious").map((alert) => alert.id);
+      return alertValue
+        .filter((alert) => alert.status === "serious")
+        .map((alert) => alert.id);
     }
     if (selection === "hardware") {
-      return alertValue.filter((alert) => alert.category === "hardware").map((alert) => alert.id);
+      return alertValue
+        .filter((alert) => alert.category === "hardware")
+        .map((alert) => alert.id);
     }
     if (selection === "software") {
-      return alertValue.filter((alert) => alert.category === "software").map((alert) => alert.id);
+      return alertValue
+        .filter((alert) => alert.category === "software")
+        .map((alert) => alert.id);
     }
     if (selection === "spacecraft") {
-      return alertValue.filter((alert) => alert.category === "spacecraft").map((alert) => alert.id);
+      return alertValue
+        .filter((alert) => alert.category === "spacecraft")
+        .map((alert) => alert.id);
     }
     return alertIdsArr;
   }, [selection, alertValue]);
-
-  useMemo(() => {
-    alertsArr.map(alertValue => alertValue.id)
-  }, [alertsArr, filteredAlertIds]);
-
 
   const selectAllCheckbox: HTMLInputElement = document.querySelector(
     ".select-all-checkbox"

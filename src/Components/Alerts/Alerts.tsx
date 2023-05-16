@@ -8,7 +8,6 @@ import {
 import AlertsList from "./AlertsList";
 import { useState } from "react";
 import useAlerts from "../../hooks/useAlerts";
-import { Alert } from "../../Types";
 
 const styles = {
   container: {
@@ -49,39 +48,15 @@ const styles = {
   },
 };
 
-type PropTypes = {
-  selectValue?: any
-}
-
-  //have filtered state for the filtered alerts, have state for unfiltered alerts, then were going to pass that array of alerts right down to the list component. we wont need to map over the list, we just need to pass the array of filtered items to alert list component and then it will map over those. Since we don't have an item component, we just have a big list component.
-  //what makes it in to an alert list as a prop will never be anything from the hook. It will only be the filtered state. If we filter by none then we pass it all- either way we're passing filtered data.
-
 const Alerts = () => {
   const { alertIds } = useAlerts();
   const [openBanner, setOpenBanner] = useState(false);
   const [selection, setSelection] = useState("All");
-  const [filteredAlerts, setFilteredAlerts] = useState<Alert[]>([]);
 
-    // const selectOptions = {
-    //   statusFilter: [
-    //     { label: "All", value: "All" },
-    //     { label: "Critical", value: "Critical" },
-    //     { label: "Caution", value: "Caution" },
-    //     { label: "Serious", value: "Serious" },
-    //   ],
-    //   categoryFilter: [
-    //     { label: "All", value: "all" },
-    //     { label: "Hardware", value: "Hardware" },
-    //     { label: "Software", value: "Software" },
-    //     { label: "Spacecraft", value: "Spacecraft" },
-    //   ],
-    // };
-
-    const selectionHandler = (e: any) => {
-      setSelection(e.target.value);
-      //setFilteredAlerts(e.target.value);
-      setOpenBanner(true);
-    };
+  const selectionHandler = (e: any) => {
+    setSelection(e.target.value);
+    setOpenBanner(true);
+  };
 
   const handleClearFilter = () => {
     setSelection("All");
@@ -96,7 +71,7 @@ const Alerts = () => {
         </div>
         <div style={styles.selectMenusDiv}>
           <RuxSelect
-            // value={selection}
+            value={selection}
             onRuxchange={selectionHandler}
             size="small"
             label="Severity"
@@ -109,7 +84,7 @@ const Alerts = () => {
           </RuxSelect>
 
           <RuxSelect
-            // value={selection}
+            value={selection}
             onRuxchange={selectionHandler}
             size="small"
             label="Category"
@@ -132,7 +107,7 @@ const Alerts = () => {
           to display all alerts.
         </RuxNotification>
       )}
-      <AlertsList selection={selection} alertsArr={filteredAlerts}/>
+      <AlertsList selection={selection} />
     </RuxContainer>
   );
 };
