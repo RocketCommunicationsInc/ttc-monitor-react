@@ -165,7 +165,7 @@ const CostellationList = ({ contacts, contactIds }: PropTypes) => {
           <RuxTableHeaderCell>Actions</RuxTableHeaderCell>
         </RuxTableHeaderRow>
       </RuxTableHeader>
-      <RuxTableBody>
+      <RuxTableBody className="constellation-table-body">
         {sortedContactIds.map((contactId) => {
           const contact = contacts[contactId];
           return (

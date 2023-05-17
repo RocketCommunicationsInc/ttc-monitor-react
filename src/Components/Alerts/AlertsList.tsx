@@ -16,20 +16,8 @@ const styles = {
     marginLeft: "1.25rem",
     marginRight: "2.5rem",
   },
-  footer: {
-    display: "flex",
-    justifyContent: "center",
-    borderTop: "1px solid var(--logHeaderBackgroundColor, rgb(20, 32, 44))",
-    boxShadow: " 0 -0.5rem 1.25rem rgba(0, 0, 0, 0.25)",
-    height: "3rem",
-    padding: "2rem",
-    position: "sticky" as "sticky",
-    bottom: 0,
-    backgroundColor: "#1B2D3E",
-  },
   alertsListContainer: {
-    height: "37.5rem",
-    overflowY: "auto" as "auto",
+    height: "100%",
   },
 };
 
@@ -43,6 +31,7 @@ const AlertsList = () => {
     stopGenerating,
     generate,
     allSelected,
+    anySelected
   } = useAlerts();
 
   useEffect(() => {
@@ -72,8 +61,8 @@ const AlertsList = () => {
               <RuxCheckbox
                 style={styles.selectAllCheckbox}
                 onRuxchange={selectAllHandler}
-                className="select-all-checkbox"
                 checked={allSelected}
+                indeterminate={anySelected && !allSelected}
               />
               <span style={{ marginLeft: "var(--spacing-4)" }}> Message</span>
               <span style={{ marginLeft: "5.8rem" }}>Category</span>
@@ -81,7 +70,7 @@ const AlertsList = () => {
             </RuxTableHeaderCell>
           </RuxTableHeaderRow>
         </RuxTableHeader>
-        <RuxTableBody>
+        <RuxTableBody className="alerts-table-body">
           {alertIds.map((alertId) => (
             <AlertListItem alertItem={alerts[alertId]} key={alertId} />
           ))}

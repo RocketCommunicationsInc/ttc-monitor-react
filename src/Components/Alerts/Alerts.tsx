@@ -94,15 +94,15 @@ const Alerts = () => {
           </RuxSelect>
         </div>
       </div>
-        <RuxNotification open={openBanner} style={styles.notificationBanner}>
-          You have one or more filters selected. <br />
-          <RuxButton onClick={handleClearFilter} secondary borderless>
-            Clear filters
-          </RuxButton>
-          to display all alerts.
-        </RuxNotification>
+      <RuxNotification open={openBanner} style={styles.notificationBanner}>
+        You have one or more filters selected. <br />
+        <RuxButton onClick={handleClearFilter} secondary borderless>
+          Clear filters
+        </RuxButton>
+        to display all alerts.
+      </RuxNotification>
       <AlertsList />
-      <AlertsFooter />
+      <AlertsFooter slot="footer" />
     </RuxContainer>
   );
 };

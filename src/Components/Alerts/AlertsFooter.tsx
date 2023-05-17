@@ -8,18 +8,18 @@ const styles = {
     borderTop: "1px solid var(--logHeaderBackgroundColor, rgb(20, 32, 44))",
     boxShadow: " 0 -0.5rem 1.25rem rgba(0, 0, 0, 0.25)",
     padding: "2rem",
-    height: "2.6rem",
-    position: "sticky" as "sticky",
-    bottom: 0,
-    backgroundColor: "#1B2D3E",
   },
 };
 
-const AlertsFooter = () => {
+type PropTypes ={
+  slot: string
+}
+
+const AlertsFooter = ({slot}: PropTypes) => {
   const { anySelected, deleteSelectedAlerts } = useAlerts();
 
   return (
-    <footer style={styles.footer}>
+    <footer style={styles.footer} slot={slot}>
       <RuxButton
         secondary
         onClick={deleteSelectedAlerts}
