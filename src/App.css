@@ -122,3 +122,13 @@ rux-time-region::part(container) {
   border: 1px solid var(--color-border-interactive-muted);
   border-left: none;
 }
+
+.watcher rux-tree-node rux-tree-node::part(node) {
+  padding: 0px;
+  display: block;
+  gap: 0;
+}
+
+.wacher rux-table {
+  width: 100%;
+}
