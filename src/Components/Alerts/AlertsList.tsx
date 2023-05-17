@@ -11,6 +11,7 @@ import {
 } from "@astrouxds/react";
 import AlertListItem from "./AlertListItem";
 import useAlerts from "../../hooks/useAlerts";
+import { Category, Status } from "../../Types";
 
 const styles = {
   selectAllCheckbox: {
@@ -28,30 +29,14 @@ const styles = {
     bottom: 0,
     backgroundColor: "#1B2D3E",
   },
-  alertMessage: {
-    minWidth: "9rem",
-    maxWidth: "9rem",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-  },
-  alertCategory: {
-    width: "4.75rem",
-    alignSelf: "center",
-    paddingLeft: "1.1rem",
-  },
-  alertTime: {
-    width: "1.7rem",
-    paddingLeft: ".6rem",
-    alignSelf: "left",
-  },
 };
 
 type PropTypes = {
-  selection1: string;
-  selection2: string;
+  severitySelection: Status | "all";
+  categorySelection: Category | "all";
 };
 
-const AlertsList = ({ selection1, selection2 }: PropTypes) => {
+const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
   const {
     alerts,
     initialize,
@@ -73,28 +58,25 @@ const AlertsList = ({ selection1, selection2 }: PropTypes) => {
     };
   }, []);
 
-  const alertValue = Object.values(alerts);
-
   const filteredAlertData = useMemo(() => {
-    const filteredAlerts = alertValue.filter((alert) => {
+    const filteredAlerts = Object.values(alerts).filter((alert) => {
       if (
-        (selection1 === "critical" && alert.status !== "critical") ||
-        (selection1 === "caution" && alert.status !== "caution") ||
-        (selection1 === "serious" && alert.status !== "serious")
+        (severitySelection === "critical" && alert.status !== "critical") ||
+        (severitySelection === "caution" && alert.status !== "caution") ||
+        (severitySelection === "serious" && alert.status !== "serious")
       ) {
         return false;
       }
       if (
-        (selection2 === "hardware" && alert.category !== "hardware") ||
-        (selection2 === "software" && alert.category !== "software") ||
-        (selection2 === "spacecraft" && alert.category !== "spacecraft")
+        (categorySelection === "hardware" && alert.category !== "hardware") ||
+        (categorySelection === "software" && alert.category !== "software") ||
+        (categorySelection === "spacecraft" && alert.category !== "spacecraft")
       ) {
         return false;
       } else return true;
     });
-
     return filteredAlerts.map((alert) => alert.id);
-  }, [selection1, selection2, alertValue]);
+  }, [severitySelection, categorySelection, Object.values(alerts)]);
 
   const selectAllHandler = (e: CustomEvent) => {
     const checkbox = e.target as HTMLRuxCheckboxElement;

@@ -8,6 +8,7 @@ import {
 } from "@astrouxds/react";
 import AlertsList from "./AlertsList";
 import useAlerts from "../../hooks/useAlerts";
+import { Category, Status } from "../../Types";
 
 const styles = {
   container: {
@@ -51,26 +52,28 @@ const styles = {
 const Alerts = () => {
   const { alertIds } = useAlerts();
   const [openBanner, setOpenBanner] = useState(false);
-  const [selection1, setSelection1] = useState("all");
-  const [selection2, setSelection2] = useState("all");
+  const [severitySelection, setSeveritySelection] = useState<Status | "all">(
+    "all"
+  );
+  const [categorySelection, setCategorySelection] = useState<Category | "all">(
+    "all"
+  );
 
   const selectionHandler1 = (e: any) => {
-    setSelection1(e.target.value);
+    setSeveritySelection(e.target.value);
     setOpenBanner(true);
   };
 
   const selectionHandler2 = (e: any) => {
-    setSelection2(e.target.value);
+    setCategorySelection(e.target.value);
     setOpenBanner(true);
   };
 
   const handleClearFilter = () => {
-    setSelection1("all");
-    setSelection2("all");
+    setSeveritySelection("all");
+    setCategorySelection("all");
     setOpenBanner(false);
   };
-
-  console.log(selection2);
 
   return (
     <RuxContainer className="alerts" style={styles.container}>
@@ -80,7 +83,7 @@ const Alerts = () => {
         </div>
         <div style={styles.selectMenusDiv}>
           <RuxSelect
-            value={selection1}
+            value={severitySelection}
             onRuxchange={selectionHandler1}
             size="small"
             label="Severity"
@@ -93,7 +96,7 @@ const Alerts = () => {
           </RuxSelect>
 
           <RuxSelect
-            value={selection2}
+            value={categorySelection}
             onRuxchange={selectionHandler2}
             size="small"
             label="Category"
@@ -113,7 +116,10 @@ const Alerts = () => {
         </RuxButton>
         to display all alerts.
       </RuxNotification>
-      <AlertsList selection1={selection1} selection2={selection2} />
+      <AlertsList
+        severitySelection={severitySelection}
+        categorySelection={categorySelection}
+      />
     </RuxContainer>
   );
 };

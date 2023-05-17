@@ -3,7 +3,7 @@ import type { Status } from "@astrouxds/astro-web-components/dist/types/common/c
 export type Alert = {
   id: string;
   status: Status;
-  category: string;
+  category: Category;
   message: string;
   longMessage: string;
   timestamp: number;
@@ -13,6 +13,8 @@ export type Alert = {
   acknowledged: boolean;
   refId: string;
 };
+
+export type Category = "hardware" | "software" | "spacecraft"
 
 export type ModifyAlertParams = {
   id: string;
