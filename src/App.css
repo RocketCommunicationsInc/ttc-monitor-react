@@ -47,7 +47,7 @@ rux-table-header {
 
 .alerts::part(body) {
   padding-bottom: 0px;
-  overflow-y: auto;
+  overflow-y: hidden;
   height: 86%;
 }
 
