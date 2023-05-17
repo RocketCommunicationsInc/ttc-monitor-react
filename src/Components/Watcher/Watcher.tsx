@@ -55,6 +55,9 @@ const Watcher = () => {
                     <RuxTableHeaderCell>Unit</RuxTableHeaderCell>
                     <RuxTableHeaderCell>Threshold</RuxTableHeaderCell>
                     <RuxTableHeaderCell>Actual</RuxTableHeaderCell>
+                    <RuxTableHeaderCell>
+                      {/* placeholder for actions menu column */}
+                    </RuxTableHeaderCell>
                   </RuxTableHeaderRow>
                 </RuxTableHeader>
                 <RuxTableBody>
