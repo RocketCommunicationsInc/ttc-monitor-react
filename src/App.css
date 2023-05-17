@@ -73,10 +73,11 @@ rux-timeline::part(time-region-container) {
 .watcher {
   grid-area: watcher;
   display: flex;
+  background-color: var(--color-palette-darkblue-900);
 }
 
 .watcher rux-container {
-  flex-basis: 40%;
+  width: 40%;
 }
 
 .watcher rux-container::part(body) {
@@ -92,13 +93,6 @@ rux-timeline::part(time-region-container) {
   border-bottom: 1px solid var(--color-palette-brightblue-300);
 }
 
-.line-chart {
-  flex-basis: 60%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .watcher rux-table-header-cell {
   text-align: right;
 }
@@ -108,10 +102,6 @@ rux-timeline::part(time-region-container) {
 }
 
 rux-time-region::part(container) {
-  border: 1px solid var(--color-border-interactive-muted);
-}
-
-rux-notification::part(container) {
   border: 1px solid var(--color-border-interactive-muted);
 }
 
@@ -125,4 +115,10 @@ rux-notification::part(container) {
 }
 .constellation .hidden {
   visibility: hidden;
+}
+
+.watcher .canvas-wrapper {
+  width: 60%;
+  border: 1px solid var(--color-border-interactive-muted);
+  border-left: none;
 }
