@@ -61,12 +61,20 @@ const Alerts = () => {
 
   const selectionHandler1 = (e: any) => {
     setSeveritySelection(e.target.value);
-    setOpenBanner(true);
+    if (severitySelection !== "all") {
+      setOpenBanner(false);
+    } else {
+      setOpenBanner(true);
+    }
   };
 
   const selectionHandler2 = (e: any) => {
     setCategorySelection(e.target.value);
-    setOpenBanner(true);
+      if (categorySelection !== "all") {
+      setOpenBanner(false);
+    } else {
+      setOpenBanner(true);
+    }
   };
 
   const handleClearFilter = () => {
