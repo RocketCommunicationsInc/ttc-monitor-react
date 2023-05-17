@@ -27,6 +27,10 @@ const styles = {
     bottom: 0,
     backgroundColor: "#1B2D3E",
   },
+  alertsListContainer: {
+    height: "37.5rem",
+    overflowY: "auto" as "auto",
+  },
 };
 
 const AlertsList = () => {
@@ -60,7 +64,7 @@ const AlertsList = () => {
   };
 
   return (
-    <div style={{ height: "37.5rem", overflowY: "auto" }}>
+    <div style={styles.alertsListContainer}>
       <RuxTable>
         <RuxTableHeader>
           <RuxTableHeaderRow>
