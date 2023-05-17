@@ -69,10 +69,10 @@ const CostellationList = ({ contacts, contactIds }: PropTypes) => {
   };
 
   return (
-    <RuxTable>
-      <RuxTableHeader className="constellation-table-header">
-        <RuxTableHeaderRow>
-          <RuxTableHeaderCell data-sortprop="status" onClick={handleClick}>
+    <RuxTable className="constellation-table">
+      <RuxTableHeader>
+        <RuxTableHeaderRow className="constellation-table-header-row">
+          <RuxTableHeaderCell data-sortprop="status" onClick={handleClick} class="constellation-t-header-cell">
             Status
             <RuxIcon
               icon={
@@ -82,7 +82,7 @@ const CostellationList = ({ contacts, contactIds }: PropTypes) => {
               className={sortProp === "status" ? "visible" : "hidden"}
             />
           </RuxTableHeaderCell>
-          <RuxTableHeaderCell data-sortprop="satellite" onClick={handleClick}>
+          <RuxTableHeaderCell data-sortprop="satellite" onClick={handleClick} class="constellation-t-header-cell">
             Satellite
             <RuxIcon
               icon={
@@ -92,7 +92,7 @@ const CostellationList = ({ contacts, contactIds }: PropTypes) => {
               className={sortProp === "satellite" ? "visible" : "hidden"}
             />
           </RuxTableHeaderCell>
-          <RuxTableHeaderCell data-sortprop="rev" onClick={handleClick}>
+          <RuxTableHeaderCell data-sortprop="rev" onClick={handleClick} class="constellation-t-header-cell">
             Next Pass
             <RuxIcon
               icon={
@@ -102,7 +102,7 @@ const CostellationList = ({ contacts, contactIds }: PropTypes) => {
               className={sortProp === "rev" ? "visible" : "hidden"}
             />
           </RuxTableHeaderCell>
-          <RuxTableHeaderCell data-sortprop="aos" onClick={handleClick}>
+          <RuxTableHeaderCell data-sortprop="aos" onClick={handleClick} class="constellation-t-header-cell">
             AOS
             <RuxIcon
               icon={
@@ -112,7 +112,7 @@ const CostellationList = ({ contacts, contactIds }: PropTypes) => {
               className={sortProp === "aos" ? "visible" : "hidden"}
             />
           </RuxTableHeaderCell>
-          <RuxTableHeaderCell data-sortprop="los" onClick={handleClick}>
+          <RuxTableHeaderCell data-sortprop="los" onClick={handleClick} class="constellation-t-header-cell">
             LOS
             <RuxIcon
               icon={
@@ -122,7 +122,7 @@ const CostellationList = ({ contacts, contactIds }: PropTypes) => {
               className={sortProp === "los" ? "visible" : "hidden"}
             />
           </RuxTableHeaderCell>
-          <RuxTableHeaderCell data-sortprop="ground" onClick={handleClick}>
+          <RuxTableHeaderCell data-sortprop="ground" onClick={handleClick} class="constellation-t-header-cell">
             Ground Station
             <RuxIcon
               icon={
@@ -132,7 +132,7 @@ const CostellationList = ({ contacts, contactIds }: PropTypes) => {
               className={sortProp === "ground" ? "visible" : "hidden"}
             />
           </RuxTableHeaderCell>
-          <RuxTableHeaderCell data-sortprop="azimuth" onClick={handleClick}>
+          <RuxTableHeaderCell data-sortprop="azimuth" onClick={handleClick} class="constellation-t-header-cell">
             Azimuth
             <RuxIcon
               icon={
@@ -142,7 +142,7 @@ const CostellationList = ({ contacts, contactIds }: PropTypes) => {
               className={sortProp === "azimuth" ? "visible" : "hidden"}
             />
           </RuxTableHeaderCell>
-          <RuxTableHeaderCell data-sortprop="elevation" onClick={handleClick}>
+          <RuxTableHeaderCell data-sortprop="elevation" onClick={handleClick} class="constellation-t-header-cell">
             Elevation
             <RuxIcon
               icon={
@@ -152,7 +152,7 @@ const CostellationList = ({ contacts, contactIds }: PropTypes) => {
               className={sortProp === "elevation" ? "visible" : "hidden"}
             />
           </RuxTableHeaderCell>
-          <RuxTableHeaderCell data-sortprop="state" onClick={handleClick}>
+          <RuxTableHeaderCell data-sortprop="state" onClick={handleClick} class="constellation-t-header-cell">
             State
             <RuxIcon
               icon={
@@ -162,24 +162,42 @@ const CostellationList = ({ contacts, contactIds }: PropTypes) => {
               className={sortProp === "state" ? "visible" : "hidden"}
             />
           </RuxTableHeaderCell>
-          <RuxTableHeaderCell>Actions</RuxTableHeaderCell>
+          <RuxTableHeaderCell class="constellation-t-header-cell">Actions</RuxTableHeaderCell>
         </RuxTableHeaderRow>
       </RuxTableHeader>
       <RuxTableBody className="constellation-table-body">
         {sortedContactIds.map((contactId) => {
           const contact = contacts[contactId];
           return (
-            <RuxTableRow key={contactId}>
-              <RuxTableCell className="constellation-table-cell">{contact.status}</RuxTableCell>
-              <RuxTableCell>{contact.satellite}</RuxTableCell>
-              <RuxTableCell>{contact.rev}</RuxTableCell>
-              <RuxTableCell>{contact.aos}</RuxTableCell>
-              <RuxTableCell>{contact.los}</RuxTableCell>
-              <RuxTableCell>{contact.ground}</RuxTableCell>
-              <RuxTableCell>{contact.azimuth}</RuxTableCell>
-              <RuxTableCell>{contact.elevation}</RuxTableCell>
-              <RuxTableCell>{contact.state}</RuxTableCell>
-              <RuxTableCell>
+            <RuxTableRow key={contactId} className="constellation-table-row">
+              <RuxTableCell id="c-t-cell-1" className="constellation-table-cell">
+                {contact.status}
+              </RuxTableCell>
+              <RuxTableCell className="constellation-table-cell">
+                {contact.satellite}
+              </RuxTableCell>
+              <RuxTableCell className="constellation-table-cell">
+                {contact.rev}
+              </RuxTableCell>
+              <RuxTableCell className="constellation-table-cell">
+                {contact.aos}
+              </RuxTableCell>
+              <RuxTableCell className="constellation-table-cell">
+                {contact.los}
+              </RuxTableCell>
+              <RuxTableCell className="constellation-table-cell">
+                {contact.ground}
+              </RuxTableCell>
+              <RuxTableCell className="constellation-table-cell">
+                {contact.azimuth}
+              </RuxTableCell>
+              <RuxTableCell className="constellation-table-cell">
+                {contact.elevation}
+              </RuxTableCell>
+              <RuxTableCell className="constellation-table-cell">
+                {contact.state}
+              </RuxTableCell>
+              <RuxTableCell className="constellation-table-cell">
                 <RuxIcon icon="more-horiz" size="small" />
               </RuxTableCell>
             </RuxTableRow>

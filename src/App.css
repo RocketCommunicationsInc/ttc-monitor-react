@@ -37,42 +37,46 @@ rux-container::part(body) {
 
 rux-table-body.alerts-table-body{
   overflow-y: overlay;
-  max-height: 35.5rem;
+  max-height: calc(39rem - 3rem);
   display: flex;
   flex-direction: column;
   align-self: stretch;
 }
 
-/* rux-table-body.constellation-table-body {
+rux-table.constellation-table {
+  overflow-y: hidden;
+  display: flex;
+  flex-wrap: wrap;
+}
+rux-table-body.constellation-table-body {
   overflow-y: overlay;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  align-items: stretch;
+}
+
+rux-table-row.constellation-table-row {
+  width: 105%;
 }
 
 rux-table-cell.constellation-table-cell{
-  display: flex;
-  flex-direction: row;
   align-items: stretch;
-  width: 1200px;
-} */
+  width: 109px;
+  align-items: left;
+  justify-content: center;
+}
 
-/* rux-table-body.constellation-table-header {
-    display: flex;
-  flex-direction: row;
-  width: 1800px;
-} */
+rux-table-header-cell.constellation-t-header-cell {
+   align-items: stretch;
+  width: 120px;
+}
 
 rux-table-body.watcher-table-body {
   overflow-y: overlay;
-  /* max-width: 30rem;
-  display: flex; */
   flex-direction: column; 
   align-self: stretch;
 }
-
-/* rux-table-row.alerts-table-row {
-  border-bottom: none !important;
-} */
 
 .alerts {
   grid-area: alerts;
@@ -160,6 +164,7 @@ rux-notification::part(container) {
 .constellation .visible {
   visibility: visible;
 }
+
 .constellation .hidden {
   visibility: hidden;
 }
