@@ -68,7 +68,7 @@ const AlertListItem = ({ alertItem }: PropTypes) => {
           Investigate
         </RuxButton>
         <div slot="label" style={styles.accordianLabel}>
-          <RuxTableRow>
+          <RuxTableRow className="alerts-table-row">
             <RuxTableCell style={{ textAlign: "center" }}>
               <RuxCheckbox
                 id={alertItem.id}

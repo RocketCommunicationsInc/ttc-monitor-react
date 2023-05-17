@@ -44,11 +44,34 @@ rux-table-body.alerts-table-body{
 }
 
 /* rux-table-body.constellation-table-body {
-
+  overflow-y: overlay;
+  display: flex;
+  flex-direction: column;
 }
 
-rux-table-body.watcher-table-body {
+rux-table-cell.constellation-table-cell{
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  width: 1200px;
+} */
 
+/* rux-table-body.constellation-table-header {
+    display: flex;
+  flex-direction: row;
+  width: 1800px;
+} */
+
+rux-table-body.watcher-table-body {
+  overflow-y: overlay;
+  /* max-width: 30rem;
+  display: flex; */
+  flex-direction: column; 
+  align-self: stretch;
+}
+
+/* rux-table-row.alerts-table-row {
+  border-bottom: none !important;
 } */
 
 .alerts {

@@ -70,7 +70,7 @@ const CostellationList = ({ contacts, contactIds }: PropTypes) => {
 
   return (
     <RuxTable>
-      <RuxTableHeader>
+      <RuxTableHeader className="constellation-table-header">
         <RuxTableHeaderRow>
           <RuxTableHeaderCell data-sortprop="status" onClick={handleClick}>
             Status
@@ -170,7 +170,7 @@ const CostellationList = ({ contacts, contactIds }: PropTypes) => {
           const contact = contacts[contactId];
           return (
             <RuxTableRow key={contactId}>
-              <RuxTableCell>{contact.status}</RuxTableCell>
+              <RuxTableCell className="constellation-table-cell">{contact.status}</RuxTableCell>
               <RuxTableCell>{contact.satellite}</RuxTableCell>
               <RuxTableCell>{contact.rev}</RuxTableCell>
               <RuxTableCell>{contact.aos}</RuxTableCell>
