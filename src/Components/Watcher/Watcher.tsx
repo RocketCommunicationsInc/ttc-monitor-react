@@ -13,7 +13,7 @@ import {
 } from "@astrouxds/react";
 import type { rowDataObject, Status } from "../../Types";
 import LineChart from "./LineChart";
-import MnemonicPopUp from "./MnemonicPopUp";
+import WatcherListItem from "./WatcherListItem";
 
 const styles = {
   container: {
@@ -45,41 +45,25 @@ const Watcher = () => {
           <RuxTreeNode>
             IRON 4090
             <RuxTreeNode slot="node">
-            <RuxTable>
-              <RuxTableHeader>
-                <RuxTableHeaderRow>
-                  <RuxTableHeaderCell>
-                    {/* placeholder for status icon column */}
-                  </RuxTableHeaderCell>
-                  <RuxTableHeaderCell>Mnemonic</RuxTableHeaderCell>
-                  <RuxTableHeaderCell>Unit</RuxTableHeaderCell>
-                  <RuxTableHeaderCell>Threshold</RuxTableHeaderCell>
-                  <RuxTableHeaderCell>Actual</RuxTableHeaderCell>
-                </RuxTableHeaderRow>
-              </RuxTableHeader>
-              <RuxTableBody>
-                {fixtureData.map((dataObj: rowDataObject) => (
-                  <RuxTableRow key={dataObj.key}>
-                    {Object.entries(dataObj).map(([key, value]) =>
-                      key === "status" ? (
-                        <RuxTableCell>
-                          <RuxStatus status={dataObj.status as Status} />
-                        </RuxTableCell>
-                      ) : key === "mnemonic" ? (
-                        <RuxTableCell>
-                          <MnemonicPopUp triggerValue={value} />
-                        </RuxTableCell>
-                      ) : (
-                        <RuxTableCell style={{ textAlign: "right" }}>
-                          {value}
-                        </RuxTableCell>
-                      )
-                    )}
-                  </RuxTableRow>
-                ))}
-              </RuxTableBody>
+              <RuxTable>
+                <RuxTableHeader>
+                  <RuxTableHeaderRow>
+                    <RuxTableHeaderCell>
+                      {/* placeholder for status icon column */}
+                    </RuxTableHeaderCell>
+                    <RuxTableHeaderCell>Mnemonic</RuxTableHeaderCell>
+                    <RuxTableHeaderCell>Unit</RuxTableHeaderCell>
+                    <RuxTableHeaderCell>Threshold</RuxTableHeaderCell>
+                    <RuxTableHeaderCell>Actual</RuxTableHeaderCell>
+                  </RuxTableHeaderRow>
+                </RuxTableHeader>
+                <RuxTableBody>
+                  {fixtureData.map((dataObj: rowDataObject) => (
+                    <WatcherListItem rowData={dataObj} />
+                  ))}
+                </RuxTableBody>
               </RuxTable>
-              </RuxTreeNode>
+            </RuxTreeNode>
           </RuxTreeNode>
         </RuxTree>
       </RuxContainer>
