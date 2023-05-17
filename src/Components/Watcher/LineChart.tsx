@@ -27,7 +27,7 @@ ChartJS.register(
 
 const randomNumber = () => Math.floor(Math.random() * 110);
 
-const labels = [800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600];
+const labels = ["0800", "0900", "1000", "1100", "1200", "1300", "1400", "1500", "1600"];
 
 const tooltipTitle = () => {
   return "";
