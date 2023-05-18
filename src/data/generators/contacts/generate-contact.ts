@@ -30,7 +30,7 @@ export const generateContact = (
   }
 
   const count = index + 1;
-  const contactId = faker.datatype.uuid();
+  const contactId = faker.string.uuid();
   const modulus = setModulus(options?.alertsPercentage);
   const secondModulus = setSecondModulus(options?.secondAlertPercentage);
   const hasAlert = count % modulus === 0;
@@ -57,10 +57,10 @@ export const generateContact = (
   return {
     id: contactId,
     status: shuffle<Status>(dataOption.statuses),
-    name: faker.datatype.number(),
+    name: faker.number.int(),
     ground: shuffle(dataOption.grounds),
-    rev: faker.datatype.number({ min: 1001, max: 9999 }),
-    satellite: "USA-" + faker.random.alphaNumeric(5).toUpperCase(),
+    rev: faker.number.int({ min: 1001, max: 9999 }),
+    satellite: "USA-" + faker.string.alphanumeric(5).toUpperCase(),
     equipment,
     state: shuffle(dataOption.states),
     step: shuffle(dataOption.steps),
@@ -72,7 +72,7 @@ export const generateContact = (
     latitude: faker.location.latitude(),
     longitude: faker.location.longitude(),
     azimuth: faker.location.longitude(),
-    elevation: faker.datatype.float({ max: 90 }),
+    elevation: faker.number.float({ max: 90 }),
     resolution: shuffle(dataOption.resolutions),
     resolutionStatus: shuffle(dataOption.resolutionStatuses),
     alerts: range(alertsRange).map(() => {

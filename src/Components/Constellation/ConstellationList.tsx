@@ -38,11 +38,16 @@ const styles = {
 type PropTypes = {
   contacts: { [key: string]: Contact };
   contactIds: string[];
+  toggleDrawer: (id?: string) => void;
 };
 
 type SortDirection = "ASC" | "DESC";
 
-const CostellationList = ({ contacts, contactIds }: PropTypes) => {
+const CostellationList = ({
+  contacts,
+  contactIds,
+  toggleDrawer,
+}: PropTypes) => {
   const [sortDirection, setSortDirection] = useState<SortDirection>("ASC");
   const [sortProp, setSortProp] = useState<keyof Contact>("id");
   const [sortedContactIds, setSortedContactIds] =

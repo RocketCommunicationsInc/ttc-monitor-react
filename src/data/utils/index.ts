@@ -14,7 +14,7 @@ export const range = (options: RangeOptions): number[] => {
 };
 
 export const between = (options?: BetweenOptions) => {
-  return faker.datatype.number(options);
+  return faker.number.int(options);
 };
 
 export const shuffle = <T>(arr: T[]) => {
