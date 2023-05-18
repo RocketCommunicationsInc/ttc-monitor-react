@@ -55,13 +55,6 @@ rux-accordion rux-table-row {
   width: 50px;
 }
 
-rux-table-row.alert-t-row {
-  text-decoration: none;
-  /* border: none !important; */
-  border-bottom: none;
-  box-shadow: none;
-}
-
 .constellation {
   grid-area: constellation;
   height: 100%;
