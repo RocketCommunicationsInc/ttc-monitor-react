@@ -6,9 +6,11 @@ import {
   RuxAccordion,
   RuxAccordionItem,
   RuxTableRow,
+  RuxNotification,
 } from "@astrouxds/react";
 import { Alert } from "../../Types";
 import useAlerts from "../../hooks/useAlerts";
+import { useState } from "react";
 
 const styles = {
   accordianLabel: {
@@ -46,6 +48,7 @@ type PropTypes = {
 
 const AlertListItem = ({ alertItem }: PropTypes) => {
   const { toggleSelected } = useAlerts();
+  const [openBanner, setOpenBanner] = useState(false);
 
   const checkboxHandler = () => {
     toggleSelected(alertItem.id);
@@ -57,7 +60,7 @@ const AlertListItem = ({ alertItem }: PropTypes) => {
   };
 
   const investigateHandler = () => {
-    alert("This feature has not been implemented.");
+    setOpenBanner(true);
   };
 
   return (
@@ -67,6 +70,9 @@ const AlertListItem = ({ alertItem }: PropTypes) => {
         <RuxButton onClick={investigateHandler} style={styles.investigateBtn}>
           Investigate
         </RuxButton>
+        <RuxNotification open={openBanner}>
+          This feature has not been implemented.
+        </RuxNotification>
         <div slot="label" style={styles.accordianLabel}>
           <RuxTableRow>
             <RuxTableCell style={{ textAlign: "center" }}>

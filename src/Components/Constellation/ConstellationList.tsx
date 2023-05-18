@@ -32,11 +32,11 @@ type PropTypes = {
 type SortDirection = "ASC" | "DESC";
 
 const CostellationList = ({ contacts, contactIds }: PropTypes) => {
+  const [openBanner, setOpenBanner] = useState(false);
   const [sortDirection, setSortDirection] = useState<SortDirection>("ASC");
   const [sortProp, setSortProp] = useState<keyof Contact>("id");
   const [sortedContactIds, setSortedContactIds] =
     useState<string[]>(contactIds);
-  const [openBanner, setOpenBanner] = useState(false);
 
   const handleClick = (event: any) => {
     const target = event.currentTarget as HTMLElement;
@@ -81,8 +81,6 @@ const CostellationList = ({ contacts, contactIds }: PropTypes) => {
     );
     setSortedContactIds(newSortedContactIds);
   };
-
-  // const constellationTRow = document.querySelectorAll("#constellation-t-row")
 
   const popupMenuHandler = () => {
     setOpenBanner(true);
