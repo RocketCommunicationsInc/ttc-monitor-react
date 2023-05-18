@@ -16,12 +16,13 @@ import {
 } from "@astrouxds/react";
 import { Contact } from "../../Types/contacts";
 
-// const styles = {
-//   actionsPopUp: {
-//     fontWeight: "var(--font-weights-bold)",
-//     fontSize: "10px"
-//   }
-// }
+const styles = {
+  satIcon: {
+    paddingLeft: ".5rem",
+    paddingBottom: ".3rem",
+    cursor: "pointer",
+  },
+};
 
 type PropTypes = {
   contacts: { [key: string]: Contact };
@@ -204,14 +205,15 @@ const CostellationList = ({ contacts, contactIds }: PropTypes) => {
                 <RuxTableCell style={{ paddingLeft: "1.5rem" }}>
                   <RuxStatus status={contact.status} />
                 </RuxTableCell>
-                <RuxTableCell>
-                  {contact.satellite}
-                  <RuxIcon
-                    style={{ paddingLeft: ".5rem" }}
-                    size="1rem"
-                    icon="launch"
-                  />
-                </RuxTableCell>
+                {contact.state === "ready" ? (
+                  <RuxTableCell style={{ color: "#B7DCFF" }}>
+                    {contact.satellite}
+                    <RuxIcon style={styles.satIcon} size="1rem" icon="launch" />
+                  </RuxTableCell>
+                ) : (
+                  <RuxTableCell>{contact.satellite}</RuxTableCell>
+                )}
+
                 <RuxTableCell>{contact.rev}</RuxTableCell>
                 <RuxTableCell>
                   {new Date(contact.aos).toTimeString().slice(0, 8)}
