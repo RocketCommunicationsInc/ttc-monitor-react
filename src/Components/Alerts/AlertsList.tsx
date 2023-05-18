@@ -58,25 +58,41 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
     };
   }, []);
 
-  const filteredAlertData = useMemo(() => {
-    const filteredAlerts = Object.values(alerts).filter((alert) => {
-      if (
-        (severitySelection === "critical" && alert.status !== "critical") ||
-        (severitySelection === "caution" && alert.status !== "caution") ||
-        (severitySelection === "serious" && alert.status !== "serious")
-      ) {
-        return false;
-      }
-      if (
-        (categorySelection === "hardware" && alert.category !== "hardware") ||
-        (categorySelection === "software" && alert.category !== "software") ||
-        (categorySelection === "spacecraft" && alert.category !== "spacecraft")
-      ) {
-        return false;
-      } else return true;
-    });
-    return filteredAlerts.map((alert) => alert.id);
-  }, [severitySelection, categorySelection, Object.values(alerts)]);
+  const filterAlerts = (
+    severity: Status | "all",
+    category: Category | "all"
+  ) => {
+    const alertsArray = Object.values(alerts);
+    const filteredForSeverityAlerts =
+      severity !== "all"
+        ? alertsArray.filter((alert) => alert.status === severity)
+        : alertsArray;
+    const filteredForCategoryAlerts =
+      category !== "all"
+        ? filteredForSeverityAlerts.filter((alert) => alert.category === category)
+        : filteredForSeverityAlerts;
+    return filteredForCategoryAlerts
+  };
+
+  const filteredAlertIds = useMemo(() => {
+    // const filteredAlerts = Object.values(alerts).filter((alert) => {
+    //   if (
+    //     (severitySelection === "critical" && alert.status !== "critical") ||
+    //     (severitySelection === "caution" && alert.status !== "caution") ||
+    //     (severitySelection === "serious" && alert.status !== "serious")
+    //   ) {
+    //     return false;
+    //   }
+    //   if (
+    //     (categorySelection === "hardware" && alert.category !== "hardware") ||
+    //     (categorySelection === "software" && alert.category !== "software") ||
+    //     (categorySelection === "spacecraft" && alert.category !== "spacecraft")
+    //   ) {
+    //     return false;
+    //   } else return true;
+    // });
+    return filterAlerts(severitySelection, categorySelection).map((alert) => alert.id);
+  }, [severitySelection, categorySelection, alerts]);
 
   const selectAllHandler = (e: CustomEvent) => {
     const checkbox = e.target as HTMLRuxCheckboxElement;
@@ -106,7 +122,7 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
           </RuxTableHeaderRow>
         </RuxTableHeader>
         <RuxTableBody>
-          {filteredAlertData.map((alertId) => (
+          {filteredAlertIds.map((alertId) => (
             <AlertListItem alertItem={alerts[alertId]} key={alertId} />
           ))}
         </RuxTableBody>

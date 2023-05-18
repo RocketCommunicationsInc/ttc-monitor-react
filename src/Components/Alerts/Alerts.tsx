@@ -70,7 +70,7 @@ const Alerts = () => {
 
   const selectionHandler2 = (e: any) => {
     setCategorySelection(e.target.value);
-      if (categorySelection !== "all") {
+    if (categorySelection !== "all") {
       setOpenBanner(false);
     } else {
       setOpenBanner(true);

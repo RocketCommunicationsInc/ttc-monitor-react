@@ -14,7 +14,7 @@ export type Alert = {
   refId: string;
 };
 
-export type Category = "hardware" | "software" | "spacecraft"
+export type Category = "hardware" | "software" | "spacecraft";
 
 export type ModifyAlertParams = {
   id: string;
