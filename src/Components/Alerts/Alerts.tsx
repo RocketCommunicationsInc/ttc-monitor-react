@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   RuxContainer,
   RuxSelect,
@@ -59,23 +59,19 @@ const Alerts = () => {
     "all"
   );
 
-  const selectionHandler1 = (e: any) => {
+  const severitySelectionHandler = (e: any) => {
     setSeveritySelection(e.target.value);
-    if (severitySelection !== "all") {
-      setOpenBanner(false);
-    } else {
-      setOpenBanner(true);
-    }
   };
 
-  const selectionHandler2 = (e: any) => {
+  const categorySelectionHandler = (e: any) => {
     setCategorySelection(e.target.value);
-    if (categorySelection !== "all") {
-      setOpenBanner(false);
-    } else {
-      setOpenBanner(true);
-    }
   };
+
+  useEffect(() => {
+    setOpenBanner(false);
+    if (severitySelection !== "all" || categorySelection !== "all")
+      setOpenBanner(true);
+  }, [severitySelection, categorySelection]);
 
   const handleClearFilter = () => {
     setSeveritySelection("all");
@@ -92,7 +88,7 @@ const Alerts = () => {
         <div style={styles.selectMenusDiv}>
           <RuxSelect
             value={severitySelection}
-            onRuxchange={selectionHandler1}
+            onRuxchange={severitySelectionHandler}
             size="small"
             label="Severity"
             style={styles.select1}
@@ -105,7 +101,7 @@ const Alerts = () => {
 
           <RuxSelect
             value={categorySelection}
-            onRuxchange={selectionHandler2}
+            onRuxchange={categorySelectionHandler}
             size="small"
             label="Category"
             style={styles.select2}
@@ -117,9 +113,9 @@ const Alerts = () => {
           </RuxSelect>
         </div>
       </div>
-      <RuxNotification open={openBanner} style={styles.notificationBanner}>
-        You have one or more filters selected. <br />
-        <RuxButton onClick={handleClearFilter} secondary borderless>
+      <RuxNotification open={openBanner} small hide-close style={styles.notificationBanner}>
+        One or more filters selected.
+        <RuxButton onClick={handleClearFilter} secondary borderless size="small">
           Clear filters
         </RuxButton>
         to display all alerts.
