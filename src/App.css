@@ -37,7 +37,8 @@ rux-container::part(body) {
 
 rux-table-body.alerts-table-body {
   overflow-y: overlay;
-  max-height: calc(39rem - 3rem);
+  max-height: calc(40rem - 3rem);
+  height: 39rem;
   display: flex;
   flex-direction: column;
   align-self: stretch;
@@ -48,10 +49,15 @@ rux-table-body.alerts-table-body {
   grid-area: alerts;
 }
 
+.alerts::part(container) {
+  padding: 0 !important;
+  margin-bottom: 0;
+}
+
 .alerts::part(body) {
   padding-bottom: 0 !important;
   overflow-y: hidden;
-  height: 38.5rem;
+  height: 77%;
 }
 
 .alerts::part(footer) {
