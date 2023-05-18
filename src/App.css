@@ -32,7 +32,7 @@ rux-container::part(container) {
 
 rux-container::part(body) {
   padding: 0;
-  overflow: hidden;
+  overflow: auto;
 }
 
 rux-table-body.alerts-table-body{
@@ -40,41 +40,6 @@ rux-table-body.alerts-table-body{
   max-height: calc(39rem - 3rem);
   display: flex;
   flex-direction: column;
-  align-self: stretch;
-}
-
-rux-table.constellation-table {
-  overflow-y: hidden;
-  display: flex;
-  flex-wrap: wrap;
-}
-rux-table-body.constellation-table-body {
-  overflow-y: overlay;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  align-items: stretch;
-}
-
-rux-table-row.constellation-table-row {
-  width: 105%;
-}
-
-rux-table-cell.constellation-table-cell{
-  align-items: stretch;
-  width: 109px;
-  align-items: left;
-  justify-content: center;
-}
-
-rux-table-header-cell.constellation-t-header-cell {
-   align-items: stretch;
-  width: 120px;
-}
-
-rux-table-body.watcher-table-body {
-  overflow-y: overlay;
-  flex-direction: column; 
   align-self: stretch;
 }
 

@@ -49,7 +49,7 @@ const Watcher = () => {
               ))}
             </RuxTableHeaderRow>
           </RuxTableHeader>
-          <RuxTableBody className="watcher-table-body">
+          <RuxTableBody>
             {fixtureData.map((dataObj: rowDataObject) => (
               <RuxTableRow key={dataObj.key}>
                 {Object.entries(dataObj).map(([key, value]) =>
