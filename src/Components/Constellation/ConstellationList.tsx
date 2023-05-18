@@ -69,6 +69,7 @@ const CostellationList = ({ contacts, contactIds }: PropTypes) => {
   };
 
   return (
+    <div className="table-wrapper">
     <RuxTable>
       <RuxTableHeader>
         <RuxTableHeaderRow>
@@ -186,7 +187,8 @@ const CostellationList = ({ contacts, contactIds }: PropTypes) => {
           );
         })}
       </RuxTableBody>
-    </RuxTable>
+      </RuxTable>
+      </div>
   );
 };
 

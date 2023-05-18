@@ -39,6 +39,7 @@ const Watcher = () => {
         <div slot="toolbar" style={styles.container}>
           IRON 4090
         </div>
+        <div className="table-wrapper">
         <RuxTable>
           <RuxTableHeader>
             <RuxTableHeaderRow>
@@ -72,7 +73,8 @@ const Watcher = () => {
               </RuxTableRow>
             ))}
           </RuxTableBody>
-        </RuxTable>
+          </RuxTable>
+          </div>
       </RuxContainer>
       <div className="canvas-wrapper">
         <LineChart subtitle={watcherDataItem.mnemonic} />
