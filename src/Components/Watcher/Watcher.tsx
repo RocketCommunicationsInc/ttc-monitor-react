@@ -56,7 +56,7 @@ const Watcher = () => {
               <RuxTableRow key={dataObj.key}>
                 {Object.entries(dataObj).map(([key, value]) =>
                   key === "status" ? (
-                    <RuxTableCell>
+                    <RuxTableCell style={{paddingLeft: "1rem"}}>
                       <RuxStatus status={dataObj.status as Status} />
                     </RuxTableCell>
                   ) : key === "mnemonic" ? (
