@@ -129,6 +129,31 @@ rux-time-region::part(container) {
   gap: 0;
 }
 
-.wacher rux-table {
-  width: 100%;
+.watcher rux-table-cell {
+  text-align: right;
+}
+
+.watcher rux-table-row rux-table-cell:last-of-type {
+  display: flex;
+  justify-content: center;
+}
+
+.watcher rux-input {
+  width: 0px;
+}
+
+.watcher rux-input::part(form-field) {
+  position: relative;
+  left: 40px;
+  width: 100px;
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 0.25rem 0.5rem;
+}
+
+.watcher rux-input div[slot="suffix"] {
+  display: flex;
+}
+
+.watcher rux-input div[slot="suffix"] div {
+  display: flex;
+  justify-content: center;
 }
