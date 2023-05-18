@@ -31,7 +31,7 @@ const AlertsList = () => {
     stopGenerating,
     generate,
     allSelected,
-    anySelected
+    anySelected,
   } = useAlerts();
 
   useEffect(() => {

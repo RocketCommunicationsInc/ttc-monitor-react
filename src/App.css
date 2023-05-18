@@ -35,12 +35,13 @@ rux-container::part(body) {
   overflow: auto;
 }
 
-rux-table-body.alerts-table-body{
+rux-table-body.alerts-table-body {
   overflow-y: overlay;
   max-height: calc(39rem - 3rem);
   display: flex;
   flex-direction: column;
   align-self: stretch;
+  padding-bottom: 0px;
 }
 
 .alerts {
@@ -48,13 +49,14 @@ rux-table-body.alerts-table-body{
 }
 
 .alerts::part(body) {
-  padding-bottom: 0px;
+  padding-bottom: 0 !important;
   overflow-y: hidden;
-  height: 75%;
+  height: 38.5rem;
 }
 
 .alerts::part(footer) {
   padding: 0;
+  height: fit-content;
 }
 
 rux-accordion rux-table-row {
@@ -68,7 +70,7 @@ rux-accordion rux-table-row {
 
 .constellation::part(body) {
   padding-bottom: 0px;
-  overflow-y: hidden;
+  overflow-y: auto;
   height: 84%;
 }
 

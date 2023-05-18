@@ -7,7 +7,7 @@ const styles = {
     justifyContent: "center",
     borderTop: "1px solid var(--logHeaderBackgroundColor, rgb(20, 32, 44))",
     boxShadow: " 0 -0.5rem 1.25rem rgba(0, 0, 0, 0.25)",
-    padding: "2rem",
+    paddingTop: "2rem",
   },
 };
 
