@@ -64,42 +64,48 @@ const AlertListItem = ({ alertItem }: PropTypes) => {
   };
 
   return (
-    <RuxAccordion>
-      <RuxAccordionItem id={alertItem.id} className="accordion-item">
-        {alertItem.message} <br />
-        <RuxButton onClick={investigateHandler} style={styles.investigateBtn}>
-          Investigate
-        </RuxButton>
-        <RuxNotification open={openBanner}>
-          This feature has not been implemented.
-        </RuxNotification>
-        <div slot="label" style={styles.accordianLabel}>
-          <RuxTableRow>
-            <RuxTableCell style={{ textAlign: "center" }}>
-              <RuxCheckbox
-                id={alertItem.id}
-                style={styles.checkboxes}
-                className="checkboxes"
-                checked={alertItem.selected}
-                onRuxchange={checkboxHandler}
-              />
-            </RuxTableCell>
-            <RuxTableCell>
-              <RuxStatus status={alertItem.status} />
-            </RuxTableCell>
-            <RuxTableCell style={styles.alertMessage}>
-              {alertItem.message}
-            </RuxTableCell>
-            <RuxTableCell style={styles.alertCategory}>
-              {alertItem.category}
-            </RuxTableCell>
-            <RuxTableCell style={styles.alertTime}>
-              {new Date(alertItem.timestamp).toTimeString().slice(0, 8)}
-            </RuxTableCell>
-          </RuxTableRow>
-        </div>
-      </RuxAccordionItem>
-    </RuxAccordion>
+    <div>
+      <RuxNotification
+        closeAfter={3}
+        onRuxclosed={() => setOpenBanner(false)}
+        open={openBanner}
+      >
+        This feature has not been implemented.
+      </RuxNotification>
+      <RuxAccordion>
+        <RuxAccordionItem id={alertItem.id} className="accordion-item">
+          {alertItem.message} <br />
+          <RuxButton onClick={investigateHandler} style={styles.investigateBtn}>
+            Investigate
+          </RuxButton>
+          <div slot="label" style={styles.accordianLabel}>
+            <RuxTableRow>
+              <RuxTableCell style={{ textAlign: "center" }}>
+                <RuxCheckbox
+                  id={alertItem.id}
+                  style={styles.checkboxes}
+                  className="checkboxes"
+                  checked={alertItem.selected}
+                  onRuxchange={checkboxHandler}
+                />
+              </RuxTableCell>
+              <RuxTableCell>
+                <RuxStatus status={alertItem.status} />
+              </RuxTableCell>
+              <RuxTableCell style={styles.alertMessage}>
+                {alertItem.message}
+              </RuxTableCell>
+              <RuxTableCell style={styles.alertCategory}>
+                {alertItem.category}
+              </RuxTableCell>
+              <RuxTableCell style={styles.alertTime}>
+                {new Date(alertItem.timestamp).toTimeString().slice(0, 8)}
+              </RuxTableCell>
+            </RuxTableRow>
+          </div>
+        </RuxAccordionItem>
+      </RuxAccordion>
+    </div>
   );
 };
 

@@ -121,7 +121,11 @@ const CostellationList = ({
           onClick={popupMenuHandler}
         />
       </RuxNotification>
-      <RuxNotification open={openFeatureUnavailable}>
+      <RuxNotification
+        closeAfter={3}
+        onRuxclosed={() => setOpenFeatureUnavailable(false)}
+        open={openFeatureUnavailable}
+      >
         This feature has not been implemented.
       </RuxNotification>
       <RuxTable>

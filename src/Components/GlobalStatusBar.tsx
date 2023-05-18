@@ -69,6 +69,13 @@ const GlobalStatusBar = () => {
 
   return (
     <div>
+      <RuxNotification
+        closeAfter={3}
+        onRuxclosed={() => setOpenBanner(false)}
+        open={openBanner}
+      >
+        This feature has not been implemented.
+      </RuxNotification>
       <RuxGlobalStatusBar
         appDomain="TT&C"
         appName="MONITOR"
@@ -139,9 +146,6 @@ const GlobalStatusBar = () => {
           </RuxTooltip>
         </div>
       </RuxGlobalStatusBar>
-      <RuxNotification open={openBanner}>
-        This feature has not been implemented.
-      </RuxNotification>
     </div>
   );
 };
