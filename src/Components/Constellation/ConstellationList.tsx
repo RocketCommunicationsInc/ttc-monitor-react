@@ -22,6 +22,12 @@ const styles = {
     paddingBottom: ".3rem",
     cursor: "pointer",
   },
+  prePassBanner: {
+    color: "#B7DCFF",
+    textDecoration: "underline",
+    marginLeft: ".5rem",
+    cursor: "pointer",
+  },
 };
 
 type PropTypes = {
@@ -32,11 +38,12 @@ type PropTypes = {
 type SortDirection = "ASC" | "DESC";
 
 const CostellationList = ({ contacts, contactIds }: PropTypes) => {
-  const [openBanner, setOpenBanner] = useState(false);
   const [sortDirection, setSortDirection] = useState<SortDirection>("ASC");
   const [sortProp, setSortProp] = useState<keyof Contact>("id");
   const [sortedContactIds, setSortedContactIds] =
     useState<string[]>(contactIds);
+  const [openFeatureUnavailable, setOpenFeatureUnavailable] = useState(false);
+  const [openPrePassBanner, setOpenPrePassBanner] = useState(false);
 
   const handleClick = (event: any) => {
     const target = event.currentTarget as HTMLElement;
@@ -83,12 +90,28 @@ const CostellationList = ({ contacts, contactIds }: PropTypes) => {
   };
 
   const popupMenuHandler = () => {
-    setOpenBanner(true);
+    setOpenFeatureUnavailable(true);
+  };
+
+  const prePasshandler = () => {
+    setOpenPrePassBanner(true);
+    // setOpenFeatureUnavailable(false)
   };
 
   return (
     <div>
-      <RuxNotification open={openBanner}>
+      <RuxNotification open={openPrePassBanner}>
+        Pre-Pass for is about to begin.
+        <span style={styles.prePassBanner} onClick={popupMenuHandler}>
+          Open Contact{" "}
+        </span>
+        {/* <RuxIcon
+            size="1rem"
+            icon="launch"
+            onClick={popupMenuHandler}
+          /> */}
+      </RuxNotification>
+      <RuxNotification open={openFeatureUnavailable}>
         This feature has not been implemented.
       </RuxNotification>
       <RuxTable>
@@ -206,7 +229,12 @@ const CostellationList = ({ contacts, contactIds }: PropTypes) => {
                 {contact.state === "ready" ? (
                   <RuxTableCell style={{ color: "#B7DCFF" }}>
                     {contact.satellite}
-                    <RuxIcon style={styles.satIcon} size="1rem" icon="launch" />
+                    <RuxIcon
+                      style={styles.satIcon}
+                      size="1rem"
+                      icon="launch"
+                      onClick={prePasshandler}
+                    />
                   </RuxTableCell>
                 ) : (
                   <RuxTableCell>{contact.satellite}</RuxTableCell>

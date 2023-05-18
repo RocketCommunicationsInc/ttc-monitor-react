@@ -74,7 +74,7 @@ const AlertListItem = ({ alertItem }: PropTypes) => {
           This feature has not been implemented.
         </RuxNotification>
         <div slot="label" style={styles.accordianLabel}>
-          <RuxTableRow>
+          <RuxTableRow className="alert-t-row">
             <RuxTableCell style={{ textAlign: "center" }}>
               <RuxCheckbox
                 id={alertItem.id}
