@@ -25,7 +25,7 @@ type PropTypes = {
   triggerValue: string | number;
 };
 
-const MneumonicPopUp = ({ triggerValue }: PropTypes) => {
+const MnemonicPopUp = ({ triggerValue }: PropTypes) => {
   return (
     <RuxPopUp placement="right">
       <RuxMenu>
@@ -64,4 +64,4 @@ const MneumonicPopUp = ({ triggerValue }: PropTypes) => {
   );
 };
 
-export default MneumonicPopUp;
+export default MnemonicPopUp;
