@@ -13,6 +13,7 @@ import {
   RuxMenu,
   RuxMenuItem,
   RuxNotification,
+  RuxButton,
 } from "@astrouxds/react";
 import { Contact } from "../../Types/contacts";
 
@@ -27,6 +28,10 @@ const styles = {
     textDecoration: "underline",
     marginLeft: ".5rem",
     cursor: "pointer",
+  },
+  moreHorizIcon: {
+    cursor: "pointer",
+    marginLeft: "1rem",
   },
 };
 
@@ -95,7 +100,6 @@ const CostellationList = ({ contacts, contactIds }: PropTypes) => {
 
   const prePasshandler = () => {
     setOpenPrePassBanner(true);
-    // setOpenFeatureUnavailable(false)
   };
 
   return (
@@ -103,13 +107,14 @@ const CostellationList = ({ contacts, contactIds }: PropTypes) => {
       <RuxNotification open={openPrePassBanner}>
         Pre-Pass for is about to begin.
         <span style={styles.prePassBanner} onClick={popupMenuHandler}>
-          Open Contact{" "}
+          Open Contact
         </span>
-        {/* <RuxIcon
-            size="1rem"
-            icon="launch"
-            onClick={popupMenuHandler}
-          /> */}
+        <RuxButton
+          iconOnly
+          borderless
+          icon="launch"
+          onClick={popupMenuHandler}
+        />
       </RuxNotification>
       <RuxNotification open={openFeatureUnavailable}>
         This feature has not been implemented.
@@ -269,7 +274,7 @@ const CostellationList = ({ contacts, contactIds }: PropTypes) => {
                   </RuxMenu>
                   <RuxTableCell slot="trigger">
                     <RuxIcon
-                      style={{ cursor: "pointer", marginLeft: "1rem" }}
+                      style={styles.moreHorizIcon}
                       icon="more-horiz"
                       size="1.5rem"
                     />
