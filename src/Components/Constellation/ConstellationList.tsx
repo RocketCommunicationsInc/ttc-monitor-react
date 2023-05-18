@@ -14,11 +14,16 @@ import { Contact } from "../../Types/contacts";
 type PropTypes = {
   contacts: { [key: string]: Contact };
   contactIds: string[];
+  toggleDrawer: (id?: string) => void;
 };
 
 type SortDirection = "ASC" | "DESC";
 
-const CostellationList = ({ contacts, contactIds }: PropTypes) => {
+const CostellationList = ({
+  contacts,
+  contactIds,
+  toggleDrawer,
+}: PropTypes) => {
   const [sortDirection, setSortDirection] = useState<SortDirection>("ASC");
   const [sortProp, setSortProp] = useState<keyof Contact>("id");
   const [sortedContactIds, setSortedContactIds] =
@@ -169,7 +174,10 @@ const CostellationList = ({ contacts, contactIds }: PropTypes) => {
         {sortedContactIds.map((contactId) => {
           const contact = contacts[contactId];
           return (
-            <RuxTableRow key={contactId}>
+            <RuxTableRow
+              key={contactId}
+              onClick={() => toggleDrawer(contactId)}
+            >
               <RuxTableCell>{contact.status}</RuxTableCell>
               <RuxTableCell>{contact.satellite}</RuxTableCell>
               <RuxTableCell>{contact.rev}</RuxTableCell>
