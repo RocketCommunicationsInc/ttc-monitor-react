@@ -17,11 +17,8 @@
     "alerts watcher watcher";
 }
 
-.background > * {
-  height: 100%;
-}
-
 rux-container {
+  height: 100%;
   border: 1px solid var(--color-border-interactive-muted);
 }
 
@@ -32,6 +29,24 @@ rux-container::part(container) {
 
 rux-container::part(body) {
   padding: 0;
+  /* to color small space above scrollbar */
+  background-color: var(--color-palette-darkblue-900);
+}
+
+.alerts::part(body) {
+  height: calc(100% - 220px);
+}
+
+.constellation::part(body) {
+  height: calc(100% - 68px);
+}
+
+.watcher rux-container::part(body) {
+  height: calc(100% - 100px);
+}
+
+.table-wrapper {
+  height: 100%;
   overflow-y: auto;
 }
 
@@ -45,10 +60,16 @@ rux-table-header {
   grid-area: alerts;
 }
 
-.alerts::part(body) {
-  padding-bottom: 0px;
-  overflow-y: auto;
-  height: 86%;
+.alerts-footer {
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid var(--logHeaderBackgroundColor, rgb(20, 32, 44));
+  box-shadow: 0 -0.5rem 1.25rem rgba(0, 0, 0, 0.25);
+  height: 3rem;
+  padding: 2rem;
+  position: sticky;
+  bottom: 0;
+  background-color: #1b2d3e;
 }
 
 rux-accordion rux-table-row {
@@ -57,13 +78,10 @@ rux-accordion rux-table-row {
 
 .constellation {
   grid-area: constellation;
-  height: 100%;
 }
 
-.constellation::part(body) {
-  padding-bottom: 0px;
-  overflow-y: scroll;
-  height: 84%;
+.table-wrapper::-webkit-scrollbar-track {
+  margin-top: 40px;
 }
 
 rux-timeline::part(time-region-container) {
@@ -78,10 +96,6 @@ rux-timeline::part(time-region-container) {
 
 .watcher rux-container {
   width: 40%;
-}
-
-.watcher rux-container::part(body) {
-  height: 67%;
 }
 
 .watcher rux-container::part(toolbar) {

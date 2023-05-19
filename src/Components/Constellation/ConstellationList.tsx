@@ -109,7 +109,7 @@ const CostellationList = ({
   };
 
   return (
-    <div>
+    <>
       <RuxNotification
         open={openPrePassBanner}
         onRuxclosed={() => setOpenPrePassBanner(false)}
@@ -133,6 +133,7 @@ const CostellationList = ({
       >
         This feature has not been implemented.
       </RuxNotification>
+      <div className="table-wrapper">
       <RuxTable>
         <RuxTableHeader>
           <RuxTableHeaderRow>
@@ -191,7 +192,7 @@ const CostellationList = ({
                   sortDirection === "ASC" ? "arrow-drop-down" : "arrow-drop-up"
                 }
                 size="small"
-                className={sortProp === "status" ? "visible" : "hidden"}
+           constellation-formatting     className={sortProp === "status" ? "visible" : "hidden"}
               />
             </RuxTableHeaderCell>
             <RuxTableHeaderCell data-sortprop="ground" onClick={handleClick}>
@@ -302,7 +303,8 @@ const CostellationList = ({
           })}
         </RuxTableBody>
       </RuxTable>
-    </div>
+      </div>
+    </>
   );
 };
 

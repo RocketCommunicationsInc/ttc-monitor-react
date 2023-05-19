@@ -18,17 +18,6 @@ const styles = {
     marginLeft: "1.25rem",
     marginRight: "2.5rem",
   },
-  footer: {
-    display: "flex",
-    justifyContent: "center",
-    borderTop: "1px solid var(--logHeaderBackgroundColor, rgb(20, 32, 44))",
-    boxShadow: " 0 -0.5rem 1.25rem rgba(0, 0, 0, 0.25)",
-    height: "3rem",
-    padding: "2rem",
-    position: "sticky" as "sticky",
-    bottom: 0,
-    backgroundColor: "#1B2D3E",
-  },
 };
 
 type PropTypes = {
@@ -92,30 +81,32 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
   };
 
   return (
-    <div>
-      <RuxTable style={{ height: "36.5rem" }}>
-        <RuxTableHeader>
-          <RuxTableHeaderRow>
-            <RuxTableHeaderCell>
-              <RuxCheckbox
-                style={styles.selectAllCheckbox}
-                onRuxchange={selectAllHandler}
-                className="select-all-checkbox"
-                checked={allSelected}
-              />
-              <span style={{ marginLeft: "var(--spacing-4)" }}> Message</span>
-              <span style={{ marginLeft: "5.8rem" }}>Category</span>
-              <span style={{ marginLeft: "var(--spacing-6)" }}>Time</span>
-            </RuxTableHeaderCell>
-          </RuxTableHeaderRow>
-        </RuxTableHeader>
-        <RuxTableBody>
-          {filteredAlertIds.map((alertId) => (
-            <AlertListItem alertItem={alerts[alertId]} key={alertId} />
-          ))}
-        </RuxTableBody>
-      </RuxTable>
-      <div style={styles.footer}>
+    <>
+      <div className="table-wrapper">
+        <RuxTable>
+          <RuxTableHeader>
+            <RuxTableHeaderRow>
+              <RuxTableHeaderCell>
+                <RuxCheckbox
+                  style={styles.selectAllCheckbox}
+                  onRuxchange={selectAllHandler}
+                  className="select-all-checkbox"
+                  checked={allSelected}
+                />
+                <span style={{ marginLeft: "var(--spacing-4)" }}> Message</span>
+                <span style={{ marginLeft: "5.8rem" }}>Category</span>
+                <span style={{ marginLeft: "var(--spacing-6)" }}>Time</span>
+              </RuxTableHeaderCell>
+            </RuxTableHeaderRow>
+          </RuxTableHeader>
+          <RuxTableBody>
+            {filteredAlertIds.map((alertId) => (
+              <AlertListItem alertItem={alerts[alertId]} key={alertId} />
+            ))}
+          </RuxTableBody>
+        </RuxTable>
+      </div>
+      <div className="alerts-footer">
         <div>
           <RuxButton
             secondary
@@ -130,7 +121,7 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
           </RuxButton>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

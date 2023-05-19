@@ -113,9 +113,19 @@ const Alerts = () => {
           </RuxSelect>
         </div>
       </div>
-      <RuxNotification open={openBanner} small hide-close style={styles.notificationBanner}>
+      <RuxNotification
+        open={openBanner}
+        small
+        hide-close
+        style={styles.notificationBanner}
+      >
         One or more filters selected.
-        <RuxButton onClick={handleClearFilter} secondary borderless size="small">
+        <RuxButton
+          onClick={handleClearFilter}
+          secondary
+          borderless
+          size="small"
+        >
           Clear filters
         </RuxButton>
         to display all alerts.
