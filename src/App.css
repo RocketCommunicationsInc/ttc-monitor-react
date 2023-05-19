@@ -157,3 +157,13 @@ rux-time-region::part(container) {
   display: flex;
   justify-content: center;
 }
+
+rux-icon[icon="arrow-upward"]{
+  transform: rotate(45deg);
+  margin-bottom: 5px;
+}
+
+rux-icon[icon="arrow-downward"] {
+  transform: rotate(-45deg);
+  margin-bottom: 5px;
+}
