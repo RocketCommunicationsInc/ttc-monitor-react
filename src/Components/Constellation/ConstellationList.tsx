@@ -134,175 +134,201 @@ const CostellationList = ({
         This feature has not been implemented.
       </RuxNotification>
       <div className="table-wrapper">
-      <RuxTable>
-        <RuxTableHeader>
-          <RuxTableHeaderRow>
-            <RuxTableHeaderCell data-sortprop="status" onClick={handleClick}>
-              <RuxIcon
-                icon={
-                  sortDirection === "ASC" ? "arrow-drop-down" : "arrow-drop-up"
-                }
-                size="small"
-                className={sortProp === "status" ? "visible" : "hidden"}
-              />
-            </RuxTableHeaderCell>
-            <RuxTableHeaderCell data-sortprop="satellite" onClick={handleClick}>
-              Satellite
-              <RuxIcon
-                icon={
-                  sortDirection === "ASC" ? "arrow-drop-down" : "arrow-drop-up"
-                }
-                size="small"
-                className={sortProp === "satellite" ? "visible" : "hidden"}
-              />
-            </RuxTableHeaderCell>
-            <RuxTableHeaderCell data-sortprop="rev" onClick={handleClick}>
-              Next Pass
-              <RuxIcon
-                icon={
-                  sortDirection === "ASC" ? "arrow-drop-down" : "arrow-drop-up"
-                }
-                size="small"
-                className={sortProp === "rev" ? "visible" : "hidden"}
-              />
-            </RuxTableHeaderCell>
-            <RuxTableHeaderCell data-sortprop="aos" onClick={handleClick}>
-              AOS
-              <RuxIcon
-                icon={
-                  sortDirection === "ASC" ? "arrow-drop-down" : "arrow-drop-up"
-                }
-                size="small"
-                className={sortProp === "aos" ? "visible" : "hidden"}
-              />
-            </RuxTableHeaderCell>
-            <RuxTableHeaderCell data-sortprop="los" onClick={handleClick}>
-              LOS
-              <RuxIcon
-                icon={
-                  sortDirection === "ASC" ? "arrow-drop-down" : "arrow-drop-up"
-                }
-                size="small"
-                className={sortProp === "los" ? "visible" : "hidden"}
-              />
-            </RuxTableHeaderCell>
-            <RuxTableHeaderCell data-sortprop="status" onClick={handleClick}>
-              <RuxIcon
-                icon={
-                  sortDirection === "ASC" ? "arrow-drop-down" : "arrow-drop-up"
-                }
-                size="small"
-           constellation-formatting     className={sortProp === "status" ? "visible" : "hidden"}
-              />
-            </RuxTableHeaderCell>
-            <RuxTableHeaderCell data-sortprop="ground" onClick={handleClick}>
-              Ground Station
-              <RuxIcon
-                icon={
-                  sortDirection === "ASC" ? "arrow-drop-down" : "arrow-drop-up"
-                }
-                size="small"
-                className={sortProp === "ground" ? "visible" : "hidden"}
-              />
-            </RuxTableHeaderCell>
-            <RuxTableHeaderCell data-sortprop="azimuth" onClick={handleClick}>
-              Azimuth
-              <RuxIcon
-                icon={
-                  sortDirection === "ASC" ? "arrow-drop-down" : "arrow-drop-up"
-                }
-                size="small"
-                className={sortProp === "azimuth" ? "visible" : "hidden"}
-              />
-            </RuxTableHeaderCell>
-            <RuxTableHeaderCell data-sortprop="elevation" onClick={handleClick}>
-              Elevation
-              <RuxIcon
-                icon={
-                  sortDirection === "ASC" ? "arrow-drop-down" : "arrow-drop-up"
-                }
-                size="small"
-                className={sortProp === "elevation" ? "visible" : "hidden"}
-              />
-            </RuxTableHeaderCell>
-            <RuxTableHeaderCell data-sortprop="state" onClick={handleClick}>
-              State
-              <RuxIcon
-                icon={
-                  sortDirection === "ASC" ? "arrow-drop-down" : "arrow-drop-up"
-                }
-                size="small"
-                className={sortProp === "state" ? "visible" : "hidden"}
-              />
-            </RuxTableHeaderCell>
-            <RuxTableHeaderCell>Actions</RuxTableHeaderCell>
-          </RuxTableHeaderRow>
-        </RuxTableHeader>
-        <RuxTableBody>
-          {sortedContactIds.map((contactId) => {
-            const contact = contacts[contactId];
-            return (
-              <RuxTableRow
-                key={contactId}
-                onClick={() => toggleDrawer(contactId)}
+        <RuxTable>
+          <RuxTableHeader>
+            <RuxTableHeaderRow>
+              <RuxTableHeaderCell data-sortprop="status" onClick={handleClick}>
+                <RuxIcon
+                  icon={
+                    sortDirection === "ASC"
+                      ? "arrow-drop-down"
+                      : "arrow-drop-up"
+                  }
+                  size="small"
+                  className={sortProp === "status" ? "visible" : "hidden"}
+                />
+              </RuxTableHeaderCell>
+              <RuxTableHeaderCell
+                data-sortprop="satellite"
+                onClick={handleClick}
               >
-                <RuxTableCell style={{ paddingLeft: "1.5rem" }}>
-                  <RuxStatus status={contact.status} />
-                </RuxTableCell>
-                {contact.state === "ready" ? (
-                  <RuxTableCell style={{ color: "#B7DCFF" }}>
-                    {contact.satellite}
-                    <RuxIcon
-                      style={styles.satIcon}
-                      size="1rem"
-                      icon="launch"
-                      onClick={prePasshandler}
-                    />
+                Satellite
+                <RuxIcon
+                  icon={
+                    sortDirection === "ASC"
+                      ? "arrow-drop-down"
+                      : "arrow-drop-up"
+                  }
+                  size="small"
+                  className={sortProp === "satellite" ? "visible" : "hidden"}
+                />
+              </RuxTableHeaderCell>
+              <RuxTableHeaderCell data-sortprop="rev" onClick={handleClick}>
+                Next Pass
+                <RuxIcon
+                  icon={
+                    sortDirection === "ASC"
+                      ? "arrow-drop-down"
+                      : "arrow-drop-up"
+                  }
+                  size="small"
+                  className={sortProp === "rev" ? "visible" : "hidden"}
+                />
+              </RuxTableHeaderCell>
+              <RuxTableHeaderCell data-sortprop="aos" onClick={handleClick}>
+                AOS
+                <RuxIcon
+                  icon={
+                    sortDirection === "ASC"
+                      ? "arrow-drop-down"
+                      : "arrow-drop-up"
+                  }
+                  size="small"
+                  className={sortProp === "aos" ? "visible" : "hidden"}
+                />
+              </RuxTableHeaderCell>
+              <RuxTableHeaderCell data-sortprop="los" onClick={handleClick}>
+                LOS
+                <RuxIcon
+                  icon={
+                    sortDirection === "ASC"
+                      ? "arrow-drop-down"
+                      : "arrow-drop-up"
+                  }
+                  size="small"
+                  className={sortProp === "los" ? "visible" : "hidden"}
+                />
+              </RuxTableHeaderCell>
+              <RuxTableHeaderCell data-sortprop="status" onClick={handleClick}>
+                <RuxIcon
+                  icon={
+                    sortDirection === "ASC"
+                      ? "arrow-drop-down"
+                      : "arrow-drop-up"
+                  }
+                  size="small"
+                  constellation-formatting
+                  className={sortProp === "status" ? "visible" : "hidden"}
+                />
+              </RuxTableHeaderCell>
+              <RuxTableHeaderCell data-sortprop="ground" onClick={handleClick}>
+                Ground Station
+                <RuxIcon
+                  icon={
+                    sortDirection === "ASC"
+                      ? "arrow-drop-down"
+                      : "arrow-drop-up"
+                  }
+                  size="small"
+                  className={sortProp === "ground" ? "visible" : "hidden"}
+                />
+              </RuxTableHeaderCell>
+              <RuxTableHeaderCell data-sortprop="azimuth" onClick={handleClick}>
+                Azimuth
+                <RuxIcon
+                  icon={
+                    sortDirection === "ASC"
+                      ? "arrow-drop-down"
+                      : "arrow-drop-up"
+                  }
+                  size="small"
+                  className={sortProp === "azimuth" ? "visible" : "hidden"}
+                />
+              </RuxTableHeaderCell>
+              <RuxTableHeaderCell
+                data-sortprop="elevation"
+                onClick={handleClick}
+              >
+                Elevation
+                <RuxIcon
+                  icon={
+                    sortDirection === "ASC"
+                      ? "arrow-drop-down"
+                      : "arrow-drop-up"
+                  }
+                  size="small"
+                  className={sortProp === "elevation" ? "visible" : "hidden"}
+                />
+              </RuxTableHeaderCell>
+              <RuxTableHeaderCell data-sortprop="state" onClick={handleClick}>
+                State
+                <RuxIcon
+                  icon={
+                    sortDirection === "ASC"
+                      ? "arrow-drop-down"
+                      : "arrow-drop-up"
+                  }
+                  size="small"
+                  className={sortProp === "state" ? "visible" : "hidden"}
+                />
+              </RuxTableHeaderCell>
+              <RuxTableHeaderCell>Actions</RuxTableHeaderCell>
+            </RuxTableHeaderRow>
+          </RuxTableHeader>
+          <RuxTableBody>
+            {sortedContactIds.map((contactId) => {
+              const contact = contacts[contactId];
+              return (
+                <RuxTableRow
+                  key={contactId}
+                  onClick={() => toggleDrawer(contactId)}
+                >
+                  <RuxTableCell style={{ paddingLeft: "1.5rem" }}>
+                    <RuxStatus status={contact.status} />
                   </RuxTableCell>
-                ) : (
-                  <RuxTableCell>{contact.satellite}</RuxTableCell>
-                )}
-
-                <RuxTableCell>{contact.rev}</RuxTableCell>
-                <RuxTableCell>
-                  {new Date(contact.aos).toTimeString().slice(0, 8)}
-                </RuxTableCell>
-                <RuxTableCell>
-                  {new Date(contact.los).toTimeString().slice(0, 8)}
-                </RuxTableCell>
-                <RuxTableCell style={{ paddingLeft: "1.5rem" }}>
-                  <RuxStatus status={contact.status} />
-                </RuxTableCell>
-                <RuxTableCell>{contact.ground}</RuxTableCell>
-                <RuxTableCell>
-                  {contact.azimuth.toString().slice(0, 7)}&deg;
-                </RuxTableCell>
-                <RuxTableCell>{contact.elevation}&deg;</RuxTableCell>
-                <RuxTableCell style={{ textTransform: "capitalize" }}>
-                  {contact.state}
-                </RuxTableCell>
-                <RuxPopUp placement="bottom">
-                  <RuxMenu>
-                    <RuxMenuItem onClick={popupMenuHandler}>
-                      View Pass Plan
-                    </RuxMenuItem>
-                    <RuxMenuItem onClick={popupMenuHandler}>
-                      Playback Last Pass
-                    </RuxMenuItem>
-                  </RuxMenu>
-                  <RuxTableCell slot="trigger">
-                    <RuxIcon
-                      style={styles.moreHorizIcon}
-                      icon="more-horiz"
-                      size="1.5rem"
-                    />
+                  {contact.state === "ready" ? (
+                    <RuxTableCell style={{ color: "#B7DCFF" }}>
+                      {contact.satellite}
+                      <RuxIcon
+                        style={styles.satIcon}
+                        size="1rem"
+                        icon="launch"
+                        onClick={prePasshandler}
+                      />
+                    </RuxTableCell>
+                  ) : (
+                    <RuxTableCell>{contact.satellite}</RuxTableCell>
+                  )}
+                  <RuxTableCell>{contact.rev}</RuxTableCell>
+                  <RuxTableCell>
+                    {new Date(contact.aos).toTimeString().slice(0, 8)}
                   </RuxTableCell>
-                </RuxPopUp>
-              </RuxTableRow>
-            );
-          })}
-        </RuxTableBody>
-      </RuxTable>
+                  <RuxTableCell>
+                    {new Date(contact.los).toTimeString().slice(0, 8)}
+                  </RuxTableCell>
+                  <RuxTableCell style={{ paddingLeft: "1.5rem" }}>
+                    <RuxStatus status={contact.status} />
+                  </RuxTableCell>
+                  <RuxTableCell>{contact.ground}</RuxTableCell>
+                  <RuxTableCell>
+                    {contact.azimuth.toString().slice(0, 7)}&deg;
+                  </RuxTableCell>
+                  <RuxTableCell>{contact.elevation}&deg;</RuxTableCell>
+                  <RuxTableCell style={{ textTransform: "capitalize" }}>
+                    {contact.state}
+                  </RuxTableCell>
+                  <RuxPopUp placement="bottom">
+                    <RuxMenu>
+                      <RuxMenuItem onClick={popupMenuHandler}>
+                        View Pass Plan
+                      </RuxMenuItem>
+                      <RuxMenuItem onClick={popupMenuHandler}>
+                        Playback Last Pass
+                      </RuxMenuItem>
+                    </RuxMenu>
+                    <RuxTableCell slot="trigger">
+                      <RuxIcon
+                        style={styles.moreHorizIcon}
+                        icon="more-horiz"
+                        size="1.5rem"
+                      />
+                    </RuxTableCell>
+                  </RuxPopUp>
+                </RuxTableRow>
+              );
+            })}
+          </RuxTableBody>
+        </RuxTable>
       </div>
     </>
   );

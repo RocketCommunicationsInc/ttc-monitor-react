@@ -75,7 +75,7 @@ const AlertListItem = ({ alertItem }: PropTypes) => {
   };
 
   return (
-    <div>
+    <>
       <RuxNotification
         small
         closeAfter={3}
@@ -119,7 +119,7 @@ const AlertListItem = ({ alertItem }: PropTypes) => {
           </div>
         </RuxAccordionItem>
       </RuxAccordion>
-    </div>
+    </>
   );
 };
 
