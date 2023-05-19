@@ -1,7 +1,7 @@
-import { Status } from "../../Types";
+import { Category, Status } from "../../Types";
 
 type DataOptions = {
-  categories: string[];
+  categories: Category[];
   errorTypes: string[];
   equipments: string[];
   grounds: string[];
