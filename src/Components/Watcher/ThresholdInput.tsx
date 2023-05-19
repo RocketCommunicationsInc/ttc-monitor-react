@@ -35,7 +35,8 @@ const ThresholdInput = ({ savedValue }: PropTypes) => {
           </div>
         </RuxInput>
       ) : (
-          <div style={{width: "fit-content", marginLeft: "auto"}}
+        <div
+          style={{ width: "fit-content", marginLeft: "auto" }}
           onClickCapture={(e) => {
             setShowInput(true);
           }}

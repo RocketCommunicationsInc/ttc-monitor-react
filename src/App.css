@@ -158,7 +158,7 @@ rux-time-region::part(container) {
   justify-content: center;
 }
 
-rux-icon[icon="arrow-upward"]{
+rux-icon[icon="arrow-upward"] {
   transform: rotate(45deg);
   margin-bottom: 5px;
 }
