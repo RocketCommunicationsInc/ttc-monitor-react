@@ -139,7 +139,14 @@
 .contact-details-icon {
   grid-column: 1;
   grid-row: 1;
+}
+
+.schedule-icon {
   margin: auto;
+}
+
+.antenna-icon {
+  margin-left: 0.6rem;
 }
 
 .col-2 {
