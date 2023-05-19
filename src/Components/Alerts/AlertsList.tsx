@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import {
   RuxTable,
   RuxTableHeader,
@@ -11,6 +11,7 @@ import {
 } from "@astrouxds/react";
 import AlertListItem from "./AlertListItem";
 import useAlerts from "../../hooks/useAlerts";
+import { Category, Status } from "../../Types";
 
 const styles = {
   selectAllCheckbox: {
@@ -30,10 +31,14 @@ const styles = {
   },
 };
 
-const AlertsList = () => {
+type PropTypes = {
+  severitySelection: Status | "all";
+  categorySelection: Category | "all";
+};
+
+const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
   const {
     alerts,
-    alertIds,
     initialize,
     deleteSelectedAlerts,
     selectAll,
@@ -52,6 +57,30 @@ const AlertsList = () => {
       stopGenerating();
     };
   }, []);
+
+  const filterAlerts = (
+    severity: Status | "all",
+    category: Category | "all"
+  ) => {
+    const alertsArray = Object.values(alerts);
+    const filteredForSeverityAlerts =
+      severity !== "all"
+        ? alertsArray.filter((alert) => alert.status === severity)
+        : alertsArray;
+    const filteredForCategoryAlerts =
+      category !== "all"
+        ? filteredForSeverityAlerts.filter(
+            (alert) => alert.category === category
+          )
+        : filteredForSeverityAlerts;
+    return filteredForCategoryAlerts;
+  };
+
+  const filteredAlertIds = useMemo(() => {
+    return filterAlerts(severitySelection, categorySelection).map(
+      (alert) => alert.id
+    );
+  }, [severitySelection, categorySelection, alerts]);
 
   const selectAllHandler = (e: CustomEvent) => {
     const checkbox = e.target as HTMLRuxCheckboxElement;
@@ -81,7 +110,7 @@ const AlertsList = () => {
           </RuxTableHeaderRow>
         </RuxTableHeader>
         <RuxTableBody>
-          {alertIds.map((alertId) => (
+          {filteredAlertIds.map((alertId) => (
             <AlertListItem alertItem={alerts[alertId]} key={alertId} />
           ))}
         </RuxTableBody>
