@@ -34,20 +34,32 @@ rux-container::part(body) {
 }
 
 .alerts::part(body) {
-  height: calc(100vh - 345px);
+  height: calc(100% - 220px);
+}
+
+.alerts .table-wrapper {
+  height: calc(100% - 0px)
 }
 
 .constellation::part(body) {
-  height: calc(100vh - 545px);
+  height: calc(100% - 68px);
+}
+
+.constellation .table-wrapper {
+  height: calc(100% - 0px)
 }
 
 .watcher rux-container::part(body) {
-  height: calc(100vh - 650px);
+  height: calc(100% - 100px);
 }
+
+.watcher .table-wrapper {
+  height: calc(100% - 0px)
+}
+
 
 .table-wrapper {
   overflow-y: scroll;
-  height: 100%;
 }
 
 rux-table-header {
