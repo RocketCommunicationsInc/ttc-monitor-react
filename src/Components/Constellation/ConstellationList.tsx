@@ -109,7 +109,10 @@ const CostellationList = ({
 
   return (
     <div>
-      <RuxNotification open={openPrePassBanner}>
+      <RuxNotification
+        open={openPrePassBanner}
+        onRuxclosed={() => setOpenPrePassBanner(false)}
+      >
         Pre-Pass for is about to begin.
         <span style={styles.prePassBanner} onClick={popupMenuHandler}>
           Open Contact
@@ -122,6 +125,7 @@ const CostellationList = ({
         />
       </RuxNotification>
       <RuxNotification
+        small
         closeAfter={3}
         onRuxclosed={() => setOpenFeatureUnavailable(false)}
         open={openFeatureUnavailable}

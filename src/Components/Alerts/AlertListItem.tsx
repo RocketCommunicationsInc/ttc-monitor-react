@@ -66,6 +66,7 @@ const AlertListItem = ({ alertItem }: PropTypes) => {
   return (
     <div>
       <RuxNotification
+        small
         closeAfter={3}
         onRuxclosed={() => setOpenBanner(false)}
         open={openBanner}

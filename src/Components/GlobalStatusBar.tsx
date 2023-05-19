@@ -70,6 +70,7 @@ const GlobalStatusBar = () => {
   return (
     <div>
       <RuxNotification
+        small
         closeAfter={3}
         onRuxclosed={() => setOpenBanner(false)}
         open={openBanner}
