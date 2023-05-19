@@ -29,6 +29,17 @@ const WatcherListItem = ({ rowData, index }: PropTypes) => {
         return <MnemonicPopUp triggerValue={value} />;
       case "threshold":
         return <ThresholdInput savedValue={String(value)} />;
+      case "value":
+        return (
+          <>
+            {value}
+            {rowData.trendingUp ? (
+              <RuxIcon icon="arrow-upward" size="extra-small" />
+            ) : (
+              <RuxIcon icon="arrow-downward" size="extra-small" />
+            )}
+          </>
+        );
       default:
         return value;
     }

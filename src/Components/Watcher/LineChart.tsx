@@ -43,7 +43,7 @@ const tooltipTitle = () => {
 };
 
 type PropTypes = {
-  data: Mnemonic
+  data: Mnemonic;
 };
 
 const LineChart = ({ data }: PropTypes) => {

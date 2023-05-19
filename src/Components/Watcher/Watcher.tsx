@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react"
+import { useState, useEffect } from "react";
 import {
   RuxContainer,
   RuxTable,
@@ -23,27 +23,26 @@ const styles = {
 const mnemonicsData = generateMnemonics(20);
 
 const Watcher = () => {
-  const [selectedIndex, setSelectedIndex] = useState(0)
-
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   useEffect(() => {
-    const watcherDiv = document.querySelector(".watcher")
-    const tableRows = watcherDiv?.querySelectorAll('rux-table-row')
-
-    const toggleSelected = (element: HTMLElement) => { 
-      tableRows?.forEach((row, index) => {
-        row.removeAttribute("selected")
-      })
-      element.setAttribute("selected", "")
-      setSelectedIndex(Number(element.dataset.index))
-    }
+    const watcherDiv = document.querySelector(".watcher");
+    const tableRows = watcherDiv?.querySelectorAll("rux-table-row");
+    //sets first menmonic as selected on mount
+    tableRows?.[0].setAttribute("selected", "");
 
     tableRows?.forEach((row) => {
-      row.addEventListener("click", () => toggleSelected(row))
-    })
-  }, [])
-  
+      row.addEventListener("click", () => toggleSelected(row));
+    });
 
+    const toggleSelected = (element: HTMLElement) => {
+      tableRows?.forEach((row, index) => {
+        row.removeAttribute("selected");
+      });
+      element.setAttribute("selected", "");
+      setSelectedIndex(Number(element.dataset.index));
+    };
+  }, []);
 
   return (
     <div className="watcher">
@@ -55,7 +54,7 @@ const Watcher = () => {
 
         </div> */}
         <RuxTree>
-          <RuxTreeNode>
+          <RuxTreeNode expanded>
             IRON 4090
             <RuxTreeNode slot="node">
               <RuxTable>
