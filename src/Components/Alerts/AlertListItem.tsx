@@ -86,9 +86,9 @@ const AlertListItem = ({ alertItem }: PropTypes) => {
       <RuxAccordion>
         <RuxAccordionItem id={alertItem.id} className="accordion-item">
           {alertItem.message} <br />
-          <RuxButton onClick={investigateHandler} style={styles.investigateBtn}>
-            Investigate
-          </RuxButton>
+          <div style={styles.investigateBtn}>
+            <RuxButton onClick={investigateHandler}>Investigate</RuxButton>
+          </div>
           <div slot="label" style={styles.accordianLabel}>
             <RuxTableRow>
               <RuxTableCell style={styles.checkbox}>
