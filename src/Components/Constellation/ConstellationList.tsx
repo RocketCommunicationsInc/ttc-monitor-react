@@ -243,7 +243,6 @@ const CostellationList = ({
               <RuxTableRow
                 key={contactId}
                 onClick={() => toggleDrawer(contactId)}
-                id="constellation-t-row"
               >
                 <RuxTableCell style={{ paddingLeft: "1.5rem" }}>
                   <RuxStatus status={contact.status} />
