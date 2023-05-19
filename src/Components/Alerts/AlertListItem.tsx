@@ -31,6 +31,7 @@ const styles = {
     alignSelf: "center",
     paddingLeft: "1.1rem",
     borderBottom: "none",
+    textTransform: "capitalize",
   },
   alertTime: {
     width: "1.7rem",
