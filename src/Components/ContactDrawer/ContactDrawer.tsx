@@ -8,6 +8,8 @@ import {
   RuxTabPanel,
   RuxIcon,
 } from "@astrouxds/react";
+import ContactDetails from "./ContactDetails";
+import PassPlan from "./PassPlan/PassPlan";
 
 import { Contact } from "../../Types";
 import "./ContactDrawer.css";
@@ -113,54 +115,11 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
 
             <RuxTabPanels aria-labelledby="contact-drawer-tabs">
               <RuxTabPanel aria-labelledby="contact-details-tab">
-                <div className="contact-details-wrapper">
-                  <div className="contact-details-grid">
-                    <RuxIcon
-                      icon="schedule"
-                      size="extra-small"
-                      className="contact-details-icon"
-                    />
-                    <p className="col-2 row-1">Next Pass</p>
-                    <p className="col-2 row-2">AOS</p>
-                    <p className="col-2 row-3">LOS</p>
-                    <p className="col-2 row-4">State</p>
-                    <p className="col-3 row-1 rux-body-1-bold">
-                      {new Date(contact.beginTimestamp)
-                        .toTimeString()
-                        .slice(0, 8)}
-                    </p>
-                    <p className="col-3 row-2 rux-body-1-bold">
-                      {new Date(contact.aos).toTimeString().slice(0, 8)}
-                    </p>
-                    <p className="col-3 row-3 rux-body-1-bold">
-                      {new Date(contact.los).toTimeString().slice(0, 8)}
-                    </p>
-                    <p className="col-3 row-4 rux-body-1-bold">
-                      {contact.state}
-                    </p>
-                  </div>
-                  <div className="contact-details-grid">
-                    <RuxIcon
-                      icon="antenna-off"
-                      size="small"
-                      className="contact-details-icon"
-                    />
-                    <p className="col-2 row-1">Ground Station</p>
-                    <p className="col-2 row-2">Azimuth</p>
-                    <p className="col-2 row-3">Elevation</p>
-                    <p className="col-3 row-1 rux-body-1-bold">
-                      {contact.ground}
-                    </p>
-                    <p className="col-3 row-2 rux-body-1-bold">
-                      {contact.azimuth}
-                    </p>
-                    <p className="col-3 row-3 rux-body-1-bold">
-                      {contact.elevation}
-                    </p>
-                  </div>
-                </div>
+                <ContactDetails contact={contact} />
               </RuxTabPanel>
-              <RuxTabPanel aria-labelledby="pass-plan-tab">Tab 2</RuxTabPanel>
+              <RuxTabPanel aria-labelledby="pass-plan-tab">
+                <PassPlan />
+              </RuxTabPanel>
             </RuxTabPanels>
             {/* <p>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem in
