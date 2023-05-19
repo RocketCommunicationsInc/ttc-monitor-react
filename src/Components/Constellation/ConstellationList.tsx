@@ -99,6 +99,15 @@ const CostellationList = ({
     setSortedContactIds(newSortedContactIds);
   };
 
+  const popupMenuHandler = () => {
+    setOpenFeatureUnavailable(true);
+  };
+
+  const prePasshandler = () => {
+    setOpenPrePassBanner(true);
+    toggleDrawer(); //prevents drawer from opening simultaneously on icon click
+  };
+
   return (
     <div>
       <RuxNotification
@@ -106,17 +115,14 @@ const CostellationList = ({
         onRuxclosed={() => setOpenPrePassBanner(false)}
       >
         Pre-Pass for is about to begin.
-        <span
-          style={styles.prePassBanner}
-          onClick={() => setOpenFeatureUnavailable(true)}
-        >
+        <span style={styles.prePassBanner} onClick={popupMenuHandler}>
           Open Contact
         </span>
         <RuxButton
           iconOnly
           borderless
           icon="launch"
-          onClick={() => setOpenFeatureUnavailable(true)}
+          onClick={popupMenuHandler}
         />
       </RuxNotification>
       <RuxNotification
@@ -249,7 +255,7 @@ const CostellationList = ({
                       style={styles.satIcon}
                       size="1rem"
                       icon="launch"
-                      onClick={() => setOpenPrePassBanner(true)}
+                      onClick={prePasshandler}
                     />
                   </RuxTableCell>
                 ) : (
@@ -276,14 +282,10 @@ const CostellationList = ({
                 </RuxTableCell>
                 <RuxPopUp placement="bottom">
                   <RuxMenu>
-                    <RuxMenuItem
-                      onClick={() => setOpenFeatureUnavailable(true)}
-                    >
+                    <RuxMenuItem onClick={popupMenuHandler}>
                       View Pass Plan
                     </RuxMenuItem>
-                    <RuxMenuItem
-                      onClick={() => setOpenFeatureUnavailable(true)}
-                    >
+                    <RuxMenuItem onClick={popupMenuHandler}>
                       Playback Last Pass
                     </RuxMenuItem>
                   </RuxMenu>
