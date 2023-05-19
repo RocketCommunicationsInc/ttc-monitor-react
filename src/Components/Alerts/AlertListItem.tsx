@@ -24,21 +24,31 @@ const styles = {
     maxWidth: "9rem",
     overflow: "hidden",
     textOverflow: "ellipsis",
+    borderBottom: "none",
   },
   alertCategory: {
     width: "4.75rem",
     alignSelf: "center",
     paddingLeft: "1.1rem",
+    borderBottom: "none",
   },
   alertTime: {
     width: "1.7rem",
     paddingLeft: ".6rem",
     alignSelf: "left",
+    borderBottom: "none",
   },
   investigateBtn: {
     display: "flex",
     justifyContent: "center",
     paddingBlock: "var(--spacing-2)",
+  },
+  status: {
+    borderBottom: "none",
+  },
+  checkbox: {
+    textAlign: "center",
+    borderBottom: "none",
   },
 };
 
@@ -81,7 +91,7 @@ const AlertListItem = ({ alertItem }: PropTypes) => {
           </RuxButton>
           <div slot="label" style={styles.accordianLabel}>
             <RuxTableRow>
-              <RuxTableCell style={{ textAlign: "center" }}>
+              <RuxTableCell style={styles.checkbox}>
                 <RuxCheckbox
                   id={alertItem.id}
                   style={styles.checkboxes}
@@ -90,7 +100,7 @@ const AlertListItem = ({ alertItem }: PropTypes) => {
                   onRuxchange={checkboxHandler}
                 />
               </RuxTableCell>
-              <RuxTableCell>
+              <RuxTableCell style={styles.status}>
                 <RuxStatus status={alertItem.status} />
               </RuxTableCell>
               <RuxTableCell style={styles.alertMessage}>
