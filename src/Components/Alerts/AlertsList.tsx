@@ -17,7 +17,7 @@ const styles = {
   selectAllCheckbox: {
     marginLeft: "1.25rem",
     marginRight: "2.5rem",
-  }
+  },
 };
 
 type PropTypes = {
@@ -82,47 +82,46 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
 
   return (
     <>
-    <div className="table-wrapper">
-      <RuxTable>
-        <RuxTableHeader>
-          <RuxTableHeaderRow>
-            <RuxTableHeaderCell>
-              <RuxCheckbox
-                style={styles.selectAllCheckbox}
-                onRuxchange={selectAllHandler}
-                className="select-all-checkbox"
-                checked={allSelected}
-              />
-              <span style={{ marginLeft: "var(--spacing-4)" }}> Message</span>
-              <span style={{ marginLeft: "5.8rem" }}>Category</span>
-              <span style={{ marginLeft: "var(--spacing-6)" }}>Time</span>
-            </RuxTableHeaderCell>
-          </RuxTableHeaderRow>
-        </RuxTableHeader>
-        <RuxTableBody>
-          {filteredAlertIds.map((alertId) => (
-            <AlertListItem alertItem={alerts[alertId]} key={alertId} />
-          ))}
-        </RuxTableBody>
-      </RuxTable>
-    </div>
-    <div className="alerts-footer">
-      <div>
-        <RuxButton
-          secondary
-          onClick={deleteSelectedAlerts}
-          style={{ marginRight: "1rem" }}
-          disabled={!anySelected}
-        >
-          Dismiss
-        </RuxButton>
-        <RuxButton onClick={deleteSelectedAlerts} disabled={!anySelected}>
-          Acknowledge
-        </RuxButton>
+      <div className="table-wrapper">
+        <RuxTable>
+          <RuxTableHeader>
+            <RuxTableHeaderRow>
+              <RuxTableHeaderCell>
+                <RuxCheckbox
+                  style={styles.selectAllCheckbox}
+                  onRuxchange={selectAllHandler}
+                  className="select-all-checkbox"
+                  checked={allSelected}
+                />
+                <span style={{ marginLeft: "var(--spacing-4)" }}> Message</span>
+                <span style={{ marginLeft: "5.8rem" }}>Category</span>
+                <span style={{ marginLeft: "var(--spacing-6)" }}>Time</span>
+              </RuxTableHeaderCell>
+            </RuxTableHeaderRow>
+          </RuxTableHeader>
+          <RuxTableBody>
+            {filteredAlertIds.map((alertId) => (
+              <AlertListItem alertItem={alerts[alertId]} key={alertId} />
+            ))}
+          </RuxTableBody>
+        </RuxTable>
       </div>
+      <div className="alerts-footer">
+        <div>
+          <RuxButton
+            secondary
+            onClick={deleteSelectedAlerts}
+            style={{ marginRight: "1rem" }}
+            disabled={!anySelected}
+          >
+            Dismiss
+          </RuxButton>
+          <RuxButton onClick={deleteSelectedAlerts} disabled={!anySelected}>
+            Acknowledge
+          </RuxButton>
+        </div>
       </div>
-      </>
-
+    </>
   );
 };
 

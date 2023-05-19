@@ -30,7 +30,7 @@ rux-container::part(container) {
 rux-container::part(body) {
   padding: 0;
   /* to color small space above scrollbar */
-  background-color: var(--color-palette-darkblue-900)
+  background-color: var(--color-palette-darkblue-900);
 }
 
 .alerts::part(body) {
@@ -69,7 +69,7 @@ rux-table-header {
   padding: 2rem;
   position: sticky;
   bottom: 0;
-  background-color: #1B2D3E;
+  background-color: #1b2d3e;
 }
 
 rux-accordion rux-table-row {
