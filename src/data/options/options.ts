@@ -10,6 +10,8 @@ type DataOptions = {
   states: string[];
   statuses: Status[];
   steps: string[];
+  subsystems: string[];
+  units: string[];
 };
 
 const options: DataOptions = {
@@ -55,6 +57,8 @@ const options: DataOptions = {
     "SARM",
     "Uplink",
   ],
+  subsystems: ["Attitude"],
+  units: ["Volts"],
 };
 
 export default options;

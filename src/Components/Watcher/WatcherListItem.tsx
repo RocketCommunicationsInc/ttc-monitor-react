@@ -1,4 +1,4 @@
-import type { rowDataObject, rowDataValue, Status } from "../../Types";
+import type { Mnemonic, Status } from "../../Types";
 import {
   RuxStatus,
   RuxTableRow,
@@ -12,15 +12,16 @@ import MnemonicPopUp from "./MnemonicPopUp";
 import ThresholdInput from "./ThresholdInput";
 
 type PropTypes = {
-  rowData: rowDataObject;
+  rowData: Mnemonic;
+  index: number;
 };
 
-const WatcherListItem = ({ rowData }: PropTypes) => {
+const WatcherListItem = ({ rowData, index }: PropTypes) => {
   const popupMenuHandler = () => {
     alert("This feature has not been implemented.");
   };
 
-  const getCellContent = (key: keyof rowDataObject, value: rowDataValue) => {
+  const getCellContent = (key: string, value: any) => {
     switch (key) {
       case "status":
         return <RuxStatus status={rowData.status as Status} />;
@@ -34,10 +35,15 @@ const WatcherListItem = ({ rowData }: PropTypes) => {
   };
 
   return (
-    <RuxTableRow key={rowData.key}>
-      {Object.entries(rowData).map(([key, value]) => (
-        <RuxTableCell> {getCellContent(key, value)}</RuxTableCell>
-      ))}
+    <RuxTableRow key={rowData.mnemonic} data-index={index}>
+      {Object.entries(rowData).map(([key, value]) => {
+        return (
+          key !== "chartData" &&
+          key !== "trendingUp" && (
+            <RuxTableCell> {getCellContent(key, value)}</RuxTableCell>
+          )
+        );
+      })}
       <RuxTableCell>
         <RuxPopUp placement="left">
           <RuxIcon slot="trigger" icon="more-horiz" size="small" />

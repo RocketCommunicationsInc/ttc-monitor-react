@@ -1,19 +1,18 @@
+import {useState, useEffect} from "react"
 import {
   RuxContainer,
-  RuxStatus,
   RuxTable,
   RuxTableHeader,
   RuxTableHeaderRow,
   RuxTableHeaderCell,
-  RuxTableRow,
-  RuxTableCell,
   RuxTableBody,
   RuxTree,
   RuxTreeNode,
 } from "@astrouxds/react";
-import type { rowDataObject, Status } from "../../Types";
+import type { Mnemonic } from "../../Types";
 import LineChart from "./LineChart";
 import WatcherListItem from "./WatcherListItem";
+import { generateMnemonics } from "../../data/generators/mnemonics/generate-mnemonics";
 
 const styles = {
   container: {
@@ -21,17 +20,31 @@ const styles = {
   },
 };
 
-const watcherDataItem = {
-  status: "caution" as const,
-  mnemonic: "PWST2IA",
-  unit: "Volts",
-  threshold: 45.6,
-  actual: 32.2,
-};
-
-const fixtureData = Array(10).fill(watcherDataItem);
+const mnemonicsData = generateMnemonics(20);
 
 const Watcher = () => {
+  const [selectedIndex, setSelectedIndex] = useState(0)
+
+
+  useEffect(() => {
+    const watcherDiv = document.querySelector(".watcher")
+    const tableRows = watcherDiv?.querySelectorAll('rux-table-row')
+
+    const toggleSelected = (element: HTMLElement) => { 
+      tableRows?.forEach((row, index) => {
+        row.removeAttribute("selected")
+      })
+      element.setAttribute("selected", "")
+      setSelectedIndex(Number(element.dataset.index))
+    }
+
+    tableRows?.forEach((row) => {
+      row.addEventListener("click", () => toggleSelected(row))
+    })
+  }, [])
+  
+
+
   return (
     <div className="watcher">
       <RuxContainer>
@@ -61,8 +74,8 @@ const Watcher = () => {
                   </RuxTableHeaderRow>
                 </RuxTableHeader>
                 <RuxTableBody>
-                  {fixtureData.map((dataObj: rowDataObject) => (
-                    <WatcherListItem rowData={dataObj} />
+                  {mnemonicsData.map((dataObj: Mnemonic, index) => (
+                    <WatcherListItem rowData={dataObj} index={index} />
                   ))}
                 </RuxTableBody>
               </RuxTable>
@@ -71,7 +84,7 @@ const Watcher = () => {
         </RuxTree>
       </RuxContainer>
       <div className="canvas-wrapper">
-        <LineChart subtitle={watcherDataItem.mnemonic} />
+        <LineChart data={mnemonicsData[selectedIndex]} />
       </div>
     </div>
   );

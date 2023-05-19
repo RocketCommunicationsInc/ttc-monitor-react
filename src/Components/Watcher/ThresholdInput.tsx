@@ -9,7 +9,7 @@ const ThresholdInput = ({ savedValue }: PropTypes) => {
   const [showInput, setShowInput] = useState(false);
   const [currentValue, setCurrentValue] = useState(savedValue);
 
-  const inputEl = useRef<any>()
+  const inputEl = useRef<any>();
 
   const onAcceptClick = () => {
     setCurrentValue(inputEl.current.value);
@@ -17,7 +17,7 @@ const ThresholdInput = ({ savedValue }: PropTypes) => {
   };
 
   const onCancelClick = () => {
-    setCurrentValue(savedValue)
+    setCurrentValue(savedValue);
     setShowInput(false);
   };
 
