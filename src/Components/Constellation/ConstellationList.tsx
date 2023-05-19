@@ -240,7 +240,11 @@ const CostellationList = ({
           {sortedContactIds.map((contactId) => {
             const contact = contacts[contactId];
             return (
-              <RuxTableRow key={contactId} id="constellation-t-row">
+              <RuxTableRow
+                key={contactId}
+                onClick={() => toggleDrawer(contactId)}
+                id="constellation-t-row"
+              >
                 <RuxTableCell style={{ paddingLeft: "1.5rem" }}>
                   <RuxStatus status={contact.status} />
                 </RuxTableCell>
