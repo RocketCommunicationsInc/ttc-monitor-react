@@ -17,11 +17,8 @@
     "alerts watcher watcher";
 }
 
-.background > * {
-  height: 100%;
-}
-
 rux-container {
+  height: 100%;
   border: 1px solid var(--color-border-interactive-muted);
 }
 
@@ -32,7 +29,25 @@ rux-container::part(container) {
 
 rux-container::part(body) {
   padding: 0;
+  /* to color small space above scrollbar */
   background-color: var(--color-palette-darkblue-900)
+}
+
+.alerts::part(body) {
+  height: calc(100vh - 345px);
+}
+
+.constellation::part(body) {
+  height: calc(100vh - 545px);
+}
+
+.watcher rux-container::part(body) {
+  height: calc(100vh - 650px);
+}
+
+.table-wrapper {
+  overflow-y: scroll;
+  height: 100%;
 }
 
 rux-table-header {
@@ -63,23 +78,6 @@ rux-accordion rux-table-row {
 
 .constellation {
   grid-area: constellation;
-  height: 100%;
-}
-
-.table-wrapper {
-  overflow-y: scroll;
-}
-
-.alerts .table-wrapper {
-  height: 540px;
-}
-
-.constellation .table-wrapper {
-  height: 348px;
-}
-
-.watcher .table-wrapper {
-  height: 235px;
 }
 
 .table-wrapper::-webkit-scrollbar-track {
@@ -98,10 +96,6 @@ rux-timeline::part(time-region-container) {
 
 .watcher rux-container {
   width: 40%;
-}
-
-.watcher rux-container::part(body) {
-  height: 67%;
 }
 
 .watcher rux-container::part(toolbar) {
