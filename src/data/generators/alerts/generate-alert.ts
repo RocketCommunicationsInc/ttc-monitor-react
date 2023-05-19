@@ -2,7 +2,7 @@ import { faker } from "@faker-js/faker";
 
 import dataOption from "../../options/options";
 import { between, generateEquipment, shuffle } from "../../utils";
-import type { Alert, AlertOptions, Status } from "../../../Types";
+import type { Alert, AlertOptions, Category, Status } from "../../../Types";
 
 export const generateAlert = (options?: AlertOptions): Alert => {
   let date = faker.date.recent({ days: 1, refDate: options?.createdRef });
@@ -22,7 +22,7 @@ export const generateAlert = (options?: AlertOptions): Alert => {
   return {
     id: faker.string.uuid(),
     refId: options?.refId || "",
-    category: shuffle(dataOption.categories),
+    category: shuffle<Category>(dataOption.categories),
     expanded: false,
     longMessage,
     message,

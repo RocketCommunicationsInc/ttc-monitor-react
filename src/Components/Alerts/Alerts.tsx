@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   RuxContainer,
   RuxSelect,
@@ -6,9 +7,8 @@ import {
   RuxNotification,
 } from "@astrouxds/react";
 import AlertsList from "./AlertsList";
-import { useState } from "react";
 import useAlerts from "../../hooks/useAlerts";
-import AlertsFooter from "./AlertsFooter";
+import { Category, Status } from "../../Types";
 
 const styles = {
   activeAlerts: {
@@ -48,15 +48,30 @@ const styles = {
 const Alerts = () => {
   const { alertIds } = useAlerts();
   const [openBanner, setOpenBanner] = useState(false);
-  const [selection, setSelection] = useState("");
+  const [severitySelection, setSeveritySelection] = useState<Status | "all">(
+    "all"
+  );
+  const [categorySelection, setCategorySelection] = useState<Category | "all">(
+    "all"
+  );
 
-  const selectionHandler = (e: any) => {
-    setSelection(e.target.value);
-    setOpenBanner(true);
+  const severitySelectionHandler = (e: any) => {
+    setSeveritySelection(e.target.value);
   };
 
+  const categorySelectionHandler = (e: any) => {
+    setCategorySelection(e.target.value);
+  };
+
+  useEffect(() => {
+    setOpenBanner(false);
+    if (severitySelection !== "all" || categorySelection !== "all")
+      setOpenBanner(true);
+  }, [severitySelection, categorySelection]);
+
   const handleClearFilter = () => {
-    setSelection("All");
+    setSeveritySelection("all");
+    setCategorySelection("all");
     setOpenBanner(false);
   };
 
@@ -68,41 +83,43 @@ const Alerts = () => {
         </div>
         <div style={styles.selectMenusDiv}>
           <RuxSelect
-            value={selection}
-            onRuxchange={selectionHandler}
+            value={severitySelection}
+            onRuxchange={severitySelectionHandler}
             size="small"
             label="Severity"
             style={styles.select1}
           >
-            <RuxOption label="All" value="" />
-            <RuxOption label="Critical" value="Critical" />
-            <RuxOption label="Caution" value="Caution" />
-            <RuxOption label="Serious" value="Serious" />
+            <RuxOption label="All" value="all" />
+            <RuxOption label="Critical" value="critical" />
+            <RuxOption label="Caution" value="caution" />
+            <RuxOption label="Serious" value="serious" />
           </RuxSelect>
 
           <RuxSelect
-            value={selection}
-            onRuxchange={selectionHandler}
+            value={categorySelection}
+            onRuxchange={categorySelectionHandler}
             size="small"
             label="Category"
             style={styles.select2}
           >
-            <RuxOption label="All" value="" />
-            <RuxOption label="Hardware" value="Hardware" />
-            <RuxOption label="Software" value="Software" />
-            <RuxOption label="Spacecraft" value="Spacecraft" />
+            <RuxOption label="All" value="all" />
+            <RuxOption label="Hardware" value="hardware" />
+            <RuxOption label="Software" value="software" />
+            <RuxOption label="Spacecraft" value="spacecraft" />
           </RuxSelect>
         </div>
       </div>
-      <RuxNotification open={openBanner} style={styles.notificationBanner}>
-        You have one or more filters selected. <br />
-        <RuxButton onClick={handleClearFilter} secondary borderless>
+      <RuxNotification open={openBanner} small hide-close style={styles.notificationBanner}>
+        One or more filters selected.
+        <RuxButton onClick={handleClearFilter} secondary borderless size="small">
           Clear filters
         </RuxButton>
         to display all alerts.
       </RuxNotification>
-      <AlertsList />
-      <AlertsFooter slot="footer" />
+      <AlertsList
+        severitySelection={severitySelection}
+        categorySelection={categorySelection}
+      />
     </RuxContainer>
   );
 };
