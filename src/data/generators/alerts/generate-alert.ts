@@ -2,13 +2,13 @@ import { faker } from "@faker-js/faker";
 
 import dataOption from "../../options/options";
 import { between, generateEquipment, shuffle } from "../../utils";
-import type { Alert, AlertOptions, Status } from "../../../Types";
+import type { Alert, AlertOptions, Category, Status } from "../../../Types";
 
 export const generateAlert = (options?: AlertOptions): Alert => {
-  let date = faker.date.recent(1, options?.createdRef);
+  let date = faker.date.recent({ days: 1, refDate: options?.createdRef });
 
   if (options?.start && options?.end && !options.createdRef) {
-    date = faker.date.between(options.start, options.end);
+    date = faker.date.between({ from: options.start, to: options.end });
   }
 
   const equipments = (options?.equipment || generateEquipment()).split(" ");
@@ -20,9 +20,9 @@ export const generateAlert = (options?: AlertOptions): Alert => {
   const longMessage = `${singleEquipment} ${adverb} ${errorType.toLowerCase()} at ${hhmmss}`;
 
   return {
-    id: faker.datatype.uuid(),
+    id: faker.string.uuid(),
     refId: options?.refId || "",
-    category: shuffle(dataOption.categories),
+    category: shuffle<Category>(dataOption.categories),
     expanded: false,
     longMessage,
     message,
