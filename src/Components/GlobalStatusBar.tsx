@@ -33,10 +33,6 @@ const GlobalStatusBar = () => {
   const [notifications3, setNotifications3] = useState(4);
   const [openBanner, setOpenBanner] = useState(false);
 
-  const popupMenuHandler = () => {
-    setOpenBanner(true);
-  };
-
   const statusValuesArr = [
     "off",
     "caution",
@@ -68,7 +64,7 @@ const GlobalStatusBar = () => {
   });
 
   return (
-    <div>
+    <>
       <RuxNotification
         small
         closeAfter={3}
@@ -85,8 +81,12 @@ const GlobalStatusBar = () => {
         <RuxPopUp placement="top-start" slot="left-side">
           <RuxIcon slot="trigger" size="small" icon="apps" />
           <RuxMenu>
-            <RuxMenuItem onClick={popupMenuHandler}>Preferences</RuxMenuItem>
-            <RuxMenuItem onClick={popupMenuHandler}>Sign Out</RuxMenuItem>
+            <RuxMenuItem onClick={() => setOpenBanner(true)}>
+              Preferences
+            </RuxMenuItem>
+            <RuxMenuItem onClick={() => setOpenBanner(true)}>
+              Sign Out
+            </RuxMenuItem>
           </RuxMenu>
         </RuxPopUp>
         <RuxClock style={styles.clock} />
@@ -95,7 +95,7 @@ const GlobalStatusBar = () => {
           <RuxTooltip title={`Ground ${notifications1}`}>
             <RuxPopUp placement="bottom">
               <RuxMenu>
-                <RuxMenuItem onClick={popupMenuHandler}>
+                <RuxMenuItem onClick={() => setOpenBanner(true)}>
                   Investigate
                 </RuxMenuItem>
               </RuxMenu>
@@ -113,7 +113,7 @@ const GlobalStatusBar = () => {
           <RuxTooltip title={`Comms ${notifications2}`}>
             <RuxPopUp placement="bottom">
               <RuxMenu>
-                <RuxMenuItem onClick={popupMenuHandler}>
+                <RuxMenuItem onClick={() => setOpenBanner(true)}>
                   Investigate
                 </RuxMenuItem>
               </RuxMenu>
@@ -131,7 +131,7 @@ const GlobalStatusBar = () => {
           <RuxTooltip title={`Software ${notifications3}`}>
             <RuxPopUp placement="bottom">
               <RuxMenu>
-                <RuxMenuItem onClick={popupMenuHandler}>
+                <RuxMenuItem onClick={() => setOpenBanner(true)}>
                   Investigate
                 </RuxMenuItem>
               </RuxMenu>
@@ -147,7 +147,7 @@ const GlobalStatusBar = () => {
           </RuxTooltip>
         </div>
       </RuxGlobalStatusBar>
-    </div>
+    </>
   );
 };
 

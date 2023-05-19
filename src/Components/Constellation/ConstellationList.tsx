@@ -99,14 +99,6 @@ const CostellationList = ({
     setSortedContactIds(newSortedContactIds);
   };
 
-  const popupMenuHandler = () => {
-    setOpenFeatureUnavailable(true);
-  };
-
-  const prePasshandler = () => {
-    setOpenPrePassBanner(true);
-  };
-
   return (
     <div>
       <RuxNotification
@@ -114,14 +106,17 @@ const CostellationList = ({
         onRuxclosed={() => setOpenPrePassBanner(false)}
       >
         Pre-Pass for is about to begin.
-        <span style={styles.prePassBanner} onClick={popupMenuHandler}>
+        <span
+          style={styles.prePassBanner}
+          onClick={() => setOpenFeatureUnavailable(true)}
+        >
           Open Contact
         </span>
         <RuxButton
           iconOnly
           borderless
           icon="launch"
-          onClick={popupMenuHandler}
+          onClick={() => setOpenFeatureUnavailable(true)}
         />
       </RuxNotification>
       <RuxNotification
@@ -254,7 +249,7 @@ const CostellationList = ({
                       style={styles.satIcon}
                       size="1rem"
                       icon="launch"
-                      onClick={prePasshandler}
+                      onClick={() => setOpenPrePassBanner(true)}
                     />
                   </RuxTableCell>
                 ) : (
@@ -281,10 +276,14 @@ const CostellationList = ({
                 </RuxTableCell>
                 <RuxPopUp placement="bottom">
                   <RuxMenu>
-                    <RuxMenuItem onClick={popupMenuHandler}>
+                    <RuxMenuItem
+                      onClick={() => setOpenFeatureUnavailable(true)}
+                    >
                       View Pass Plan
                     </RuxMenuItem>
-                    <RuxMenuItem onClick={popupMenuHandler}>
+                    <RuxMenuItem
+                      onClick={() => setOpenFeatureUnavailable(true)}
+                    >
                       Playback Last Pass
                     </RuxMenuItem>
                   </RuxMenu>
