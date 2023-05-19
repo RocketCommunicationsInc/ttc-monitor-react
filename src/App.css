@@ -37,28 +37,16 @@ rux-container::part(body) {
   height: calc(100% - 220px);
 }
 
-.alerts .table-wrapper {
-  height: calc(100% - 0px)
-}
-
 .constellation::part(body) {
   height: calc(100% - 68px);
-}
-
-.constellation .table-wrapper {
-  height: calc(100% - 0px)
 }
 
 .watcher rux-container::part(body) {
   height: calc(100% - 100px);
 }
 
-.watcher .table-wrapper {
-  height: calc(100% - 0px)
-}
-
-
 .table-wrapper {
+  height: 100%;
   overflow-y: scroll;
 }
 
