@@ -50,34 +50,33 @@ const Watcher = () => {
         <div slot="header" style={styles.container}>
           Watcher
         </div>
-        {/* <div slot="toolbar" style={styles.container}>
-
-        </div> */}
         <RuxTree>
           <RuxTreeNode expanded>
             IRON 4090
             <RuxTreeNode slot="node">
-              <RuxTable>
-                <RuxTableHeader>
-                  <RuxTableHeaderRow>
-                    <RuxTableHeaderCell>
-                      {/* placeholder for status icon column */}
-                    </RuxTableHeaderCell>
-                    <RuxTableHeaderCell>Mnemonic</RuxTableHeaderCell>
-                    <RuxTableHeaderCell>Unit</RuxTableHeaderCell>
-                    <RuxTableHeaderCell>Threshold</RuxTableHeaderCell>
-                    <RuxTableHeaderCell>Actual</RuxTableHeaderCell>
-                    <RuxTableHeaderCell>
-                      {/* placeholder for actions menu column */}
-                    </RuxTableHeaderCell>
-                  </RuxTableHeaderRow>
-                </RuxTableHeader>
-                <RuxTableBody>
-                  {mnemonicsData.map((dataObj: Mnemonic, index) => (
-                    <WatcherListItem rowData={dataObj} index={index} />
-                  ))}
-                </RuxTableBody>
-              </RuxTable>
+              <div className="table-wrapper">
+                <RuxTable>
+                  <RuxTableHeader>
+                    <RuxTableHeaderRow>
+                      <RuxTableHeaderCell>
+                        {/* placeholder for status icon column */}
+                      </RuxTableHeaderCell>
+                      <RuxTableHeaderCell>Mnemonic</RuxTableHeaderCell>
+                      <RuxTableHeaderCell>Unit</RuxTableHeaderCell>
+                      <RuxTableHeaderCell>Threshold</RuxTableHeaderCell>
+                      <RuxTableHeaderCell>Actual</RuxTableHeaderCell>
+                      <RuxTableHeaderCell>
+                        {/* placeholder for actions menu column */}
+                      </RuxTableHeaderCell>
+                    </RuxTableHeaderRow>
+                  </RuxTableHeader>
+                  <RuxTableBody>
+                    {mnemonicsData.map((dataObj: Mnemonic, index) => (
+                      <WatcherListItem rowData={dataObj} index={index} />
+                    ))}
+                  </RuxTableBody>
+                </RuxTable>
+              </div>
             </RuxTreeNode>
           </RuxTreeNode>
         </RuxTree>

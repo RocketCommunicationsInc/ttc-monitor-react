@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import {
   RuxTable,
   RuxTableHeader,
@@ -11,29 +11,23 @@ import {
 } from "@astrouxds/react";
 import AlertListItem from "./AlertListItem";
 import useAlerts from "../../hooks/useAlerts";
+import { Category, Status } from "../../Types";
 
 const styles = {
   selectAllCheckbox: {
     marginLeft: "1.25rem",
     marginRight: "2.5rem",
   },
-  footer: {
-    display: "flex",
-    justifyContent: "center",
-    borderTop: "1px solid var(--logHeaderBackgroundColor, rgb(20, 32, 44))",
-    boxShadow: " 0 -0.5rem 1.25rem rgba(0, 0, 0, 0.25)",
-    height: "3rem",
-    padding: "2rem",
-    position: "sticky" as "sticky",
-    bottom: 0,
-    backgroundColor: "#1B2D3E",
-  },
 };
 
-const AlertsList = () => {
+type PropTypes = {
+  severitySelection: Status | "all";
+  categorySelection: Category | "all";
+};
+
+const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
   const {
     alerts,
-    alertIds,
     initialize,
     deleteSelectedAlerts,
     selectAll,
@@ -53,6 +47,30 @@ const AlertsList = () => {
     };
   }, []);
 
+  const filterAlerts = (
+    severity: Status | "all",
+    category: Category | "all"
+  ) => {
+    const alertsArray = Object.values(alerts);
+    const filteredForSeverityAlerts =
+      severity !== "all"
+        ? alertsArray.filter((alert) => alert.status === severity)
+        : alertsArray;
+    const filteredForCategoryAlerts =
+      category !== "all"
+        ? filteredForSeverityAlerts.filter(
+            (alert) => alert.category === category
+          )
+        : filteredForSeverityAlerts;
+    return filteredForCategoryAlerts;
+  };
+
+  const filteredAlertIds = useMemo(() => {
+    return filterAlerts(severitySelection, categorySelection).map(
+      (alert) => alert.id
+    );
+  }, [severitySelection, categorySelection, alerts]);
+
   const selectAllHandler = (e: CustomEvent) => {
     const checkbox = e.target as HTMLRuxCheckboxElement;
     if (checkbox.checked === true) {
@@ -63,30 +81,32 @@ const AlertsList = () => {
   };
 
   return (
-    <div>
-      <RuxTable style={{ height: "36.5rem" }}>
-        <RuxTableHeader>
-          <RuxTableHeaderRow>
-            <RuxTableHeaderCell>
-              <RuxCheckbox
-                style={styles.selectAllCheckbox}
-                onRuxchange={selectAllHandler}
-                className="select-all-checkbox"
-                checked={allSelected}
-              />
-              <span style={{ marginLeft: "var(--spacing-4)" }}> Message</span>
-              <span style={{ marginLeft: "5.8rem" }}>Category</span>
-              <span style={{ marginLeft: "var(--spacing-6)" }}>Time</span>
-            </RuxTableHeaderCell>
-          </RuxTableHeaderRow>
-        </RuxTableHeader>
-        <RuxTableBody>
-          {alertIds.map((alertId) => (
-            <AlertListItem alertItem={alerts[alertId]} key={alertId} />
-          ))}
-        </RuxTableBody>
-      </RuxTable>
-      <div style={styles.footer}>
+    <>
+      <div className="table-wrapper">
+        <RuxTable>
+          <RuxTableHeader>
+            <RuxTableHeaderRow>
+              <RuxTableHeaderCell>
+                <RuxCheckbox
+                  style={styles.selectAllCheckbox}
+                  onRuxchange={selectAllHandler}
+                  className="select-all-checkbox"
+                  checked={allSelected}
+                />
+                <span style={{ marginLeft: "var(--spacing-4)" }}> Message</span>
+                <span style={{ marginLeft: "5.8rem" }}>Category</span>
+                <span style={{ marginLeft: "var(--spacing-6)" }}>Time</span>
+              </RuxTableHeaderCell>
+            </RuxTableHeaderRow>
+          </RuxTableHeader>
+          <RuxTableBody>
+            {filteredAlertIds.map((alertId) => (
+              <AlertListItem alertItem={alerts[alertId]} key={alertId} />
+            ))}
+          </RuxTableBody>
+        </RuxTable>
+      </div>
+      <div className="alerts-footer">
         <div>
           <RuxButton
             secondary
@@ -101,7 +121,7 @@ const AlertsList = () => {
           </RuxButton>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
