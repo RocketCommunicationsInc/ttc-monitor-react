@@ -41,13 +41,19 @@ rux-container::part(body) {
   height: calc(100% - 68px);
 }
 
-.watcher rux-container::part(body) {
-  height: calc(100% - 100px);
-}
+/* .watcher rux-container::part(body) {
+  height: calc(100% - 60px);
+} */
 
 .table-wrapper {
   height: 100%;
   overflow-y: scroll;
+  /* to color small space above scrollbar on watcher component */
+  background-color: var(--color-palette-darkblue-900);
+}
+
+.watcher .table-wrapper {
+  overflow-y: hidden;
 }
 
 rux-table-header {

@@ -20,7 +20,7 @@ const styles = {
   },
 };
 
-const mnemonicsData = generateMnemonics(20);
+const mnemonicsData = generateMnemonics(4);
 
 const Watcher = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
