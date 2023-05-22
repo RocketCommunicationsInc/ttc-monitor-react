@@ -72,7 +72,7 @@ export const generateContact = (
     latitude: faker.location.latitude(),
     longitude: faker.location.longitude(),
     azimuth: faker.location.longitude(),
-    elevation: faker.number.float({ max: 90 }),
+    elevation: faker.number.float({ min: 400, max: 2000 }),
     resolution: shuffle(dataOption.resolutions),
     resolutionStatus: shuffle(dataOption.resolutionStatuses),
     alerts: range(alertsRange).map(() => {
