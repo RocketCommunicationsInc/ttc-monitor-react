@@ -1,0 +1,29 @@
+#sat-icon {
+padding-left: .5rem;
+padding-bottom: .3rem;
+cursor: pointer;
+}
+
+#pre-pass-banner {
+color: #B7DCFF;
+text-decoration: underline;
+margin-left: .5rem;
+cursor: pointer;
+}
+
+#more-horiz-icon {
+margin-left: 1rem;
+cursor: pointer;
+}
+
+.status-t-cell {
+padding-left: 1.5rem;
+}
+
+#ready-sat {
+color: #B7DCFF;
+}
+
+#state-t-cell {
+text-transform: capitalize;
+}

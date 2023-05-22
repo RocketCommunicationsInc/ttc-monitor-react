@@ -99,11 +99,6 @@ const LineChart = ({ subtitle }: PropTypes) => {
           color: "grey",
           drawTicks: false,
         },
-        // title: {
-        //   display: true,
-        //   color: "white",
-        //   text: "Volts",
-        // },
         ticks: {
           color: "white",
           padding: 7,

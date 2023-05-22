@@ -1,0 +1,9 @@
+.slider {
+display: flex;
+align-self: center;
+margin-left: auto;
+}
+
+.header {
+display: flex;
+}

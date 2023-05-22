@@ -1,0 +1,30 @@
+.pop-up-menu-div {
+padding-right: 3rem;
+padding-left: 1rem;
+margin-block: .5rem;
+}
+
+#volts {
+margin-left: 4rem;
+font-weight: var(--font-weights-bold);
+}
+
+#altitude-link {
+margin-left: 1.5rem;
+}
+
+#value {
+margin-top: .75rem;
+}
+
+#subsystem {
+margin-bottom: .75rem;
+}
+
+.bold-values {
+font-weight: var(--font-weights-bold);
+}
+
+.mneumonic-popup-value {
+color: var(--color-palette-brightblue-300);
+}

@@ -1,25 +1,5 @@
 import { RuxCheckbox, RuxIcon, RuxMenu, RuxPopUp } from "@astrouxds/react";
-
-const styles = {
-  popUpMenuDiv: {
-    paddingRight: "3rem",
-    paddingLeft: "1rem",
-    marginBlock: ".5rem",
-  },
-  volts: {
-    marginLeft: "4rem",
-    fontWeight: "var(--font-weights-bold)",
-  },
-  altitudeLink: {
-    marginLeft: "1.5rem",
-  },
-  boldPopUpWords: {
-    fontWeight: "var(--font-weights-bold)",
-  },
-  popUpValue: {
-    color: "var(--color-palette-brightblue-300)",
-  },
-};
+import "./MnemonicPopUp.css";
 
 type PropTypes = {
   triggerValue: string | number;
@@ -29,15 +9,15 @@ const MnemonicPopUp = ({ triggerValue }: PropTypes) => {
   return (
     <RuxPopUp placement="right">
       <RuxMenu>
-        <div style={styles.popUpMenuDiv}>
-          <span style={styles.boldPopUpWords}>PWBVTLM</span>
-          <div style={{ marginTop: ".75rem" }}>
+        <div className="pop-up-menu-div">
+          <span className="bold-values">PWBVTLM</span>
+          <div id="value">
             Value
-            <span style={styles.volts}>24.2 Volts</span>
+            <span id="volts">24.2 Volts</span>
           </div>
-          <div style={{ marginBottom: ".75rem" }}>
+          <div id="subsystem">
             Subsystem
-            <span style={styles.altitudeLink}>
+            <span id="altitude-link">
               <a
                 href="https://ttc-investigate.astrouxds.com/?system=Attitude"
                 target="_blank"
@@ -49,15 +29,11 @@ const MnemonicPopUp = ({ triggerValue }: PropTypes) => {
             </span>
           </div>
           <RuxCheckbox>
-            <span style={styles.boldPopUpWords}>Add to Watcher</span>
+            <span className="bold-values">Add to Watcher</span>
           </RuxCheckbox>
         </div>
       </RuxMenu>
-      <span
-        slot="trigger"
-        style={styles.popUpValue}
-        className="mneumonic-popup-value"
-      >
+      <span slot="trigger" className="mneumonic-popup-value">
         {triggerValue}
       </span>
     </RuxPopUp>
