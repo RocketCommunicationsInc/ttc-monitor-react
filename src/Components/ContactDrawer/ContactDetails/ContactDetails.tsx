@@ -1,7 +1,8 @@
 import { RuxIcon } from "@astrouxds/react";
-import { Contact } from "../../Types";
+import { Contact } from "../../../Types";
 
-import "./ContactDrawer.css";
+import "./ContactDetails.css";
+// import { getJulianDay } from "../../../data/utils";
 
 type PropTypes = {
   contact: Contact;
@@ -21,7 +22,7 @@ const ContactDetails = ({ contact }: PropTypes) => {
         <p className="col-2 row-3">LOS</p>
         <p className="col-2 row-4">State</p>
         <p className="col-3 row-1 rux-body-1-bold">
-          {new Date(contact.beginTimestamp).toTimeString().slice(0, 8)}
+          {/* {getJulianDay(new Date(contact.beginTimestamp))} */}
         </p>
         <p className="col-3 row-2 rux-body-1-bold">
           {new Date(contact.aos).toTimeString().slice(0, 8)}
@@ -29,7 +30,12 @@ const ContactDetails = ({ contact }: PropTypes) => {
         <p className="col-3 row-3 rux-body-1-bold">
           {new Date(contact.los).toTimeString().slice(0, 8)}
         </p>
-        <p className="col-3 row-4 rux-body-1-bold">{contact.state}</p>
+        <p
+          style={{ textTransform: "capitalize" }}
+          className="col-3 row-4 rux-body-1-bold"
+        >
+          {contact.state}
+        </p>
       </div>
       <div className="contact-details-grid">
         <RuxIcon
@@ -41,8 +47,10 @@ const ContactDetails = ({ contact }: PropTypes) => {
         <p className="col-2 row-2">Azimuth</p>
         <p className="col-2 row-3">Elevation</p>
         <p className="col-3 row-1 rux-body-1-bold">{contact.ground}</p>
-        <p className="col-3 row-2 rux-body-1-bold">{contact.azimuth}</p>
-        <p className="col-3 row-3 rux-body-1-bold">{contact.elevation}</p>
+        <p className="col-3 row-2 rux-body-1-bold">{contact.azimuth}&deg;</p>
+        <p className="col-3 row-3 rux-body-1-bold">
+          {contact.elevation.toString().slice(0, 8)}
+        </p>
       </div>
     </div>
   );
