@@ -21,10 +21,14 @@ const ThresholdInput = ({ savedValue }: PropTypes) => {
     setShowInput(false);
   };
 
+  const handleInputChange = () => {
+    setCurrentValue(inputEl.current.value);
+  };
+
   return (
     <>
       {showInput ? (
-        <RuxInput type="number" size="small" value={currentValue} ref={inputEl}>
+        <RuxInput onRuxinput={handleInputChange} type="number" size="small" value={currentValue} ref={inputEl}>
           <div slot="suffix">
             <div onClickCapture={() => handleAcceptClick()}>
               <RuxIcon icon="check" size="extra-small"></RuxIcon>
