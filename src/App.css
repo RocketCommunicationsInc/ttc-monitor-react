@@ -122,3 +122,8 @@ rux-time-region::part(container) {
   border: 1px solid var(--color-border-interactive-muted);
   border-left: none;
 }
+
+/* added to center align indicator with table row */
+rux-tree-node::part(indicator) {
+  margin-top: 0.3rem;
+}
