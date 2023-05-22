@@ -12,13 +12,7 @@ import {
 import AlertListItem from "./AlertListItem";
 import useAlerts from "../../hooks/useAlerts";
 import { Category, Status } from "../../Types";
-
-const styles = {
-  selectAllCheckbox: {
-    marginLeft: "1.25rem",
-    marginRight: "2.5rem",
-  },
-};
+import "./AlertsList.css";
 
 type PropTypes = {
   severitySelection: Status | "all";
@@ -88,14 +82,13 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
             <RuxTableHeaderRow>
               <RuxTableHeaderCell>
                 <RuxCheckbox
-                  style={styles.selectAllCheckbox}
                   onRuxchange={selectAllHandler}
                   className="select-all-checkbox"
                   checked={allSelected}
                 />
-                <span style={{ marginLeft: "var(--spacing-4)" }}> Message</span>
-                <span style={{ marginLeft: "5.8rem" }}>Category</span>
-                <span style={{ marginLeft: "var(--spacing-6)" }}>Time</span>
+                <span id="message-header"> Message</span>
+                <span id="category-header">Category</span>
+                <span id="time-header">Time</span>
               </RuxTableHeaderCell>
             </RuxTableHeaderRow>
           </RuxTableHeader>
@@ -111,8 +104,8 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
           <RuxButton
             secondary
             onClick={deleteSelectedAlerts}
-            style={{ marginRight: "1rem" }}
             disabled={!anySelected}
+            className="dismiss-btn"
           >
             Dismiss
           </RuxButton>

@@ -11,47 +11,7 @@ import {
 import { Alert } from "../../Types";
 import useAlerts from "../../hooks/useAlerts";
 import { useState } from "react";
-
-const styles = {
-  accordianLabel: {
-    color: "var(--color-palette-neutral-000)",
-  },
-  checkboxes: {
-    paddingRight: "var(--spacing-4)",
-  },
-  alertMessage: {
-    minWidth: "9rem",
-    maxWidth: "9rem",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    borderBottom: "none",
-  },
-  alertCategory: {
-    width: "4.75rem",
-    alignSelf: "center",
-    paddingLeft: "1.1rem",
-    borderBottom: "none",
-    textTransform: "capitalize",
-  },
-  alertTime: {
-    width: "1.7rem",
-    paddingLeft: ".6rem",
-    alignSelf: "left",
-    borderBottom: "none",
-  },
-  investigateBtn: {
-    display: "flex",
-    justifyContent: "center",
-    paddingBlock: "var(--spacing-2)",
-  },
-  status: {
-    borderBottom: "none",
-  },
-  checkbox: {
-    textAlign: "center",
-    borderBottom: "none",
-  },
-};
+import "./AlertListItem.css";
 
 type PropTypes = {
   alertItem: Alert;
@@ -87,32 +47,31 @@ const AlertListItem = ({ alertItem }: PropTypes) => {
       <RuxAccordion>
         <RuxAccordionItem id={alertItem.id} className="accordion-item">
           {alertItem.message} <br />
-          <div style={styles.investigateBtn}>
+          <div className="investigate-btn">
             <RuxButton icon="launch" onClick={investigateHandler}>
               Investigate
             </RuxButton>
           </div>
-          <div slot="label" style={styles.accordianLabel}>
+          <div slot="label" className="accordion-label">
             <RuxTableRow>
-              <RuxTableCell style={styles.checkbox}>
+              <RuxTableCell className="checkbox-cell">
                 <RuxCheckbox
                   id={alertItem.id}
-                  style={styles.checkboxes}
                   className="checkboxes"
                   checked={alertItem.selected}
                   onRuxchange={checkboxHandler}
                 />
               </RuxTableCell>
-              <RuxTableCell style={styles.status}>
+              <RuxTableCell className="status">
                 <RuxStatus status={alertItem.status} />
               </RuxTableCell>
-              <RuxTableCell style={styles.alertMessage}>
+              <RuxTableCell className="alert-message">
                 {alertItem.message}
               </RuxTableCell>
-              <RuxTableCell style={styles.alertCategory}>
+              <RuxTableCell className="alert-category">
                 {alertItem.category}
               </RuxTableCell>
-              <RuxTableCell style={styles.alertTime}>
+              <RuxTableCell className="alert-time">
                 {new Date(alertItem.timestamp).toTimeString().slice(0, 8)}
               </RuxTableCell>
             </RuxTableRow>

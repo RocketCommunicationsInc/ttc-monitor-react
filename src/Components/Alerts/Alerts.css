@@ -1,0 +1,37 @@
+.alert {
+overflow: hidden;
+}
+
+.active-alerts {
+display: flex;
+flex: auto;
+flex-flow: column nowrap;
+font-size: var(--font-size-base);
+margin-right: 8rem;
+}
+
+.select-menu-div {
+margin-left: auto;
+display: flex;
+}
+
+.alerts-num {
+font-size: var(--font-size-5xl);
+font-weight: var(--font-weights-bold);
+}
+
+.severity-select {
+ width: var(--spacing-24);
+margin-right: var(--spacing-4);
+}
+
+.category-select {
+width: var(--spacing-24);
+}
+
+.header {
+display: flex;
+align-items: center;
+text-align: center;
+margin-right: auto;
+}

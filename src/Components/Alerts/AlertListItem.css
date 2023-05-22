@@ -1,0 +1,45 @@
+.accordion-label {
+color: var(--color-palette-neutral-000);
+}
+
+.checkboxes {
+padding-right: var(--spacing-4)
+}
+
+.checkbox-cell {
+text-align: center;
+ border-bottom: none;
+}
+
+.alert-message {
+min-width: 9rem;
+max-width: 9rem;
+overflow: hidden;
+text-overflow: ellipsis;
+ border-bottom: none;
+}
+
+.alert-category {
+width: 4.75rem;
+align-self: center;
+padding-left: 1.1rem;
+border-bottom: none;
+text-transform: capitalize;
+}
+
+.alert-time {
+width: 1.7rem;
+padding-left: .6rem;
+align-self: left;
+ border-bottom: none;
+}
+
+.investigate-btn {
+display: flex;
+justify-content: center;
+padding-block: var(--spacing-2);
+}
+
+.status {
+border-bottom: none;
+}
