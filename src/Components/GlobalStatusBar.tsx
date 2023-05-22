@@ -77,7 +77,7 @@ const GlobalStatusBar = () => {
       <RuxClock style={styles.clock} />
 
       <div style={styles.statusIndicators}>
-        <RuxTooltip title={`Ground ${notifications1}`} className="GSB-tooltip">
+        <RuxTooltip message={`Ground ${notifications1}`} placement="bottom">
           <RuxPopUp placement="bottom">
             <RuxMenu>
               <RuxMenuItem onClick={popupMenuHandler}>Investigate</RuxMenuItem>
@@ -93,7 +93,7 @@ const GlobalStatusBar = () => {
           </RuxPopUp>
         </RuxTooltip>
 
-        <RuxTooltip title={`Comms ${notifications2}`} className="GSB-tooltip">
+        <RuxTooltip message={`Comms ${notifications2}`} placement="bottom">
           <RuxPopUp placement="bottom">
             <RuxMenu>
               <RuxMenuItem onClick={popupMenuHandler}>Investigate</RuxMenuItem>
@@ -109,7 +109,7 @@ const GlobalStatusBar = () => {
           </RuxPopUp>
         </RuxTooltip>
 
-        <RuxTooltip title={`Software ${notifications3}`} className="GSB-tooltip">
+        <RuxTooltip message={`Software ${notifications3}`} placement="bottom">
           <RuxPopUp placement="bottom">
             <RuxMenu>
               <RuxMenuItem onClick={popupMenuHandler}>Investigate</RuxMenuItem>
