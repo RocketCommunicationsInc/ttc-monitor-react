@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import {
   RuxTable,
   RuxTableHeader,
@@ -99,12 +99,13 @@ const CostellationList = ({
     setSortedContactIds(newSortedContactIds);
   };
 
-  const popupMenuHandler = () => {
+  const popupMenuHandler = (e: MouseEvent<HTMLSpanElement>) => {
+    e.stopPropagation();
     setOpenFeatureUnavailable(true);
   };
 
-  const prePasshandler = (e: MouseEvent) => {
-    e.stopPropagation()
+  const prePasshandler = (e: MouseEvent<HTMLRuxIconElement>) => {
+    e.stopPropagation();
     setOpenPrePassBanner(true);
   };
 
@@ -283,7 +284,7 @@ const CostellationList = ({
                         style={styles.satIcon}
                         size="1rem"
                         icon="launch"
-                        onClick={prePasshandler}
+                        onClick={(e) => prePasshandler(e)}
                       />
                     </RuxTableCell>
                   ) : (
@@ -309,10 +310,10 @@ const CostellationList = ({
                   </RuxTableCell>
                   <RuxPopUp placement="bottom">
                     <RuxMenu>
-                      <RuxMenuItem onClick={popupMenuHandler}>
+                      <RuxMenuItem onClick={(e) => popupMenuHandler(e)}>
                         View Pass Plan
                       </RuxMenuItem>
-                      <RuxMenuItem onClick={popupMenuHandler}>
+                      <RuxMenuItem onClick={(e) => popupMenuHandler(e)}>
                         Playback Last Pass
                       </RuxMenuItem>
                     </RuxMenu>
@@ -321,6 +322,7 @@ const CostellationList = ({
                         style={styles.moreHorizIcon}
                         icon="more-horiz"
                         size="1.5rem"
+                        onClick={(e) => e.stopPropagation()}
                       />
                     </RuxTableCell>
                   </RuxPopUp>
