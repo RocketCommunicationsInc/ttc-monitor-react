@@ -8,11 +8,11 @@ margin-right: 1rem;
 }
 
 #message-header {
-margin-left: var(--spacing-4);
+margin-left: 2.75rem;
 }
 
 #category-header {
-margin-left: 5.8rem;
+margin-left: 6rem;
 }
 
 #time-header {
