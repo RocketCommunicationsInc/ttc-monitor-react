@@ -36,10 +36,12 @@ const Watcher = () => {
     });
 
     const toggleSelected = (element: HTMLElement) => {
+      if (element.className !== "rux-input") return 
       tableRows?.forEach((row, index) => {
         row.removeAttribute("selected");
       });
       element.setAttribute("selected", "");
+      
       setSelectedIndex(Number(element.dataset.index));
     };
   }, []);

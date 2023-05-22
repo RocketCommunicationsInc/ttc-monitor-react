@@ -11,12 +11,12 @@ const ThresholdInput = ({ savedValue }: PropTypes) => {
 
   const inputEl = useRef<any>();
 
-  const onAcceptClick = () => {
+  const handleAcceptClick = () => {
     setCurrentValue(inputEl.current.value);
     setShowInput(false);
   };
 
-  const onCancelClick = () => {
+  const handleCancelClick = () => {
     setCurrentValue(savedValue);
     setShowInput(false);
   };
@@ -26,10 +26,10 @@ const ThresholdInput = ({ savedValue }: PropTypes) => {
       {showInput ? (
         <RuxInput type="number" size="small" value={currentValue} ref={inputEl}>
           <div slot="suffix">
-            <div onClickCapture={() => onAcceptClick()}>
+            <div onClickCapture={() => handleAcceptClick()}>
               <RuxIcon icon="check" size="extra-small"></RuxIcon>
             </div>
-            <div onClickCapture={() => onCancelClick()}>
+            <div onClickCapture={() => handleCancelClick()}>
               <RuxIcon icon="close" size="extra-small"></RuxIcon>
             </div>
           </div>

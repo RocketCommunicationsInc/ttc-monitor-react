@@ -164,8 +164,8 @@ rux-time-region::part(container) {
 
 .watcher rux-input::part(form-field) {
   position: relative;
-  left: 40px;
-  width: 100px;
+  left: 30px;
+  width: 110px;
   box-shadow: rgba(0, 0, 0, 0.45) 0px 0.25rem 0.5rem;
 }
 
