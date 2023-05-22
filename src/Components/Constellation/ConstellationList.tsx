@@ -103,9 +103,9 @@ const CostellationList = ({
     setOpenFeatureUnavailable(true);
   };
 
-  const prePasshandler = () => {
+  const prePasshandler = (e: MouseEvent) => {
+    e.stopPropagation()
     setOpenPrePassBanner(true);
-    toggleDrawer(); //prevents drawer from opening simultaneously on icon click
   };
 
   return (
