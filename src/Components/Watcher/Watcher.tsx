@@ -32,17 +32,21 @@ const Watcher = () => {
     tableRows?.[0].setAttribute("selected", "");
 
     tableRows?.forEach((row) => {
-      row.addEventListener("click", () => toggleSelected(row));
+      row.addEventListener("click", (event) => toggleSelected(event));
     });
 
-    const toggleSelected = (element: HTMLElement) => {
-      if (element.className !== "rux-input") return 
-      tableRows?.forEach((row, index) => {
+    const toggleSelected = (event: any) => {
+      const watcherDiv = document.querySelector(".watcher");
+      const tableRows = watcherDiv?.querySelectorAll("rux-table-row");
+      const closestRow = event.target.closest('rux-table-row')
+
+      if (!closestRow || event.target.nodeName === 'RUX-INPUT') return 
+      tableRows?.forEach((row) => {
         row.removeAttribute("selected");
       });
-      element.setAttribute("selected", "");
+      closestRow.setAttribute("selected", "");
       
-      setSelectedIndex(Number(element.dataset.index));
+      setSelectedIndex(Number(closestRow.dataset.index));
     };
   }, []);
 
