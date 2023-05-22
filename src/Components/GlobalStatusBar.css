@@ -1,0 +1,11 @@
+.status-indicators {
+display: flex;
+}
+
+.clock {
+ margin-inline: auto;
+}
+
+.monitor-icons {
+ margin-inline: var(--spacing-3);
+}
