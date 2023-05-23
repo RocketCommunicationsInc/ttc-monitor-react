@@ -88,7 +88,7 @@ const GlobalStatusBar = () => {
         <RuxClock style={styles.clock} />
 
         <div style={styles.statusIndicators}>
-          <RuxTooltip message={`Ground ${notifications1}`}>
+          <RuxTooltip message={`Ground ${notifications1}`} placement="bottom">
             <RuxPopUp placement="bottom" closeOnSelect>
               <RuxMenu onRuxmenuselected={() => setOpenBanner(true)}>
                 <RuxMenuItem>Investigate</RuxMenuItem>
@@ -104,7 +104,7 @@ const GlobalStatusBar = () => {
             </RuxPopUp>
           </RuxTooltip>
 
-          <RuxTooltip message={`Comms ${notifications2}`}>
+          <RuxTooltip message={`Comms ${notifications2}`} placement="bottom">
             <RuxPopUp placement="bottom" closeOnSelect>
               <RuxMenu onRuxmenuselected={() => setOpenBanner(true)}>
                 <RuxMenuItem>Investigate</RuxMenuItem>
@@ -120,7 +120,7 @@ const GlobalStatusBar = () => {
             </RuxPopUp>
           </RuxTooltip>
 
-          <RuxTooltip message={`Software ${notifications3}`}>
+          <RuxTooltip message={`Software ${notifications3}`} placement="bottom">
             <RuxPopUp placement="bottom" closeOnSelect>
               <RuxMenu onRuxmenuselected={() => setOpenBanner(true)}>
                 <RuxMenuItem>Investigate</RuxMenuItem>
