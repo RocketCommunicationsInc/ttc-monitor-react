@@ -12,7 +12,6 @@ import {
 import AlertListItem from "./AlertListItem";
 import useAlerts from "../../hooks/useAlerts";
 import { Category, Status } from "../../Types";
-import "./AlertsList.css";
 
 type PropTypes = {
   severitySelection: Status | "all";

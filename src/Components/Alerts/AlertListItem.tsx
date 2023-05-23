@@ -11,7 +11,6 @@ import {
 import { Alert } from "../../Types";
 import useAlerts from "../../hooks/useAlerts";
 import { useState } from "react";
-import "./AlertListItem.css";
 
 type PropTypes = {
   alertItem: Alert;
@@ -45,36 +44,36 @@ const AlertListItem = ({ alertItem }: PropTypes) => {
         This feature has not been implemented.
       </RuxNotification>
       <RuxAccordion>
-        <RuxAccordionItem id={alertItem.id} className="accordion-item">
-          {alertItem.message} <br />
-          <div className="investigate-btn">
-            <RuxButton icon="launch" onClick={investigateHandler}>
-              Investigate
-            </RuxButton>
-          </div>
-          <div slot="label" className="accordion-label">
+        <RuxAccordionItem id={alertItem.id}>
+          <div slot="label">
             <RuxTableRow>
-              <RuxTableCell className="checkbox-cell">
+              <RuxTableCell>
                 <RuxCheckbox
                   id={alertItem.id}
-                  className="checkboxes"
                   checked={alertItem.selected}
                   onRuxchange={checkboxHandler}
                 />
               </RuxTableCell>
-              <RuxTableCell className="status">
+              <RuxTableCell>
                 <RuxStatus status={alertItem.status} />
               </RuxTableCell>
-              <RuxTableCell className="alert-message">
+              <RuxTableCell>
                 {alertItem.message}
               </RuxTableCell>
-              <RuxTableCell className="alert-category">
+              <RuxTableCell>
                 {alertItem.category}
               </RuxTableCell>
-              <RuxTableCell className="alert-time">
+              <RuxTableCell>
                 {new Date(alertItem.timestamp).toTimeString().slice(0, 8)}
               </RuxTableCell>
             </RuxTableRow>
+          </div>
+          {/* accordion item content */}
+          <div className="accordion-item__content">
+            <div>{alertItem.message}</div>
+            <RuxButton icon="launch" onClick={investigateHandler}>
+              Investigate
+            </RuxButton>
           </div>
         </RuxAccordionItem>
       </RuxAccordion>
