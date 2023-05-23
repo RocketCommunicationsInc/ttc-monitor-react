@@ -284,7 +284,7 @@ const CostellationList = ({
                         style={styles.satIcon}
                         size="1rem"
                         icon="launch"
-                        onClick={(e) => prePasshandler(e)}
+                        onClick={prePasshandler}
                       />
                     </RuxTableCell>
                   ) : (
@@ -310,10 +310,10 @@ const CostellationList = ({
                   </RuxTableCell>
                   <RuxPopUp placement="bottom">
                     <RuxMenu>
-                      <RuxMenuItem onClick={(e) => popupMenuHandler(e)}>
+                      <RuxMenuItem onClick={popupMenuHandler}>
                         View Pass Plan
                       </RuxMenuItem>
-                      <RuxMenuItem onClick={(e) => popupMenuHandler(e)}>
+                      <RuxMenuItem onClick={popupMenuHandler}>
                         Playback Last Pass
                       </RuxMenuItem>
                     </RuxMenu>
