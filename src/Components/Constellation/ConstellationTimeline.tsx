@@ -4,91 +4,55 @@ import {
   RuxTimeRegion,
   RuxRuler,
 } from "@astrouxds/react";
+import useContacts from "../../hooks/useContacts";
 
 type PropTypes = {
   zoomLevel: number;
 };
 
 const ConstellationTimeline = ({ zoomLevel }: PropTypes) => {
+  const { contacts, contactIds } = useContacts();
+
+  // const regions = [
+  //   "ALPH 6648",
+  //   "ECHO 1100",
+  //   "FOXI 3232",
+  //   "GOLF 5602",
+  //   "HOTL 0002",
+  //   "IRON 4090",
+  //   "JULI 3309",
+  //   "KILO 4684",
+  //   "LIMA 2017",
+  //   "MIKE 7509",
+  // ];
+
   return (
     <RuxTimeline
       timezone="America/New_York"
-      start="2021-02-01T00:00:00.000Z"
-      end="2021-02-03T00:00:00.000Z"
-      playhead="2021-02-01T04:00:00.000Z"
+      start="2023-05-23T00:09:00.000Z"
+      end="2023-05-24T18:00:09.695Z"
+      playhead="2023-05-23T04:00:00.000Z"
       interval="hour"
       zoom={zoomLevel}
     >
-      <RuxTrack>
-        <div slot="label">Region 1</div>
-        <RuxTimeRegion
-          start="2021-02-01T01:00:00Z"
-          end="2021-02-01T02:00:00Z"
-          status="serious"
-        >
-          Event 1.2
-        </RuxTimeRegion>
-      </RuxTrack>
-      <RuxTrack>
-        <div slot="label">Region 2</div>
-        <RuxTimeRegion
-          start="2021-02-01T10:00:00Z"
-          end="2021-02-01T12:00:00Z"
-          status="serious"
-        >
-          Event 2.1
-        </RuxTimeRegion>
-      </RuxTrack>
-      <RuxTrack>
-        <div slot="label">Region 3</div>
-        <RuxTimeRegion
-          start="2021-02-01T00:00:00Z"
-          end="2021-02-02T02:00:00Z"
-          status="standby"
-        >
-          Event 3.1
-        </RuxTimeRegion>
-      </RuxTrack>
-      <RuxTrack>
-        <div slot="label">Region 4</div>
-        <RuxTimeRegion
-          start="2021-02-01T03:00:00Z"
-          end="2021-02-02T04:33:00Z"
-          status="critical"
-        >
-          Event 4.1
-        </RuxTimeRegion>
-      </RuxTrack>
-      <RuxTrack>
-        <div slot="label">Region 5</div>
-        <RuxTimeRegion
-          start="2021-02-01T05:00:00Z"
-          end="2021-02-02T05:33:00Z"
-          status="caution"
-        >
-          Event 5.1
-        </RuxTimeRegion>
-      </RuxTrack>
-      <RuxTrack>
-        <div slot="label">Region 6</div>
-        <RuxTimeRegion
-          start="2021-02-01T05:00:00Z"
-          end="2021-02-02T05:33:00Z"
-          status="normal"
-        >
-          Event 6.1
-        </RuxTimeRegion>
-      </RuxTrack>
-      <RuxTrack>
-        <div slot="label">Region 7</div>
-        <RuxTimeRegion
-          start="2021-02-01T05:00:00Z"
-          end="2021-02-02T05:33:00Z"
-          status="normal"
-        >
-          Event 7.1
-        </RuxTimeRegion>
-      </RuxTrack>
+      {contactIds.map((contactId) => {
+        const beginDate = new Date(contacts[contactId].beginTimestamp).toISOString()
+          const endDate = new Date(contacts[contactId].endTimestamp).toISOString()
+        console.log(beginDate)
+        return (
+               <RuxTrack>
+          <div slot="label">{contacts[contactId].equipment.slice(0, 6)}</div>
+          <RuxTimeRegion
+            start={beginDate}
+            end={endDate}
+            status={contacts[contactId].status}
+          >
+            {contacts[contactId].satellite}
+          </RuxTimeRegion>
+        </RuxTrack>
+        )
+      }
+      )}
       <RuxTrack slot="ruler">
         <RuxRuler />
       </RuxTrack>
