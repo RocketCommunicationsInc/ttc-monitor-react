@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import {
   RuxTable,
   RuxTableHeader,
@@ -16,6 +16,24 @@ import {
   RuxButton,
 } from "@astrouxds/react";
 import { Contact } from "../../Types/contacts";
+
+const styles = {
+  satIcon: {
+    paddingLeft: ".5rem",
+    paddingBottom: ".3rem",
+    cursor: "pointer",
+  },
+  prePassBanner: {
+    color: "#B7DCFF",
+    textDecoration: "underline",
+    marginLeft: ".5rem",
+    cursor: "pointer",
+  },
+  moreHorizIcon: {
+    cursor: "pointer",
+    marginLeft: "1rem",
+  },
+};
 
 type PropTypes = {
   contacts: { [key: string]: Contact };
@@ -81,13 +99,14 @@ const CostellationList = ({
     setSortedContactIds(newSortedContactIds);
   };
 
-  const popupMenuHandler = () => {
+  const popupMenuHandler = (e: MouseEvent<HTMLSpanElement>) => {
+    e.stopPropagation();
     setOpenFeatureUnavailable(true);
   };
 
-  const prePasshandler = () => {
+  const prePasshandler = (e: MouseEvent<HTMLRuxIconElement>) => {
+    e.stopPropagation();
     setOpenPrePassBanner(true);
-    toggleDrawer(); //prevents drawer from opening simultaneously on icon click
   };
 
   return (
@@ -295,7 +314,11 @@ const CostellationList = ({
                       </RuxMenuItem>
                     </RuxMenu>
                     <RuxTableCell slot="trigger">
-                      <RuxIcon icon="more-horiz" size="1.5rem" />
+                      <RuxIcon
+                        icon="more-horiz"
+                        size="1.5rem"
+                        onClick={(e) => e.stopPropagation()}
+                      />
                     </RuxTableCell>
                   </RuxPopUp>
                 </RuxTableRow>

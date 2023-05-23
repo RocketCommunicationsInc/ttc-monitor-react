@@ -67,26 +67,20 @@ const GlobalStatusBar = () => {
         appName="MONITOR"
         username="J. Smith"
       >
-        <RuxPopUp placement="top-start" slot="left-side">
+        <RuxPopUp placement="top-start" slot="left-side" closeOnSelect>
           <RuxIcon slot="trigger" size="small" icon="apps" />
-          <RuxMenu>
-            <RuxMenuItem onClick={() => setOpenBanner(true)}>
-              Preferences
-            </RuxMenuItem>
-            <RuxMenuItem onClick={() => setOpenBanner(true)}>
-              Sign Out
-            </RuxMenuItem>
+          <RuxMenu onRuxmenuselected={() => setOpenBanner(true)}>
+            <RuxMenuItem>Preferences</RuxMenuItem>
+            <RuxMenuItem>Sign Out</RuxMenuItem>
           </RuxMenu>
         </RuxPopUp>
-        <RuxClock />
+        <RuxClock/>
 
         <div className="status-indicators" slot="right-side">
-          <RuxTooltip title={`Ground ${notifications1}`}>
-            <RuxPopUp placement="bottom">
-              <RuxMenu>
-                <RuxMenuItem onClick={() => setOpenBanner(true)}>
-                  Investigate
-                </RuxMenuItem>
+          <RuxTooltip message={`Ground ${notifications1}`} placement="bottom">
+            <RuxPopUp placement="bottom" closeOnSelect>
+              <RuxMenu onRuxmenuselected={() => setOpenBanner(true)}>
+                <RuxMenuItem>Investigate</RuxMenuItem>
               </RuxMenu>
               <RuxMonitoringIcon
                 status={status1}
@@ -98,12 +92,10 @@ const GlobalStatusBar = () => {
             </RuxPopUp>
           </RuxTooltip>
 
-          <RuxTooltip title={`Comms ${notifications2}`}>
-            <RuxPopUp placement="bottom">
-              <RuxMenu>
-                <RuxMenuItem onClick={() => setOpenBanner(true)}>
-                  Investigate
-                </RuxMenuItem>
+          <RuxTooltip message={`Comms ${notifications2}`} placement="bottom">
+            <RuxPopUp placement="bottom" closeOnSelect>
+              <RuxMenu onRuxmenuselected={() => setOpenBanner(true)}>
+                <RuxMenuItem>Investigate</RuxMenuItem>
               </RuxMenu>
               <RuxMonitoringIcon
                 status={status2}
@@ -115,12 +107,10 @@ const GlobalStatusBar = () => {
             </RuxPopUp>
           </RuxTooltip>
 
-          <RuxTooltip title={`Software ${notifications3}`}>
-            <RuxPopUp placement="bottom">
-              <RuxMenu>
-                <RuxMenuItem onClick={() => setOpenBanner(true)}>
-                  Investigate
-                </RuxMenuItem>
+          <RuxTooltip message={`Software ${notifications3}`} placement="bottom">
+            <RuxPopUp placement="bottom" closeOnSelect>
+              <RuxMenu onRuxmenuselected={() => setOpenBanner(true)}>
+                <RuxMenuItem>Investigate</RuxMenuItem>
               </RuxMenu>
               <RuxMonitoringIcon
                 status={status3}
