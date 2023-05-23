@@ -78,29 +78,6 @@ rux-table-header {
   z-index: 10;
 }
 
-.watcher rux-container::part(toolbar) {
-  background-color: var(--color-background-surface-selected);
-  padding: 10px;
-}
-
-.watcher .mneumonic-popup-value[slot="trigger"]:hover {
-  border-bottom: 1px solid var(--color-palette-brightblue-300);
-}
-
-.watcher rux-table-header-cell {
-  text-align: right;
-}
-
-.watcher rux-table-header-cell:nth-of-type(2) {
-  text-align: left;
-}
-
-.watcher .canvas-wrapper {
-  width: 60%;
-  border: 1px solid var(--color-border-interactive-muted);
-  border-left: none;
-}
-
 /* rux-accordion-item::part(label-wrapper) {
   flex-direction: row-reverse;
 } */

@@ -57,12 +57,8 @@ const AlertListItem = ({ alertItem }: PropTypes) => {
               <RuxTableCell>
                 <RuxStatus status={alertItem.status} />
               </RuxTableCell>
-              <RuxTableCell>
-                {alertItem.message}
-              </RuxTableCell>
-              <RuxTableCell>
-                {alertItem.category}
-              </RuxTableCell>
+              <RuxTableCell>{alertItem.message}</RuxTableCell>
+              <RuxTableCell>{alertItem.category}</RuxTableCell>
               <RuxTableCell>
                 {new Date(alertItem.timestamp).toTimeString().slice(0, 8)}
               </RuxTableCell>

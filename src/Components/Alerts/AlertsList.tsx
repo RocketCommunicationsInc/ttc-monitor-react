@@ -85,12 +85,12 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
                   className="select-all-checkbox"
                   checked={allSelected}
                 />
-                </RuxTableHeaderCell>
-                {/* Status Placeholder */}
-                <RuxTableHeaderCell></RuxTableHeaderCell>
-                <RuxTableHeaderCell>Message</RuxTableHeaderCell>
-                <RuxTableHeaderCell>Category</RuxTableHeaderCell>
-                <RuxTableHeaderCell>Time</RuxTableHeaderCell>
+              </RuxTableHeaderCell>
+              {/* Status Placeholder */}
+              <RuxTableHeaderCell></RuxTableHeaderCell>
+              <RuxTableHeaderCell>Message</RuxTableHeaderCell>
+              <RuxTableHeaderCell>Category</RuxTableHeaderCell>
+              <RuxTableHeaderCell>Time</RuxTableHeaderCell>
             </RuxTableHeaderRow>
           </RuxTableHeader>
           <RuxTableBody>

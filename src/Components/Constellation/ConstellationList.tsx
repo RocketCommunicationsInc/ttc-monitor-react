@@ -97,9 +97,7 @@ const CostellationList = ({
         onRuxclosed={() => setOpenPrePassBanner(false)}
       >
         Pre-Pass for is about to begin.
-        <span onClick={popupMenuHandler}>
-          Open Contact
-        </span>
+        <span onClick={popupMenuHandler}>Open Contact</span>
         <RuxButton
           iconOnly
           borderless
@@ -297,10 +295,7 @@ const CostellationList = ({
                       </RuxMenuItem>
                     </RuxMenu>
                     <RuxTableCell slot="trigger">
-                      <RuxIcon
-                        icon="more-horiz"
-                        size="1.5rem"
-                      />
+                      <RuxIcon icon="more-horiz" size="1.5rem" />
                     </RuxTableCell>
                   </RuxPopUp>
                 </RuxTableRow>

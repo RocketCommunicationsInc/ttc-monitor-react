@@ -1,32 +1,48 @@
+.watcher rux-container::part(toolbar) {
+  background-color: var(--color-background-surface-selected);
+  padding: 10px;
+}
+
+.watcher .mneumonic-popup-value[slot="trigger"]:hover {
+  border-bottom: 1px solid var(--color-palette-brightblue-300);
+}
+
+.watcher rux-table-header-cell {
+  text-align: right;
+}
+
+.watcher rux-table-header-cell:nth-of-type(2) {
+  text-align: left;
+}
+
+.watcher .canvas-wrapper {
+  width: 60%;
+  border: 1px solid var(--color-border-interactive-muted);
+  border-left: none;
+}
+
 /* MNEMONIC POP-UP STYLES */
 
-.pop-up-menu-div {
-  padding-right: 3rem;
-  padding-left: 1rem;
-  margin-block: 0.5rem;
+.watcher .pop-up-menu-div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
 }
 
-#volts {
-  margin-left: 4rem;
-  font-weight: var(--font-weights-bold);
+.mnemonic-pop-up-values div {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
 }
 
-#altitude-link {
-  margin-left: 1.5rem;
-}
-
-#value {
-  margin-top: 0.75rem;
-}
-
-#subsystem {
-  margin-bottom: 0.75rem;
-}
-
-.bold-values {
+.mnemonic-pop-up-values span:last-of-type,
+.mnemonic-pop-up-title,
+.mnemonic-pop-up rux-checkbox::part(label) {
   font-weight: var(--font-weights-bold);
 }
 
 .mneumonic-popup-value {
   color: var(--color-palette-brightblue-300);
+  display: flex;
 }

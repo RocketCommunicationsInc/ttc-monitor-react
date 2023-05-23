@@ -1,7 +1,7 @@
- /* ALERTS CONTAINER HEADER */
+/* ALERTS CONTAINER HEADER */
 
 .alerts div[slot="header"] {
-  display:flex;
+  display: flex;
   text-align: center;
   align-items: center;
   justify-content: space-between;
@@ -37,7 +37,7 @@
 }
 
 .alerts rux-table-header-cell {
-  height: 32px
+  height: 32px;
 }
 
 .alerts rux-table-header-cell:nth-of-type(1),
@@ -46,20 +46,20 @@
   margin-left: calc(8px + 8px);
 }
 
-.alerts rux-table-header-cell:nth-of-type(2), 
-.alerts rux-table-cell:nth-of-type(2){
-  width: 1rem;;
+.alerts rux-table-header-cell:nth-of-type(2),
+.alerts rux-table-cell:nth-of-type(2) {
+  width: 1rem;
 }
-.alerts rux-table-header-cell:nth-of-type(3), 
-.alerts rux-table-cell:nth-of-type(3){
+.alerts rux-table-header-cell:nth-of-type(3),
+.alerts rux-table-cell:nth-of-type(3) {
   width: 9rem;
   min-width: 9rem;
   max-width: 9rem;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.alerts rux-table-header-cell:nth-of-type(4), 
-.alerts rux-table-cell:nth-of-type(4){
+.alerts rux-table-header-cell:nth-of-type(4),
+.alerts rux-table-cell:nth-of-type(4) {
   width: 4.8rem;
   text-transform: capitalize;
 }
@@ -89,7 +89,7 @@
 
 /* ALERTS FOOTER STYLES */
 
-.alerts-footer{
+.alerts-footer {
   display: flex;
   gap: 1rem;
   justify-content: center;
