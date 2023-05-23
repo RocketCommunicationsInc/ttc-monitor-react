@@ -36,7 +36,7 @@
   background-color: var(--color-background-surface-header);
 }
 
-rux-table-header-cell {
+.alerts rux-table-header-cell {
   height: 32px
 }
 

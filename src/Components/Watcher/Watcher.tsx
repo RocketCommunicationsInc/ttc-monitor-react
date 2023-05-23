@@ -12,6 +12,7 @@ import {
 import type { rowDataObject, Status } from "../../Types";
 import LineChart from "./LineChart";
 import MnemonicPopUp from "./MnemonicPopUp";
+import "./Watcher.css";
 
 const styles = {
   container: {

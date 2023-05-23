@@ -16,7 +16,6 @@ import {
   RuxButton,
 } from "@astrouxds/react";
 import { Contact } from "../../Types/contacts";
-import "./ConstellationList.css";
 
 type PropTypes = {
   contacts: { [key: string]: Contact };
@@ -98,7 +97,7 @@ const CostellationList = ({
         onRuxclosed={() => setOpenPrePassBanner(false)}
       >
         Pre-Pass for is about to begin.
-        <span id="pre-pass-banner" onClick={popupMenuHandler}>
+        <span onClick={popupMenuHandler}>
           Open Contact
         </span>
         <RuxButton
@@ -256,11 +255,11 @@ const CostellationList = ({
                   key={contactId}
                   onClick={() => toggleDrawer(contactId)}
                 >
-                  <RuxTableCell className="status-t-cell">
+                  <RuxTableCell>
                     <RuxStatus status={contact.status} />
                   </RuxTableCell>
                   {contact.state === "ready" ? (
-                    <RuxTableCell id="ready-sat">
+                    <RuxTableCell>
                       {contact.satellite}
                       <RuxIcon
                         id="sat-icon"
@@ -279,7 +278,7 @@ const CostellationList = ({
                   <RuxTableCell>
                     {new Date(contact.los).toTimeString().slice(0, 8)}
                   </RuxTableCell>
-                  <RuxTableCell className="status-t-cell">
+                  <RuxTableCell>
                     <RuxStatus status={contact.status} />
                   </RuxTableCell>
                   <RuxTableCell>{contact.ground}</RuxTableCell>
@@ -299,7 +298,6 @@ const CostellationList = ({
                     </RuxMenu>
                     <RuxTableCell slot="trigger">
                       <RuxIcon
-                        id="more-horiz-icon"
                         icon="more-horiz"
                         size="1.5rem"
                       />

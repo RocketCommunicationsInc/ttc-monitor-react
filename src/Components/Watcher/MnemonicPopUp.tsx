@@ -1,5 +1,4 @@
 import { RuxCheckbox, RuxIcon, RuxMenu, RuxPopUp } from "@astrouxds/react";
-import "./MnemonicPopUp.css";
 
 type PropTypes = {
   triggerValue: string | number;
