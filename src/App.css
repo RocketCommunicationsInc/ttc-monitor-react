@@ -47,7 +47,7 @@ rux-container::part(body) {
 
 .table-wrapper {
   height: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 rux-table-header {
