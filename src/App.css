@@ -50,6 +50,11 @@ rux-container::part(body) {
   overflow-y: auto;
 }
 
+.timeline-wrapper {
+  height: 100%;
+  overflow-y: auto;
+}
+
 rux-table-header {
   top: 0;
   position: sticky;
