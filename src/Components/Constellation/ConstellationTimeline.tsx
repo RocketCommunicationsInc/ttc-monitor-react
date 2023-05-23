@@ -3,6 +3,7 @@ import {
   RuxTrack,
   RuxTimeRegion,
   RuxRuler,
+  RuxStatus,
 } from "@astrouxds/react";
 import useContacts from "../../hooks/useContacts";
 
@@ -32,7 +33,11 @@ const ConstellationTimeline = ({ zoomLevel }: PropTypes) => {
           ).toISOString();
           return (
             <RuxTrack>
-              <div slot="label">
+              <div slot="label" style={{ display: "flex" }}>
+                <RuxStatus
+                  style={{ paddingRight: ".5rem" }}
+                  status={contacts[contactId].status}
+                />
                 {contacts[contactId].satellite.slice(4, 10)}
               </div>
               <RuxTimeRegion
