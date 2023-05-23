@@ -52,10 +52,6 @@ rux-container::part(body) {
   background-color: var(--color-palette-darkblue-900);
 }
 
-.watcher .table-wrapper {
-  overflow-y: hidden;
-}
-
 rux-table-header {
   top: 0;
   position: sticky;

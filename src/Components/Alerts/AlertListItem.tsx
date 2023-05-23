@@ -6,9 +6,11 @@ import {
   RuxAccordion,
   RuxAccordionItem,
   RuxTableRow,
+  RuxNotification,
 } from "@astrouxds/react";
 import { Alert } from "../../Types";
 import useAlerts from "../../hooks/useAlerts";
+import { useState } from "react";
 
 const styles = {
   accordianLabel: {
@@ -22,21 +24,32 @@ const styles = {
     maxWidth: "9rem",
     overflow: "hidden",
     textOverflow: "ellipsis",
+    borderBottom: "none",
   },
   alertCategory: {
     width: "4.75rem",
     alignSelf: "center",
     paddingLeft: "1.1rem",
+    borderBottom: "none",
+    textTransform: "capitalize",
   },
   alertTime: {
     width: "1.7rem",
     paddingLeft: ".6rem",
     alignSelf: "left",
+    borderBottom: "none",
   },
   investigateBtn: {
     display: "flex",
     justifyContent: "center",
     paddingBlock: "var(--spacing-2)",
+  },
+  status: {
+    borderBottom: "none",
+  },
+  checkbox: {
+    textAlign: "center",
+    borderBottom: "none",
   },
 };
 
@@ -46,6 +59,7 @@ type PropTypes = {
 
 const AlertListItem = ({ alertItem }: PropTypes) => {
   const { toggleSelected } = useAlerts();
+  const [openBanner, setOpenBanner] = useState(false);
 
   const checkboxHandler = () => {
     toggleSelected(alertItem.id);
@@ -57,43 +71,55 @@ const AlertListItem = ({ alertItem }: PropTypes) => {
   };
 
   const investigateHandler = () => {
-    alert("This feature has not been implemented.");
+    setOpenBanner(true);
   };
 
   return (
-    <RuxAccordion>
-      <RuxAccordionItem id={alertItem.id} className="accordion-item">
-        {alertItem.message} <br />
-        <RuxButton onClick={investigateHandler} style={styles.investigateBtn}>
-          Investigate
-        </RuxButton>
-        <div slot="label" style={styles.accordianLabel}>
-          <RuxTableRow>
-            <RuxTableCell style={{ textAlign: "center" }}>
-              <RuxCheckbox
-                id={alertItem.id}
-                style={styles.checkboxes}
-                className="checkboxes"
-                checked={alertItem.selected}
-                onRuxchange={checkboxHandler}
-              />
-            </RuxTableCell>
-            <RuxTableCell>
-              <RuxStatus status={alertItem.status} />
-            </RuxTableCell>
-            <RuxTableCell style={styles.alertMessage}>
-              {alertItem.message}
-            </RuxTableCell>
-            <RuxTableCell style={styles.alertCategory}>
-              {alertItem.category}
-            </RuxTableCell>
-            <RuxTableCell style={styles.alertTime}>
-              {new Date(alertItem.timestamp).toTimeString().slice(0, 8)}
-            </RuxTableCell>
-          </RuxTableRow>
-        </div>
-      </RuxAccordionItem>
-    </RuxAccordion>
+    <>
+      <RuxNotification
+        small
+        closeAfter={3}
+        onRuxclosed={() => setOpenBanner(false)}
+        open={openBanner}
+      >
+        This feature has not been implemented.
+      </RuxNotification>
+      <RuxAccordion>
+        <RuxAccordionItem id={alertItem.id} className="accordion-item">
+          {alertItem.message} <br />
+          <div style={styles.investigateBtn}>
+            <RuxButton icon="launch" onClick={investigateHandler}>
+              Investigate
+            </RuxButton>
+          </div>
+          <div slot="label" style={styles.accordianLabel}>
+            <RuxTableRow>
+              <RuxTableCell style={styles.checkbox}>
+                <RuxCheckbox
+                  id={alertItem.id}
+                  style={styles.checkboxes}
+                  className="checkboxes"
+                  checked={alertItem.selected}
+                  onRuxchange={checkboxHandler}
+                />
+              </RuxTableCell>
+              <RuxTableCell style={styles.status}>
+                <RuxStatus status={alertItem.status} />
+              </RuxTableCell>
+              <RuxTableCell style={styles.alertMessage}>
+                {alertItem.message}
+              </RuxTableCell>
+              <RuxTableCell style={styles.alertCategory}>
+                {alertItem.category}
+              </RuxTableCell>
+              <RuxTableCell style={styles.alertTime}>
+                {new Date(alertItem.timestamp).toTimeString().slice(0, 8)}
+              </RuxTableCell>
+            </RuxTableRow>
+          </div>
+        </RuxAccordionItem>
+      </RuxAccordion>
+    </>
   );
 };
 
