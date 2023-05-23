@@ -78,9 +78,9 @@ const GlobalStatusBar = () => {
             </RuxMenuItem>
           </RuxMenu>
         </RuxPopUp>
-        <RuxClock className="clock" />
+        <RuxClock/>
 
-        <div className="status-indicators">
+        <div className="status-indicators" slot="right-side">
           <RuxTooltip title={`Ground ${notifications1}`}>
             <RuxPopUp placement="bottom">
               <RuxMenu>
@@ -93,7 +93,6 @@ const GlobalStatusBar = () => {
                 icon="antenna-off"
                 label="Ground"
                 notifications={notifications1}
-                className="monitor-icons"
                 slot="trigger"
               ></RuxMonitoringIcon>
             </RuxPopUp>
@@ -111,7 +110,6 @@ const GlobalStatusBar = () => {
                 icon="antenna-receive"
                 label="Comms"
                 notifications={notifications2}
-                className="monitor-icons"
                 slot="trigger"
               />
             </RuxPopUp>
@@ -129,7 +127,6 @@ const GlobalStatusBar = () => {
                 icon="processor"
                 label="Software"
                 notifications={notifications3}
-                className="monitor-icons"
                 slot="trigger"
               />
             </RuxPopUp>

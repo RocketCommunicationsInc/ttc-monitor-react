@@ -2,10 +2,6 @@
   display: flex;
 }
 
-.clock {
-  margin-inline: auto;
-}
-
-.monitor-icons {
+.status-indicators rux-monitoring-icon {
   margin-inline: var(--spacing-3);
 }
