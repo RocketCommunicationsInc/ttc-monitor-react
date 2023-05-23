@@ -6,16 +6,16 @@ import {
   RuxTableBody,
   RuxIcon,
 } from "@astrouxds/react";
-import PassPlanItem from "./PassPlanItem";
+import PassPlanItem, { PassPlanMnemonic } from "./PassPlanItem";
 import { getJulianDay } from "../../../data/utils";
-import passPlanData from "./passPlanData.json";
 import { Contact } from "../../../Types";
 
 type PropTypes = {
   contact: Contact;
+  passPlan: PassPlanMnemonic[];
 };
 
-const PassPlan = ({ contact }: PropTypes) => {
+const PassPlan = ({ contact, passPlan }: PropTypes) => {
   return (
     <div className="pass-plan-wrapper">
       <div className="next-pass-time">
@@ -38,7 +38,7 @@ const PassPlan = ({ contact }: PropTypes) => {
         </RuxTableHeader>
         <RuxTableBody>
           {/* Hard Coded Values */}
-          {passPlanData.map((step) => (
+          {passPlan.map((step) => (
             <PassPlanItem item={step} key={step.step} />
           ))}
         </RuxTableBody>

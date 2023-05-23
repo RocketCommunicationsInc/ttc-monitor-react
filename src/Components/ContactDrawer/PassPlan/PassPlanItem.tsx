@@ -6,7 +6,7 @@ import {
 } from "@astrouxds/react";
 import "./PassPlan.css";
 
-type PassPlanMnemonic = {
+export type PassPlanMnemonic = {
   step: string;
   command: string;
   runLength?: string;

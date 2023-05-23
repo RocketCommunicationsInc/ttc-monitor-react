@@ -168,7 +168,7 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
                 <ContactDetails contact={contact} />
               </RuxTabPanel>
               <RuxTabPanel aria-labelledby="pass-plan-tab">
-                <PassPlan contact={contact} />
+                <PassPlan contact={contact} passPlan={passPlanData} />
               </RuxTabPanel>
             </RuxTabPanels>
           </div>
