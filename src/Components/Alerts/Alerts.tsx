@@ -43,9 +43,9 @@ const Alerts = () => {
 
   return (
     <RuxContainer className="alerts">
-      <div slot="header" className="header">
+      <div slot="header">
         <div className="active-alerts">
-          <span className="alerts-num">{alertIds.length}</span> Active Alerts
+          <span>{alertIds.length}</span> Active Alerts
         </div>
         <div className="select-menu-div">
           <RuxSelect
@@ -53,7 +53,6 @@ const Alerts = () => {
             onRuxchange={severitySelectionHandler}
             size="small"
             label="Severity"
-            className="severity-select"
           >
             <RuxOption label="All" value="all" />
             <RuxOption label="Critical" value="critical" />
@@ -66,7 +65,6 @@ const Alerts = () => {
             onRuxchange={categorySelectionHandler}
             size="small"
             label="Category"
-            className="category-select"
           >
             <RuxOption label="All" value="all" />
             <RuxOption label="Hardware" value="hardware" />
