@@ -16,7 +16,7 @@ import {
   RuxButton,
 } from "@astrouxds/react";
 import { Contact } from "../../Types/contacts";
-import "./ConstellationList.css"
+import "./ConstellationList.css";
 
 type PropTypes = {
   contacts: { [key: string]: Contact };
@@ -287,9 +287,7 @@ const CostellationList = ({
                     {contact.azimuth.toString().slice(0, 7)}&deg;
                   </RuxTableCell>
                   <RuxTableCell>{contact.elevation}&deg;</RuxTableCell>
-                  <RuxTableCell id="state-t-cell">
-                    {contact.state}
-                  </RuxTableCell>
+                  <RuxTableCell id="state-t-cell">{contact.state}</RuxTableCell>
                   <RuxPopUp placement="bottom">
                     <RuxMenu>
                       <RuxMenuItem onClick={popupMenuHandler}>

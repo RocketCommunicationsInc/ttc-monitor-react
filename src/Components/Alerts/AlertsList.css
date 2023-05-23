@@ -1,20 +1,20 @@
 .select-all-checkbox {
-margin-left: 1.25rem;
-margin-right: 2.5rem;
+  margin-left: 1.25rem;
+  margin-right: 2.5rem;
 }
 
 .dismiss-btn {
-margin-right: 1rem;
+  margin-right: 1rem;
 }
 
 #message-header {
-margin-left: 2.75rem;
+  margin-left: 2.75rem;
 }
 
 #category-header {
-margin-left: 6rem;
+  margin-left: 6rem;
 }
 
 #time-header {
-margin-left: var(--spacing-6);
+  margin-left: var(--spacing-6);
 }

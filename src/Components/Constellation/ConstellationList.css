@@ -1,29 +1,29 @@
 #sat-icon {
-padding-left: .5rem;
-padding-bottom: .3rem;
-cursor: pointer;
+  padding-left: 0.5rem;
+  padding-bottom: 0.3rem;
+  cursor: pointer;
 }
 
 #pre-pass-banner {
-color: #B7DCFF;
-text-decoration: underline;
-margin-left: .5rem;
-cursor: pointer;
+  color: #b7dcff;
+  text-decoration: underline;
+  margin-left: 0.5rem;
+  cursor: pointer;
 }
 
 #more-horiz-icon {
-margin-left: 1rem;
-cursor: pointer;
+  margin-left: 1rem;
+  cursor: pointer;
 }
 
 .status-t-cell {
-padding-left: 1.5rem;
+  padding-left: 1.5rem;
 }
 
 #ready-sat {
-color: #B7DCFF;
+  color: #b7dcff;
 }
 
 #state-t-cell {
-text-transform: capitalize;
+  text-transform: capitalize;
 }

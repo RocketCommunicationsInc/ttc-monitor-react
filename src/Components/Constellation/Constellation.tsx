@@ -14,7 +14,7 @@ import {
 import useContacts from "../../hooks/useContacts";
 import ContactDrawer from "../ContactDrawer/ContactDrawer";
 import { Contact } from "../../Types";
-import "./Constellation.css"
+import "./Constellation.css";
 
 const Constellation = () => {
   const [content, setContent] = useState("List");
