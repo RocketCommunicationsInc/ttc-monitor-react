@@ -33,11 +33,19 @@ rux-container::part(body) {
   background-color: var(--color-palette-darkblue-900);
 }
 
-.alerts::part(body) {
+rux-container.alerts {
+  grid-area: alerts;
+}
+
+rux-container.constellation {
+  grid-area: constellation;
+}
+
+rux-container.alerts::part(body) {
   height: calc(100% - 220px);
 }
 
-.constellation::part(body) {
+rux-container.constellation::part(body) {
   height: calc(100% - 68px);
 }
 
@@ -50,39 +58,22 @@ rux-container::part(body) {
   overflow-y: auto;
 }
 
+.table-wrapper::-webkit-scrollbar-track {
+  margin-top: 32px;
+}
+
 rux-table-header {
   top: 0;
   position: sticky;
   z-index: 10;
 }
 
-.alerts {
-  grid-area: alerts;
-}
 
-.alerts-footer {
-  display: flex;
-  justify-content: center;
-  border-top: 1px solid var(--logHeaderBackgroundColor, rgb(20, 32, 44));
-  box-shadow: 0 -0.5rem 1.25rem rgba(0, 0, 0, 0.25);
-  height: 3rem;
-  padding: 2rem;
-  position: sticky;
-  bottom: 0;
-  background-color: #1b2d3e;
-}
 
 rux-accordion rux-table-row {
   width: 50px;
 }
 
-.constellation {
-  grid-area: constellation;
-}
-
-.table-wrapper::-webkit-scrollbar-track {
-  margin-top: 40px;
-}
 
 rux-timeline::part(time-region-container) {
   height: 84%;
@@ -137,6 +128,6 @@ rux-time-region::part(container) {
   border-left: none;
 }
 
-rux-accordion-item::part(label-wrapper) {
+/* rux-accordion-item::part(label-wrapper) {
   flex-direction: row-reverse;
-}
+} */

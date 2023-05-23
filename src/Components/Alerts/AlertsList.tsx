@@ -86,10 +86,12 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
                   className="select-all-checkbox"
                   checked={allSelected}
                 />
-                <span id="message-header"> Message</span>
-                <span id="category-header">Category</span>
-                <span id="time-header">Time</span>
-              </RuxTableHeaderCell>
+                </RuxTableHeaderCell>
+                {/* Status Placeholder */}
+                <RuxTableHeaderCell></RuxTableHeaderCell>
+                <RuxTableHeaderCell>Message</RuxTableHeaderCell>
+                <RuxTableHeaderCell>Category</RuxTableHeaderCell>
+                <RuxTableHeaderCell>Time</RuxTableHeaderCell>
             </RuxTableHeaderRow>
           </RuxTableHeader>
           <RuxTableBody>
@@ -100,19 +102,16 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
         </RuxTable>
       </div>
       <div className="alerts-footer">
-        <div>
-          <RuxButton
-            secondary
-            onClick={deleteSelectedAlerts}
-            disabled={!anySelected}
-            className="dismiss-btn"
-          >
-            Dismiss
-          </RuxButton>
-          <RuxButton onClick={deleteSelectedAlerts} disabled={!anySelected}>
-            Acknowledge
-          </RuxButton>
-        </div>
+        <RuxButton
+          secondary
+          onClick={deleteSelectedAlerts}
+          disabled={!anySelected}
+        >
+          Dismiss
+        </RuxButton>
+        <RuxButton onClick={deleteSelectedAlerts} disabled={!anySelected}>
+          Acknowledge
+        </RuxButton>
       </div>
     </>
   );
