@@ -30,14 +30,10 @@ const PassPlan = ({ contact, passPlan }: PropTypes) => {
               <span style={{ marginRight: "3.5rem" }}>Step</span>
               <span style={{ marginRight: "10.5rem" }}>Command</span>
               <span>Run Length</span>
-              {/* Step */}
             </RuxTableHeaderCell>
-            {/* <RuxTableHeaderCell>Command</RuxTableHeaderCell>
-            <RuxTableHeaderCell>Run Length</RuxTableHeaderCell> */}
           </RuxTableHeaderRow>
         </RuxTableHeader>
         <RuxTableBody>
-          {/* Hard Coded Values */}
           {passPlan.map((step) => (
             <PassPlanItem item={step} key={step.step} />
           ))}
