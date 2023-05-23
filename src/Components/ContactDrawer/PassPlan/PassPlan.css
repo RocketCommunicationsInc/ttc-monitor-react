@@ -1,0 +1,28 @@
+.pass-plan-wrapper {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.t-cell {
+  border-bottom: none;
+}
+
+.next-pass-time {
+  display: flex;
+  margin-block: 1.5rem;
+  align-items: center;
+  font-weight: bold;
+  justify-content: center;
+}
+
+.next-pass-time rux-icon {
+  margin-right: 0.5rem;
+}
+
+.t-cell-step {
+  width: 3rem;
+}
+
+.t-cell-command {
+  width: 16rem;
+}

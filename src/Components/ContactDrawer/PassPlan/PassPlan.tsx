@@ -4,86 +4,46 @@ import {
   RuxTableHeaderRow,
   RuxTableHeaderCell,
   RuxTableBody,
-  // RuxCheckbox,
-  // RuxButton,
+  RuxIcon,
 } from "@astrouxds/react";
 import PassPlanItem from "./PassPlanItem";
-// import { Contact } from "../../Types";
+import { getJulianDay } from "../../../data/utils";
+import passPlanData from "./passPlanData.json";
+import { Contact } from "../../../Types";
 
-// type PropTypes = {
-//   contact: Contact;
-// };
+type PropTypes = {
+  contact: Contact;
+};
 
-const data = [
-  { step: "1", command: "ON" },
-  { step: "2", command: "ENABLED" },
-  { step: "3", command: "OPEN" },
-  { step: "4", command: "< 1.25 Magnitude" },
-  { step: "5", command: "< 1.25 Magnitude" },
-  { step: "6", command: "Are you receiving Telemetry?" },
-  {
-    step: "7",
-    command: "81001",
-    runLength: "00:07:25",
-    subSteps: [
-      { step: "7-1", command: "1" },
-      { step: "7-2", command: "SEL" },
-      { step: "7-3", command: "RPG 1" },
-      { step: "7-4", command: "< /= 60 Amps" },
-    ],
-  },
-  {
-    step: "8",
-    command: "81002",
-    runLength: "00:07:25",
-    subSteps: [
-      { step: "8-1", command: "1" },
-      { step: "8-2", command: "SEL" },
-      { step: "8-3", command: "RPG 1" },
-      { step: "8-4", command: "< /= 60 Amps" },
-    ],
-  },
-  {
-    step: "9",
-    command: "81003",
-    runLength: "00:07:25",
-    subSteps: [
-      { step: "9-1", command: "1" },
-      { step: "9-2", command: "SEL" },
-      { step: "9-3", command: "RPG 1" },
-      { step: "9-4", command: "< /= 60 Amps" },
-    ],
-  },
-  {
-    step: "10",
-    command: "81004",
-    runLength: "00:07:25",
-    subSteps: [
-      { step: "10-1", command: "1" },
-      { step: "10-2", command: "SEL" },
-      { step: "10-3", command: "RPG 1" },
-      { step: "10-4", command: "< /= 60 Amps" },
-    ],
-  },
-];
-
-const PassPlan = () => {
+const PassPlan = ({ contact }: PropTypes) => {
   return (
-    <RuxTable>
-      <RuxTableHeader>
-        <RuxTableHeaderRow>
-          <RuxTableHeaderCell>Step</RuxTableHeaderCell>
-          <RuxTableHeaderCell>Command</RuxTableHeaderCell>
-          <RuxTableHeaderCell>Run Length</RuxTableHeaderCell>
-        </RuxTableHeaderRow>
-      </RuxTableHeader>
-      {/* Hard Coded Values */}
-      <RuxTableBody>
-        {data.map((step) => (
-          <PassPlanItem item={step} key={step.step} />
-        ))}
-      </RuxTableBody>
-    </RuxTable>
+    <div className="pass-plan-wrapper">
+      <div className="next-pass-time">
+        <RuxIcon icon="schedule" size="1.4rem" />
+        {`Next Pass: ${getJulianDay(new Date(contact.aos))}`} &nbsp;
+        {`AOS: ${new Date(contact.aos).toTimeString().slice(0, 8)}`}
+      </div>
+      <RuxTable style={{ borderBottom: "none" }}>
+        <RuxTableHeader>
+          <RuxTableHeaderRow>
+            <RuxTableHeaderCell>
+              <span style={{ marginRight: "3.5rem" }}>Step</span>
+              <span style={{ marginRight: "10.5rem" }}>Command</span>
+              <span>Run Length</span>
+              {/* Step */}
+            </RuxTableHeaderCell>
+            {/* <RuxTableHeaderCell>Command</RuxTableHeaderCell>
+            <RuxTableHeaderCell>Run Length</RuxTableHeaderCell> */}
+          </RuxTableHeaderRow>
+        </RuxTableHeader>
+        <RuxTableBody>
+          {/* Hard Coded Values */}
+          {passPlanData.map((step) => (
+            <PassPlanItem item={step} key={step.step} />
+          ))}
+        </RuxTableBody>
+      </RuxTable>
+    </div>
   );
 };
 
