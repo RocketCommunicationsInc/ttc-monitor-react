@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   RuxButton,
   RuxStatus,
@@ -7,9 +7,11 @@ import {
   RuxTabPanels,
   RuxTabPanel,
   RuxIcon,
+  RuxNotification,
 } from "@astrouxds/react";
-import ContactDetails from "./ContactDetails";
+import ContactDetails from "./ContactDetails/ContactDetails";
 import PassPlan from "./PassPlan/PassPlan";
+import passPlanData from "./PassPlan/passPlanData.json";
 
 import { Contact } from "../../Types";
 import "./ContactDrawer.css";
@@ -28,6 +30,9 @@ type PropTypes = {
 };
 
 const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
+  const [openBanner, setOpenBanner] = useState(false);
+  const [selectedTab, setSelectedTab] = useState("");
+  const passPlanRef = useRef<HTMLRuxTabElement | null>(null);
   const contactDrawer = useRef<HTMLElement | null>(null);
   const keydownHandler = useCallback(
     (event: KeyboardEvent) => {
@@ -37,6 +42,21 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
     },
     [toggle]
   );
+
+  //   Will only go up to 24 hours
+  const passPlanLength = useMemo(() => {
+    const total = passPlanData.reduce((acc, currentValue) => {
+      if (currentValue.runLength) {
+        const { runLength } = currentValue;
+        const hours = Number(runLength.slice(0, 2));
+        const minutes = Number(runLength.slice(3, 5));
+        const seconds = Number(runLength.slice(6));
+
+        return (acc += seconds * 1000 + minutes * 60000 + hours * 360000);
+      } else return acc;
+    }, 0);
+    return new Date(total).toUTCString().slice(-12, -4);
+  }, []);
 
   const openDrawer = () => {
     if (contactDrawer.current) {
@@ -80,20 +100,36 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
     return () => document.removeEventListener("keydown", keydownHandler);
   }, [open, keydownHandler]);
 
-  console.log("contact", contact);
-
   return (
     <section className={"drawer"} id="contact-drawer" ref={contactDrawer}>
-      <div className="drawer__overlay" tabIndex={-1}></div>
+      <div
+        className="drawer__overlay"
+        tabIndex={-1}
+        onClick={() => toggle()}
+      ></div>
       {contact ? (
         <div className="drawer__wrapper">
           <div className="drawer__header">
-            <div className="drawer__title">
+            <div
+              className="drawer__title"
+              style={{
+                textDecoration: "underline",
+                fontSize: "18px",
+              }}
+            >
               <RuxStatus
                 status={contact.status}
                 className="drawer-title-status"
               />
-              {contact.satellite}
+              <RuxButton borderless onClick={() => setOpenBanner(true)}>
+                {contact.satellite}
+              </RuxButton>
+              <RuxIcon
+                style={{ marginLeft: "-.75rem", cursor: "pointer" }}
+                size="1.15rem"
+                icon="launch"
+                onClick={() => setOpenBanner(true)}
+              />
             </div>
             <RuxButton
               borderless
@@ -105,11 +141,25 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
               Close
             </RuxButton>
           </div>
+          <RuxNotification
+            small
+            closeAfter={3}
+            onRuxclosed={() => setOpenBanner(false)}
+            open={openBanner}
+          >
+            This feature has not been implemented.
+          </RuxNotification>
           <div className="drawer__content">
             <div className="tabs-wrapper">
-              <RuxTabs small id="contact-drawer-tabs">
+              <RuxTabs
+                onRuxselected={(e) => setSelectedTab(e.detail.id)}
+                small
+                id="contact-drawer-tabs"
+              >
                 <RuxTab id="contact-details-tab">Contact Details</RuxTab>
-                <RuxTab id="pass-plan-tab">Pass Plan</RuxTab>
+                <RuxTab ref={passPlanRef} id="pass-plan-tab">
+                  Pass Plan
+                </RuxTab>
               </RuxTabs>
             </div>
 
@@ -118,44 +168,15 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
                 <ContactDetails contact={contact} />
               </RuxTabPanel>
               <RuxTabPanel aria-labelledby="pass-plan-tab">
-                <PassPlan />
+                <PassPlan contact={contact} />
               </RuxTabPanel>
             </RuxTabPanels>
-            {/* <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem in
-              aliquid nulla, sed veritatis, officiis ea aut natus quas
-              voluptates perferendis ratione modi ab qui omnis cum labore alias
-              eos.
-            </p>
-            <div style={{ padding: "50px 0" }}></div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam aut
-              exercitationem laborum vero tenetur officiis facilis eveniet sunt
-              quo voluptatibus sit reiciendis, iusto quia et quidem? Dolores
-              dolor et necessitatibus.
-            </p>
-            <div style={{ padding: "50px 0" }}></div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam aut
-              exercitationem laborum vero tenetur officiis facilis eveniet sunt
-              quo voluptatibus sit reiciendis, iusto quia et quidem? Dolores
-              dolor et necessitatibus.
-            </p>
-            <div style={{ padding: "50px 0" }}></div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam aut
-              exercitationem laborum vero tenetur officiis facilis eveniet sunt
-              quo voluptatibus sit reiciendis, iusto quia et quidem? Dolores
-              dolor et necessitatibus.
-            </p>
-            <div style={{ padding: "50px 0" }}></div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam aut
-              exercitationem laborum vero tenetur officiis facilis eveniet sunt
-              quo voluptatibus sit reiciendis, iusto quia et quidem? Dolores
-              dolor et necessitatibus.
-            </p> */}
           </div>
+          {selectedTab === "pass-plan-tab" ? (
+            <footer className="run-length-footer">
+              {`Total Run Length: ${passPlanLength}`}
+            </footer>
+          ) : null}
         </div>
       ) : null}
     </section>
