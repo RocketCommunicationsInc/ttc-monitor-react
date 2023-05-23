@@ -24,20 +24,19 @@ const ConstellationTimeline = ({ zoomLevel }: PropTypes) => {
         zoom={zoomLevel}
       >
         {contactIds.map((contactId) => {
-          const beginDate = new Date(
+          const startDate = new Date(
             contacts[contactId].beginTimestamp
           ).toISOString();
           const endDate = new Date(
             contacts[contactId].endTimestamp
           ).toISOString();
-          console.log(beginDate);
           return (
             <RuxTrack>
               <div slot="label">
                 {contacts[contactId].satellite.slice(4, 10)}
               </div>
               <RuxTimeRegion
-                start={beginDate}
+                start={startDate}
                 end={endDate}
                 status={contacts[contactId].status}
               >
