@@ -2,7 +2,7 @@ import { RuxIcon } from "@astrouxds/react";
 import { Contact } from "../../../Types";
 
 import "./ContactDetails.css";
-// import { getJulianDay } from "../../../data/utils";
+import { getJulianDay } from "../../../data/utils";
 
 type PropTypes = {
   contact: Contact;
@@ -22,7 +22,7 @@ const ContactDetails = ({ contact }: PropTypes) => {
         <p className="col-2 row-3">LOS</p>
         <p className="col-2 row-4">State</p>
         <p className="col-3 row-1 rux-body-1-bold">
-          {/* {getJulianDay(new Date(contact.beginTimestamp))} */}
+          {getJulianDay(new Date(contact.beginTimestamp))}
         </p>
         <p className="col-3 row-2 rux-body-1-bold">
           {new Date(contact.aos).toTimeString().slice(0, 8)}
