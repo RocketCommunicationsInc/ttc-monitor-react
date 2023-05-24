@@ -21,7 +21,7 @@ const ConstellationTimeline = ({ zoomLevel, toggleDrawer, options }: PropTypes) 
   const { contacts, contactIds } = useContacts();
 
  const time = faker.date.recent(options?.daysRange, options?.dateRef).getTime()
- const startTimeISO = new Date(time - randomMinutes(20, 60)).toISOString();
+ const startTimeISO = new Date(time - randomMinutes(0, 0)).toISOString();
  const endTimeISO = new Date(time + randomMinutes(825, 825)).toISOString()
  const playheadISO = new Date(Math.round(time) + randomMinutes(50, 60)).toISOString()
 
