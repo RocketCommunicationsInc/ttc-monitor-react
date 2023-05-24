@@ -50,7 +50,7 @@ const ConstellationTimeline = ({ zoomLevel }: PropTypes) => {
             </RuxTrack>
           );
         })}
-        <RuxTrack slot="ruler">
+        <RuxTrack slot="ruler" className="rux-ruler">
           <RuxRuler />
         </RuxTrack>
       </RuxTimeline>

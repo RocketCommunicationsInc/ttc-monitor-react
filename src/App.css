@@ -53,6 +53,9 @@ rux-container::part(body) {
 .timeline-wrapper {
   height: 100%;
   overflow-y: auto;
+  position: relative;
+  display: flex;
+  flex-direction: row;
 }
 
 rux-table-header {
@@ -60,6 +63,41 @@ rux-table-header {
   position: sticky;
   z-index: 10;
 }
+
+/* rux-timeline rux-track.rux-ruler[slot="ruler"]{
+  position: sticky;
+  bottom: 0;
+  background-color: red;
+} */
+
+rux-timeline rux-track:last-child::part(container){
+  background-color: blueviolet;
+  position: sticky !important;
+  position: -webkit-sticky;
+  bottom: 0 !important;
+  /* display: flex;
+  justify-content: center; */
+}
+
+rux-timeline rux-track:last-child::part(track-header) {
+  background-color: blueviolet;
+  position: sticky !important;
+  position: -webkit-sticky;
+  bottom: 0 !important;
+  /* display: flex;
+  justify-content: center; */
+}
+
+.timeline-wrapper::-webkit-scrollbar:horizontal {
+  position: sticky;
+  bottom: 0;
+}
+
+/* rux-timeline rux-track.rux-ruler::part(container) {
+  background-color: red;
+  position: sticky !important;
+  bottom: 0 !important;
+} */
 
 .alerts {
   grid-area: alerts;
