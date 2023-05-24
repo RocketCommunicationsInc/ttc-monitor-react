@@ -38,10 +38,6 @@
   cursor: pointer;
 }
 
-.constellation rux-table-cell:has(rux-status) {
-  padding-left: 1.5rem;
-}
-
 .constellation rux-table-cell:has(#sat-icon) {
   color: #b7dcff;
 }
@@ -59,6 +55,7 @@
 /* TIMELINE STYLES */
 
 /* .constellation rux-time-region::part(container) {
+  margin: 3px;
   border: 1px solid var(--color-border-interactive-muted);
 } */
 

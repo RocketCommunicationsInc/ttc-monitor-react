@@ -33,7 +33,7 @@
 .alerts rux-table-header-row {
   display: flex;
   background-color: var(--color-background-surface-header);
-  padding-left: 28px;
+  /* padding-left: 28px; */
 }
 
 .alerts rux-table-header-cell {
@@ -67,9 +67,13 @@
 
 /* ACCORDION ITEM STYLES */
 
-.alerts rux-accordion-item::part(label-wrapper) {
+/* .alerts rux-accordion-item::part(label-wrapper) {
   flex-direction: row-reverse;
 }
+
+.alerts rux-accordion-item::part(indicator) {
+  transform: rotate(-90deg);
+} */
 
 .alerts rux-accordion-item::part(container) {
   padding-inline: 0px;
@@ -101,9 +105,9 @@
 .alerts div[slot="footer"] {
   display: flex;
   gap: 1rem;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   box-shadow: 0 -0.5rem 1.25rem rgba(0, 0, 0, 0.25);
-  height: 3rem;
+  /* height: 3rem; */
   padding: 2rem;
 }

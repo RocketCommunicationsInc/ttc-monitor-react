@@ -71,8 +71,10 @@ const LineChart = ({ subtitle }: PropTypes) => {
     maintainAspectRatio: false,
     layout: {
       padding: {
-        top: 5,
-        left: 3,
+        top: 16,
+        left: 24,
+        right: 24,
+        bottom: 16
       },
     },
     scales: {

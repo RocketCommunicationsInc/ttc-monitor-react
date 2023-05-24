@@ -61,7 +61,7 @@ rux-container.constellation::part(body) {
   height: calc(100% - 100px);
 }
 
-/* TABLE STYLES */
+/* GlOBALTABLE STYLES */
 
 .table-wrapper {
   height: 100%;
@@ -78,6 +78,6 @@ rux-table-header {
   z-index: 10;
 }
 
-/* rux-accordion-item::part(label-wrapper) {
-  flex-direction: row-reverse;
-} */
+rux-status::part(status){
+  margin-inline: auto;
+}
