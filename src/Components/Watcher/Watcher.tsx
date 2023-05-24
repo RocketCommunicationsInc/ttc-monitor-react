@@ -8,6 +8,7 @@ import {
   RuxTableBody,
   RuxTree,
   RuxTreeNode,
+  RuxNotification
 } from "@astrouxds/react";
 import type { Mnemonic } from "../../Types";
 import LineChart from "./LineChart";
@@ -24,6 +25,7 @@ const mnemonicsData = generateMnemonics(4);
 
 const Watcher = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [openBanner, setOpenBanner] = useState(false);  
 
   useEffect(() => {
     const watcherDiv = document.querySelector(".watcher");
@@ -56,6 +58,14 @@ const Watcher = () => {
         <div slot="header" style={styles.container}>
           Watcher
         </div>
+        <RuxNotification
+          small
+          closeAfter={3}
+          onRuxclosed={() => setOpenBanner(false)}
+          open={openBanner}
+        >
+          This feature has not been implemented.
+        </RuxNotification>
         <RuxTree>
           <RuxTreeNode expanded>
             IRON 4090
@@ -78,7 +88,7 @@ const Watcher = () => {
                   </RuxTableHeader>
                   <RuxTableBody>
                     {mnemonicsData.map((dataObj: Mnemonic, index) => (
-                      <WatcherListItem rowData={dataObj} index={index} />
+                      <WatcherListItem rowData={dataObj} index={index} setOpenBanner={setOpenBanner} />
                     ))}
                   </RuxTableBody>
                 </RuxTable>

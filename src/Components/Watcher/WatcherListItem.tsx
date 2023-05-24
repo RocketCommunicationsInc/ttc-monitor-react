@@ -14,13 +14,10 @@ import ThresholdInput from "./ThresholdInput";
 type PropTypes = {
   rowData: Mnemonic;
   index: number;
+  setOpenBanner: React.Dispatch<React.SetStateAction<boolean>>
 };
 
-const WatcherListItem = ({ rowData, index }: PropTypes) => {
-  const popupMenuHandler = () => {
-    alert("This feature has not been implemented.");
-  };
-
+const WatcherListItem = ({ rowData, index, setOpenBanner }: PropTypes) => {
   const getCellContent = (key: string, value: any) => {
     switch (key) {
       case "status":
@@ -56,9 +53,9 @@ const WatcherListItem = ({ rowData, index }: PropTypes) => {
         );
       })}
       <RuxTableCell>
-        <RuxPopUp placement="left">
+        <RuxPopUp placement="left" closeOnSelect>
           <RuxIcon slot="trigger" icon="more-horiz" size="small" />
-          <RuxMenu onRuxmenuselected={popupMenuHandler}>
+          <RuxMenu onRuxmenuselected={() => setOpenBanner(true)}>
             <RuxMenuItem>Investigate</RuxMenuItem>
             <RuxMenuItem>Remove</RuxMenuItem>
           </RuxMenu>
