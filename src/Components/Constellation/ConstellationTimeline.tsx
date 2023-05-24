@@ -6,22 +6,32 @@ import {
   RuxStatus,
 } from "@astrouxds/react";
 import useContacts from "../../hooks/useContacts";
+import { faker } from "@faker-js/faker";
+import { ContactOptions } from "../../Types";
+import { randomMinutes } from "../../data/utils";
+
 
 type PropTypes = {
   zoomLevel: number;
   toggleDrawer: (id?: string) => void;
+  options?: ContactOptions
 };
 
-const ConstellationTimeline = ({ zoomLevel, toggleDrawer }: PropTypes) => {
+const ConstellationTimeline = ({ zoomLevel, toggleDrawer, options }: PropTypes) => {
   const { contacts, contactIds } = useContacts();
+
+ const time = faker.date.recent(options?.daysRange, options?.dateRef).getTime()
+ const startTimeISO = new Date(time - randomMinutes(0, 20)).toISOString();
+ const endTimeISO = new Date(time + randomMinutes(800, 800)).toISOString()
+ const playheadISO = new Date(time + randomMinutes(50, 60)).toISOString()
 
   return (
     <div className="timeline-wrapper">
       <RuxTimeline
         timezone="UTC"
-        start="2023-05-24T03:00:00.000Z"
-        end="2023-05-24T23:00:00.005Z"
-        playhead="2023-05-24T06:00:00.000Z"
+        start={startTimeISO}
+        end={endTimeISO}
+        playhead={playheadISO}
         interval="hour"
         zoom={zoomLevel}
       >
