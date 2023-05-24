@@ -25,7 +25,7 @@ const styles = {
 
 const Constellation = () => {
   const [content, setContent] = useState("List");
-  const [zoomLevel, setZoomLevel] = useState(1);
+  const [zoomLevel, setZoomLevel] = useState(4);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [drawerContact, setDrawerContact] = useState<Contact | null>(null);
 
