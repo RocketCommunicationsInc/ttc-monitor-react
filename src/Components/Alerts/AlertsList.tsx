@@ -9,6 +9,7 @@ import {
   RuxTableBody,
   RuxCheckbox,
   RuxButton,
+  RuxStatus,
 } from "@astrouxds/react";
 import AlertListItem from "./AlertListItem";
 import useAlerts from "../../hooks/useAlerts";
@@ -116,6 +117,10 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
     // }
   };
 
+  // const statusIcons = filterAlerts.map((status) => {
+  //   return <RuxStatus status="caution" />;
+  // });
+
   const SelectAllCheckbox = () => (
     <RuxCheckbox
       // style={styles.selectAllCheckbox}
@@ -127,6 +132,7 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
 
   const rowClickedListener = (e: RowClickedEvent<Alert>) => {
     if (e.data) {
+      // e.node.setExpanded(e.node.expanded);
       // toggleSelected(e.data.id);
       // console.log(e.data);
       // console.log(alerts);
@@ -134,6 +140,7 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
     }
   };
 
+  // const masterDetail = true;
   const gridOptions: GridOptions<Alert> = {
     columnDefs: [
       {
@@ -142,12 +149,23 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
         maxWidth: 40,
         // headerComponent: SelectAllCheckbox,
       },
-      { field: "status" },
-      { field: "message", headerName: "Message" },
-      { field: "category", headerName: "Category" },
+      {
+        field: "",
+        cellRenderer: function () {
+          return <RuxStatus status="caution" />;
+        },
+        width: 10,
+      },
+      {
+        field: "message",
+        headerName: "Message",
+        // cellRenderer: "agGroupCellRenderer",
+      },
+      { field: "category", headerName: "Category", flex: 1 },
       {
         field: "timestamp",
         headerName: "Time",
+        flex: 1,
         valueFormatter: (params: ValueFormatterParams<Alert>) => {
           return params.data
             ? new Date(params.data?.timestamp).toTimeString().slice(0, 8)
@@ -164,10 +182,20 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
     onRowClicked: rowClickedListener,
   };
 
+  // const detailCellRendererParams = {
+  //   detailGridOptions: {
+  //     columnDefs: { field: "message" },
+  //   },
+  // };
+
   return (
     <>
       <div className="table-wrapper ag-theme-astro">
-        <AgGridReact rowData={filterAlerts} gridOptions={gridOptions} />
+        <AgGridReact
+          // detailCellRendererParams={detailCellRendererParams}
+          rowData={filterAlerts}
+          gridOptions={gridOptions}
+        />
         {/* <RuxTable>
           <RuxTableHeader>
             <RuxTableHeaderRow>
