@@ -32,8 +32,8 @@
 
 .alerts rux-table-header-row {
   display: flex;
-  min-width: 100%;
   background-color: var(--color-background-surface-header);
+  padding-left: 28px;
 }
 
 .alerts rux-table-header-cell {
@@ -66,6 +66,10 @@
 }
 
 /* ACCORDION ITEM STYLES */
+
+.alerts rux-accordion-item::part(label-wrapper) {
+  flex-direction: row-reverse;
+}
 
 .alerts rux-accordion-item::part(container) {
   padding-inline: 0px;
