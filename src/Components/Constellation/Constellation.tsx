@@ -85,7 +85,10 @@ const Constellation = () => {
             toggleDrawer={toggleDrawer}
           />
         ) : contactIds.length ? (
-          <ConstellationTimeline zoomLevel={zoomLevel} />
+          <ConstellationTimeline
+            toggleDrawer={toggleDrawer}
+            zoomLevel={zoomLevel}
+          />
         ) : null}
       </RuxContainer>
       <ContactDrawer

@@ -9,9 +9,10 @@ import useContacts from "../../hooks/useContacts";
 
 type PropTypes = {
   zoomLevel: number;
+  toggleDrawer: (id?: string) => void;
 };
 
-const ConstellationTimeline = ({ zoomLevel }: PropTypes) => {
+const ConstellationTimeline = ({ zoomLevel, toggleDrawer }: PropTypes) => {
   const { contacts, contactIds } = useContacts();
 
   return (
@@ -41,6 +42,7 @@ const ConstellationTimeline = ({ zoomLevel }: PropTypes) => {
                 {contacts[contactId].satellite.slice(4, 10)}
               </div>
               <RuxTimeRegion
+                onClick={() => toggleDrawer(contactId)}
                 start={startDate}
                 end={endDate}
                 status={contacts[contactId].status}
@@ -50,7 +52,7 @@ const ConstellationTimeline = ({ zoomLevel }: PropTypes) => {
             </RuxTrack>
           );
         })}
-        <RuxTrack slot="ruler" className="rux-ruler">
+        <RuxTrack slot="ruler">
           <RuxRuler />
         </RuxTrack>
       </RuxTimeline>
