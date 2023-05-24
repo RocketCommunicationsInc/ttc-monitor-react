@@ -19,9 +19,9 @@ const ConstellationTimeline = ({ zoomLevel, toggleDrawer }: PropTypes) => {
     <div className="timeline-wrapper">
       <RuxTimeline
         timezone="UTC"
-        start="2023-05-23T20:00:00.000Z"
-        end="2023-05-24T16:00:00.005Z"
-        playhead="2023-05-23T22:00:00.000Z"
+        start="2023-05-24T03:00:00.000Z"
+        end="2023-05-24T23:00:00.005Z"
+        playhead="2023-05-24T06:00:00.000Z"
         interval="hour"
         zoom={zoomLevel}
       >
