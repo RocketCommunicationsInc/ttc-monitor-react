@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef, useCallback } from "react";
+import { AgGridReact } from "ag-grid-react";
 import {
   RuxTable,
   RuxTableHeader,
@@ -11,7 +12,16 @@ import {
 } from "@astrouxds/react";
 import AlertListItem from "./AlertListItem";
 import useAlerts from "../../hooks/useAlerts";
-import { Category, Status } from "../../Types";
+import type { Category, Status, Alert } from "../../Types";
+import type {
+  RowClickedEvent,
+  ColGroupDef,
+  ColDef,
+  ColDefUtil,
+  ValueFormatterParams,
+  CheckboxSelectionCallbackParams,
+  GridOptions,
+} from "ag-grid-community";
 
 const styles = {
   selectAllCheckbox: {
@@ -26,6 +36,7 @@ type PropTypes = {
 };
 
 const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
+  const gridRef = useRef<typeof AgGridReact>();
   const {
     alerts,
     initialize,
@@ -34,42 +45,58 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
     selectNone,
     stopGenerating,
     generate,
+    toggleSelected,
     allSelected,
     anySelected,
   } = useAlerts();
 
   useEffect(() => {
     initialize();
-    generate();
+    // generate();
 
     return () => {
       stopGenerating();
     };
   }, []);
 
-  const filterAlerts = (
-    severity: Status | "all",
-    category: Category | "all"
-  ) => {
+  const filterAlerts = useMemo(() => {
     const alertsArray = Object.values(alerts);
     const filteredForSeverityAlerts =
-      severity !== "all"
-        ? alertsArray.filter((alert) => alert.status === severity)
+      severitySelection !== "all"
+        ? alertsArray.filter((alert) => alert.status === severitySelection)
         : alertsArray;
     const filteredForCategoryAlerts =
-      category !== "all"
+      categorySelection !== "all"
         ? filteredForSeverityAlerts.filter(
-            (alert) => alert.category === category
+            (alert) => alert.category === categorySelection
           )
         : filteredForSeverityAlerts;
     return filteredForCategoryAlerts;
-  };
-
-  const filteredAlertIds = useMemo(() => {
-    return filterAlerts(severitySelection, categorySelection).map(
-      (alert) => alert.id
-    );
   }, [severitySelection, categorySelection, alerts]);
+
+  // const filterAlerts = (
+  //   severity: Status | "all",
+  //   category: Category | "all"
+  // ) => {
+  //   const alertsArray = Object.values(alerts);
+  //   const filteredForSeverityAlerts =
+  //     severity !== "all"
+  //       ? alertsArray.filter((alert) => alert.status === severity)
+  //       : alertsArray;
+  //   const filteredForCategoryAlerts =
+  //     category !== "all"
+  //       ? filteredForSeverityAlerts.filter(
+  //           (alert) => alert.category === category
+  //         )
+  //       : filteredForSeverityAlerts;
+  //   return filteredForCategoryAlerts;
+  // };
+
+  // const filteredAlertIds = useMemo(() => {
+  //   return filterAlerts(severitySelection, categorySelection).map(
+  //     (alert) => alert.id
+  //   );
+  // }, [severitySelection, categorySelection, alerts]);
 
   const selectAllHandler = (e: CustomEvent) => {
     const checkbox = e.target as HTMLRuxCheckboxElement;
@@ -80,10 +107,68 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
     }
   };
 
+  const checkboxHandler = () => {
+    // toggleSelected(alertItem.id);
+    // if (alertItem.selected) {
+    //   alertItem.selected = false;
+    // } else {
+    //   alertItem.selected = true;
+    // }
+  };
+
+  const SelectAllCheckbox = () => (
+    <RuxCheckbox
+      // style={styles.selectAllCheckbox}
+      onRuxchange={selectAllHandler}
+      // className="select-all-checkbox"
+      checked={allSelected}
+    />
+  );
+
+  const rowClickedListener = (e: RowClickedEvent<Alert>) => {
+    if (e.data) {
+      // toggleSelected(e.data.id);
+      // console.log(e.data);
+      // console.log(alerts);
+      // console.log(filterAlerts);
+    }
+  };
+
+  const gridOptions: GridOptions<Alert> = {
+    columnDefs: [
+      {
+        headerCheckboxSelection: true,
+        checkboxSelection: true,
+        maxWidth: 40,
+        // headerComponent: SelectAllCheckbox,
+      },
+      { field: "status" },
+      { field: "message", headerName: "Message" },
+      { field: "category", headerName: "Category" },
+      {
+        field: "timestamp",
+        headerName: "Time",
+        valueFormatter: (params: ValueFormatterParams<Alert>) => {
+          return params.data
+            ? new Date(params.data?.timestamp).toTimeString().slice(0, 8)
+            : new Date().toTimeString().slice(0, 8);
+        },
+      },
+    ],
+    defaultColDef: {
+      sortable: true,
+    },
+    rowMultiSelectWithClick: true,
+    animateRows: true,
+    rowSelection: "multiple",
+    onRowClicked: rowClickedListener,
+  };
+
   return (
     <>
-      <div className="table-wrapper">
-        <RuxTable>
+      <div className="table-wrapper ag-theme-astro">
+        <AgGridReact rowData={filterAlerts} gridOptions={gridOptions} />
+        {/* <RuxTable>
           <RuxTableHeader>
             <RuxTableHeaderRow>
               <RuxTableHeaderCell>
@@ -104,7 +189,7 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
               <AlertListItem alertItem={alerts[alertId]} key={alertId} />
             ))}
           </RuxTableBody>
-        </RuxTable>
+        </RuxTable> */}
       </div>
       <div className="alerts-footer">
         <div>
