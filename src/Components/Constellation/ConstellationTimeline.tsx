@@ -46,6 +46,7 @@ const ConstellationTimeline = ({ zoomLevel, toggleDrawer }: PropTypes) => {
                 start={startDate}
                 end={endDate}
                 status={contacts[contactId].status}
+                style={{cursor: "pointer"}}
               >
                 {contacts[contactId].satellite}
               </RuxTimeRegion>

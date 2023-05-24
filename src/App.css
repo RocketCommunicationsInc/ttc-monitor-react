@@ -70,21 +70,6 @@ rux-timeline::part(container){
   flex-direction: row;
 }
 
-rux-timeline rux-track:last-child::part(container){
-  background-color: blueviolet;
-  position: sticky !important;
-  position: -webkit-sticky;
-  bottom: 0 !important;
-}
-
-rux-timeline rux-track:last-child::part(track-header) {
-  background-color: blueviolet;
-  display: block;
-  position: sticky !important;
-  position: -webkit-sticky;
-  bottom: 0 !important;
-}
-
 .timeline-wrapper::-webkit-scrollbar:horizontal {
   position: sticky;
   bottom: 0;
