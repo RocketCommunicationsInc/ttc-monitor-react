@@ -7,7 +7,6 @@ import {
   RuxTableHeaderCell,
   RuxTableBody,
   RuxCheckbox,
-  RuxButton,
 } from "@astrouxds/react";
 import AlertListItem from "./AlertListItem";
 import useAlerts from "../../hooks/useAlerts";
@@ -22,13 +21,11 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
   const {
     alerts,
     initialize,
-    deleteSelectedAlerts,
     selectAll,
     selectNone,
     stopGenerating,
     generate,
     allSelected,
-    anySelected,
   } = useAlerts();
 
   useEffect(() => {
@@ -74,45 +71,31 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
   };
 
   return (
-    <>
-      <div className="table-wrapper">
-        <RuxTable>
-          <RuxTableHeader>
-            <RuxTableHeaderRow>
-              <RuxTableHeaderCell>
-                <RuxCheckbox
-                  onRuxchange={selectAllHandler}
-                  className="select-all-checkbox"
-                  checked={allSelected}
-                />
-              </RuxTableHeaderCell>
-              {/* Status Placeholder */}
-              <RuxTableHeaderCell></RuxTableHeaderCell>
-              <RuxTableHeaderCell>Message</RuxTableHeaderCell>
-              <RuxTableHeaderCell>Category</RuxTableHeaderCell>
-              <RuxTableHeaderCell>Time</RuxTableHeaderCell>
-            </RuxTableHeaderRow>
-          </RuxTableHeader>
-          <RuxTableBody>
-            {filteredAlertIds.map((alertId) => (
-              <AlertListItem alertItem={alerts[alertId]} key={alertId} />
-            ))}
-          </RuxTableBody>
-        </RuxTable>
-      </div>
-      <div className="alerts-footer">
-        <RuxButton
-          secondary
-          onClick={deleteSelectedAlerts}
-          disabled={!anySelected}
-        >
-          Dismiss
-        </RuxButton>
-        <RuxButton onClick={deleteSelectedAlerts} disabled={!anySelected}>
-          Acknowledge
-        </RuxButton>
-      </div>
-    </>
+    <div className="table-wrapper">
+      <RuxTable>
+        <RuxTableHeader>
+          <RuxTableHeaderRow>
+            <RuxTableHeaderCell>
+              <RuxCheckbox
+                onRuxchange={selectAllHandler}
+                className="select-all-checkbox"
+                checked={allSelected}
+              />
+            </RuxTableHeaderCell>
+            {/* Status Placeholder */}
+            <RuxTableHeaderCell></RuxTableHeaderCell>
+            <RuxTableHeaderCell>Message</RuxTableHeaderCell>
+            <RuxTableHeaderCell>Category</RuxTableHeaderCell>
+            <RuxTableHeaderCell>Time</RuxTableHeaderCell>
+          </RuxTableHeaderRow>
+        </RuxTableHeader>
+        <RuxTableBody>
+          {filteredAlertIds.map((alertId) => (
+            <AlertListItem alertItem={alerts[alertId]} key={alertId} />
+          ))}
+        </RuxTableBody>
+      </RuxTable>
+    </div>
   );
 };
 

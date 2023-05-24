@@ -12,7 +12,7 @@ import { Category, Status } from "../../Types";
 import "./Alerts.css";
 
 const Alerts = () => {
-  const { alertIds } = useAlerts();
+  const { alertIds, deleteSelectedAlerts, anySelected } = useAlerts();
   const [openBanner, setOpenBanner] = useState(false);
   const [severitySelection, setSeveritySelection] = useState<Status | "all">(
     "all"
@@ -20,14 +20,6 @@ const Alerts = () => {
   const [categorySelection, setCategorySelection] = useState<Category | "all">(
     "all"
   );
-
-  const severitySelectionHandler = (e: any) => {
-    setSeveritySelection(e.target.value);
-  };
-
-  const categorySelectionHandler = (e: any) => {
-    setCategorySelection(e.target.value);
-  };
 
   useEffect(() => {
     setOpenBanner(false);
@@ -50,7 +42,7 @@ const Alerts = () => {
         <div className="select-menu-div">
           <RuxSelect
             value={severitySelection}
-            onRuxchange={severitySelectionHandler}
+            onRuxchange={(e) => setSeveritySelection(e.target.value as Status)}
             size="small"
             label="Severity"
           >
@@ -62,7 +54,7 @@ const Alerts = () => {
 
           <RuxSelect
             value={categorySelection}
-            onRuxchange={categorySelectionHandler}
+            onRuxchange={(e) => setCategorySelection(e.target.value as Category)}
             size="small"
             label="Category"
           >
@@ -89,6 +81,18 @@ const Alerts = () => {
         severitySelection={severitySelection}
         categorySelection={categorySelection}
       />
+      <div slot="footer">
+        <RuxButton
+          secondary
+          onClick={deleteSelectedAlerts}
+          disabled={!anySelected}
+        >
+          Dismiss
+        </RuxButton>
+        <RuxButton onClick={deleteSelectedAlerts} disabled={!anySelected}>
+          Acknowledge
+        </RuxButton>
+      </div>
     </RuxContainer>
   );
 };

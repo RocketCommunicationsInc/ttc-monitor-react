@@ -1,25 +1,20 @@
+/* APPLICATION LAYOUT & GRID STYLES */
+
 .app-container {
   height: 100%;
-  overflow: hidden;
 }
 
 .background {
   height: calc(100% - var(--spacing-24));
-  padding-block: var(--spacing-3);
-  padding-inline: var(--spacing-2);
+  padding: var(--spacing-3);
   background-color: var(--color-background-surface);
   display: grid;
-  gap: 15px 10px;
+  gap: var(--spacing-3);
   grid-template-columns: calc(30% - 10px) 1fr 1fr;
   grid-template-rows: calc(55% - 7.5px) calc(45% - 7.5px);
   grid-template-areas:
     "alerts constellation constellation"
     "alerts watcher watcher";
-}
-
-rux-container {
-  height: 100%;
-  border: 1px solid var(--color-border-interactive-muted);
 }
 
 rux-container::part(container) {
@@ -52,16 +47,21 @@ rux-container.constellation::part(body) {
 .watcher {
   grid-area: watcher;
   display: flex;
-  background-color: var(--color-palette-darkblue-900);
 }
 
 .watcher rux-container {
   width: 40%;
 }
 
+.watcher rux-container::part(container) {
+  border-right: none;
+}
+
 .watcher rux-container::part(body) {
   height: calc(100% - 100px);
 }
+
+/* TABLE STYLES */
 
 .table-wrapper {
   height: 100%;
@@ -69,7 +69,7 @@ rux-container.constellation::part(body) {
 }
 
 .table-wrapper::-webkit-scrollbar-track {
-  margin-top: 32px;
+  margin-top: 40px;
 }
 
 rux-table-header {

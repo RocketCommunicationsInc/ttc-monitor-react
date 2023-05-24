@@ -20,19 +20,6 @@ const AlertListItem = ({ alertItem }: PropTypes) => {
   const { toggleSelected } = useAlerts();
   const [openBanner, setOpenBanner] = useState(false);
 
-  const checkboxHandler = () => {
-    toggleSelected(alertItem.id);
-    if (alertItem.selected) {
-      alertItem.selected = false;
-    } else {
-      alertItem.selected = true;
-    }
-  };
-
-  const investigateHandler = () => {
-    setOpenBanner(true);
-  };
-
   return (
     <>
       <RuxNotification
@@ -45,29 +32,27 @@ const AlertListItem = ({ alertItem }: PropTypes) => {
       </RuxNotification>
       <RuxAccordion>
         <RuxAccordionItem id={alertItem.id}>
-          <div slot="label">
-            <RuxTableRow>
-              <RuxTableCell>
-                <RuxCheckbox
-                  id={alertItem.id}
-                  checked={alertItem.selected}
-                  onRuxchange={checkboxHandler}
-                />
-              </RuxTableCell>
-              <RuxTableCell>
-                <RuxStatus status={alertItem.status} />
-              </RuxTableCell>
-              <RuxTableCell>{alertItem.message}</RuxTableCell>
-              <RuxTableCell>{alertItem.category}</RuxTableCell>
-              <RuxTableCell>
-                {new Date(alertItem.timestamp).toTimeString().slice(0, 8)}
-              </RuxTableCell>
-            </RuxTableRow>
-          </div>
+          <RuxTableRow slot="label">
+            <RuxTableCell>
+              <RuxCheckbox
+                id={alertItem.id}
+                checked={alertItem.selected}
+                onRuxinput={() => toggleSelected(alertItem.id)}
+              />
+            </RuxTableCell>
+            <RuxTableCell>
+              <RuxStatus status={alertItem.status} />
+            </RuxTableCell>
+            <RuxTableCell>{alertItem.message}</RuxTableCell>
+            <RuxTableCell>{alertItem.category}</RuxTableCell>
+            <RuxTableCell>
+              {new Date(alertItem.timestamp).toTimeString().slice(0, 8)}
+            </RuxTableCell>
+          </RuxTableRow>
           {/* accordion item content */}
           <div className="accordion-item__content">
             <div>{alertItem.message}</div>
-            <RuxButton icon="launch" onClick={investigateHandler}>
+            <RuxButton icon="launch" onClick={() => setOpenBanner(true)}>
               Investigate
             </RuxButton>
           </div>

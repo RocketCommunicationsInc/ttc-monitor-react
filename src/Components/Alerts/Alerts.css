@@ -26,7 +26,7 @@
 
 /* ALERTS TABLE STYLES */
 
-.aslerts rux-table-cell {
+.alerts rux-table-cell {
   border-bottom: none;
 }
 
@@ -37,7 +37,8 @@
 }
 
 .alerts rux-table-header-cell {
-  height: 32px;
+  display: flex;
+  align-items: center;
 }
 
 .alerts rux-table-header-cell:nth-of-type(1),
@@ -89,7 +90,11 @@
 
 /* ALERTS FOOTER STYLES */
 
-.alerts-footer {
+.alerts::part(footer) {
+  padding: 0px;
+}
+
+.alerts div[slot="footer"] {
   display: flex;
   gap: 1rem;
   justify-content: center;

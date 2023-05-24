@@ -17,24 +17,6 @@ import {
 } from "@astrouxds/react";
 import { Contact } from "../../Types/contacts";
 
-const styles = {
-  satIcon: {
-    paddingLeft: ".5rem",
-    paddingBottom: ".3rem",
-    cursor: "pointer",
-  },
-  prePassBanner: {
-    color: "#B7DCFF",
-    textDecoration: "underline",
-    marginLeft: ".5rem",
-    cursor: "pointer",
-  },
-  moreHorizIcon: {
-    cursor: "pointer",
-    marginLeft: "1rem",
-  },
-};
-
 type PropTypes = {
   contacts: { [key: string]: Contact };
   contactIds: string[];

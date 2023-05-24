@@ -74,7 +74,7 @@ const GlobalStatusBar = () => {
             <RuxMenuItem>Sign Out</RuxMenuItem>
           </RuxMenu>
         </RuxPopUp>
-        <RuxClock/>
+        <RuxClock />
 
         <div className="status-indicators" slot="right-side">
           <RuxTooltip message={`Ground ${notifications1}`} placement="bottom">
