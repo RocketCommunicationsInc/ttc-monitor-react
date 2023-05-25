@@ -21,13 +21,13 @@
   user-select: none;
 }
 
-.drawer__header {
-  /* Optional */
-  padding: 0.5rem;
+.drawer rux-container div[slot="header"] {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--color-background-surface-header);
+  gap: 1rem;
+}
+
+.drawer rux-container div[slot="header"] rux-button {
+  margin-left: auto;
 }
 
 .drawer__close {
@@ -68,12 +68,6 @@
 
   /* Optional */
   box-shadow: 0 2px 6px #000;
-}
-
-.drawer__title {
-  display: flex;
-  flex-flow: nowrap;
-  align-items: center;
 }
 
 .drawer-title-status {

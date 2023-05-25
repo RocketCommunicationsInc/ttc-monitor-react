@@ -14,7 +14,7 @@ import ThresholdInput from "./ThresholdInput";
 type PropTypes = {
   rowData: Mnemonic;
   index: number;
-  setOpenBanner: React.Dispatch<React.SetStateAction<boolean>>
+  setOpenBanner: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const WatcherListItem = ({ rowData, index, setOpenBanner }: PropTypes) => {

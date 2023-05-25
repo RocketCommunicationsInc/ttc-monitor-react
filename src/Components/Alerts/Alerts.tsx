@@ -9,48 +9,10 @@ import {
 import AlertsList from "./AlertsList";
 import useAlerts from "../../hooks/useAlerts";
 import { Category, Status } from "../../Types";
-
-const styles = {
-  container: {
-    overflowY: "auto",
-    overflowX: "hidden",
-  },
-  activeAlerts: {
-    flex: "auto",
-    display: "flex",
-    flexFlow: "column nowrap",
-    fontSize: "var(--font-size-base)",
-    marginRight: "8rem",
-  },
-  selectMenusDiv: {
-    marginLeft: "auto",
-    display: "flex",
-  },
-  alertsNum: {
-    fontSize: "var(--font-size-5xl)",
-    fontWeight: "var(--font-weights-bold)",
-  },
-  select1: {
-    width: "var(--spacing-24)",
-    marginRight: "var(--spacing-4)",
-  },
-  select2: {
-    width: "var(--spacing-24)",
-  },
-  header: {
-    display: "flex",
-    alignItems: "center",
-    textAlign: "center" as "center",
-    marginRight: "auto",
-  },
-  notificationBanner: {
-    position: "sticky" as "sticky",
-    zIndex: 50,
-  },
-};
+import "./Alerts.css";
 
 const Alerts = () => {
-  const { alertIds } = useAlerts();
+  const { alertIds, deleteSelectedAlerts, anySelected } = useAlerts();
   const [openBanner, setOpenBanner] = useState(false);
   const [severitySelection, setSeveritySelection] = useState<Status | "all">(
     "all"
@@ -58,14 +20,6 @@ const Alerts = () => {
   const [categorySelection, setCategorySelection] = useState<Category | "all">(
     "all"
   );
-
-  const severitySelectionHandler = (e: any) => {
-    setSeveritySelection(e.target.value);
-  };
-
-  const categorySelectionHandler = (e: any) => {
-    setCategorySelection(e.target.value);
-  };
 
   useEffect(() => {
     setOpenBanner(false);
@@ -80,18 +34,17 @@ const Alerts = () => {
   };
 
   return (
-    <RuxContainer className="alerts" style={styles.container}>
-      <div slot="header" style={styles.header}>
-        <div style={styles.activeAlerts}>
-          <span style={styles.alertsNum}>{alertIds.length}</span> Active Alerts
+    <RuxContainer className="alerts">
+      <div slot="header">
+        <div className="active-alerts">
+          <span>{alertIds.length}</span> Active Alerts
         </div>
-        <div style={styles.selectMenusDiv}>
+        <div className="select-menu-div">
           <RuxSelect
             value={severitySelection}
-            onRuxchange={severitySelectionHandler}
+            onRuxchange={(e) => setSeveritySelection(e.target.value as Status)}
             size="small"
             label="Severity"
-            style={styles.select1}
           >
             <RuxOption label="All" value="all" />
             <RuxOption label="Critical" value="critical" />
@@ -101,10 +54,11 @@ const Alerts = () => {
 
           <RuxSelect
             value={categorySelection}
-            onRuxchange={categorySelectionHandler}
+            onRuxchange={(e) =>
+              setCategorySelection(e.target.value as Category)
+            }
             size="small"
             label="Category"
-            style={styles.select2}
           >
             <RuxOption label="All" value="all" />
             <RuxOption label="Hardware" value="hardware" />
@@ -113,12 +67,7 @@ const Alerts = () => {
           </RuxSelect>
         </div>
       </div>
-      <RuxNotification
-        open={openBanner}
-        small
-        hide-close
-        style={styles.notificationBanner}
-      >
+      <RuxNotification open={openBanner} small hide-close>
         One or more filters selected.
         <RuxButton
           onClick={handleClearFilter}
@@ -134,6 +83,18 @@ const Alerts = () => {
         severitySelection={severitySelection}
         categorySelection={categorySelection}
       />
+      <div slot="footer">
+        <RuxButton
+          secondary
+          onClick={deleteSelectedAlerts}
+          disabled={!anySelected}
+        >
+          Dismiss
+        </RuxButton>
+        <RuxButton onClick={deleteSelectedAlerts} disabled={!anySelected}>
+          Acknowledge
+        </RuxButton>
+      </div>
     </RuxContainer>
   );
 };

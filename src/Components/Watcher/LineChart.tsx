@@ -68,8 +68,10 @@ const LineChart = ({ data }: PropTypes) => {
     maintainAspectRatio: false,
     layout: {
       padding: {
-        top: 5,
-        left: 3,
+        top: 16,
+        left: 24,
+        right: 24,
+        bottom: 16,
       },
     },
     scales: {
@@ -96,11 +98,6 @@ const LineChart = ({ data }: PropTypes) => {
           color: "grey",
           drawTicks: false,
         },
-        // title: {
-        //   display: true,
-        //   color: "white",
-        //   text: "Volts",
-        // },
         ticks: {
           color: "white",
           padding: 7,

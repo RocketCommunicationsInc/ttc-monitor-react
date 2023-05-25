@@ -1,0 +1,7 @@
+.status-indicators {
+  display: flex;
+}
+
+.status-indicators rux-monitoring-icon {
+  margin-inline: var(--spacing-3);
+}
