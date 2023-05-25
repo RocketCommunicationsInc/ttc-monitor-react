@@ -1,4 +1,4 @@
-import { RuxCheckbox, RuxIcon, RuxPopUp } from "@astrouxds/react";
+import { RuxCheckbox, RuxIcon, RuxPopUp, RuxCard } from "@astrouxds/react";
 
 type PropTypes = {
   triggerValue: string | number;
@@ -7,32 +7,30 @@ type PropTypes = {
 const MnemonicPopUp = ({ triggerValue }: PropTypes) => {
   return (
     <RuxPopUp placement="right" className="mnemonic-pop-up">
-      <div className="pop-up-menu-div">
-        <div className="mnemonic-pop-up-title">PWBVTLM</div>
-        <div className="mnemonic-pop-up-values">
-          <div>
-            <span>Value</span>
-            <span>24.2 Volts</span>
-          </div>
-          <div>
-            <span>Subsystem</span>
-            <span>
-              <a
-                href="https://ttc-investigate.astrouxds.com/?system=Attitude"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Altitude
-              </a>
-              <RuxIcon size="1rem" icon="launch" />
-            </span>
-          </div>
+      <RuxCard>
+        <span slot="header">PWBVTLM</span>
+        <div>
+          <span>Value</span>
+          <span>24.2 Volts</span>
         </div>
-        <RuxCheckbox>Add to Watcher</RuxCheckbox>
-      </div>
-      <span slot="trigger" className="mneumonic-popup-value">
-        {triggerValue}
-      </span>
+        <div>
+          <span>Subsystem</span>
+          <span>
+            <a
+              href="https://ttc-investigate.astrouxds.com/?system=Attitude"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Altitude
+            </a>
+            <RuxIcon size="1rem" icon="launch" />
+          </span>
+        </div>
+        <div slot="footer">
+          <RuxCheckbox>Add to Watcher</RuxCheckbox>
+        </div>
+      </RuxCard>
+      <span slot="trigger">{triggerValue}</span>
     </RuxPopUp>
   );
 };
