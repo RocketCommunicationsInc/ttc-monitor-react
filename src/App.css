@@ -136,3 +136,12 @@ rux-time-region::part(container) {
   border: 1px solid var(--color-border-interactive-muted);
   border-left: none;
 }
+
+/* ALERT LIST AG GRID STYLES_________________________________________ */
+/* .ag-theme-astro {
+  --ag-range-selection-highlight-color: none;
+} */
+
+.alert-status-icon {
+  margin-top: 0.6rem;
+}
