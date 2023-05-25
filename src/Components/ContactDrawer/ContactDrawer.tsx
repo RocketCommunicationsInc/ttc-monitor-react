@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef } from "react";
-import { RuxButton, RuxStatus } from "@astrouxds/react";
+import { RuxContainer, RuxButton, RuxStatus } from "@astrouxds/react";
 
 import { Contact } from "../../Types";
 import "./ContactDrawer.css";
@@ -78,15 +78,15 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
         onClick={() => toggle()}
       ></div>
       {contact ? (
-        <div className="drawer__wrapper">
-          <div className="drawer__header">
-            <div className="drawer__title">
+        <RuxContainer className="drawer__wrapper">
+          <div slot="header" className="drawer__header">
+            {/* <div className="drawer__title"> */}
               <RuxStatus
                 status={contact.status}
                 className="drawer-title-status"
               />
               {contact.satellite}
-            </div>
+            {/* </div> */}
             <RuxButton
               borderless
               size="small"
@@ -133,7 +133,7 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
               dolor et necessitatibus.
             </p>
           </div>
-        </div>
+        </RuxContainer>
       ) : null}
     </section>
   );
