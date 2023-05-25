@@ -1,11 +1,9 @@
 import {
-  RuxTableCell,
   RuxCheckbox,
   RuxStatus,
   RuxButton,
   RuxAccordion,
   RuxAccordionItem,
-  RuxTableRow,
   RuxNotification,
 } from "@astrouxds/react";
 import { Alert } from "../../Types";
@@ -16,40 +14,10 @@ const styles = {
   accordianLabel: {
     color: "var(--color-palette-neutral-000)",
   },
-  checkboxes: {
-    paddingRight: "var(--spacing-4)",
-  },
-  alertMessage: {
-    minWidth: "9rem",
-    maxWidth: "9rem",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    borderBottom: "none",
-  },
-  alertCategory: {
-    width: "4.75rem",
-    alignSelf: "center",
-    paddingLeft: "1.1rem",
-    borderBottom: "none",
-    textTransform: "capitalize",
-  },
-  alertTime: {
-    width: "1.7rem",
-    paddingLeft: ".6rem",
-    alignSelf: "left",
-    borderBottom: "none",
-  },
   investigateBtn: {
     display: "flex",
     justifyContent: "center",
     paddingBlock: "var(--spacing-2)",
-  },
-  status: {
-    borderBottom: "none",
-  },
-  checkbox: {
-    textAlign: "center",
-    borderBottom: "none",
   },
 };
 
@@ -62,11 +30,12 @@ const AlertListItem = ({ alertItem }: PropTypes) => {
   const [openBanner, setOpenBanner] = useState(false);
 
   const checkboxHandler = () => {
-    toggleSelected(alertItem.id);
     if (alertItem.selected) {
       alertItem.selected = false;
+      //toggleSelected(alertItem.id);
     } else {
       alertItem.selected = true;
+      //toggleSelected(alertItem.id);
     }
   };
 
@@ -75,7 +44,7 @@ const AlertListItem = ({ alertItem }: PropTypes) => {
   };
 
   return (
-    <>
+    <li>
       <RuxNotification
         small
         closeAfter={3}
@@ -93,33 +62,31 @@ const AlertListItem = ({ alertItem }: PropTypes) => {
             </RuxButton>
           </div>
           <div slot="label" style={styles.accordianLabel}>
-            <RuxTableRow>
-              <RuxTableCell style={styles.checkbox}>
+            <div className="alert-list-label">
+              <div>
                 <RuxCheckbox
                   id={alertItem.id}
-                  style={styles.checkboxes}
-                  className="checkboxes"
                   checked={alertItem.selected}
                   onRuxchange={checkboxHandler}
                 />
-              </RuxTableCell>
-              <RuxTableCell style={styles.status}>
-                <RuxStatus status={alertItem.status} />
-              </RuxTableCell>
-              <RuxTableCell style={styles.alertMessage}>
-                {alertItem.message}
-              </RuxTableCell>
-              <RuxTableCell style={styles.alertCategory}>
-                {alertItem.category}
-              </RuxTableCell>
-              <RuxTableCell style={styles.alertTime}>
-                {new Date(alertItem.timestamp).toTimeString().slice(0, 8)}
-              </RuxTableCell>
-            </RuxTableRow>
+              </div>
+              <div className="message-status-column">
+                <div className="status">
+                  <RuxStatus status={alertItem.status} />
+                </div>
+                <div className="alert-message">{alertItem.message}</div>
+              </div>
+              <div className="category-time-column">
+                <div className="alert-category">{alertItem.category}</div>
+                <div className="alert-time">
+                  {new Date(alertItem.timestamp).toTimeString().slice(0, 8)}
+                </div>
+              </div>
+            </div>
           </div>
         </RuxAccordionItem>
       </RuxAccordion>
-    </>
+    </li>
   );
 };
 
