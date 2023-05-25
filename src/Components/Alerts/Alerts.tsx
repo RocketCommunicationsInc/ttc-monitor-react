@@ -54,7 +54,9 @@ const Alerts = () => {
 
           <RuxSelect
             value={categorySelection}
-            onRuxchange={(e) => setCategorySelection(e.target.value as Category)}
+            onRuxchange={(e) =>
+              setCategorySelection(e.target.value as Category)
+            }
             size="small"
             label="Category"
           >

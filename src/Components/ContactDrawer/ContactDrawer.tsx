@@ -81,11 +81,11 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
         <RuxContainer className="drawer__wrapper">
           <div slot="header" className="drawer__header">
             {/* <div className="drawer__title"> */}
-              <RuxStatus
-                status={contact.status}
-                className="drawer-title-status"
-              />
-              {contact.satellite}
+            <RuxStatus
+              status={contact.status}
+              className="drawer-title-status"
+            />
+            {contact.satellite}
             {/* </div> */}
             <RuxButton
               borderless

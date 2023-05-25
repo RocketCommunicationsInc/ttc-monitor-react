@@ -1,17 +1,19 @@
+import { useState, useEffect } from "react";
 import {
   RuxContainer,
-  RuxStatus,
   RuxTable,
   RuxTableHeader,
   RuxTableHeaderRow,
   RuxTableHeaderCell,
-  RuxTableRow,
-  RuxTableCell,
   RuxTableBody,
+  RuxTree,
+  RuxTreeNode,
+  RuxNotification,
 } from "@astrouxds/react";
-import type { rowDataObject, Status } from "../../Types";
+import type { Mnemonic } from "../../Types";
 import LineChart from "./LineChart";
-import MnemonicPopUp from "./MnemonicPopUp";
+import WatcherListItem from "./WatcherListItem";
+import { generateMnemonics } from "../../data/generators/mnemonics/generate-mnemonics";
 import "./Watcher.css";
 
 const styles = {
@@ -20,65 +22,88 @@ const styles = {
   },
 };
 
-const watcherDataItem = {
-  status: "caution" as const,
-  mnemonic: "PWST2IA",
-  unit: "Volts",
-  threshold: 45.6,
-  actual: 32.2,
-};
-
-const fixtureData = Array(20).fill(watcherDataItem);
+const mnemonicsData = generateMnemonics(8);
 
 const Watcher = () => {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [openBanner, setOpenBanner] = useState(false);
+
+  useEffect(() => {
+    const watcherDiv = document.querySelector(".watcher");
+    const tableRows = watcherDiv?.querySelectorAll("rux-table-row");
+    //sets first menmonic as selected on mount
+    tableRows?.[0].setAttribute("selected", "");
+
+    tableRows?.forEach((row) => {
+      row.addEventListener("click", (event) => toggleSelected(event));
+    });
+
+    const toggleSelected = (event: any) => {
+      const watcherDiv = document.querySelector(".watcher");
+      const tableRows = watcherDiv?.querySelectorAll("rux-table-row");
+      const closestRow = event.target.closest("rux-table-row");
+
+      if (!closestRow || event.target.nodeName === "RUX-INPUT") return;
+      tableRows?.forEach((row) => {
+        row.removeAttribute("selected");
+      });
+      closestRow.setAttribute("selected", "");
+
+      setSelectedIndex(Number(closestRow.dataset.index));
+    };
+  }, []);
+
   return (
     <div className="watcher">
       <RuxContainer>
         <div slot="header" style={styles.container}>
           Watcher
         </div>
-        <div slot="toolbar" style={styles.container}>
-          IRON 4090
-        </div>
-        <div className="table-wrapper">
-          <RuxTable>
-            <RuxTableHeader>
-              <RuxTableHeaderRow>
-                <RuxTableHeaderCell>
-                  {/* placeholder for status icon column */}
-                </RuxTableHeaderCell>
-                <RuxTableHeaderCell>Mnemonic</RuxTableHeaderCell>
-                <RuxTableHeaderCell>Unit</RuxTableHeaderCell>
-                <RuxTableHeaderCell>Threshold</RuxTableHeaderCell>
-                <RuxTableHeaderCell>Actual</RuxTableHeaderCell>
-              </RuxTableHeaderRow>
-            </RuxTableHeader>
-            <RuxTableBody>
-              {fixtureData.map((dataObj: rowDataObject) => (
-                <RuxTableRow key={dataObj.key}>
-                  {Object.entries(dataObj).map(([key, value]) =>
-                    key === "status" ? (
-                      <RuxTableCell>
-                        <RuxStatus status={dataObj.status as Status} />
-                      </RuxTableCell>
-                    ) : key === "mnemonic" ? (
-                      <RuxTableCell>
-                        <MnemonicPopUp triggerValue={value} />
-                      </RuxTableCell>
-                    ) : (
-                      <RuxTableCell style={{ textAlign: "right" }}>
-                        {value}
-                      </RuxTableCell>
-                    )
-                  )}
-                </RuxTableRow>
-              ))}
-            </RuxTableBody>
-          </RuxTable>
-        </div>
+        <RuxNotification
+          small
+          closeAfter={3}
+          onRuxclosed={() => setOpenBanner(false)}
+          open={openBanner}
+        >
+          This feature has not been implemented.
+        </RuxNotification>
+        <RuxTree>
+          <RuxTreeNode expanded>
+            IRON 4090
+            <RuxTreeNode slot="node">
+              <div className="table-wrapper">
+                <RuxTable>
+                  <RuxTableHeader>
+                    <RuxTableHeaderRow>
+                      <RuxTableHeaderCell>
+                        {/* placeholder for status icon column */}
+                      </RuxTableHeaderCell>
+                      <RuxTableHeaderCell>Mnemonic</RuxTableHeaderCell>
+                      <RuxTableHeaderCell>Unit</RuxTableHeaderCell>
+                      <RuxTableHeaderCell>Threshold</RuxTableHeaderCell>
+                      <RuxTableHeaderCell>Actual</RuxTableHeaderCell>
+                      <RuxTableHeaderCell>
+                        {/* placeholder for actions menu column */}
+                      </RuxTableHeaderCell>
+                    </RuxTableHeaderRow>
+                  </RuxTableHeader>
+                  <RuxTableBody>
+                    {mnemonicsData.map((dataObj: Mnemonic, index) => (
+                      <WatcherListItem
+                        rowData={dataObj}
+                        index={index}
+                        setOpenBanner={setOpenBanner}
+                      />
+                    ))}
+                  </RuxTableBody>
+                </RuxTable>
+              </div>
+            </RuxTreeNode>
+          </RuxTreeNode>
+        </RuxTree>
       </RuxContainer>
       <div className="canvas-wrapper">
-        <LineChart subtitle={watcherDataItem.mnemonic} />
+        <LineChart data={mnemonicsData[selectedIndex]} />
       </div>
     </div>
   );
