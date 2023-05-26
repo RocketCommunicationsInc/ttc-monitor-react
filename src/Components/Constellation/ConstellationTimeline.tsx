@@ -6,9 +6,7 @@ import {
   RuxStatus,
 } from "@astrouxds/react";
 import useContacts from "../../hooks/useContacts";
-import { faker } from "@faker-js/faker";
 import { ContactOptions } from "../../Types";
-import { randomMinutes } from "../../data/utils";
 
 type PropTypes = {
   zoomLevel: number;
@@ -24,7 +22,7 @@ const ConstellationTimeline = ({
   const { contacts, contactIds } = useContacts();
 
   const date = new Date();
-  const getStartTime = date.setHours(date.getHours() - 2);
+  const getStartTime = date.setHours(date.getHours() - 22);
   const getEndTime = date.setDate(date.getDate() + 1);
   const getPlaybackTime = date.setHours(date.getHours() - 22)
   const startTime = new Date(getStartTime).toISOString();

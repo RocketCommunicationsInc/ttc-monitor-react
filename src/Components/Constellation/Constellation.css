@@ -76,7 +76,18 @@ rux-time-region {
   cursor: pointer;
 }
 
+rux-timeline::part(container){
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}
+
 .timeline-wrapper::-webkit-scrollbar:horizontal {
+  position: sticky;
+  bottom: 0;
+}
+
+.rux-timeline::part(time-region-container)::-webkit-scrollbar:horizontal {
   position: sticky;
   bottom: 0;
 }
