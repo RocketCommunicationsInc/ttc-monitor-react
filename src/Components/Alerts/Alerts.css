@@ -31,29 +31,11 @@
   flex-flow: row nowrap;
   margin: 0;
   box-shadow: 0px 3px 3px 0px rgb(0 0 0 / 40%);
-  padding-bottom: 0.5rem;
+  padding: var(--spacing-2) var(--spacing-4);
   background-color: var(--color-palette-darkblue-900);
   position: sticky;
   top: 0;
   z-index: 90;
-  padding-top: .5rem;
-}
-
-.alert-list-headers span:nth-of-type(1) {
-  width: 42%;
-  padding-left: 8.5%;
-}
-
-.alert-list-headers span:nth-of-type(2) {
-  width: 12%;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.alert-list-headers span:nth-of-type(3) {
-  width: 14%;
-  display: flex;
-  justify-content: flex-end;
 }
 
 .table-wrapper.alert-list::-webkit-scrollbar-track {
@@ -86,24 +68,36 @@
   color: var(--color-palette-neutral-000);
 }
 
-rux-accordion rux-accordion-item div:nth-of-type(3) {
-  width: 50%;
+.select-all-checkbox {
+  margin-right: 44px;
+}
+
+.alert-list-headers span:nth-of-type(1),
+.alert-list-label span:nth-of-type(1) {
+  width: 54%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-rux-accordion rux-accordion-item div:nth-of-type(4) {
-  margin-left: 1rem;
-  width: 15%;
+.alert-list-headers span:nth-of-type(2),
+.alert-list-label span:nth-of-type(2) {
+  width: 20%;
   text-transform: capitalize;
 }
 
-rux-accordion rux-accordion-item div:nth-of-type(5) {
-  margin-left: 2rem;
-  width: 15%;
-  display: flex;
-  justify-content: flex-end;
+.alert-list-headers span:nth-of-type(3),
+.alert-list-label span:nth-of-type(3) {
+  width: 20%;
+}
+
+.alert-list-headers span:nth-of-type(3) {
+  margin-right: calc(28px + 16px);
+}
+
+.alert-list-headers > span + span,
+.alert-list-label > span + span {
+  margin-left: 1rem;
 }
 
 rux-accordion rux-status {
@@ -116,9 +110,6 @@ rux-accordion rux-status {
   background-color: var(--color-background-surface-default);
   overflow-y: scroll;
   flex-grow: 1;
-}
-
-.alert-list ul {
   padding-left: 0;
   margin: 0;
 }
@@ -127,10 +118,6 @@ li {
   list-style-type: none;
   padding-left: 0;
   margin: 0;
-}
-
-.select-all-checkbox {
-  padding-left: 1rem;
 }
 
 .accordion-item__content {

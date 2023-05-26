@@ -77,13 +77,11 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
         <span>Category</span>
         <span>Time</span>
       </div>
-      <div className="alert-list">
-        <ul>
-          {filteredAlertIds.map((alertId) => (
-            <AlertListItem alertItem={alerts[alertId]} key={alertId} />
-          ))}
-        </ul>
-      </div>
+      <ul className="alert-list">
+        {filteredAlertIds.map((alertId) => (
+          <AlertListItem alertItem={alerts[alertId]} key={alertId} />
+        ))}
+      </ul>
     </>
   );
 };

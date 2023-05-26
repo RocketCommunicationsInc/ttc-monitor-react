@@ -36,24 +36,18 @@ const AlertListItem = ({ alertItem }: PropTypes) => {
               Investigate
             </RuxButton>
           </div>
-          <div slot="label">
-            <div className="alert-list-label">
-              <div>
-                <RuxCheckbox
-                  id={alertItem.id}
-                  checked={alertItem.selected}
-                  onRuxinput={() => toggleSelected(alertItem.id)}
-                />
-              </div>
-              <div>
-                <RuxStatus status={alertItem.status} />
-              </div>
-              <div>{alertItem.message}</div>
-              <div>{alertItem.category}</div>
-              <div>
-                {new Date(alertItem.timestamp).toTimeString().slice(0, 8)}
-              </div>
-            </div>
+          <div slot="label" className="alert-list-label">
+            <RuxCheckbox
+              id={alertItem.id}
+              checked={alertItem.selected}
+              onRuxinput={() => toggleSelected(alertItem.id)}
+            />
+            <RuxStatus status={alertItem.status} />
+            <span>{alertItem.message}</span>
+            <span>{alertItem.category}</span>
+            <span>
+              {new Date(alertItem.timestamp).toTimeString().slice(0, 8)}
+            </span>
           </div>
         </RuxAccordionItem>
       </RuxAccordion>
