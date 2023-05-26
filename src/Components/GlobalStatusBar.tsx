@@ -11,18 +11,7 @@ import {
   RuxNotification,
 } from "@astrouxds/react";
 import type { Status } from "../Types";
-
-const styles = {
-  statusIndicators: {
-    display: "flex",
-  },
-  clock: {
-    marginInline: "auto",
-  },
-  monitorIcons: {
-    marginInline: "var(--spacing-3)",
-  },
-};
+import "./GlobalStatusBar.css";
 
 const GlobalStatusBar = () => {
   const [status1, setStatus1] = useState<Status>("off");
@@ -85,9 +74,9 @@ const GlobalStatusBar = () => {
             <RuxMenuItem>Sign Out</RuxMenuItem>
           </RuxMenu>
         </RuxPopUp>
-        <RuxClock style={styles.clock} />
+        <RuxClock />
 
-        <div style={styles.statusIndicators}>
+        <div className="status-indicators" slot="right-side">
           <RuxTooltip message={`Ground ${notifications1}`} placement="bottom">
             <RuxPopUp placement="bottom" closeOnSelect>
               <RuxMenu onRuxmenuselected={() => setOpenBanner(true)}>
@@ -98,7 +87,6 @@ const GlobalStatusBar = () => {
                 icon="antenna-off"
                 label="Ground"
                 notifications={notifications1}
-                style={styles.monitorIcons}
                 slot="trigger"
               ></RuxMonitoringIcon>
             </RuxPopUp>
@@ -114,7 +102,6 @@ const GlobalStatusBar = () => {
                 icon="antenna-receive"
                 label="Comms"
                 notifications={notifications2}
-                style={styles.monitorIcons}
                 slot="trigger"
               />
             </RuxPopUp>
@@ -130,7 +117,6 @@ const GlobalStatusBar = () => {
                 icon="processor"
                 label="Software"
                 notifications={notifications3}
-                style={styles.monitorIcons}
                 slot="trigger"
               />
             </RuxPopUp>

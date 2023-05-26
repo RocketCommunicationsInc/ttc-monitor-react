@@ -17,24 +17,6 @@ import {
 } from "@astrouxds/react";
 import { Contact } from "../../Types/contacts";
 
-const styles = {
-  satIcon: {
-    paddingLeft: ".5rem",
-    paddingBottom: ".3rem",
-    cursor: "pointer",
-  },
-  prePassBanner: {
-    color: "#B7DCFF",
-    textDecoration: "underline",
-    marginLeft: ".5rem",
-    cursor: "pointer",
-  },
-  moreHorizIcon: {
-    cursor: "pointer",
-    marginLeft: "1rem",
-  },
-};
-
 type PropTypes = {
   contacts: { [key: string]: Contact };
   contactIds: string[];
@@ -116,9 +98,7 @@ const CostellationList = ({
         onRuxclosed={() => setOpenPrePassBanner(false)}
       >
         Pre-Pass for is about to begin.
-        <span style={styles.prePassBanner} onClick={popupMenuHandler}>
-          Open Contact
-        </span>
+        <span onClick={popupMenuHandler}>Open Contact</span>
         <RuxButton
           iconOnly
           borderless
@@ -274,14 +254,14 @@ const CostellationList = ({
                   key={contactId}
                   onClick={() => toggleDrawer(contactId)}
                 >
-                  <RuxTableCell style={{ paddingLeft: "1.5rem" }}>
+                  <RuxTableCell>
                     <RuxStatus status={contact.status} />
                   </RuxTableCell>
                   {contact.state === "ready" ? (
-                    <RuxTableCell style={{ color: "#B7DCFF" }}>
+                    <RuxTableCell>
                       {contact.satellite}
                       <RuxIcon
-                        style={styles.satIcon}
+                        id="sat-icon"
                         size="1rem"
                         icon="launch"
                         onClick={prePasshandler}
@@ -297,7 +277,7 @@ const CostellationList = ({
                   <RuxTableCell>
                     {new Date(contact.los).toTimeString().slice(0, 8)}
                   </RuxTableCell>
-                  <RuxTableCell style={{ paddingLeft: "1.5rem" }}>
+                  <RuxTableCell>
                     <RuxStatus status={contact.status} />
                   </RuxTableCell>
                   <RuxTableCell>{contact.ground}</RuxTableCell>
@@ -305,9 +285,7 @@ const CostellationList = ({
                     {contact.azimuth.toString().slice(0, 7)}&deg;
                   </RuxTableCell>
                   <RuxTableCell>{contact.elevation}&deg;</RuxTableCell>
-                  <RuxTableCell style={{ textTransform: "capitalize" }}>
-                    {contact.state}
-                  </RuxTableCell>
+                  <RuxTableCell id="state-t-cell">{contact.state}</RuxTableCell>
                   <RuxPopUp placement="bottom">
                     <RuxMenu>
                       <RuxMenuItem onClick={popupMenuHandler}>
@@ -319,7 +297,6 @@ const CostellationList = ({
                     </RuxMenu>
                     <RuxTableCell slot="trigger">
                       <RuxIcon
-                        style={styles.moreHorizIcon}
                         icon="more-horiz"
                         size="1.5rem"
                         onClick={(e) => e.stopPropagation()}

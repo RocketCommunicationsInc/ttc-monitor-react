@@ -1,0 +1,77 @@
+/* HEADER STYLES */
+
+.constellation div[slot="header"] {
+  display: flex;
+  align-items: center;
+}
+
+.constellation div[slot="header"] .slider {
+  display: flex;
+  margin-left: auto;
+}
+
+/* NOTIFICATION BANNER STYLES */
+
+.constellation rux-notification > span {
+  color: #b7dcff;
+  text-decoration: underline;
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
+
+/* CONSTELLATION TABLE STYLES */
+
+.constellation rux-table-header-row rux-icon {
+  vertical-align: middle;
+  width: 32px;
+}
+
+.constellation rux-table-header-row .visible {
+  visibility: visible;
+}
+.constellation rux-table-header-row .hidden {
+  visibility: hidden;
+}
+
+.constellation rux-table-cell:last-of-type rux-icon {
+  margin-inline: 1rem;
+  cursor: pointer;
+}
+
+.constellation rux-table-cell:has(#sat-icon) {
+  color: #b7dcff;
+}
+
+.constellation #sat-icon {
+  padding-left: 0.5rem;
+  padding-bottom: 0.3rem;
+  cursor: pointer;
+}
+
+.constellation #state-t-cell {
+  text-transform: capitalize;
+}
+
+/* TIMELINE STYLES */
+
+/* .constellation rux-time-region::part(container) {
+  margin: 3px;
+  border: 1px solid var(--color-border-interactive-muted);
+} */
+
+.constellation rux-timeline {
+  height: 100%;
+  overflow: auto;
+}
+
+rux-track div[slot="label"] {
+  display: flex;
+}
+
+rux-track rux-status {
+  padding-right: 1rem;
+}
+
+rux-time-region {
+  cursor: pointer;
+}
