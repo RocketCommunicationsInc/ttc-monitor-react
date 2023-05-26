@@ -75,3 +75,8 @@ rux-track rux-status {
 rux-time-region {
   cursor: pointer;
 }
+
+.timeline-wrapper::-webkit-scrollbar:horizontal {
+  position: sticky;
+  bottom: 0;
+}

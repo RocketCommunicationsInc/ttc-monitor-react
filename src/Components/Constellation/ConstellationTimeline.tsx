@@ -23,22 +23,21 @@ const ConstellationTimeline = ({
 }: PropTypes) => {
   const { contacts, contactIds } = useContacts();
 
-  const time = faker.date
-    .recent(options?.daysRange, options?.dateRef)
-    .getTime();
-  const startTimeISO = new Date(time - randomMinutes(0, 5)).toISOString();
-  const endTimeISO = new Date(time + randomMinutes(825, 825)).toISOString();
-  const playheadISO = new Date(
-    Math.round(time) + randomMinutes(50, 60)
-  ).toISOString();
+  const date = new Date();
+  const getStartTime = date.setHours(date.getHours() - 2);
+  const getEndTime = date.setDate(date.getDate() + 1);
+  const getPlaybackTime = date.setHours(date.getHours() - 22)
+  const startTime = new Date(getStartTime).toISOString();
+  const endTime = new Date(getEndTime).toISOString();
+  const playhead = new Date(getPlaybackTime).toISOString();
 
   return (
     <div className="timeline-wrapper">
       <RuxTimeline
         timezone="UTC"
-        start={startTimeISO}
-        end={endTimeISO}
-        playhead={playheadISO}
+        start={startTime}
+        end={endTime}
+        playhead={playhead}
         interval="hour"
         zoom={zoomLevel}
       >
