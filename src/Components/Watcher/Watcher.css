@@ -1,0 +1,94 @@
+.watcher .canvas-wrapper {
+  width: 60%;
+  border: 1px solid var(--container-color-border);
+  border-left: none;
+  background-color: var(--color-palette-darkblue-900);
+}
+
+.watcher rux-tree-node > * {
+  background-color: var(--color-palette-darkblue-900);
+}
+
+.watcher rux-tree-node rux-tree-node::part(node) {
+  padding: 0px;
+  display: block;
+  gap: 0;
+}
+
+.watcher rux-table-header-cell {
+  text-align: right;
+}
+
+.watcher rux-table-header-cell:nth-of-type(2) {
+  text-align: left;
+}
+
+.watcher rux-table-body {
+  height: 100px;
+}
+
+.watcher rux-table-cell {
+  text-align: right;
+}
+
+.watcher rux-table-cell:last-of-type {
+  display: flex;
+  justify-content: center;
+}
+
+.watcher rux-icon[icon="arrow-upward"] {
+  transform: rotate(45deg);
+  margin-bottom: 5px;
+}
+
+.watcher rux-icon[icon="arrow-downward"] {
+  transform: rotate(-45deg);
+  margin-bottom: 5px;
+}
+
+/* THRESHOLD INPUT STYLES */
+
+.watcher rux-input {
+  width: 0px;
+}
+
+.watcher rux-input::part(form-field) {
+  position: relative;
+  left: 30px;
+  width: 110px;
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 0.25rem 0.5rem;
+}
+
+.watcher rux-input div[slot="suffix"] {
+  display: flex;
+}
+
+.watcher rux-input div[slot="suffix"] div {
+  display: flex;
+  justify-content: center;
+}
+
+/* MNEMONIC POP-UP STYLES */
+
+rux-pop-up.mnemonic-pop-up span[slot="trigger"] {
+  color: var(--color-palette-brightblue-300);
+}
+
+rux-pop-up.mnemonic-pop-up span[slot="trigger"]:hover {
+  border-bottom: 1px solid var(--color-palette-brightblue-300);
+}
+
+rux-pop-up.mnemonic-pop-up rux-card::part(body) {
+  display: flex;
+  flex-direction: column;
+}
+
+rux-pop-up.mnemonic-pop-up rux-card div {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--spacing-8);
+}
+
+rux-pop-up.mnemonic-pop-up rux-checkbox::part(label) {
+  font-weight: var(--font-weights-bold);
+}

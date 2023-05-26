@@ -10,17 +10,6 @@ import { Alert } from "../../Types";
 import useAlerts from "../../hooks/useAlerts";
 import { useState } from "react";
 
-const styles = {
-  accordianLabel: {
-    color: "var(--color-palette-neutral-000)",
-  },
-  investigateBtn: {
-    display: "flex",
-    justifyContent: "center",
-    paddingBlock: "var(--spacing-2)",
-  },
-};
-
 type PropTypes = {
   alertItem: Alert;
 };
@@ -28,20 +17,6 @@ type PropTypes = {
 const AlertListItem = ({ alertItem }: PropTypes) => {
   const { toggleSelected } = useAlerts();
   const [openBanner, setOpenBanner] = useState(false);
-
-  const checkboxHandler = () => {
-    if (alertItem.selected) {
-      alertItem.selected = false;
-      //toggleSelected(alertItem.id);
-    } else {
-      alertItem.selected = true;
-      //toggleSelected(alertItem.id);
-    }
-  };
-
-  const investigateHandler = () => {
-    setOpenBanner(true);
-  };
 
   return (
     <li>
@@ -54,33 +29,29 @@ const AlertListItem = ({ alertItem }: PropTypes) => {
         This feature has not been implemented.
       </RuxNotification>
       <RuxAccordion>
-        <RuxAccordionItem id={alertItem.id} className="accordion-item">
-          {alertItem.message} <br />
-          <div style={styles.investigateBtn}>
-            <RuxButton icon="launch" onClick={investigateHandler}>
+        <RuxAccordionItem id={alertItem.id}>
+          <div className="accordion-item__content">
+            <div>{alertItem.message}</div>
+            <RuxButton icon="launch" onClick={() => setOpenBanner(true)}>
               Investigate
             </RuxButton>
           </div>
-          <div slot="label" style={styles.accordianLabel}>
+          <div slot="label">
             <div className="alert-list-label">
               <div>
                 <RuxCheckbox
                   id={alertItem.id}
                   checked={alertItem.selected}
-                  onRuxchange={checkboxHandler}
+                  onRuxinput={() => toggleSelected(alertItem.id)}
                 />
               </div>
-              <div className="message-status-column">
-                <div className="status">
-                  <RuxStatus status={alertItem.status} />
-                </div>
-                <div className="alert-message">{alertItem.message}</div>
+              <div>
+                <RuxStatus status={alertItem.status} />
               </div>
-              <div className="category-time-column">
-                <div className="alert-category">{alertItem.category}</div>
-                <div className="alert-time">
-                  {new Date(alertItem.timestamp).toTimeString().slice(0, 8)}
-                </div>
+              <div>{alertItem.message}</div>
+              <div>{alertItem.category}</div>
+              <div>
+                {new Date(alertItem.timestamp).toTimeString().slice(0, 8)}
               </div>
             </div>
           </div>

@@ -8,12 +8,13 @@ import {
   RuxTableBody,
   RuxTree,
   RuxTreeNode,
-  RuxNotification
+  RuxNotification,
 } from "@astrouxds/react";
 import type { Mnemonic } from "../../Types";
 import LineChart from "./LineChart";
 import WatcherListItem from "./WatcherListItem";
 import { generateMnemonics } from "../../data/generators/mnemonics/generate-mnemonics";
+import "./Watcher.css";
 
 const styles = {
   container: {
@@ -21,11 +22,11 @@ const styles = {
   },
 };
 
-const mnemonicsData = generateMnemonics(4);
+const mnemonicsData = generateMnemonics(8);
 
 const Watcher = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [openBanner, setOpenBanner] = useState(false);  
+  const [openBanner, setOpenBanner] = useState(false);
 
   useEffect(() => {
     const watcherDiv = document.querySelector(".watcher");
@@ -40,14 +41,14 @@ const Watcher = () => {
     const toggleSelected = (event: any) => {
       const watcherDiv = document.querySelector(".watcher");
       const tableRows = watcherDiv?.querySelectorAll("rux-table-row");
-      const closestRow = event.target.closest('rux-table-row')
+      const closestRow = event.target.closest("rux-table-row");
 
-      if (!closestRow || event.target.nodeName === 'RUX-INPUT') return 
+      if (!closestRow || event.target.nodeName === "RUX-INPUT") return;
       tableRows?.forEach((row) => {
         row.removeAttribute("selected");
       });
       closestRow.setAttribute("selected", "");
-      
+
       setSelectedIndex(Number(closestRow.dataset.index));
     };
   }, []);
@@ -88,7 +89,11 @@ const Watcher = () => {
                   </RuxTableHeader>
                   <RuxTableBody>
                     {mnemonicsData.map((dataObj: Mnemonic, index) => (
-                      <WatcherListItem rowData={dataObj} index={index} setOpenBanner={setOpenBanner} />
+                      <WatcherListItem
+                        rowData={dataObj}
+                        index={index}
+                        setOpenBanner={setOpenBanner}
+                      />
                     ))}
                   </RuxTableBody>
                 </RuxTable>

@@ -1,16 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useMemo } from "react";
-import { RuxCheckbox, RuxButton } from "@astrouxds/react";
+import { RuxCheckbox } from "@astrouxds/react";
 import AlertListItem from "./AlertListItem";
 import useAlerts from "../../hooks/useAlerts";
 import { Category, Status } from "../../Types";
-
-const styles = {
-  selectAllCheckbox: {
-    marginLeft: "1.25rem",
-    marginRight: "3.25rem",
-  },
-};
 
 type PropTypes = {
   severitySelection: Status | "all";
@@ -21,7 +14,6 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
   const {
     alerts,
     initialize,
-    deleteSelectedAlerts,
     selectAll,
     selectNone,
     stopGenerating,
@@ -76,38 +68,21 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
     <>
       <div className="alert-list-headers">
         <RuxCheckbox
-          style={styles.selectAllCheckbox}
+          className="select-all-checkbox"
           onRuxchange={selectAllHandler}
           checked={allSelected}
           indeterminate={anySelected && !allSelected}
         />
-        <span className="message-column">Message</span>
-        <span className="category-time-column">
-          <span className="alert-category">Category</span>
-          <span className="alert-time">Time</span>
-        </span>
+        <span>Message</span>
+        <span>Category</span>
+        <span>Time</span>
       </div>
-      <div className="table-wrapper alert-list" id="alert-scrollbar">
+      <div className="table-wrapper alert-list">
         <ul>
           {filteredAlertIds.map((alertId) => (
             <AlertListItem alertItem={alerts[alertId]} key={alertId} />
           ))}
         </ul>
-      </div>
-      <div className="alerts-footer" slot="footer">
-        <div>
-          <RuxButton
-            secondary
-            onClick={deleteSelectedAlerts}
-            style={{ marginRight: "1rem" }}
-            disabled={!anySelected}
-          >
-            Dismiss
-          </RuxButton>
-          <RuxButton onClick={deleteSelectedAlerts} disabled={!anySelected}>
-            Acknowledge
-          </RuxButton>
-        </div>
       </div>
     </>
   );
