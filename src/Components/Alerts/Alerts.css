@@ -1,0 +1,113 @@
+/* ALERTS CONTAINER HEADER */
+
+.alerts div[slot="header"] {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.active-alerts {
+  display: flex;
+  flex-flow: column nowrap;
+  font-size: var(--font-size-base);
+}
+
+.active-alerts > span {
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weights-bold);
+}
+
+.select-menu-div {
+  display: flex;
+  max-width: 50%;
+  gap: 5%;
+}
+
+/* ALERTS TABLE STYLES */
+
+.alerts rux-table-cell {
+  border-bottom: none;
+}
+
+.alerts rux-table-header-row {
+  display: flex;
+  background-color: var(--color-background-surface-header);
+  /* padding-left: 28px; */
+}
+
+.alerts rux-table-header-cell {
+  display: flex;
+  align-items: center;
+}
+
+.alerts rux-table-header-cell:nth-of-type(1),
+.alerts rux-table-cell:nth-of-type(1) {
+  width: 2.3rem;
+  margin-left: calc(8px + 8px);
+}
+
+.alerts rux-table-header-cell:nth-of-type(2),
+.alerts rux-table-cell:nth-of-type(2) {
+  width: 1rem;
+}
+.alerts rux-table-header-cell:nth-of-type(3),
+.alerts rux-table-cell:nth-of-type(3) {
+  width: 9rem;
+  min-width: 9rem;
+  max-width: 9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.alerts rux-table-header-cell:nth-of-type(4),
+.alerts rux-table-cell:nth-of-type(4) {
+  width: 4.8rem;
+  text-transform: capitalize;
+}
+
+/* ACCORDION ITEM STYLES */
+
+/* .alerts rux-accordion-item::part(label-wrapper) {
+  flex-direction: row-reverse;
+}
+
+.alerts rux-accordion-item::part(indicator) {
+  transform: rotate(-90deg);
+} */
+
+.alerts rux-accordion-item::part(container) {
+  padding-inline: 0px;
+}
+
+.alerts rux-accordion-item::part(label) {
+  color: var(--color-palette-neutral-000);
+}
+
+.accordion-item__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding-block: var(--spacing-2);
+}
+
+.accordion-item__content > div {
+  align-self: flex-start;
+}
+
+/* ALERTS FOOTER STYLES */
+
+.alerts::part(footer) {
+  padding: 0px;
+}
+
+.alerts div[slot="footer"] {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  align-items: center;
+  box-shadow: 0 -0.5rem 1.25rem rgba(0, 0, 0, 0.25);
+  /* height: 3rem; */
+  padding: 2rem;
+}

@@ -1,9 +1,4 @@
-import {
-  RuxTableRow,
-  RuxTableCell,
-  RuxTree,
-  RuxTreeNode,
-} from "@astrouxds/react";
+import { RuxTree, RuxTreeNode } from "@astrouxds/react";
 import "./PassPlan.css";
 
 export type PassPlanMnemonic = {
@@ -20,56 +15,40 @@ type PropTypes = {
 const PassPlanItem = ({ item }: PropTypes) => {
   if (!item.subSteps)
     return (
-      <RuxTree>
-        <RuxTreeNode>
-          <RuxTableRow>
-            <RuxTableCell className="t-cell t-cell-step">
-              {item.step}
-            </RuxTableCell>
-            <RuxTableCell className="t-cell t-cell-command">
-              {item.command}
-            </RuxTableCell>
-            {item.runLength ? (
-              <RuxTableCell className="t-cell">{item.runLength}</RuxTableCell>
-            ) : null}
-          </RuxTableRow>
-        </RuxTreeNode>
-      </RuxTree>
+      <li>
+        <RuxTree>
+          <RuxTreeNode>
+            <div className="rux-tree-content">
+              <div>{item.step}</div>
+              <div>{item.command}</div>
+              {item.runLength ? <div>{item.runLength}</div> : null}
+            </div>
+          </RuxTreeNode>
+        </RuxTree>
+      </li>
     );
   else
     return (
-      <RuxTableRow>
+      <li className="pass-plan-list">
         <RuxTree>
           <RuxTreeNode>
-            <RuxTableCell className="t-cell t-cell-step">
-              {item.step}
-            </RuxTableCell>
-            <RuxTableCell className="t-cell t-cell-command">
-              {item.command}
-            </RuxTableCell>
-            {item.runLength ? (
-              <RuxTableCell className="t-cell">{item.runLength}</RuxTableCell>
-            ) : null}
+            <div className="rux-tree-content">
+              <div>{item.step}</div>
+              <div>{item.command}</div>
+              {item.runLength ? <div>{item.runLength}</div> : null}
+            </div>
             {item.subSteps.map((subStep) => (
               <RuxTreeNode slot="node" key={subStep.step}>
-                <RuxTableRow>
-                  <RuxTableCell className="t-cell" style={{ width: "2rem" }}>
-                    {subStep.step}
-                  </RuxTableCell>
-                  <RuxTableCell className="t-cell" style={{ width: "16rem" }}>
-                    {subStep.command}
-                  </RuxTableCell>
-                  {subStep.runLength ? (
-                    <RuxTableCell className="t-cell">
-                      {subStep.runLength}
-                    </RuxTableCell>
-                  ) : null}
-                </RuxTableRow>
+                <div className="rux-tree-content">
+                  <div>{subStep.step}</div>
+                  <div>{subStep.command}</div>
+                  {subStep.runLength ? <div>{subStep.runLength}</div> : null}
+                </div>
               </RuxTreeNode>
             ))}
           </RuxTreeNode>
         </RuxTree>
-      </RuxTableRow>
+      </li>
     );
 };
 

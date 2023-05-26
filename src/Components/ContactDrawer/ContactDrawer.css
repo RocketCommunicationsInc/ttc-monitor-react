@@ -1,3 +1,5 @@
+/* DRAWER LAYOUT */
+
 .drawer {
   display: none;
 }
@@ -21,13 +23,13 @@
   user-select: none;
 }
 
-.drawer__header {
-  /* Optional */
-  padding: 0.5rem;
+.drawer rux-container div[slot="header"] {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--color-background-surface-header);
+  gap: 1rem;
+}
+
+.drawer rux-container div[slot="header"] rux-button {
+  margin-left: auto;
 }
 
 .drawer__close {
@@ -48,7 +50,7 @@
   top: 0;
   right: 0;
   bottom: 0;
-  height: 100%;
+  margin-top: 6.75rem;
   width: 100%;
   max-width: 500px;
   z-index: 9999;
@@ -56,7 +58,6 @@
 
   transition: transform 0.3s;
   will-change: transform;
-  background-color: var(--color-background-surface-default);
 
   display: flex;
   flex-direction: column;
@@ -70,11 +71,7 @@
   box-shadow: 0 2px 6px #000;
 }
 
-.drawer__title {
-  display: flex;
-  flex-flow: nowrap;
-  align-items: center;
-}
+/* DRAWER CONTENT  */
 
 .drawer-title-status {
   margin-right: 0.25rem;
@@ -88,6 +85,7 @@
   flex-grow: 1;
   /* Optional */
   padding: 1.5rem;
+   background-color: var(--color-background-surface-default);
 }
 
 .drawer--left .drawer__wrapper {
@@ -115,12 +113,30 @@
   justify-content: center;
 }
 
+.drawer__header {
+display: flex;
+justify-content: space-between;
+padding-top: 1rem;
+align-items: center;
+}
+
+.drawer__header rux-status{
+margin-right: 1rem;
+}
+
+.drawer__header rux-icon{
+margin-left: -.5rem;
+cursor: pointer;
+}
+
+/* DRAWER FOOTER */
+
 .run-length-footer {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   height: 4.5rem;
-  width: 100%;
+  width: 93%;
   background-color: #172635;
   font-weight: bold;
   padding-right: 2rem;

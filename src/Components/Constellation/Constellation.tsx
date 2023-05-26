@@ -14,14 +14,7 @@ import {
 import useContacts from "../../hooks/useContacts";
 import ContactDrawer from "../ContactDrawer/ContactDrawer";
 import { Contact } from "../../Types";
-
-const styles = {
-  slider: {
-    display: "flex",
-    alignSelf: "center",
-    marginLeft: "auto",
-  },
-};
+import "./Constellation.css";
 
 const Constellation = () => {
   const [content, setContent] = useState("List");
@@ -54,10 +47,10 @@ const Constellation = () => {
   return (
     <>
       <RuxContainer className="constellation">
-        <div slot="header" style={{ display: "flex" }}>
+        <div slot="header" className="header">
           Constellation
           {content === "Timeline" ? (
-            <div style={styles.slider}>
+            <div className="slider">
               <RuxIcon icon="zoom-out" size="extra-small" />
               <RuxSlider
                 value={zoomLevel}

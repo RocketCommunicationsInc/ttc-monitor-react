@@ -8,6 +8,7 @@ import {
   RuxTabPanel,
   RuxIcon,
   RuxNotification,
+  RuxContainer,
 } from "@astrouxds/react";
 import ContactDetails from "./ContactDetails/ContactDetails";
 import PassPlan from "./PassPlan/PassPlan";
@@ -108,24 +109,14 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
         onClick={() => toggle()}
       ></div>
       {contact ? (
-        <div className="drawer__wrapper">
+        <RuxContainer className="drawer__wrapper">
           <div className="drawer__header">
-            <div
-              className="drawer__title"
-              style={{
-                textDecoration: "underline",
-                fontSize: "18px",
-              }}
-            >
-              <RuxStatus
-                status={contact.status}
-                className="drawer-title-status"
-              />
+            <div>
               <RuxButton borderless onClick={() => setOpenBanner(true)}>
+                <RuxStatus status={contact.status} />
                 {contact.satellite}
               </RuxButton>
               <RuxIcon
-                style={{ marginLeft: "-.75rem", cursor: "pointer" }}
                 size="1.15rem"
                 icon="launch"
                 onClick={() => setOpenBanner(true)}
@@ -177,7 +168,7 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
               {`Total Run Length: ${passPlanLength}`}
             </footer>
           ) : null}
-        </div>
+        </RuxContainer>
       ) : null}
     </section>
   );

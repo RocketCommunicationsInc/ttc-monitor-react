@@ -12,6 +12,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import annotationPlugin from "chartjs-plugin-annotation";
+import type { Mnemonic } from "../../Types";
 
 ChartJS.register(
   CategoryScale,
@@ -24,8 +25,6 @@ ChartJS.register(
   Legend,
   annotationPlugin
 );
-
-const randomNumber = () => Math.floor(Math.random() * 110);
 
 const labels = [
   "0800",
@@ -43,36 +42,36 @@ const tooltipTitle = () => {
   return "";
 };
 
-const dataObj = {
-  labels,
-  datasets: [
-    {
-      label: "Value",
-      data: Array(9)
-        .fill(1)
-        .map(() => randomNumber()),
-      borderColor: "rgb(77, 172, 255)",
-      pointRadius: 0,
-      gridLines: {
-        color: "#455D6E",
-        display: true,
-      },
-    },
-  ],
-};
-
 type PropTypes = {
-  subtitle: string;
+  data: Mnemonic;
 };
 
-const LineChart = ({ subtitle }: PropTypes) => {
+const LineChart = ({ data }: PropTypes) => {
+  const dataObj = {
+    labels,
+    datasets: [
+      {
+        label: "Value",
+        data: data.chartData,
+        borderColor: "rgb(77, 172, 255)",
+        pointRadius: 0,
+        gridLines: {
+          color: "#455D6E",
+          display: true,
+        },
+      },
+    ],
+  };
+
   const options = {
     responsive: true,
     maintainAspectRatio: false,
     layout: {
       padding: {
-        top: 5,
-        left: 3,
+        top: 16,
+        left: 24,
+        right: 24,
+        bottom: 16,
       },
     },
     scales: {
@@ -99,11 +98,6 @@ const LineChart = ({ subtitle }: PropTypes) => {
           color: "grey",
           drawTicks: false,
         },
-        // title: {
-        //   display: true,
-        //   color: "white",
-        //   text: "Volts",
-        // },
         ticks: {
           color: "white",
           padding: 7,
@@ -132,7 +126,7 @@ const LineChart = ({ subtitle }: PropTypes) => {
       },
       subtitle: {
         display: true,
-        text: `               ${subtitle}`,
+        text: `               ${data.mnemonic}`,
         color: "white",
         align: "start",
         font: {

@@ -1,11 +1,4 @@
-import {
-  RuxTable,
-  RuxTableHeader,
-  RuxTableHeaderRow,
-  RuxTableHeaderCell,
-  RuxTableBody,
-  RuxIcon,
-} from "@astrouxds/react";
+import { RuxIcon } from "@astrouxds/react";
 import PassPlanItem, { PassPlanMnemonic } from "./PassPlanItem";
 import { getJulianDay } from "../../../data/utils";
 import { Contact } from "../../../Types";
@@ -23,22 +16,18 @@ const PassPlan = ({ contact, passPlan }: PropTypes) => {
         {`Next Pass: ${getJulianDay(new Date(contact.aos))}`} &nbsp;
         {`AOS: ${new Date(contact.aos).toTimeString().slice(0, 8)}`}
       </div>
-      <RuxTable style={{ borderBottom: "none" }}>
-        <RuxTableHeader>
-          <RuxTableHeaderRow>
-            <RuxTableHeaderCell>
-              <span style={{ marginRight: "3.5rem" }}>Step</span>
-              <span style={{ marginRight: "10.5rem" }}>Command</span>
-              <span>Run Length</span>
-            </RuxTableHeaderCell>
-          </RuxTableHeaderRow>
-        </RuxTableHeader>
-        <RuxTableBody>
+      <div className="rux-tree-header">
+        <span>Step</span>
+        <span>Command</span>
+        <span>Run Length</span>
+        </div>
+      <div className="pass-plan-list">
+        <ul>
           {passPlan.map((step) => (
             <PassPlanItem item={step} key={step.step} />
           ))}
-        </RuxTableBody>
-      </RuxTable>
+        </ul>
+      </div>
     </div>
   );
 };

@@ -6,39 +6,11 @@ import {
   RuxAccordion,
   RuxAccordionItem,
   RuxTableRow,
+  RuxNotification,
 } from "@astrouxds/react";
 import { Alert } from "../../Types";
 import useAlerts from "../../hooks/useAlerts";
-
-const styles = {
-  accordianLabel: {
-    color: "var(--color-palette-neutral-000)",
-  },
-  checkboxes: {
-    paddingRight: "var(--spacing-4)",
-  },
-  alertMessage: {
-    minWidth: "9rem",
-    maxWidth: "9rem",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-  },
-  alertCategory: {
-    width: "4.75rem",
-    alignSelf: "center",
-    paddingLeft: "1.1rem",
-  },
-  alertTime: {
-    width: "1.7rem",
-    paddingLeft: ".6rem",
-    alignSelf: "left",
-  },
-  investigateBtn: {
-    display: "flex",
-    justifyContent: "center",
-    paddingBlock: "var(--spacing-2)",
-  },
-};
+import { useState } from "react";
 
 type PropTypes = {
   alertItem: Alert;
@@ -46,54 +18,47 @@ type PropTypes = {
 
 const AlertListItem = ({ alertItem }: PropTypes) => {
   const { toggleSelected } = useAlerts();
-
-  const checkboxHandler = () => {
-    toggleSelected(alertItem.id);
-    if (alertItem.selected) {
-      alertItem.selected = false;
-    } else {
-      alertItem.selected = true;
-    }
-  };
-
-  const investigateHandler = () => {
-    alert("This feature has not been implemented.");
-  };
+  const [openBanner, setOpenBanner] = useState(false);
 
   return (
-    <RuxAccordion>
-      <RuxAccordionItem id={alertItem.id} className="accordion-item">
-        {alertItem.message} <br />
-        <RuxButton onClick={investigateHandler} style={styles.investigateBtn}>
-          Investigate
-        </RuxButton>
-        <div slot="label" style={styles.accordianLabel}>
-          <RuxTableRow>
-            <RuxTableCell style={{ textAlign: "center" }}>
+    <>
+      <RuxNotification
+        small
+        closeAfter={3}
+        onRuxclosed={() => setOpenBanner(false)}
+        open={openBanner}
+      >
+        This feature has not been implemented.
+      </RuxNotification>
+      <RuxAccordion>
+        <RuxAccordionItem id={alertItem.id}>
+          <RuxTableRow slot="label">
+            <RuxTableCell>
               <RuxCheckbox
                 id={alertItem.id}
-                style={styles.checkboxes}
-                className="checkboxes"
                 checked={alertItem.selected}
-                onRuxchange={checkboxHandler}
+                onRuxinput={() => toggleSelected(alertItem.id)}
               />
             </RuxTableCell>
             <RuxTableCell>
               <RuxStatus status={alertItem.status} />
             </RuxTableCell>
-            <RuxTableCell style={styles.alertMessage}>
-              {alertItem.message}
-            </RuxTableCell>
-            <RuxTableCell style={styles.alertCategory}>
-              {alertItem.category}
-            </RuxTableCell>
-            <RuxTableCell style={styles.alertTime}>
+            <RuxTableCell>{alertItem.message}</RuxTableCell>
+            <RuxTableCell>{alertItem.category}</RuxTableCell>
+            <RuxTableCell>
               {new Date(alertItem.timestamp).toTimeString().slice(0, 8)}
             </RuxTableCell>
           </RuxTableRow>
-        </div>
-      </RuxAccordionItem>
-    </RuxAccordion>
+          {/* accordion item content */}
+          <div className="accordion-item__content">
+            <div>{alertItem.message}</div>
+            <RuxButton icon="launch" onClick={() => setOpenBanner(true)}>
+              Investigate
+            </RuxButton>
+          </div>
+        </RuxAccordionItem>
+      </RuxAccordion>
+    </>
   );
 };
 

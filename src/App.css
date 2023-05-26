@@ -1,15 +1,15 @@
+/* APPLICATION LAYOUT & GRID STYLES */
+
 .app-container {
   height: 100%;
-  overflow: hidden;
 }
 
 .background {
   height: calc(100% - var(--spacing-24));
-  padding-block: var(--spacing-3);
-  padding-inline: var(--spacing-2);
+  padding: var(--spacing-3);
   background-color: var(--color-background-surface);
   display: grid;
-  gap: 15px 10px;
+  gap: var(--spacing-3);
   grid-template-columns: calc(30% - 10px) 1fr 1fr;
   grid-template-rows: calc(55% - 7.5px) calc(45% - 7.5px);
   grid-template-areas:
@@ -17,37 +17,52 @@
     "alerts watcher watcher";
 }
 
-rux-container {
-  height: 100%;
-  border: 1px solid var(--color-border-interactive-muted);
-}
-
 rux-container::part(container) {
+  display: flex;
+  flex-direction: column;
   height: calc(100% - 2px);
   overflow-y: hidden;
 }
 
 rux-container::part(body) {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
   padding: 0;
   /* to color small space above scrollbar */
   background-color: var(--color-palette-darkblue-900);
 }
 
-.alerts::part(body) {
-  height: calc(100% - 220px);
+rux-container.alerts {
+  grid-area: alerts;
 }
 
-.constellation::part(body) {
-  height: calc(100% - 68px);
+rux-container.constellation {
+  grid-area: constellation;
 }
 
-.watcher rux-container::part(body) {
-  height: calc(100% - 100px);
+.watcher {
+  grid-area: watcher;
+  display: flex;
 }
+
+.watcher rux-container {
+  width: 40%;
+}
+
+.watcher rux-container::part(container) {
+  border-right: none;
+}
+
+/* GlOBAL TABLE STYLES */
 
 .table-wrapper {
-  height: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+  margin-top: 40px;
 }
 
 rux-table-header {
@@ -56,85 +71,8 @@ rux-table-header {
   z-index: 10;
 }
 
-.alerts {
-  grid-area: alerts;
-}
-
-.alerts-footer {
-  display: flex;
-  justify-content: center;
-  border-top: 1px solid var(--logHeaderBackgroundColor, rgb(20, 32, 44));
-  box-shadow: 0 -0.5rem 1.25rem rgba(0, 0, 0, 0.25);
-  height: 3rem;
-  padding: 2rem;
-  position: sticky;
-  bottom: 0;
-  background-color: #1b2d3e;
-}
-
-rux-accordion rux-table-row {
-  width: 50px;
-}
-
-.constellation {
-  grid-area: constellation;
-}
-
-.table-wrapper::-webkit-scrollbar-track {
-  margin-top: 40px;
-}
-
-rux-timeline::part(time-region-container) {
-  height: 84%;
-}
-
-.watcher {
-  grid-area: watcher;
-  display: flex;
-  background-color: var(--color-palette-darkblue-900);
-}
-
-.watcher rux-container {
-  width: 40%;
-}
-
-.watcher rux-container::part(toolbar) {
-  background-color: var(--color-background-surface-selected);
-  padding: 10px;
-}
-
-.mneumonic-popup-value[slot="trigger"]:hover {
-  border-bottom: 1px solid var(--color-palette-brightblue-300);
-}
-
-.watcher rux-table-header-cell {
-  text-align: right;
-}
-
-.watcher rux-table-header-cell:nth-of-type(2) {
-  text-align: left;
-}
-
-rux-time-region::part(container) {
-  border: 1px solid var(--color-border-interactive-muted);
-}
-
-.constellation rux-icon {
-  vertical-align: middle;
-  width: 32px;
-}
-
-.constellation .visible {
-  visibility: visible;
-}
-.constellation .hidden {
-  visibility: hidden;
-}
-
-.watcher .canvas-wrapper {
-  width: 60%;
-  border: 1px solid var(--color-border-interactive-muted);
-  border-left: none;
+rux-status::part(status) {
+  margin-inline: auto;
 }
 
 /* added to center align indicator with table row */
