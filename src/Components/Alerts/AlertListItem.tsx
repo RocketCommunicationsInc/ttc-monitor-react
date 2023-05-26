@@ -1,11 +1,9 @@
 import {
-  RuxTableCell,
   RuxCheckbox,
   RuxStatus,
   RuxButton,
   RuxAccordion,
   RuxAccordionItem,
-  RuxTableRow,
   RuxNotification,
 } from "@astrouxds/react";
 import { Alert } from "../../Types";
@@ -21,7 +19,7 @@ const AlertListItem = ({ alertItem }: PropTypes) => {
   const [openBanner, setOpenBanner] = useState(false);
 
   return (
-    <>
+    <li>
       <RuxNotification
         small
         closeAfter={3}
@@ -32,33 +30,28 @@ const AlertListItem = ({ alertItem }: PropTypes) => {
       </RuxNotification>
       <RuxAccordion>
         <RuxAccordionItem id={alertItem.id}>
-          <RuxTableRow slot="label">
-            <RuxTableCell>
-              <RuxCheckbox
-                id={alertItem.id}
-                checked={alertItem.selected}
-                onRuxinput={() => toggleSelected(alertItem.id)}
-              />
-            </RuxTableCell>
-            <RuxTableCell>
-              <RuxStatus status={alertItem.status} />
-            </RuxTableCell>
-            <RuxTableCell>{alertItem.message}</RuxTableCell>
-            <RuxTableCell>{alertItem.category}</RuxTableCell>
-            <RuxTableCell>
-              {new Date(alertItem.timestamp).toTimeString().slice(0, 8)}
-            </RuxTableCell>
-          </RuxTableRow>
-          {/* accordion item content */}
           <div className="accordion-item__content">
             <div>{alertItem.message}</div>
             <RuxButton icon="launch" onClick={() => setOpenBanner(true)}>
               Investigate
             </RuxButton>
           </div>
+          <div slot="label" className="alert-list-label">
+            <RuxCheckbox
+              id={alertItem.id}
+              checked={alertItem.selected}
+              onRuxinput={() => toggleSelected(alertItem.id)}
+            />
+            <RuxStatus status={alertItem.status} />
+            <span>{alertItem.message}</span>
+            <span>{alertItem.category}</span>
+            <span>
+              {new Date(alertItem.timestamp).toTimeString().slice(0, 8)}
+            </span>
+          </div>
         </RuxAccordionItem>
       </RuxAccordion>
-    </>
+    </li>
   );
 };
 

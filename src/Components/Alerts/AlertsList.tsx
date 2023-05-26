@@ -1,13 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useMemo } from "react";
-import {
-  RuxTable,
-  RuxTableHeader,
-  RuxTableHeaderRow,
-  RuxTableHeaderCell,
-  RuxTableBody,
-  RuxCheckbox,
-} from "@astrouxds/react";
+import { RuxCheckbox } from "@astrouxds/react";
 import AlertListItem from "./AlertListItem";
 import useAlerts from "../../hooks/useAlerts";
 import { Category, Status } from "../../Types";
@@ -26,6 +19,7 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
     stopGenerating,
     generate,
     allSelected,
+    anySelected,
   } = useAlerts();
 
   useEffect(() => {
@@ -71,31 +65,24 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
   };
 
   return (
-    <div className="table-wrapper">
-      <RuxTable>
-        <RuxTableHeader>
-          <RuxTableHeaderRow>
-            <RuxTableHeaderCell>
-              <RuxCheckbox
-                onRuxchange={selectAllHandler}
-                className="select-all-checkbox"
-                checked={allSelected}
-              />
-            </RuxTableHeaderCell>
-            {/* Status Placeholder */}
-            <RuxTableHeaderCell></RuxTableHeaderCell>
-            <RuxTableHeaderCell>Message</RuxTableHeaderCell>
-            <RuxTableHeaderCell>Category</RuxTableHeaderCell>
-            <RuxTableHeaderCell>Time</RuxTableHeaderCell>
-          </RuxTableHeaderRow>
-        </RuxTableHeader>
-        <RuxTableBody>
-          {filteredAlertIds.map((alertId) => (
-            <AlertListItem alertItem={alerts[alertId]} key={alertId} />
-          ))}
-        </RuxTableBody>
-      </RuxTable>
-    </div>
+    <>
+      <div className="alert-list-headers">
+        <RuxCheckbox
+          className="select-all-checkbox"
+          onRuxchange={selectAllHandler}
+          checked={allSelected}
+          indeterminate={anySelected && !allSelected}
+        />
+        <span>Message</span>
+        <span>Category</span>
+        <span>Time</span>
+      </div>
+      <ul className="alert-list">
+        {filteredAlertIds.map((alertId) => (
+          <AlertListItem alertItem={alerts[alertId]} key={alertId} />
+        ))}
+      </ul>
+    </>
   );
 };
 
