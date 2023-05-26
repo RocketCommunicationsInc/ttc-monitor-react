@@ -114,6 +114,8 @@ rux-accordion rux-status {
   display: flex;
   flex-direction: column;
   background-color: var(--color-background-surface-default);
+  overflow-y: scroll;
+  flex-grow: 1;
 }
 
 .alert-list ul {

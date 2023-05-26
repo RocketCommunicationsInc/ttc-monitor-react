@@ -77,7 +77,7 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
         <span>Category</span>
         <span>Time</span>
       </div>
-      <div className="table-wrapper alert-list">
+      <div className="alert-list">
         <ul>
           {filteredAlertIds.map((alertId) => (
             <AlertListItem alertItem={alerts[alertId]} key={alertId} />
