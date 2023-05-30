@@ -26,6 +26,7 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
     stopGenerating,
     generate,
     allSelected,
+    anySelected,
   } = useAlerts();
 
   useEffect(() => {
@@ -80,6 +81,7 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
                 onRuxchange={selectAllHandler}
                 className="select-all-checkbox"
                 checked={allSelected}
+                indeterminate={anySelected && !allSelected}
               />
             </RuxTableHeaderCell>
             {/* Status Placeholder */}
