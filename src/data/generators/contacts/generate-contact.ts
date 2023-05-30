@@ -43,7 +43,7 @@ export const generateContact = (
 
   // 2) end timestamp based off start and generates a random timestamp
   // between 20 and 60 minutes in the future
-  const end = new Date(beginTimestamp + randomMinutes(20, 60));
+  const end = new Date(beginTimestamp + randomMinutes(20, 30));
   const endTimestamp = end.getTime();
 
   // 3) AOS (Acquisition of Signal) random number of seconds after start
