@@ -58,7 +58,7 @@ rux-container.constellation {
 /* GlOBAL TABLE STYLES */
 
 .table-wrapper {
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 
 .timeline-wrapper {
