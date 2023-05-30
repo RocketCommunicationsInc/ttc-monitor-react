@@ -63,3 +63,34 @@
   height: 100%;
   overflow: auto;
 }
+
+rux-track div[slot="label"] {
+  display: flex;
+}
+
+rux-track rux-status {
+  padding-right: 1rem;
+}
+
+rux-time-region {
+  cursor: pointer;
+}
+
+rux-timeline{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}
+
+.timeline-wrapper::-webkit-scrollbar:horizontal {
+  position: sticky;
+  bottom: 0;
+}
+
+.timeline-wrapper {
+  height: 100%;
+  overflow-y: auto;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}

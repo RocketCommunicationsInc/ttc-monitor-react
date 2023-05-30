@@ -18,7 +18,7 @@ import "./Constellation.css";
 
 const Constellation = () => {
   const [content, setContent] = useState("List");
-  const [zoomLevel, setZoomLevel] = useState(1);
+  const [zoomLevel, setZoomLevel] = useState(5);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [drawerContact, setDrawerContact] = useState<Contact | null>(null);
 
@@ -78,7 +78,10 @@ const Constellation = () => {
             toggleDrawer={toggleDrawer}
           />
         ) : (
-          <ConstellationTimeline zoomLevel={zoomLevel} />
+          <ConstellationTimeline
+            toggleDrawer={toggleDrawer}
+            zoomLevel={zoomLevel}
+          />
         )}
       </RuxContainer>
       <ContactDrawer
