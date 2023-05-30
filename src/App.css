@@ -74,8 +74,3 @@ rux-table-header {
 rux-status::part(status) {
   margin-inline: auto;
 }
-
-/* added to center align indicator with table row */
-rux-tree-node::part(indicator) {
-  margin-top: 0.3rem;
-}
