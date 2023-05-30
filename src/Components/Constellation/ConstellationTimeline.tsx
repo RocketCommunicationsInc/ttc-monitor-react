@@ -19,7 +19,7 @@ const ConstellationTimeline = ({
   const { contacts, contactIds } = useContacts();
 
   const date = new Date();
-  const getStartTime = date.setHours(date.getHours() - 22);
+  const getStartTime = date.setHours(date.getHours() - 23);
   const getEndTime = date.setDate(date.getDate() + 1);
   const getPlaybackTime = date.setHours(date.getHours() - 22);
   const startTime = new Date(getStartTime).toISOString();
