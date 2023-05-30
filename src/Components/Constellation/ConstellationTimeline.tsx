@@ -3,57 +3,96 @@ import {
   RuxTrack,
   RuxTimeRegion,
   RuxRuler,
-  RuxStatus,
 } from "@astrouxds/react";
-import useContacts from "../../hooks/useContacts";
 
 type PropTypes = {
   zoomLevel: number;
-  toggleDrawer: (id?: string) => void;
 };
 
-const ConstellationTimeline = ({ zoomLevel, toggleDrawer }: PropTypes) => {
-  const { contacts, contactIds } = useContacts();
-
-  const date = new Date();
-  const getStartTime = date.setHours(date.getHours() - 23);
-  const getEndTime = date.setDate(date.getDate() + 1);
-  const getPlaybackTime = date.setHours(date.getHours() - 22);
-  const startTime = new Date(getStartTime).toISOString();
-  const endTime = new Date(getEndTime).toISOString();
-  const playhead = new Date(getPlaybackTime).toISOString();
-
+const ConstellationTimeline = ({ zoomLevel }: PropTypes) => {
   return (
-    <div className="timeline-wrapper">
-      <RuxTimeline
-        timezone="UTC"
-        start={startTime}
-        end={endTime}
-        playhead={playhead}
-        interval="hour"
-        zoom={zoomLevel}
-      >
-        {contactIds.map((contactId) => (
-          <RuxTrack>
-            <div slot="label">
-              <RuxStatus status={contacts[contactId].status} />
-              {contacts[contactId].satellite.slice(4, 10)}
-            </div>
-            <RuxTimeRegion
-              onClick={() => toggleDrawer(contactId)}
-              start={new Date(contacts[contactId].beginTimestamp).toISOString()}
-              end={new Date(contacts[contactId].endTimestamp).toISOString()}
-              status={contacts[contactId].status}
-            >
-              {contacts[contactId].satellite}
-            </RuxTimeRegion>
-          </RuxTrack>
-        ))}
-        <RuxTrack slot="ruler">
-          <RuxRuler />
-        </RuxTrack>
-      </RuxTimeline>
-    </div>
+    <RuxTimeline
+      timezone="America/New_York"
+      start="2021-02-01T00:00:00.000Z"
+      end="2021-02-03T00:00:00.000Z"
+      playhead="2021-02-01T04:00:00.000Z"
+      interval="hour"
+      zoom={zoomLevel}
+    >
+      <RuxTrack>
+        <div slot="label">Region 1</div>
+        <RuxTimeRegion
+          start="2021-02-01T01:00:00Z"
+          end="2021-02-01T02:00:00Z"
+          status="serious"
+        >
+          Event 1.2
+        </RuxTimeRegion>
+      </RuxTrack>
+      <RuxTrack>
+        <div slot="label">Region 2</div>
+        <RuxTimeRegion
+          start="2021-02-01T10:00:00Z"
+          end="2021-02-01T12:00:00Z"
+          status="serious"
+        >
+          Event 2.1
+        </RuxTimeRegion>
+      </RuxTrack>
+      <RuxTrack>
+        <div slot="label">Region 3</div>
+        <RuxTimeRegion
+          start="2021-02-01T00:00:00Z"
+          end="2021-02-02T02:00:00Z"
+          status="standby"
+        >
+          Event 3.1
+        </RuxTimeRegion>
+      </RuxTrack>
+      <RuxTrack>
+        <div slot="label">Region 4</div>
+        <RuxTimeRegion
+          start="2021-02-01T03:00:00Z"
+          end="2021-02-02T04:33:00Z"
+          status="critical"
+        >
+          Event 4.1
+        </RuxTimeRegion>
+      </RuxTrack>
+      <RuxTrack>
+        <div slot="label">Region 5</div>
+        <RuxTimeRegion
+          start="2021-02-01T05:00:00Z"
+          end="2021-02-02T05:33:00Z"
+          status="caution"
+        >
+          Event 5.1
+        </RuxTimeRegion>
+      </RuxTrack>
+      <RuxTrack>
+        <div slot="label">Region 6</div>
+        <RuxTimeRegion
+          start="2021-02-01T05:00:00Z"
+          end="2021-02-02T05:33:00Z"
+          status="normal"
+        >
+          Event 6.1
+        </RuxTimeRegion>
+      </RuxTrack>
+      <RuxTrack>
+        <div slot="label">Region 7</div>
+        <RuxTimeRegion
+          start="2021-02-01T05:00:00Z"
+          end="2021-02-02T05:33:00Z"
+          status="normal"
+        >
+          Event 7.1
+        </RuxTimeRegion>
+      </RuxTrack>
+      <RuxTrack slot="ruler">
+        <RuxRuler />
+      </RuxTrack>
+    </RuxTimeline>
   );
 };
 

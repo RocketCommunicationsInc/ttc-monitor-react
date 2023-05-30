@@ -286,7 +286,7 @@ const CostellationList = ({
                   </RuxTableCell>
                   <RuxTableCell>{contact.elevation}&deg;</RuxTableCell>
                   <RuxTableCell id="state-t-cell">{contact.state}</RuxTableCell>
-                  <RuxPopUp placement="bottom" closeOnSelect>
+                  <RuxPopUp placement="bottom">
                     <RuxMenu>
                       <RuxMenuItem onClick={popupMenuHandler}>
                         View Pass Plan
