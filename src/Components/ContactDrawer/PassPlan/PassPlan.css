@@ -1,0 +1,78 @@
+/* PASS PLAN LIST */
+
+.pass-plan-wrapper {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.next-pass-time {
+  display: flex;
+  margin-block: 1.5rem;
+  align-items: center;
+  font-weight: bold;
+  justify-content: center;
+}
+
+.next-pass-time rux-icon {
+  margin-right: 0.5rem;
+}
+
+.pass-plan-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.rux-tree-content {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  align-items: center;
+}
+
+.rux-tree-content div:nth-of-type(1) {
+  margin-right: 2rem;
+  width: 2rem;
+}
+
+.rux-tree-content div:nth-of-type(2) {
+  margin-right: 2.5rem;
+  width: 13.5rem;
+} 
+
+li {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.tree-node.parent {
+  padding: 0;
+  margin: 0;
+}
+
+.pass-plan-wrapper ul {
+  padding-left: 0;
+  margin: 0;
+}
+
+/* RUX TREE HEADER */
+
+.rux-tree-header {
+  background-color: #172635;
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  box-shadow: 0px 3px 3px 0px rgb(0 0 0 / 40%);
+  height: 40px;
+  padding-inline: 8px;
+  font-size: 18px;
+  align-items: center;
+}
+
+.rux-tree-header span:nth-of-type(1) {
+  margin-right: 3rem;
+}
+
+.rux-tree-header span:nth-of-type(2) {
+  margin-right: 10.5rem;
+}
