@@ -41,14 +41,18 @@
   justify-content: center;
 }
 
+.watcher rux-icon[icon="arrow-upward"],
+.watcher rux-icon[icon="arrow-downward"] {
+  color: var(--default-color);
+  margin-bottom: 5px;
+}
+
 .watcher rux-icon[icon="arrow-upward"] {
   transform: rotate(45deg);
-  margin-bottom: 5px;
 }
 
 .watcher rux-icon[icon="arrow-downward"] {
   transform: rotate(-45deg);
-  margin-bottom: 5px;
 }
 
 /* THRESHOLD INPUT STYLES */
