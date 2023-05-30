@@ -86,3 +86,11 @@ rux-timeline{
   position: sticky;
   bottom: 0;
 }
+
+.timeline-wrapper {
+  height: 100%;
+  overflow-y: auto;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}

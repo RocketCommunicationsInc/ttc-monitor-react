@@ -42,7 +42,7 @@ export const generateContact = (
   const beginTimestamp = start.getTime();
 
   // 2) end timestamp based off start and generates a random timestamp
-  // between 20 and 60 minutes in the future
+  // between 20 and 30 minutes in the future
   const end = new Date(beginTimestamp + randomMinutes(20, 30));
   const endTimestamp = end.getTime();
 

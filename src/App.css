@@ -61,14 +61,6 @@ rux-container.constellation {
   overflow-y: scroll;
 }
 
-.timeline-wrapper {
-  height: 100%;
-  overflow-y: auto;
-  position: relative;
-  display: flex;
-  flex-direction: row;
-}
-
 .table-wrapper::-webkit-scrollbar-track {
   margin-top: 40px;
 }

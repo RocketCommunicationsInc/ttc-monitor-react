@@ -12,10 +12,7 @@ type PropTypes = {
   toggleDrawer: (id?: string) => void;
 };
 
-const ConstellationTimeline = ({
-  zoomLevel,
-  toggleDrawer,
-}: PropTypes) => {
+const ConstellationTimeline = ({ zoomLevel, toggleDrawer }: PropTypes) => {
   const { contacts, contactIds } = useContacts();
 
   const date = new Date();
@@ -36,30 +33,22 @@ const ConstellationTimeline = ({
         interval="hour"
         zoom={zoomLevel}
       >
-        {contactIds.map((contactId) => {
-          const startDate = new Date(
-            contacts[contactId].beginTimestamp
-          ).toISOString();
-          const endDate = new Date(
-            contacts[contactId].endTimestamp
-          ).toISOString();
-          return (
-            <RuxTrack>
-              <div slot="label">
-                <RuxStatus status={contacts[contactId].status} />
-                {contacts[contactId].satellite.slice(4, 10)}
-              </div>
-              <RuxTimeRegion
-                onClick={() => toggleDrawer(contactId)}
-                start={startDate}
-                end={endDate}
-                status={contacts[contactId].status}
-              >
-                {contacts[contactId].satellite}
-              </RuxTimeRegion>
-            </RuxTrack>
-          );
-        })}
+        {contactIds.map((contactId) => (
+          <RuxTrack>
+            <div slot="label">
+              <RuxStatus status={contacts[contactId].status} />
+              {contacts[contactId].satellite.slice(4, 10)}
+            </div>
+            <RuxTimeRegion
+              onClick={() => toggleDrawer(contactId)}
+              start={new Date(contacts[contactId].beginTimestamp).toISOString()}
+              end={new Date(contacts[contactId].endTimestamp).toISOString()}
+              status={contacts[contactId].status}
+            >
+              {contacts[contactId].satellite}
+            </RuxTimeRegion>
+          </RuxTrack>
+        ))}
         <RuxTrack slot="ruler">
           <RuxRuler />
         </RuxTrack>
