@@ -6,18 +6,15 @@ import {
   RuxStatus,
 } from "@astrouxds/react";
 import useContacts from "../../hooks/useContacts";
-import { ContactOptions } from "../../Types";
 
 type PropTypes = {
   zoomLevel: number;
   toggleDrawer: (id?: string) => void;
-  options?: ContactOptions;
 };
 
 const ConstellationTimeline = ({
   zoomLevel,
   toggleDrawer,
-  options,
 }: PropTypes) => {
   const { contacts, contactIds } = useContacts();
 
