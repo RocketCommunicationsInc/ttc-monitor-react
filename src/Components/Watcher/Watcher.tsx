@@ -6,8 +6,8 @@ import {
   RuxTableHeaderRow,
   RuxTableHeaderCell,
   RuxTableBody,
-  RuxTree,
-  RuxTreeNode,
+  RuxAccordion,
+  RuxAccordionItem,
   RuxNotification,
 } from "@astrouxds/react";
 import type { Mnemonic } from "../../Types";
@@ -22,7 +22,7 @@ const styles = {
   },
 };
 
-const mnemonicsData = generateMnemonics(8);
+const mnemonicsData = generateMnemonics(10);
 
 const Watcher = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -67,10 +67,9 @@ const Watcher = () => {
         >
           This feature has not been implemented.
         </RuxNotification>
-        <RuxTree>
-          <RuxTreeNode expanded>
-            IRON 4090
-            <RuxTreeNode slot="node">
+          <RuxAccordion>
+            <RuxAccordionItem expanded>
+              <span slot="label">IRON 4090</span>
               <div className="table-wrapper">
                 <RuxTable>
                   <RuxTableHeader>
@@ -98,9 +97,8 @@ const Watcher = () => {
                   </RuxTableBody>
                 </RuxTable>
               </div>
-            </RuxTreeNode>
-          </RuxTreeNode>
-        </RuxTree>
+            </RuxAccordionItem>    
+        </RuxAccordion>  
       </RuxContainer>
       <div className="canvas-wrapper">
         <LineChart data={mnemonicsData[selectedIndex]} />

@@ -23,7 +23,7 @@ const WatcherListItem = ({ rowData, index, setOpenBanner }: PropTypes) => {
       case "status":
         return <RuxStatus status={rowData.status as Status} />;
       case "mnemonic":
-        return <MnemonicPopUp triggerValue={value} />;
+        return <MnemonicPopUp triggerValue={value} data={rowData} />;
       case "threshold":
         return <ThresholdInput savedValue={String(value)} />;
       case "value":

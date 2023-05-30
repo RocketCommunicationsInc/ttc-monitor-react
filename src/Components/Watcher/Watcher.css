@@ -5,14 +5,19 @@
   background-color: var(--color-palette-darkblue-900);
 }
 
-.watcher rux-tree-node > * {
-  background-color: var(--color-palette-darkblue-900);
+.watcher rux-accordion{
+  height: 100%;
 }
 
-.watcher rux-tree-node rux-tree-node::part(node) {
-  padding: 0px;
+.watcher rux-accordion-item::part(container) {
   display: block;
-  gap: 0;
+  height: 100%;
+  padding: 0px;
+  overflow: hidden;
+}
+
+.watcher .table-wrapper {
+  height: calc(100% - 58px)
 }
 
 .watcher rux-table-header-cell {
@@ -36,14 +41,18 @@
   justify-content: center;
 }
 
+.watcher rux-icon[icon="arrow-upward"],
+.watcher rux-icon[icon="arrow-downward"] {
+  color: var(--default-color);
+  margin-bottom: 5px;
+}
+
 .watcher rux-icon[icon="arrow-upward"] {
   transform: rotate(45deg);
-  margin-bottom: 5px;
 }
 
 .watcher rux-icon[icon="arrow-downward"] {
   transform: rotate(-45deg);
-  margin-bottom: 5px;
 }
 
 /* THRESHOLD INPUT STYLES */
