@@ -28,20 +28,16 @@ const WatcherListItem = ({
   return (
     <RuxTableRow key={rowData.mnemonicId} data-index={index}>
       <RuxTableCell>
-        {" "}
         <RuxStatus status={rowData.status as Status} />
       </RuxTableCell>
       <RuxTableCell>
-        {" "}
         <MnemonicPopUp triggerValue={rowData.mnemonicId} data={rowData} />
       </RuxTableCell>
       <RuxTableCell> {rowData.unit}</RuxTableCell>
       <RuxTableCell>
-        {" "}
         <ThresholdInput savedValue={String(rowData.thresholdMax)} />
       </RuxTableCell>
       <RuxTableCell>
-        {" "}
         <>
           {rowData.currentValue}
           {chartDataSlope >= 0 ? (
