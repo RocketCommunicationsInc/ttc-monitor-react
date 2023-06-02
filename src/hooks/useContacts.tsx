@@ -6,10 +6,10 @@ import {
   createContext,
   useContext,
 } from "react";
-import { generateContact } from "../data/generators/contacts/generate-contact";
-import { generateContacts } from "../data/generators/contacts/generate-contacts";
+import { generateContact } from "@astrouxds/mock-data";
+import { generateContacts } from "@astrouxds/mock-data";
+import { Contact } from "@astrouxds/mock-data/dist/types";
 import type {
-  Contact,
   ModifyContactParams,
   ContactOptions,
   GenerateOptions,

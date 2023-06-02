@@ -6,7 +6,7 @@ import {
   RuxAccordionItem,
   RuxNotification,
 } from "@astrouxds/react";
-import { Alert } from "../../Types";
+import { Alert } from "@astrouxds/mock-data/dist/types";
 import useAlerts from "../../hooks/useAlerts";
 import { useState } from "react";
 

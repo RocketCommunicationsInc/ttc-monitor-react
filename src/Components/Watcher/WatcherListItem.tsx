@@ -1,4 +1,5 @@
-import type { Mnemonic, Status } from "../../Types";
+import type { Status } from "../../Types";
+import { Mnemonic } from "@astrouxds/mock-data/dist/types";
 import {
   RuxStatus,
   RuxTableRow,
@@ -13,45 +14,43 @@ import ThresholdInput from "./ThresholdInput";
 
 type PropTypes = {
   rowData: Mnemonic;
+  chartDataSlope: number;
   index: number;
   setOpenBanner: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const WatcherListItem = ({ rowData, index, setOpenBanner }: PropTypes) => {
-  const getCellContent = (key: string, value: any) => {
-    switch (key) {
-      case "status":
-        return <RuxStatus status={rowData.status as Status} />;
-      case "mnemonic":
-        return <MnemonicPopUp triggerValue={value} data={rowData} />;
-      case "threshold":
-        return <ThresholdInput savedValue={String(value)} />;
-      case "value":
-        return (
-          <>
-            {value}
-            {rowData.trendingUp ? (
-              <RuxIcon icon="arrow-upward" size="extra-small" />
-            ) : (
-              <RuxIcon icon="arrow-downward" size="extra-small" />
-            )}
-          </>
-        );
-      default:
-        return value;
-    }
-  };
-
+const WatcherListItem = ({
+  rowData,
+  chartDataSlope,
+  index,
+  setOpenBanner,
+}: PropTypes) => {
   return (
-    <RuxTableRow key={rowData.mnemonic} data-index={index}>
-      {Object.entries(rowData).map(([key, value]) => {
-        return (
-          key !== "chartData" &&
-          key !== "trendingUp" && (
-            <RuxTableCell> {getCellContent(key, value)}</RuxTableCell>
-          )
-        );
-      })}
+    <RuxTableRow key={rowData.mnemonicId} data-index={index}>
+      <RuxTableCell>
+        {" "}
+        <RuxStatus status={rowData.status as Status} />
+      </RuxTableCell>
+      <RuxTableCell>
+        {" "}
+        <MnemonicPopUp triggerValue={rowData.mnemonicId} data={rowData} />
+      </RuxTableCell>
+      <RuxTableCell> {rowData.unit}</RuxTableCell>
+      <RuxTableCell>
+        {" "}
+        <ThresholdInput savedValue={String(rowData.thresholdMax)} />
+      </RuxTableCell>
+      <RuxTableCell>
+        {" "}
+        <>
+          {rowData.currentValue}
+          {chartDataSlope >= 0 ? (
+            <RuxIcon icon="arrow-upward" size="extra-small" />
+          ) : (
+            <RuxIcon icon="arrow-downward" size="extra-small" />
+          )}
+        </>
+      </RuxTableCell>
       <RuxTableCell>
         <RuxPopUp placement="left" closeOnSelect>
           <RuxIcon slot="trigger" icon="more-horiz" size="small" />

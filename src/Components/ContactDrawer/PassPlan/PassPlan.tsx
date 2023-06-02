@@ -1,7 +1,7 @@
 import { RuxIcon } from "@astrouxds/react";
 import PassPlanItem, { PassPlanMnemonic } from "./PassPlanItem";
-import { getJulianDay } from "../../../data/utils";
-import { Contact } from "../../../Types";
+import { getJulianDay } from "../../../utils";
+import { Contact } from "@astrouxds/mock-data/dist/types";
 
 type PropTypes = {
   contact: Contact;
@@ -20,7 +20,7 @@ const PassPlan = ({ contact, passPlan }: PropTypes) => {
         <span>Step</span>
         <span>Command</span>
         <span>Run Length</span>
-        </div>
+      </div>
       <div className="pass-plan-list">
         <ul>
           {passPlan.map((step) => (

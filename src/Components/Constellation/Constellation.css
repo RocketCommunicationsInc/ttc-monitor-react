@@ -76,7 +76,7 @@ rux-time-region {
   cursor: pointer;
 }
 
-rux-timeline{
+rux-timeline {
   position: relative;
   display: flex;
   flex-direction: row;

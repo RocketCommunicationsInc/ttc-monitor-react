@@ -13,7 +13,7 @@ import {
 } from "@astrouxds/astro-web-components/dist/types/components";
 import useContacts from "../../hooks/useContacts";
 import ContactDrawer from "../ContactDrawer/ContactDrawer";
-import { Contact } from "../../Types";
+import { Contact } from "@astrouxds/mock-data/dist/types";
 import "./Constellation.css";
 
 const Constellation = () => {

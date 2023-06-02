@@ -1,5 +1,5 @@
 import { RuxCheckbox, RuxIcon, RuxPopUp, RuxCard } from "@astrouxds/react";
-import type { Mnemonic} from "../../Types";
+import type { Mnemonic } from "@astrouxds/mock-data/dist/types";
 
 type PropTypes = {
   triggerValue: string | number;
@@ -10,10 +10,10 @@ const MnemonicPopUp = ({ triggerValue, data }: PropTypes) => {
   return (
     <RuxPopUp placement="right" className="mnemonic-pop-up">
       <RuxCard>
-        <span slot="header">{data.mnemonic}</span>
+        <span slot="header">{data.mnemonicId}</span>
         <div>
           <span>Value</span>
-          <span>{data.value}</span>
+          <span>{data.currentValue}</span>
         </div>
         <div>
           <span>Subsystem</span>
