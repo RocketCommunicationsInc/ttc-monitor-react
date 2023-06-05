@@ -5,7 +5,7 @@
   background-color: var(--color-palette-darkblue-900);
 }
 
-.watcher rux-accordion{
+.watcher rux-accordion {
   height: 100%;
 }
 
@@ -17,7 +17,7 @@
 }
 
 .watcher .table-wrapper {
-  height: calc(100% - 58px)
+  height: calc(100% - 58px);
 }
 
 .watcher rux-table-header-cell {

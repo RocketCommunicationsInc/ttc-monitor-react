@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@astrouxds/mock-data": "^0.3.0",
     "@astrouxds/react": "^7.9.3",
     "@astrouxds/tokens": "^1.7.0",
     "@faker-js/faker": "^8.0.1",

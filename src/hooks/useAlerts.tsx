@@ -6,14 +6,10 @@ import {
   createContext,
   useContext,
 } from "react";
-import { generateAlert } from "../data/generators/alerts/generate-alert";
-import { generateAlerts } from "../data/generators/alerts/generate-alerts";
-import type {
-  Alert,
-  ModifyAlertParams,
-  Children,
-  GenerateOptions,
-} from "../Types";
+import { generateAlert } from "@astrouxds/mock-data";
+import { generateAlerts } from "@astrouxds/mock-data";
+import { Alert } from "@astrouxds/mock-data/dist/types";
+import type { ModifyAlertParams, Children, GenerateOptions } from "../Types";
 
 const defaultOptions = {
   initial: 5,

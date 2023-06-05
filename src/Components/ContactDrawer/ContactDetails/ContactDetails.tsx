@@ -1,8 +1,8 @@
 import { RuxIcon } from "@astrouxds/react";
-import { Contact } from "../../../Types";
+import { Contact } from "@astrouxds/mock-data/dist/types";
 
 import "./ContactDetails.css";
-import { getJulianDay } from "../../../data/utils";
+import { getJulianDay } from "../../../utils";
 
 type PropTypes = {
   contact: Contact;

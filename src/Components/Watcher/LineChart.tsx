@@ -12,7 +12,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import annotationPlugin from "chartjs-plugin-annotation";
-import type { Mnemonic } from "../../Types";
+import { Mnemonic } from "@astrouxds/mock-data/dist/types";
 
 ChartJS.register(
   CategoryScale,
@@ -44,15 +44,16 @@ const tooltipTitle = () => {
 
 type PropTypes = {
   data: Mnemonic;
+  chartData: number[];
 };
 
-const LineChart = ({ data }: PropTypes) => {
+const LineChart = ({ data, chartData }: PropTypes) => {
   const dataObj = {
     labels,
     datasets: [
       {
         label: "Value",
-        data: data.chartData,
+        data: chartData,
         borderColor: "rgb(77, 172, 255)",
         pointRadius: 0,
         gridLines: {
@@ -126,7 +127,7 @@ const LineChart = ({ data }: PropTypes) => {
       },
       subtitle: {
         display: true,
-        text: `               ${data.mnemonic}`,
+        text: `               ${data.mnemonicId}`,
         color: "white",
         align: "start",
         font: {

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { faker } from "@faker-js/faker";
 import {
   RuxContainer,
   RuxTable,
@@ -10,10 +11,10 @@ import {
   RuxAccordionItem,
   RuxNotification,
 } from "@astrouxds/react";
-import type { Mnemonic } from "../../Types";
+import { Mnemonic } from "@astrouxds/mock-data/dist/types";
 import LineChart from "./LineChart";
 import WatcherListItem from "./WatcherListItem";
-import { generateMnemonics } from "../../data/generators/mnemonics/generate-mnemonics";
+import { generateMnemonics } from "@astrouxds/mock-data";
 import "./Watcher.css";
 
 const styles = {
@@ -22,7 +23,21 @@ const styles = {
   },
 };
 
+const generateMnemonicValue = () => faker.number.float({ max: 110, precision: 0.1 })
+
+const generateChartData = () =>
+  faker.helpers.multiple(
+    () => generateMnemonicValue(),
+    { count: 9 }
+  );
+
 const mnemonicsData = generateMnemonics(10);
+const updatedMnemoncicsData = mnemonicsData.map((data) => {
+  return {
+    ...data,
+    previousReadings: generateChartData(),
+  };
+});
 
 const Watcher = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -67,41 +82,56 @@ const Watcher = () => {
         >
           This feature has not been implemented.
         </RuxNotification>
-          <RuxAccordion>
-            <RuxAccordionItem expanded>
-              <span slot="label">IRON 4090</span>
-              <div className="table-wrapper">
-                <RuxTable>
-                  <RuxTableHeader>
-                    <RuxTableHeaderRow>
-                      <RuxTableHeaderCell>
-                        {/* placeholder for status icon column */}
-                      </RuxTableHeaderCell>
-                      <RuxTableHeaderCell>Mnemonic</RuxTableHeaderCell>
-                      <RuxTableHeaderCell>Unit</RuxTableHeaderCell>
-                      <RuxTableHeaderCell>Threshold</RuxTableHeaderCell>
-                      <RuxTableHeaderCell>Actual</RuxTableHeaderCell>
-                      <RuxTableHeaderCell>
-                        {/* placeholder for actions menu column */}
-                      </RuxTableHeaderCell>
-                    </RuxTableHeaderRow>
-                  </RuxTableHeader>
-                  <RuxTableBody>
-                    {mnemonicsData.map((dataObj: Mnemonic, index) => (
-                      <WatcherListItem
-                        rowData={dataObj}
-                        index={index}
-                        setOpenBanner={setOpenBanner}
-                      />
-                    ))}
-                  </RuxTableBody>
-                </RuxTable>
-              </div>
-            </RuxAccordionItem>    
-        </RuxAccordion>  
+        <RuxAccordion>
+          <RuxAccordionItem expanded>
+            <span slot="label">IRON 4090</span>
+            <div className="table-wrapper">
+              <RuxTable>
+                <RuxTableHeader>
+                  <RuxTableHeaderRow>
+                    <RuxTableHeaderCell>
+                      {/* placeholder for status icon column */}
+                    </RuxTableHeaderCell>
+                    <RuxTableHeaderCell>Mnemonic</RuxTableHeaderCell>
+                    <RuxTableHeaderCell>Unit</RuxTableHeaderCell>
+                    <RuxTableHeaderCell>Threshold</RuxTableHeaderCell>
+                    <RuxTableHeaderCell>Actual</RuxTableHeaderCell>
+                    <RuxTableHeaderCell>
+                      {/* placeholder for actions menu column */}
+                    </RuxTableHeaderCell>
+                  </RuxTableHeaderRow>
+                </RuxTableHeader>
+                <RuxTableBody>
+                  {updatedMnemoncicsData.map(
+                    (
+                      dataObj: Mnemonic & { previousReadings: number[] },
+                      index
+                    ) => {
+                      const lastDataPoint =
+                        dataObj.previousReadings.at(-1) || 0;
+                      const chartDataSlope =
+                        lastDataPoint - dataObj.previousReadings[0];
+                      return (
+                        <WatcherListItem
+                          rowData={dataObj}
+                          chartDataSlope={chartDataSlope}
+                          index={index}
+                          setOpenBanner={setOpenBanner}
+                        />
+                      );
+                    }
+                  )}
+                </RuxTableBody>
+              </RuxTable>
+            </div>
+          </RuxAccordionItem>
+        </RuxAccordion>
       </RuxContainer>
       <div className="canvas-wrapper">
-        <LineChart data={mnemonicsData[selectedIndex]} />
+        <LineChart
+          data={updatedMnemoncicsData[selectedIndex]}
+          chartData={updatedMnemoncicsData[selectedIndex].previousReadings}
+        />
       </div>
     </div>
   );
