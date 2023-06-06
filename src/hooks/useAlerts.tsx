@@ -6,8 +6,7 @@ import {
   createContext,
   useContext,
 } from "react";
-import { generateAlert } from "@astrouxds/mock-data";
-import { generateAlerts } from "@astrouxds/mock-data";
+import { generateAlert, generateAlerts } from "@astrouxds/mock-data";
 import { Alert } from "@astrouxds/mock-data/dist/types";
 import type { ModifyAlertParams, Children, GenerateOptions } from "../Types";
 

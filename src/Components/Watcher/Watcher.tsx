@@ -23,13 +23,11 @@ const styles = {
   },
 };
 
-const generateMnemonicValue = () => faker.number.float({ max: 110, precision: 0.1 })
+const generateMnemonicValue = () =>
+  faker.number.float({ max: 110, precision: 0.1 });
 
 const generateChartData = () =>
-  faker.helpers.multiple(
-    () => generateMnemonicValue(),
-    { count: 9 }
-  );
+  faker.helpers.multiple(() => generateMnemonicValue(), { count: 9 });
 
 const mnemonicsData = generateMnemonics(10);
 const updatedMnemoncicsData = mnemonicsData.map((data) => {

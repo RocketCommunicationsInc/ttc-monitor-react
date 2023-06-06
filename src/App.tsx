@@ -7,10 +7,12 @@ import { ContactsContextProvider } from "./hooks/useContacts";
 
 import "@astrouxds/astro-web-components/dist/astro-web-components/astro-web-components.css";
 import "./App.css";
+import TestComponent from "./Components/TestComponent";
 
 function App() {
   return (
     <div className="app-container">
+      <TestComponent />
       <ContactsContextProvider>
         <GlobalStatusBar />
         <div className="background">
@@ -26,3 +28,5 @@ function App() {
 }
 
 export default App;
+
+
