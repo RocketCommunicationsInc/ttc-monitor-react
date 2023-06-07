@@ -7,26 +7,29 @@ import { ContactsContextProvider } from "./hooks/useContacts";
 
 import "@astrouxds/astro-web-components/dist/astro-web-components/astro-web-components.css";
 import "./App.css";
+import RootStateProvider from "./Components/RootStateProvider";
 import TestComponent from "./Components/TestComponent";
+import TestRootComponent from "./Components/TestRootComponent";
 
 function App() {
   return (
-    <div className="app-container">
-      <TestComponent />
-      <ContactsContextProvider>
-        <GlobalStatusBar />
-        <div className="background">
-          <AlertsContextProvider>
-            <Alerts />
-          </AlertsContextProvider>
-          <Constellation />
-          <Watcher />
-        </div>
-      </ContactsContextProvider>
-    </div>
+    <RootStateProvider>
+      <div className="app-container">
+        {/* <TestComponent /> */}
+        <TestRootComponent />
+        <ContactsContextProvider>
+          <GlobalStatusBar />
+          <div className="background">
+            <AlertsContextProvider>
+              <Alerts />
+            </AlertsContextProvider>
+            <Constellation />
+            <Watcher />
+          </div>
+        </ContactsContextProvider>
+      </div>
+    </RootStateProvider>
   );
 }
 
 export default App;
-
-
