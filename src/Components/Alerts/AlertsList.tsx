@@ -1,9 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useMemo } from "react";
+import { useMemo, useCallback } from "react";
 import { RuxCheckbox } from "@astrouxds/react";
 import AlertListItem from "./AlertListItem";
-import useAlerts from "../../hooks/useAlerts";
-import { Category, Status } from "../../Types";
+import type { Category, Status } from "@astrouxds/mock-data";
+import { useTTCGRMActions, useTTCGRMAlerts } from "@astrouxds/mock-data";
 
 type PropTypes = {
   severitySelection: Status | "all";
@@ -11,49 +10,37 @@ type PropTypes = {
 };
 
 const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
-  const {
-    alerts,
-    initialize,
-    selectAll,
-    selectNone,
-    stopGenerating,
-    generate,
-    allSelected,
-    anySelected,
-  } = useAlerts();
+  const { dataById: alerts } = useTTCGRMAlerts();
+  const { allAlertsHaveProp, anyAlertsHaveProp, modifyAllAlerts } =
+    useTTCGRMActions();
+  const allSelected = allAlertsHaveProp("selected", true);
+  const selectAll = () => modifyAllAlerts({ selected: true });
+  const selectNone = () => modifyAllAlerts({ selected: false });
+  const anySelected = anyAlertsHaveProp("selected", true);
 
-  useEffect(() => {
-    initialize();
-    generate();
-
-    return () => {
-      stopGenerating();
-    };
-  }, []);
-
-  const filterAlerts = (
-    severity: Status | "all",
-    category: Category | "all"
-  ) => {
-    const alertsArray = Object.values(alerts);
-    const filteredForSeverityAlerts =
-      severity !== "all"
-        ? alertsArray.filter((alert) => alert.status === severity)
-        : alertsArray;
-    const filteredForCategoryAlerts =
-      category !== "all"
-        ? filteredForSeverityAlerts.filter(
-            (alert) => alert.category === category
-          )
-        : filteredForSeverityAlerts;
-    return filteredForCategoryAlerts;
-  };
+  const filterAlerts = useCallback(
+    (severity: Status | "all", category: Category | "all") => {
+      const alertsArray = Object.values(alerts);
+      const filteredForSeverityAlerts =
+        severity !== "all"
+          ? alertsArray.filter((alert) => alert.status === severity)
+          : alertsArray;
+      const filteredForCategoryAlerts =
+        category !== "all"
+          ? filteredForSeverityAlerts.filter(
+              (alert) => alert.category === category
+            )
+          : filteredForSeverityAlerts;
+      return filteredForCategoryAlerts;
+    },
+    [alerts]
+  );
 
   const filteredAlertIds = useMemo(() => {
     return filterAlerts(severitySelection, categorySelection).map(
       (alert) => alert.id
     );
-  }, [severitySelection, categorySelection, alerts]);
+  }, [filterAlerts, severitySelection, categorySelection]);
 
   const selectAllHandler = (e: CustomEvent) => {
     const checkbox = e.target as HTMLRuxCheckboxElement;

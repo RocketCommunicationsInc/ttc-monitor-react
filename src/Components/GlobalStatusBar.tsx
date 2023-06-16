@@ -10,7 +10,7 @@ import {
   RuxTooltip,
   RuxNotification,
 } from "@astrouxds/react";
-import type { Status } from "../Types";
+import type { Status } from "@astrouxds/mock-data";
 import "./GlobalStatusBar.css";
 
 const GlobalStatusBar = () => {

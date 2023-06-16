@@ -1,5 +1,3 @@
-import type { Status } from "../../Types";
-import { Mnemonic } from "@astrouxds/mock-data/dist/types";
 import {
   RuxStatus,
   RuxTableRow,
@@ -11,6 +9,7 @@ import {
 } from "@astrouxds/react";
 import MnemonicPopUp from "./MnemonicPopUp";
 import ThresholdInput from "./ThresholdInput";
+import type { Mnemonic, Status } from "@astrouxds/mock-data";
 
 type PropTypes = {
   rowData: Mnemonic;

@@ -11,10 +11,10 @@ import {
   RuxAccordionItem,
   RuxNotification,
 } from "@astrouxds/react";
-import { Mnemonic } from "@astrouxds/mock-data/dist/types";
 import LineChart from "./LineChart";
 import WatcherListItem from "./WatcherListItem";
 import { generateMnemonics } from "@astrouxds/mock-data";
+import type { Mnemonic } from "@astrouxds/mock-data/dist/types";
 import "./Watcher.css";
 
 const styles = {

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   RuxCheckbox,
   RuxStatus,
@@ -6,16 +7,17 @@ import {
   RuxAccordionItem,
   RuxNotification,
 } from "@astrouxds/react";
-import { Alert } from "@astrouxds/mock-data/dist/types";
-import useAlerts from "../../hooks/useAlerts";
-import { useState } from "react";
+import { useTTCGRMActions } from "@astrouxds/mock-data";
+import type { Alert } from "@astrouxds/mock-data";
 
 type PropTypes = {
   alertItem: Alert;
 };
 
 const AlertListItem = ({ alertItem }: PropTypes) => {
-  const { toggleSelected } = useAlerts();
+  const { modifyAlert } = useTTCGRMActions();
+  const toggleSelected = (alert: Alert) =>
+    modifyAlert({ ...alert, selected: !alertItem.selected });
   const [openBanner, setOpenBanner] = useState(false);
 
   return (
@@ -40,7 +42,7 @@ const AlertListItem = ({ alertItem }: PropTypes) => {
             <RuxCheckbox
               id={alertItem.id}
               checked={alertItem.selected}
-              onRuxinput={() => toggleSelected(alertItem.id)}
+              onRuxinput={() => toggleSelected(alertItem)}
             />
             <RuxStatus status={alertItem.status} />
             <span>{alertItem.message}</span>

@@ -1,7 +1,7 @@
 import { RuxIcon } from "@astrouxds/react";
 import PassPlanItem, { PassPlanMnemonic } from "./PassPlanItem";
 import { getJulianDay } from "../../../utils";
-import { Contact } from "@astrouxds/mock-data/dist/types";
+import type { Contact } from "@astrouxds/mock-data";
 
 type PropTypes = {
   contact: Contact;
