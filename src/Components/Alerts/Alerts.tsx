@@ -7,12 +7,11 @@ import {
   RuxNotification,
 } from "@astrouxds/react";
 import AlertsList from "./AlertsList";
-import useAlerts from "../../hooks/useAlerts";
-import { Category, Status } from "../../Types";
+import { useTTCGRMActions, useTTCGRMAlerts } from "@astrouxds/mock-data";
+import type { Category, Status } from "@astrouxds/mock-data";
 import "./Alerts.css";
 
 const Alerts = () => {
-  const { alertIds, deleteSelectedAlerts, anySelected } = useAlerts();
   const [openBanner, setOpenBanner] = useState(false);
   const [severitySelection, setSeveritySelection] = useState<Status | "all">(
     "all"
@@ -20,6 +19,12 @@ const Alerts = () => {
   const [categorySelection, setCategorySelection] = useState<Category | "all">(
     "all"
   );
+
+  const { deleteAlertsWithProp, anyAlertsHaveProp } = useTTCGRMActions();
+  const { dataIds: alertIds } = useTTCGRMAlerts();
+
+  const anySelected = anyAlertsHaveProp("selected", true);
+  const deleteSelectedAlerts = () => deleteAlertsWithProp("selected", true);
 
   useEffect(() => {
     setOpenBanner(false);

@@ -12,7 +12,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import annotationPlugin from "chartjs-plugin-annotation";
-import { Mnemonic } from "@astrouxds/mock-data/dist/types";
+import type { Mnemonic } from "@astrouxds/mock-data";
 
 ChartJS.register(
   CategoryScale,

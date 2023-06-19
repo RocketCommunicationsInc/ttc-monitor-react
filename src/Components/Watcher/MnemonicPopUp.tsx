@@ -1,5 +1,5 @@
 import { RuxCheckbox, RuxIcon, RuxPopUp, RuxCard } from "@astrouxds/react";
-import type { Mnemonic } from "@astrouxds/mock-data/dist/types";
+import type { Mnemonic } from "@astrouxds/mock-data";
 
 type PropTypes = {
   triggerValue: string | number;

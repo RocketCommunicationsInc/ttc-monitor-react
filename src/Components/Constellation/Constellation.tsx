@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import {
   RuxContainer,
   RuxSegmentedButton,
@@ -7,13 +7,13 @@ import {
 } from "@astrouxds/react";
 import ConstellationList from "./ConstellationList";
 import ConstellationTimeline from "./ConstellationTimeline";
+import ContactDrawer from "../ContactDrawer/ContactDrawer";
 import {
   RuxSegmentedButtonCustomEvent,
   RuxSliderCustomEvent,
 } from "@astrouxds/astro-web-components/dist/types/components";
-import useContacts from "../../hooks/useContacts";
-import ContactDrawer from "../ContactDrawer/ContactDrawer";
-import { Contact } from "@astrouxds/mock-data/dist/types";
+import type { Contact } from "@astrouxds/mock-data";
+import { useTTCGRMContacts } from "@astrouxds/mock-data";
 import "./Constellation.css";
 
 const Constellation = () => {
@@ -22,7 +22,7 @@ const Constellation = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [drawerContact, setDrawerContact] = useState<Contact | null>(null);
 
-  const { contacts, contactIds, initialize } = useContacts();
+  const { dataById: contacts, dataIds: contactIds } = useTTCGRMContacts();
 
   const handleButton = (e: RuxSegmentedButtonCustomEvent<string>) => {
     setContent(e.detail);
@@ -39,10 +39,6 @@ const Constellation = () => {
     },
     [contacts]
   );
-
-  useEffect(() => {
-    initialize();
-  }, [initialize]);
 
   return (
     <>
@@ -71,7 +67,7 @@ const Constellation = () => {
             onRuxchange={handleButton}
           ></RuxSegmentedButton>
         </div>
-        {content === "List" && contactIds.length ? (
+        {content === "List" && contactIds?.length ? (
           <ConstellationList
             contacts={contacts}
             contactIds={contactIds}

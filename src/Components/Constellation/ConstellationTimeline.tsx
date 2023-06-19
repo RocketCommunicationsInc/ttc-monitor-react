@@ -5,7 +5,7 @@ import {
   RuxRuler,
   RuxStatus,
 } from "@astrouxds/react";
-import useContacts from "../../hooks/useContacts";
+import { useTTCGRMContacts } from "@astrouxds/mock-data";
 
 type PropTypes = {
   zoomLevel: number;
@@ -13,7 +13,7 @@ type PropTypes = {
 };
 
 const ConstellationTimeline = ({ zoomLevel, toggleDrawer }: PropTypes) => {
-  const { contacts, contactIds } = useContacts();
+  const { dataById: contacts, dataIds: contactIds } = useTTCGRMContacts();
 
   const date = new Date();
   const getStartTime = date.setHours(date.getHours() - 23);
@@ -33,7 +33,7 @@ const ConstellationTimeline = ({ zoomLevel, toggleDrawer }: PropTypes) => {
         interval="hour"
         zoom={zoomLevel}
       >
-        {contactIds.map((contactId) => (
+        {contactIds.map((contactId: string) => (
           <RuxTrack>
             <div slot="label">
               <RuxStatus status={contacts[contactId].status} />

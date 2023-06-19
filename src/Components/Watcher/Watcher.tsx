@@ -11,10 +11,10 @@ import {
   RuxAccordionItem,
   RuxNotification,
 } from "@astrouxds/react";
-import { Mnemonic } from "@astrouxds/mock-data/dist/types";
 import LineChart from "./LineChart";
 import WatcherListItem from "./WatcherListItem";
 import { generateMnemonics } from "@astrouxds/mock-data";
+import type { Mnemonic } from "@astrouxds/mock-data/dist/types";
 import "./Watcher.css";
 
 const styles = {
@@ -23,13 +23,11 @@ const styles = {
   },
 };
 
-const generateMnemonicValue = () => faker.number.float({ max: 110, precision: 0.1 })
+const generateMnemonicValue = () =>
+  faker.number.float({ max: 110, precision: 0.1 });
 
 const generateChartData = () =>
-  faker.helpers.multiple(
-    () => generateMnemonicValue(),
-    { count: 9 }
-  );
+  faker.helpers.multiple(() => generateMnemonicValue(), { count: 9 });
 
 const mnemonicsData = generateMnemonics(10);
 const updatedMnemoncicsData = mnemonicsData.map((data) => {

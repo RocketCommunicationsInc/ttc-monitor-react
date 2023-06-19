@@ -13,8 +13,7 @@ import {
 import ContactDetails from "./ContactDetails/ContactDetails";
 import PassPlan from "./PassPlan/PassPlan";
 import passPlanData from "./PassPlan/passPlanData.json";
-
-import { Contact } from "@astrouxds/mock-data/dist/types";
+import type { Contact } from "@astrouxds/mock-data";
 import "./ContactDrawer.css";
 
 const settings = {

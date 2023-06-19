@@ -15,7 +15,7 @@ import {
   RuxNotification,
   RuxButton,
 } from "@astrouxds/react";
-import { Contact } from "@astrouxds/mock-data/dist/types";
+import type { Contact } from "@astrouxds/mock-data";
 
 type PropTypes = {
   contacts: { [key: string]: Contact };
