@@ -111,6 +111,7 @@ const Watcher = () => {
                         lastDataPoint - dataObj.previousReadings[0];
                       return (
                         <WatcherListItem
+                          key={dataObj.id}
                           rowData={dataObj}
                           chartDataSlope={chartDataSlope}
                           index={index}
