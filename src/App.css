@@ -75,3 +75,7 @@ rux-table-header {
 rux-status::part(status) {
   margin-inline: auto;
 }
+
+canvas {
+  background-color: var(--color-background-base-header);
+}

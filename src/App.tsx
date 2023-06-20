@@ -16,7 +16,7 @@ const options = {
 
 function App() {
   return (
-    <div className="app-container">
+    <div id="app-container" className="app-container">
       <TTCGRMProvider options={options}>
         <GlobalStatusBar />
         <div className="background">

@@ -1,3 +1,4 @@
+import {useState} from 'react'
 import {
   Chart as ChartJS,
   ChartType,
@@ -13,6 +14,7 @@ import {
 import { Line } from "react-chartjs-2";
 import annotationPlugin from "chartjs-plugin-annotation";
 import type { Mnemonic } from "@astrouxds/mock-data";
+import { useEffect } from "react";
 
 ChartJS.register(
   CategoryScale,
@@ -47,19 +49,38 @@ type PropTypes = {
   chartData: number[];
 };
 
+
+
 const LineChart = ({ data, chartData }: PropTypes) => {
+  const [parentRendered, setParentRendered] = useState(false);
+
+  useEffect(() => {
+    setParentRendered(true);
+  }, []);
+
+  if (!parentRendered) return null
+  const appContainer = document.getElementById("app-container");
+
+  const isLightTheme = appContainer?.classList.contains("light-theme")
+  const textColor = isLightTheme ? "black" : "white"
+    //--color-data-visualization-6 : --color-data-visualization-8
+  const dataLine = isLightTheme ? "#2b659b" : "#3a87cf"
+  //--color-border-interactive-default : --color-border-interactive-muted 
+  const gridLinesColor = isLightTheme ? "#005a8f" : "#2f7aa7"
+    //--color-border-interactive-default : --color-border-interactive-muted 
+  const annotationLinesColor = isLightTheme ? "#005a8f": "#2f7aa7" 
+  //--color-background-base-default : --color-background-interactive-default
+  const annotationBackgroundColor = isLightTheme ? "#eaeef4": "#005a8f" 
+
+
   const dataObj = {
     labels,
     datasets: [
       {
         label: "Value",
         data: chartData,
-        borderColor: "rgb(77, 172, 255)",
+        borderColor: dataLine,
         pointRadius: 0,
-        gridLines: {
-          color: "#455D6E",
-          display: true,
-        },
       },
     ],
   };
@@ -80,10 +101,10 @@ const LineChart = ({ data, chartData }: PropTypes) => {
         fill: true,
         border: {
           display: true,
-          color: "white",
+          color: textColor,
         },
         ticks: {
-          color: "white",
+          color: textColor
         },
         scaleLabel: {
           display: true,
@@ -93,14 +114,14 @@ const LineChart = ({ data, chartData }: PropTypes) => {
         fill: true,
         border: {
           display: true,
-          color: "white",
+          color: textColor,
         },
         grid: {
-          color: "grey",
+          color: gridLinesColor,
           drawTicks: false,
         },
         ticks: {
-          color: "white",
+          color: textColor,
           padding: 7,
           stepSize: 10,
         },
@@ -119,7 +140,7 @@ const LineChart = ({ data, chartData }: PropTypes) => {
       title: {
         display: true,
         text: "            IRON 4090",
-        color: "white",
+        color: textColor,
         align: "start",
         font: {
           size: 16,
@@ -128,7 +149,7 @@ const LineChart = ({ data, chartData }: PropTypes) => {
       subtitle: {
         display: true,
         text: `               ${data.mnemonicId}`,
-        color: "white",
+        color: textColor,
         align: "start",
         font: {
           size: 13,
@@ -154,14 +175,14 @@ const LineChart = ({ data, chartData }: PropTypes) => {
             type: "line" as ChartType,
             yMin: 100,
             yMax: 100,
-            borderColor: "white",
+            borderColor: annotationLinesColor,
             borderWidth: 2.5,
             borderDash: [1, 2],
             label: {
-              color: "#fff",
+              color: textColor,
               content: "Upper Limit",
               display: true,
-              backgroundColor: "#172635",
+              backgroundColor: annotationBackgroundColor,
               opacity: 0.5,
               font: {
                 size: 10.5,
@@ -173,14 +194,14 @@ const LineChart = ({ data, chartData }: PropTypes) => {
             type: "line" as ChartType,
             yMin: 20,
             yMax: 20,
-            borderColor: "white",
+            borderColor: annotationLinesColor,
             borderWidth: 2.5,
             borderDash: [1, 2],
             label: {
-              color: "#fff",
+              color: textColor,
               content: "Lower Limit",
               display: true,
-              backgroundColor: "#172635",
+              backgroundColor: annotationBackgroundColor,
               font: {
                 size: 10.5,
                 weight: "normal",
