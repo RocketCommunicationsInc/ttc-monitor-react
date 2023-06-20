@@ -47,7 +47,7 @@ const ConstellationTimeline = ({ zoomLevel, toggleDrawer }: PropTypes) => {
             >
               {contacts[contactId].satellite}
             </RuxTimeRegion>
-            </RuxTrack>
+          </RuxTrack>
         ))}
         <RuxTrack slot="ruler">
           <RuxRuler />
