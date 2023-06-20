@@ -34,7 +34,7 @@ const ConstellationTimeline = ({ zoomLevel, toggleDrawer }: PropTypes) => {
         zoom={zoomLevel}
       >
         {contactIds.map((contactId: string) => (
-          <RuxTrack>
+          <RuxTrack key={contactId}>
             <div slot="label">
               <RuxStatus status={contacts[contactId].status} />
               {contacts[contactId].satellite.slice(4, 10)}
