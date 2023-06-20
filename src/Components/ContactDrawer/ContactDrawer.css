@@ -136,7 +136,7 @@
   justify-content: flex-end;
   height: 4.5rem;
   width: 93%;
-  background-color: #172635;
+  background-color: var(--color-background-base-header);
   font-weight: bold;
   padding-right: 2rem;
 }
