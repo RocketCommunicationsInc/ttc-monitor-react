@@ -13,7 +13,7 @@
 /* NOTIFICATION BANNER STYLES */
 
 .constellation rux-notification > span {
-  color: #b7dcff;
+  color: var(--color-text-interactive-default);
   text-decoration: underline;
   margin-left: 0.5rem;
   cursor: pointer;
@@ -39,7 +39,7 @@
 }
 
 .constellation rux-table-cell:has(#sat-icon) {
-  color: #b7dcff;
+  color: var(--color-text-interactive-default);
 }
 
 .constellation #sat-icon {

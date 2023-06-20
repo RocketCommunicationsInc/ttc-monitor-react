@@ -7,7 +7,8 @@
 .background {
   height: calc(100% - var(--spacing-24));
   padding: var(--spacing-3);
-  background-color: var(--color-background-surface);
+  background-color: var(--color-background-base-default);
+  color: var(--color-text-primary);
   display: grid;
   gap: var(--spacing-3);
   grid-template-columns: calc(30% - 10px) 1fr 1fr;
@@ -31,7 +32,7 @@ rux-container::part(body) {
   overflow-y: hidden;
   padding: 0;
   /* to color small space above scrollbar */
-  background-color: var(--color-palette-darkblue-900);
+  background-color: var(--color-background-base-header);
 }
 
 rux-container.alerts {

@@ -58,7 +58,7 @@ li {
 /* RUX TREE HEADER */
 
 .rux-tree-header {
-  background-color: #172635;
+  background-color: var(--color-background-surface-header);
   display: flex;
   flex-flow: row nowrap;
   width: 100%;
