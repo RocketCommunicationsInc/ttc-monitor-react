@@ -20,8 +20,6 @@ const LineChart = ({ data, chartData }: PropTypes) => {
     "1600",
   ];
 
-  const yLabels = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120];
-
   var options = {
     chart: {
       stacked: false,
@@ -74,9 +72,11 @@ const LineChart = ({ data, chartData }: PropTypes) => {
     },
     yaxis: [
       {
-        categories: yLabels,
-        tickAmount: 10,
+        show: true,
+        tickAmount: 11,
         decimalsInFloat: 0,
+        min: 0,
+        max: 110,
         axisTicks: {
           show: false,
         },
@@ -90,6 +90,10 @@ const LineChart = ({ data, chartData }: PropTypes) => {
           style: {
             colors: "var(--color-text-primary)",
           },
+          // //@ts-expect-error
+          // formatter: function (yLabels) {
+          //   return yLabels.toFixed(0);
+          // },
         },
         title: {
           style: {
@@ -103,7 +107,6 @@ const LineChart = ({ data, chartData }: PropTypes) => {
       x: {
         show: false,
       },
-      theme: "",
       //@ts-expect-error
       custom: function ({ series, seriesIndex, dataPointIndex }) {
         return (
