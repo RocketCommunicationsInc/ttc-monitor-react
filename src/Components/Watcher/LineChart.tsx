@@ -1,46 +1,6 @@
-import {
-  Chart as ChartJS,
-  ChartType,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  SubTitle,
-  Tooltip,
-  Legend,
-} from "chart.js";
-import { Line } from "react-chartjs-2";
-import annotationPlugin from "chartjs-plugin-annotation";
 import type { Mnemonic } from "@astrouxds/mock-data";
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  SubTitle,
-  Tooltip,
-  Legend,
-  annotationPlugin
-);
-
-const labels = [
-  "0800",
-  "0900",
-  "1000",
-  "1100",
-  "1200",
-  "1300",
-  "1400",
-  "1500",
-  "1600",
-];
-
-const tooltipTitle = () => {
-  return "";
-};
+import Chart from "react-apexcharts";
+import "./LineChart.css";
 
 type PropTypes = {
   data: Mnemonic;
@@ -48,160 +8,173 @@ type PropTypes = {
 };
 
 const LineChart = ({ data, chartData }: PropTypes) => {
-  const dataObj = {
-    labels,
-    datasets: [
-      {
-        label: "Value",
-        data: chartData,
-        borderColor: "rgb(77, 172, 255)",
-        pointRadius: 0,
-        gridLines: {
-          color: "#455D6E",
-          display: true,
-        },
-      },
-    ],
-  };
+  const labels = [
+    "0800",
+    "0900",
+    "1000",
+    "1100",
+    "1200",
+    "1300",
+    "1400",
+    "1500",
+    "1600",
+  ];
 
-  const options = {
-    responsive: true,
-    maintainAspectRatio: false,
-    layout: {
-      padding: {
-        top: 16,
-        left: 24,
-        right: 24,
-        bottom: 16,
+  var options = {
+    chart: {
+      stacked: false,
+      background: "var(--color-background-base-header)",
+      toolbar: {
+        show: false,
       },
     },
-    scales: {
-      x: {
-        fill: true,
-        border: {
-          display: true,
-          color: "white",
-        },
-        ticks: {
-          color: "white",
-        },
-        scaleLabel: {
-          display: true,
-        },
-      },
-      y: {
-        fill: true,
-        border: {
-          display: true,
-          color: "white",
-        },
-        grid: {
-          color: "grey",
-          drawTicks: false,
-        },
-        ticks: {
-          color: "white",
-          padding: 7,
-          stepSize: 10,
-        },
-        scaleLabel: {
-          display: true,
-        },
-        min: 0,
-        max: 110,
-        autoSkip: false,
+    grid: {
+      borderColor: "var(--color-border-interactive-default)",
+    },
+    title: {
+      text: "IRON 4090",
+      align: "left" as "left",
+      margin: 20,
+      offsetX: 50,
+      offsetY: 10,
+      style: {
+        fontSize: "16px",
+        fontWeight: "bold",
+        color: "var(--color-text-primary)",
       },
     },
-    plugins: {
-      legend: {
-        display: false,
+    subtitle: {
+      text: `${data.mnemonicId}`,
+      align: "left" as "left",
+      offsetX: 50,
+      offsetY: 45,
+      style: {
+        fontSize: "12px",
+        color: "var(--color-text-primary)",
       },
-      title: {
-        display: true,
-        text: "            IRON 4090",
-        color: "white",
-        align: "start",
-        font: {
-          size: 16,
-        },
-      },
-      subtitle: {
-        display: true,
-        text: `               ${data.mnemonicId}`,
-        color: "white",
-        align: "start",
-        font: {
-          size: 13,
-          weight: "normal",
-        },
-        padding: {
-          bottom: 25,
+    },
+    stroke: {
+      width: [3, 3],
+    },
+    xaxis: {
+      categories: labels,
+      labels: {
+        style: {
+          colors: "var(--color-text-primary)",
         },
       },
       tooltip: {
-        mode: "index",
-        intersect: false,
-        yAlign: "bottom",
-        displayColors: false,
-        titleMarginBottom: 0,
-        callbacks: {
-          title: tooltipTitle,
-        },
+        enabled: false,
       },
-      annotation: {
-        annotations: {
-          upperThreshold: {
-            type: "line" as ChartType,
-            yMin: 100,
-            yMax: 100,
-            borderColor: "white",
-            borderWidth: 2.5,
-            borderDash: [1, 2],
-            label: {
-              color: "#fff",
-              content: "Upper Limit",
-              display: true,
-              backgroundColor: "#172635",
-              opacity: 0.5,
-              font: {
-                size: 10.5,
-                weight: "normal",
-              },
-            },
-          },
-          lowerThreshold: {
-            type: "line" as ChartType,
-            yMin: 20,
-            yMax: 20,
-            borderColor: "white",
-            borderWidth: 2.5,
-            borderDash: [1, 2],
-            label: {
-              color: "#fff",
-              content: "Lower Limit",
-              display: true,
-              backgroundColor: "#172635",
-              font: {
-                size: 10.5,
-                weight: "normal",
-              },
-            },
-          },
-        },
+      axisTicks: {
+        show: false,
       },
     },
-    hover: {
-      mode: "nearest",
-      intersect: false, //this is the point on the graph for tooltip
+    yaxis: [
+      {
+        show: true,
+        tickAmount: 11,
+        decimalsInFloat: 0,
+        min: 0,
+        max: 110,
+        axisTicks: {
+          show: false,
+        },
+        axisBorder: {
+          show: true,
+          color: "var(--color-text-primary)",
+        },
+        labels: {
+          enabled: true,
+          show: true,
+          style: {
+            colors: "var(--color-text-primary)",
+          },
+          // //@ts-expect-error
+          // formatter: function (yLabels) {
+          //   return yLabels.toFixed(0);
+          // },
+        },
+        title: {
+          style: {
+            color: "var(--color-text-primary)",
+          },
+        },
+      },
+    ],
+    tooltip: {
+      enabled: true,
+      x: {
+        show: false,
+      },
+      theme: "",
+      //@ts-expect-error
+      custom: function ({ series, seriesIndex, dataPointIndex }) {
+        return (
+          '<span class="tooltip-box">' +
+          series[seriesIndex][dataPointIndex] +
+          "</span>"
+        );
+      },
+      style: {
+        fontSize: "12px",
+        color: "var(--color-text-primary)",
+      },
+      shared: false,
+      intersect: false,
+      onDatasetHover: {
+        highlightDataSeries: false,
+      },
+      marker: {
+        show: false,
+      },
+    },
+    annotations: {
+      yaxis: [
+        {
+          y: 100,
+          borderColor: "var(--color-background-base-default)",
+          strokeDashArray: 7,
+          label: {
+            borderColor: "var(--color-background-base-default)",
+            position: "center",
+            offsetY: 5,
+            style: {
+              color: "var(--color-text-primary)",
+              background: "var(--color-background-surface-hover)",
+            },
+            text: "Upper Limit",
+          },
+        },
+        {
+          y: 20,
+          borderColor: "var(--color-background-base-default)",
+          strokeDashArray: 7,
+          label: {
+            borderColor: "var(--color-background-base-default)",
+            position: "center",
+            offsetY: 5,
+            style: {
+              color: "var(--color-text-primary)",
+              background: "var(--color-background-surface-hover)",
+            },
+            text: "Lower Limit",
+          },
+        },
+      ],
     },
   };
 
+  const series = [
+    {
+      data: chartData,
+    },
+  ];
+
   return (
-    <Line
-      // @ts-expect-error
-      options={options}
-      data={dataObj}
-    ></Line>
+    <div className="line-chart">
+      <Chart type="line" options={options} series={series} height="100%" />
+    </div>
   );
 };
 
