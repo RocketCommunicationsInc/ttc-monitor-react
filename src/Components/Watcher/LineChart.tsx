@@ -107,6 +107,7 @@ const LineChart = ({ data, chartData }: PropTypes) => {
       x: {
         show: false,
       },
+      theme: "",
       //@ts-expect-error
       custom: function ({ series, seriesIndex, dataPointIndex }) {
         return (
