@@ -134,7 +134,7 @@ const LineChart = ({ data, chartData }: PropTypes) => {
         {
           y: 100,
           borderColor: "var(--color-background-base-default)",
-          strokeDashArray: 2,
+          strokeDashArray: 7,
           label: {
             borderColor: "var(--color-background-base-default)",
             position: "center",
@@ -149,7 +149,7 @@ const LineChart = ({ data, chartData }: PropTypes) => {
         {
           y: 20,
           borderColor: "var(--color-background-base-default)",
-          strokeDashArray: 2,
+          strokeDashArray: 7,
           label: {
             borderColor: "var(--color-background-base-default)",
             position: "center",
