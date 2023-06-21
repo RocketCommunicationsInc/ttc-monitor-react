@@ -1,5 +1,6 @@
 import type { Mnemonic } from "@astrouxds/mock-data";
 import Chart from "react-apexcharts";
+import "./LineChart.css";
 
 type PropTypes = {
   data: Mnemonic;
@@ -19,12 +20,18 @@ const LineChart = ({ data, chartData }: PropTypes) => {
     "1600",
   ];
 
+  const yLabels = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120];
+
   var options = {
     chart: {
       stacked: false,
+      background: "var(--color-background-base-header)",
       toolbar: {
         show: false,
       },
+    },
+    grid: {
+      borderColor: "var(--color-border-interactive-default)",
     },
     title: {
       text: "IRON 4090",
@@ -35,7 +42,7 @@ const LineChart = ({ data, chartData }: PropTypes) => {
       style: {
         fontSize: "16px",
         fontWeight: "bold",
-        color: "white",
+        color: "var(--color-text-primary)",
       },
     },
     subtitle: {
@@ -45,7 +52,7 @@ const LineChart = ({ data, chartData }: PropTypes) => {
       offsetY: 45,
       style: {
         fontSize: "12px",
-        color: "white",
+        color: "var(--color-text-primary)",
       },
     },
     stroke: {
@@ -55,7 +62,7 @@ const LineChart = ({ data, chartData }: PropTypes) => {
       categories: labels,
       labels: {
         style: {
-          colors: "white",
+          colors: "var(--color-text-primary)",
         },
       },
       tooltip: {
@@ -67,23 +74,26 @@ const LineChart = ({ data, chartData }: PropTypes) => {
     },
     yaxis: [
       {
+        categories: yLabels,
         tickAmount: 10,
-        max: 110,
+        decimalsInFloat: 0,
         axisTicks: {
           show: false,
         },
         axisBorder: {
           show: true,
-          color: "white",
+          color: "var(--color-text-primary)",
         },
         labels: {
+          enabled: true,
+          show: true,
           style: {
-            colors: "white",
+            colors: "var(--color-text-primary)",
           },
         },
         title: {
           style: {
-            color: "white",
+            color: "var(--color-text-primary)",
           },
         },
       },
@@ -93,30 +103,24 @@ const LineChart = ({ data, chartData }: PropTypes) => {
       x: {
         show: false,
       },
-      fillSeriesColor: true,
+      theme: "",
+      //@ts-expect-error
+      custom: function ({ series, seriesIndex, dataPointIndex }) {
+        return (
+          '<span class="tooltip-box">' +
+          series[seriesIndex][dataPointIndex] +
+          "</span>"
+        );
+      },
       style: {
         fontSize: "12px",
-        color: "black",
+        color: "var(--color-text-primary)",
       },
-      y: {
-        title: {
-          formatter: function () {
-            return "";
-          },
-        },
+      shared: false,
+      intersect: false,
+      onDatasetHover: {
+        highlightDataSeries: false,
       },
-
-      // theme: true,
-      // shared: true,
-      // followCursor: false,
-      // intersect: false,
-      // style: {
-      //   fontSize: "12px",
-      //   backgroundColor: "black",
-      // },
-      // onDatasetHover: {
-      //   highlightDataSeries: false,
-      // },
       marker: {
         show: false,
       },
@@ -125,52 +129,36 @@ const LineChart = ({ data, chartData }: PropTypes) => {
       yaxis: [
         {
           y: 100,
-          borderColor: "#00E396",
+          borderColor: "var(--color-background-base-default)",
           strokeDashArray: 2,
-          // stroke: {
-          //   show: true,
-          //   curve: "smooth",
-          //   lineCap: "butt",
-          //   width: 2,
-          //   dashArray: 0,
-          // },
           label: {
-            borderColor: "#00E396",
+            borderColor: "var(--color-background-base-default)",
             position: "center",
             offsetY: 5,
             style: {
-              color: "#fff",
-              background: "#00E396",
+              color: "var(--color-text-primary)",
+              background: "var(--color-background-surface-hover)",
             },
             text: "Upper Limit",
           },
         },
         {
           y: 20,
-          borderColor: "#00E396",
+          borderColor: "var(--color-background-base-default)",
+          strokeDashArray: 2,
           label: {
-            borderColor: "#00E396",
+            borderColor: "var(--color-background-base-default)",
             position: "center",
             offsetY: 5,
             style: {
-              color: "#fff",
-              background: "#00E396",
+              color: "var(--color-text-primary)",
+              background: "var(--color-background-surface-hover)",
             },
             text: "Lower Limit",
           },
         },
       ],
     },
-    // theme: {
-    //   mode: "light" as "light",
-    //   palette: "palette1" as "pallette1",
-    //   monochrome: {
-    //     enabled: false,
-    //     color: "#255aee",
-    //     shadeTo: "light" as "light",
-    //     shadeIntensity: 0.65,
-    //   },
-    // },
   };
 
   const series = [
@@ -180,8 +168,8 @@ const LineChart = ({ data, chartData }: PropTypes) => {
   ];
 
   return (
-    <div>
-      <Chart type="line" options={options} series={series} height="230%" />
+    <div className="line-chart">
+      <Chart type="line" options={options} series={series} height="100%" />
     </div>
   );
 };
