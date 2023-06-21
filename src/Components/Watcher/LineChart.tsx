@@ -31,6 +31,7 @@ const LineChart = ({ data, chartData }: PropTypes) => {
       align: "left" as "left",
       margin: 20,
       offsetX: 50,
+      offsetY: 10,
       style: {
         fontSize: "16px",
         fontWeight: "bold",
@@ -41,6 +42,7 @@ const LineChart = ({ data, chartData }: PropTypes) => {
       text: `${data.mnemonicId}`,
       align: "left" as "left",
       offsetX: 50,
+      offsetY: 45,
       style: {
         fontSize: "12px",
         color: "white",
@@ -51,25 +53,24 @@ const LineChart = ({ data, chartData }: PropTypes) => {
     },
     xaxis: {
       categories: labels,
-      title: {
-        text: undefined,
-        offsetX: 0,
-        offsetY: 0,
+      labels: {
         style: {
-          color: "white",
-          fontSize: "12px",
-          fontFamily: "Helvetica, Arial, sans-serif",
-          fontWeight: 600,
+          colors: "white",
         },
       },
       tooltip: {
         enabled: false,
       },
+      axisTicks: {
+        show: false,
+      },
     },
     yaxis: [
       {
+        tickAmount: 10,
+        max: 110,
         axisTicks: {
-          show: true,
+          show: false,
         },
         axisBorder: {
           show: true,
@@ -86,22 +87,29 @@ const LineChart = ({ data, chartData }: PropTypes) => {
           },
         },
       },
-      {
-        opposite: true,
-        axisBorder: {
-          show: true,
-          color: "white",
-        },
-      },
     ],
     tooltip: {
       enabled: true,
+      x: {
+        show: false,
+      },
+      fillSeriesColor: true,
+      style: {
+        fontSize: "12px",
+        color: "black",
+      },
+      y: {
+        title: {
+          formatter: function () {
+            return "";
+          },
+        },
+      },
+
+      // theme: true,
       // shared: true,
       // followCursor: false,
       // intersect: false,
-      // inverseOrder: false,
-      // fillSeriesColor: false,
-      // theme: false,
       // style: {
       //   fontSize: "12px",
       //   backgroundColor: "black",
@@ -109,25 +117,64 @@ const LineChart = ({ data, chartData }: PropTypes) => {
       // onDatasetHover: {
       //   highlightDataSeries: false,
       // },
-      // marker: {
-      //   show: true,
-      // },
-      // fixed: {
-      //   enabled: false,
-      //   position: "topRight",
-      //   offsetX: 0,
-      //   offsetY: 0,
-      // },
+      marker: {
+        show: false,
+      },
     },
-    // legend: {
-    //   // horizontalAlign: "left" as "left",
-    //   offsetX: 40,
+    annotations: {
+      yaxis: [
+        {
+          y: 100,
+          borderColor: "#00E396",
+          strokeDashArray: 2,
+          // stroke: {
+          //   show: true,
+          //   curve: "smooth",
+          //   lineCap: "butt",
+          //   width: 2,
+          //   dashArray: 0,
+          // },
+          label: {
+            borderColor: "#00E396",
+            position: "center",
+            offsetY: 5,
+            style: {
+              color: "#fff",
+              background: "#00E396",
+            },
+            text: "Upper Limit",
+          },
+        },
+        {
+          y: 20,
+          borderColor: "#00E396",
+          label: {
+            borderColor: "#00E396",
+            position: "center",
+            offsetY: 5,
+            style: {
+              color: "#fff",
+              background: "#00E396",
+            },
+            text: "Lower Limit",
+          },
+        },
+      ],
+    },
+    // theme: {
+    //   mode: "light" as "light",
+    //   palette: "palette1" as "pallette1",
+    //   monochrome: {
+    //     enabled: false,
+    //     color: "#255aee",
+    //     shadeTo: "light" as "light",
+    //     shadeIntensity: 0.65,
+    //   },
     // },
   };
 
   const series = [
     {
-      name: "Line Chart",
       data: chartData,
     },
   ];
