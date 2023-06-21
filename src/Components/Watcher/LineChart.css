@@ -1,0 +1,8 @@
+.tooltip-box {
+  background-color: var(--color-background-base-selected);
+  padding: var(--spacing-1);
+}
+
+.line-chart {
+    height: 99.5%;
+}
