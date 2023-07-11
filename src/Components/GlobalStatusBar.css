@@ -5,3 +5,7 @@
 .status-indicators rux-monitoring-icon {
   margin-inline: var(--spacing-3);
 }
+
+.app-icon-pop-up {
+  height: calc(var(--spacing-14, 3.5rem) + var(--spacing-050, 0.125rem));
+}

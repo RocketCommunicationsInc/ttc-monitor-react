@@ -67,7 +67,12 @@ const GlobalStatusBar = () => {
         appName="MONITOR"
         username="J. Smith"
       >
-        <RuxPopUp placement="top-start" slot="left-side" closeOnSelect>
+        <RuxPopUp
+          className="app-icon-pop-up"
+          placement="top-start"
+          slot="left-side"
+          closeOnSelect
+        >
           <RuxIcon slot="trigger" size="small" icon="apps" />
           <RuxMenu onRuxmenuselected={() => setOpenBanner(true)}>
             <RuxMenuItem>Preferences</RuxMenuItem>
