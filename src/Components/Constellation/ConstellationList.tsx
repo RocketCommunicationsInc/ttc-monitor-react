@@ -16,6 +16,7 @@ import {
   RuxButton,
 } from "@astrouxds/react";
 import type { Contact } from "@astrouxds/mock-data";
+import LinkButtonWithIcon from "../LinkButtonWithIcon/LinkButtonWithIcon";
 
 type PropTypes = {
   contacts: { [key: string]: Contact };
@@ -86,7 +87,7 @@ const CostellationList = ({
     setOpenFeatureUnavailable(true);
   };
 
-  const prePasshandler = (e: MouseEvent<HTMLRuxIconElement>) => {
+  const prePasshandler = (e: MouseEvent<HTMLRuxButtonElement>) => {
     e.stopPropagation();
     setOpenPrePassBanner(true);
   };
@@ -98,13 +99,13 @@ const CostellationList = ({
         onRuxclosed={() => setOpenPrePassBanner(false)}
       >
         Pre-Pass for is about to begin.
-        <span onClick={popupMenuHandler}>Open Contact</span>
-        <RuxButton
-          iconOnly
-          borderless
-          icon="launch"
-          onClick={popupMenuHandler}
-        />
+        <LinkButtonWithIcon onClick={popupMenuHandler} text={"Open Contact"} />
+        {/* <RuxButton borderless size="small" onClick={popupMenuHandler}>
+          <div>
+            Open Contact
+            <RuxIcon size="extra-small" icon="launch"></RuxIcon>
+          </div>
+        </RuxButton> */}
       </RuxNotification>
       <RuxNotification
         small
@@ -259,12 +260,9 @@ const CostellationList = ({
                   </RuxTableCell>
                   {contact.state === "ready" ? (
                     <RuxTableCell>
-                      {contact.satellite}
-                      <RuxIcon
-                        id="sat-icon"
-                        size="1rem"
-                        icon="launch"
+                      <LinkButtonWithIcon
                         onClick={prePasshandler}
+                        text={contact.satellite}
                       />
                     </RuxTableCell>
                   ) : (

@@ -1,0 +1,11 @@
+rux-icon {
+  margin-inline: 1rem;
+  cursor: pointer;
+  margin-inline-start: var(--spacing-1);
+  display: flex;
+  align-items: center;
+}
+
+rux-button::part(container) {
+  padding: var(--spacing-0);
+}

@@ -15,6 +15,7 @@ import PassPlan from "./PassPlan/PassPlan";
 import passPlanData from "./PassPlan/passPlanData.json";
 import type { Contact } from "@astrouxds/mock-data";
 import "./ContactDrawer.css";
+import LinkButtonWithIcon from "../LinkButtonWithIcon/LinkButtonWithIcon";
 
 const settings = {
   speedOpen: 50,
@@ -111,7 +112,12 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
         <RuxContainer className="drawer__wrapper">
           <div className="drawer__header">
             <div>
-              <RuxButton borderless onClick={() => setOpenBanner(true)}>
+              <RuxStatus status={contact.status} />
+              <LinkButtonWithIcon
+                onClick={() => setOpenBanner(true)}
+                text={contact.satellite}
+              />
+              {/* <RuxButton borderless onClick={() => setOpenBanner(true)}>
                 <RuxStatus status={contact.status} />
                 {contact.satellite}
               </RuxButton>
@@ -119,7 +125,7 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
                 size="1.15rem"
                 icon="launch"
                 onClick={() => setOpenBanner(true)}
-              />
+              /> */}
             </div>
             <RuxButton
               borderless
