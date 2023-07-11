@@ -75,8 +75,8 @@ const Alerts = () => {
       <RuxNotification open={openBanner} small hide-close>
         One or more filters selected.
         <RuxButton
+          className="alerts_clear-filter"
           onClick={handleClearFilter}
-          secondary
           borderless
           size="small"
         >
