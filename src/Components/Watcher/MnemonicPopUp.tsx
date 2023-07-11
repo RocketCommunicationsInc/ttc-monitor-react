@@ -8,7 +8,11 @@ type PropTypes = {
 
 const MnemonicPopUp = ({ triggerValue, data }: PropTypes) => {
   return (
-    <RuxPopUp placement="right" className="mnemonic-pop-up">
+    <RuxPopUp
+      placement="right-end"
+      strategy="fixed"
+      className="mnemonic-pop-up"
+    >
       <RuxCard>
         <span slot="header">{data.mnemonicId}</span>
         <div>
