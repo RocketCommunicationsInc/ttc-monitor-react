@@ -7,7 +7,6 @@ import {
   RuxMenu,
   RuxMenuItem,
   RuxMonitoringIcon,
-  RuxTooltip,
   RuxToastStack,
 } from "@astrouxds/react";
 import type { Status } from "@astrouxds/mock-data";
