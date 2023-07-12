@@ -24,6 +24,18 @@
   gap: 5%;
 }
 
+.filter-notification {
+  background-color: var(--color-background-surface-default);
+  padding: var(--spacing-2);
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  & rux-button::part(container):hover {
+    box-shadow: none;
+  }
+}
+
 /* ALERTS LIST STYLES */
 
 .alert-list-headers {
