@@ -12,6 +12,7 @@ import {
 } from "@astrouxds/react";
 import type { Status } from "@astrouxds/mock-data";
 import "./GlobalStatusBar.css";
+import { RuxMenuCustomEvent } from "@astrouxds/astro-web-components";
 
 const GlobalStatusBar = () => {
   const [status1, setStatus1] = useState<Status>("off");
@@ -20,6 +21,7 @@ const GlobalStatusBar = () => {
   const [notifications1, setNotifications1] = useState(0);
   const [notifications2, setNotifications2] = useState(2);
   const [notifications3, setNotifications3] = useState(4);
+  const [lightTheme, setLightTheme] = useState(false);
   const [openBanner, setOpenBanner] = useState(false);
 
   const statusValuesArr = [
@@ -52,6 +54,15 @@ const GlobalStatusBar = () => {
     return () => clearInterval(interval);
   });
 
+  function menuSelect(e: RuxMenuCustomEvent<HTMLRuxMenuItemElement>) {
+    if (e.detail.value === "themeToggle") {
+      setLightTheme(!lightTheme);
+      document.body.classList.toggle("light-theme");
+      return;
+    }
+    setOpenBanner(true);
+  }
+
   return (
     <>
       <RuxNotification
@@ -69,7 +80,10 @@ const GlobalStatusBar = () => {
       >
         <RuxPopUp placement="top-start" slot="left-side" closeOnSelect>
           <RuxIcon slot="trigger" size="small" icon="apps" />
-          <RuxMenu onRuxmenuselected={() => setOpenBanner(true)}>
+          <RuxMenu onRuxmenuselected={(e) => menuSelect(e)}>
+            <RuxMenuItem value="themeToggle">
+              {lightTheme ? "Dark" : "Light"} Theme
+            </RuxMenuItem>
             <RuxMenuItem>Preferences</RuxMenuItem>
             <RuxMenuItem>Sign Out</RuxMenuItem>
           </RuxMenu>
