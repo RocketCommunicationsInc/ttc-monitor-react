@@ -21,7 +21,6 @@ const GlobalStatusBar = () => {
   const [notifications1, setNotifications1] = useState(0);
   const [notifications2, setNotifications2] = useState(2);
   const [notifications3, setNotifications3] = useState(4);
-  // const [openBanner, setOpenBanner] = useState(false);
 
   const statusValuesArr = [
     "off",
@@ -55,14 +54,6 @@ const GlobalStatusBar = () => {
 
   return (
     <>
-      {/* <RuxNotification
-        small
-        closeAfter={3}
-        onRuxclosed={() => setOpenBanner(false)}
-        open={openBanner}
-      >
-        This feature has not been implemented.
-      </RuxNotification> */}
       <RuxToastStack />
       <RuxGlobalStatusBar
         appDomain="TT&C"
