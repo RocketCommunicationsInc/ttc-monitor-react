@@ -11,8 +11,8 @@ export const getJulianDay = (date: Date) => {
 
 export const addToast = (
   message: string,
-  hideClose: boolean,
-  closeAfter: number
+  hideClose: boolean | null,
+  closeAfter: number | null
 ) => {
   const toastStack = document.querySelector(
     "rux-toast-stack"
