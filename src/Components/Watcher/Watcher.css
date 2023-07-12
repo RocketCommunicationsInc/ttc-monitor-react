@@ -107,3 +107,11 @@ rux-pop-up.mnemonic-pop-up rux-card div {
 rux-pop-up.mnemonic-pop-up rux-checkbox::part(label) {
   font-weight: var(--font-weights-bold);
 }
+
+.threshold-value {
+  margin-left: "auto";
+
+  &::part(container) {
+    box-shadow: none;
+  }
+}
