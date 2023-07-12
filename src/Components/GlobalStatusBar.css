@@ -12,8 +12,10 @@
 
 rux-toast-stack {
   top: 96px;
-  max-height: 392px;
-  overflow: hidden;
+}
+
+rux-toast:nth-child(n+5) {
+ display: none;
 }
 
 rux-menu-item[value="themeToggle"] span {
