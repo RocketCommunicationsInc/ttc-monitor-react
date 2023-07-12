@@ -21,6 +21,7 @@ const GlobalStatusBar = () => {
   const [notifications1, setNotifications1] = useState(0);
   const [notifications2, setNotifications2] = useState(2);
   const [notifications3, setNotifications3] = useState(4);
+  const [lightTheme, setLightTheme] = useState(false);
 
   const statusValuesArr = [
     "off",
@@ -52,6 +53,16 @@ const GlobalStatusBar = () => {
     return () => clearInterval(interval);
   });
 
+  function menuSelect(e: CustomEvent) {
+    const { detail } = e;
+    if (detail.value === "themeToggle") {
+      setLightTheme(!lightTheme);
+      document.body.classList.toggle("light-theme");
+      return;
+    }
+    addToast("This feature has not been implemented", false, 3000);
+  }
+
   return (
     <>
       <RuxToastStack />
@@ -67,11 +78,10 @@ const GlobalStatusBar = () => {
           closeOnSelect
         >
           <RuxIcon slot="trigger" size="small" icon="apps" />
-          <RuxMenu
-            onRuxmenuselected={() =>
-              addToast("This feature has not been implemented", false, 3000)
-            }
-          >
+          <RuxMenu onRuxmenuselected={(e) => menuSelect(e)}>
+            <RuxMenuItem value="themeToggle">
+              {lightTheme ? "Dark" : "Light"} Theme
+            </RuxMenuItem>
             <RuxMenuItem>Preferences</RuxMenuItem>
             <RuxMenuItem>Sign Out</RuxMenuItem>
           </RuxMenu>
@@ -79,62 +89,56 @@ const GlobalStatusBar = () => {
         <RuxClock />
 
         <div className="status-indicators" slot="right-side">
-          <RuxTooltip message={`Ground ${notifications1}`} placement="bottom">
-            <RuxPopUp placement="bottom" closeOnSelect>
-              <RuxMenu
-                onRuxmenuselected={() =>
-                  addToast("This feature has not been implemented", false, 3000)
-                }
-              >
-                <RuxMenuItem>Investigate</RuxMenuItem>
-              </RuxMenu>
-              <RuxMonitoringIcon
-                status={status1}
-                icon="antenna-off"
-                label="Ground"
-                notifications={notifications1}
-                slot="trigger"
-              ></RuxMonitoringIcon>
-            </RuxPopUp>
-          </RuxTooltip>
+          <RuxPopUp placement="bottom" closeOnSelect>
+            <RuxMenu
+              onRuxmenuselected={() =>
+                addToast("This feature has not been implemented", false, 3000)
+              }
+            >
+              <RuxMenuItem>Investigate</RuxMenuItem>
+            </RuxMenu>
+            <RuxMonitoringIcon
+              status={status1}
+              icon="antenna-off"
+              label="Ground"
+              notifications={notifications1}
+              slot="trigger"
+            ></RuxMonitoringIcon>
+          </RuxPopUp>
 
-          <RuxTooltip message={`Comms ${notifications2}`} placement="bottom">
-            <RuxPopUp placement="bottom" closeOnSelect>
-              <RuxMenu
-                onRuxmenuselected={() =>
-                  addToast("This feature has not been implemented", false, 3000)
-                }
-              >
-                <RuxMenuItem>Investigate</RuxMenuItem>
-              </RuxMenu>
-              <RuxMonitoringIcon
-                status={status2}
-                icon="antenna-receive"
-                label="Comms"
-                notifications={notifications2}
-                slot="trigger"
-              />
-            </RuxPopUp>
-          </RuxTooltip>
+          <RuxPopUp placement="bottom" closeOnSelect>
+            <RuxMenu
+              onRuxmenuselected={() =>
+                addToast("This feature has not been implemented", false, 3000)
+              }
+            >
+              <RuxMenuItem>Investigate</RuxMenuItem>
+            </RuxMenu>
+            <RuxMonitoringIcon
+              status={status2}
+              icon="antenna-receive"
+              label="Comms"
+              notifications={notifications2}
+              slot="trigger"
+            />
+          </RuxPopUp>
 
-          <RuxTooltip message={`Software ${notifications3}`} placement="bottom">
-            <RuxPopUp placement="bottom" closeOnSelect>
-              <RuxMenu
-                onRuxmenuselected={() =>
-                  addToast("This feature has not been implemented", false, 3000)
-                }
-              >
-                <RuxMenuItem>Investigate</RuxMenuItem>
-              </RuxMenu>
-              <RuxMonitoringIcon
-                status={status3}
-                icon="processor"
-                label="Software"
-                notifications={notifications3}
-                slot="trigger"
-              />
-            </RuxPopUp>
-          </RuxTooltip>
+          <RuxPopUp placement="bottom" closeOnSelect>
+            <RuxMenu
+              onRuxmenuselected={() =>
+                addToast("This feature has not been implemented", false, 3000)
+              }
+            >
+              <RuxMenuItem>Investigate</RuxMenuItem>
+            </RuxMenu>
+            <RuxMonitoringIcon
+              status={status3}
+              icon="processor"
+              label="Software"
+              notifications={notifications3}
+              slot="trigger"
+            />
+          </RuxPopUp>
         </div>
       </RuxGlobalStatusBar>
     </>

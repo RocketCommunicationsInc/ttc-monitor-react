@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { RuxInput, RuxIcon } from "@astrouxds/react";
+import { RuxInput, RuxIcon, RuxButton } from "@astrouxds/react";
 
 type PropTypes = {
   savedValue: string;
@@ -45,14 +45,17 @@ const ThresholdInput = ({ savedValue }: PropTypes) => {
           </div>
         </RuxInput>
       ) : (
-        <div
-          style={{ width: "fit-content", marginLeft: "auto" }}
-          onClickCapture={(e) => {
+        <RuxButton
+          size="small"
+          className="threshold-value"
+          secondary
+          borderless
+          onClick={(e) => {
             setShowInput(true);
           }}
         >
           {currentValue}
-        </div>
+        </RuxButton>
       )}
     </>
   );
