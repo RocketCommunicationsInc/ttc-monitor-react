@@ -9,9 +9,9 @@ interface ButtonProps {
 const LinkButtonWithIcon = ({ onClick, text }: ButtonProps) => {
   return (
     <>
-      <RuxButton borderless onClick={onClick}>
+      <RuxButton className="link-button-with-icon" borderless onClick={onClick}>
         {text}
-        <RuxIcon size="extra-small" icon="launch" />
+        <RuxIcon className="launch-icon" size="extra-small" icon="launch" />
       </RuxButton>
     </>
   );

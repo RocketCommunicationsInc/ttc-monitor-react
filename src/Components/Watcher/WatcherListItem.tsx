@@ -10,20 +10,15 @@ import {
 import MnemonicPopUp from "./MnemonicPopUp";
 import ThresholdInput from "./ThresholdInput";
 import type { Mnemonic, Status } from "@astrouxds/mock-data";
+import { addToast } from "../../utils";
 
 type PropTypes = {
   rowData: Mnemonic;
   chartDataSlope: number;
   index: number;
-  setOpenBanner: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const WatcherListItem = ({
-  rowData,
-  chartDataSlope,
-  index,
-  setOpenBanner,
-}: PropTypes) => {
+const WatcherListItem = ({ rowData, chartDataSlope, index }: PropTypes) => {
   return (
     <RuxTableRow key={rowData.mnemonicId} data-index={index}>
       <RuxTableCell>
@@ -49,7 +44,11 @@ const WatcherListItem = ({
       <RuxTableCell>
         <RuxPopUp placement="left" closeOnSelect>
           <RuxIcon slot="trigger" icon="more-horiz" size="small" />
-          <RuxMenu onRuxmenuselected={() => setOpenBanner(true)}>
+          <RuxMenu
+            onRuxmenuselected={() =>
+              addToast("This feature has not been implemented", false, 3000)
+            }
+          >
             <RuxMenuItem>Investigate</RuxMenuItem>
             <RuxMenuItem>Remove</RuxMenuItem>
           </RuxMenu>

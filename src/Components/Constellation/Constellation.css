@@ -16,19 +16,6 @@
   padding-inline: var(--spacing-2);
 }
 
-.constellation rux-notification rux-button div {
-  display: flex;
-  align-items: center;
-}
-
-.constellation rux-notification rux-button rux-icon {
-  margin-inline-start: var(--spacing-1);
-}
-
-.constellation rux-notification rux-button:hover rux-icon {
-  color: var(--color-text-interactive-hover);
-}
-
 /* CONSTELLATION TABLE STYLES */
 
 .constellation rux-table-header-row rux-icon {

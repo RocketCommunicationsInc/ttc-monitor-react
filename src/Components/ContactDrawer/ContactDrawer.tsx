@@ -6,8 +6,6 @@ import {
   RuxTab,
   RuxTabPanels,
   RuxTabPanel,
-  RuxIcon,
-  RuxNotification,
   RuxContainer,
 } from "@astrouxds/react";
 import ContactDetails from "./ContactDetails/ContactDetails";
@@ -16,6 +14,7 @@ import passPlanData from "./PassPlan/passPlanData.json";
 import type { Contact } from "@astrouxds/mock-data";
 import "./ContactDrawer.css";
 import LinkButtonWithIcon from "../LinkButtonWithIcon/LinkButtonWithIcon";
+import { addToast } from "../../utils";
 
 const settings = {
   speedOpen: 50,
@@ -31,7 +30,6 @@ type PropTypes = {
 };
 
 const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
-  const [openBanner, setOpenBanner] = useState(false);
   const [selectedTab, setSelectedTab] = useState("");
   const passPlanRef = useRef<HTMLRuxTabElement | null>(null);
   const contactDrawer = useRef<HTMLElement | null>(null);
@@ -114,18 +112,11 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
             <div>
               <RuxStatus status={contact.status} />
               <LinkButtonWithIcon
-                onClick={() => setOpenBanner(true)}
+                onClick={() =>
+                  addToast("This feature has not been implemented", false, 3000)
+                }
                 text={contact.satellite}
               />
-              {/* <RuxButton borderless onClick={() => setOpenBanner(true)}>
-                <RuxStatus status={contact.status} />
-                {contact.satellite}
-              </RuxButton>
-              <RuxIcon
-                size="1.15rem"
-                icon="launch"
-                onClick={() => setOpenBanner(true)}
-              /> */}
             </div>
             <RuxButton
               borderless
@@ -137,14 +128,6 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
               Close
             </RuxButton>
           </div>
-          <RuxNotification
-            small
-            closeAfter={3}
-            onRuxclosed={() => setOpenBanner(false)}
-            open={openBanner}
-          >
-            This feature has not been implemented.
-          </RuxNotification>
           <div className="drawer__content">
             <div className="tabs-wrapper">
               <RuxTabs

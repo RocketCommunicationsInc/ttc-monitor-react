@@ -13,10 +13,10 @@ import {
   RuxMenu,
   RuxMenuItem,
   RuxNotification,
-  RuxButton,
 } from "@astrouxds/react";
 import type { Contact } from "@astrouxds/mock-data";
 import LinkButtonWithIcon from "../LinkButtonWithIcon/LinkButtonWithIcon";
+import { addToast } from "../../utils/index";
 
 type PropTypes = {
   contacts: { [key: string]: Contact };
@@ -26,7 +26,7 @@ type PropTypes = {
 
 type SortDirection = "ASC" | "DESC";
 
-const CostellationList = ({
+const ConstellationList = ({
   contacts,
   contactIds,
   toggleDrawer,
@@ -35,7 +35,6 @@ const CostellationList = ({
   const [sortProp, setSortProp] = useState<keyof Contact>("id");
   const [sortedContactIds, setSortedContactIds] =
     useState<string[]>(contactIds);
-  const [openFeatureUnavailable, setOpenFeatureUnavailable] = useState(false);
   const [openPrePassBanner, setOpenPrePassBanner] = useState(false);
 
   const handleClick = (event: any) => {
@@ -84,7 +83,8 @@ const CostellationList = ({
 
   const popupMenuHandler = (e: MouseEvent<HTMLSpanElement>) => {
     e.stopPropagation();
-    setOpenFeatureUnavailable(true);
+    addToast("This feature has not been implemented.", false, 3000);
+    // setOpenFeatureUnavailable(true);
   };
 
   const prePasshandler = (e: MouseEvent<HTMLRuxButtonElement>) => {
@@ -100,20 +100,6 @@ const CostellationList = ({
       >
         Pre-Pass for is about to begin.
         <LinkButtonWithIcon onClick={popupMenuHandler} text={"Open Contact"} />
-        {/* <RuxButton borderless size="small" onClick={popupMenuHandler}>
-          <div>
-            Open Contact
-            <RuxIcon size="extra-small" icon="launch"></RuxIcon>
-          </div>
-        </RuxButton> */}
-      </RuxNotification>
-      <RuxNotification
-        small
-        closeAfter={3}
-        onRuxclosed={() => setOpenFeatureUnavailable(false)}
-        open={openFeatureUnavailable}
-      >
-        This feature has not been implemented.
       </RuxNotification>
       <div className="table-wrapper">
         <RuxTable>
@@ -311,4 +297,4 @@ const CostellationList = ({
   );
 };
 
-export default CostellationList;
+export default ConstellationList;

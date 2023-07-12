@@ -8,9 +8,10 @@ import {
   RuxMenuItem,
   RuxMonitoringIcon,
   RuxTooltip,
-  RuxNotification,
+  RuxToastStack,
 } from "@astrouxds/react";
 import type { Status } from "@astrouxds/mock-data";
+import { addToast } from "../utils";
 import "./GlobalStatusBar.css";
 
 const GlobalStatusBar = () => {
@@ -20,7 +21,7 @@ const GlobalStatusBar = () => {
   const [notifications1, setNotifications1] = useState(0);
   const [notifications2, setNotifications2] = useState(2);
   const [notifications3, setNotifications3] = useState(4);
-  const [openBanner, setOpenBanner] = useState(false);
+  // const [openBanner, setOpenBanner] = useState(false);
 
   const statusValuesArr = [
     "off",
@@ -54,14 +55,15 @@ const GlobalStatusBar = () => {
 
   return (
     <>
-      <RuxNotification
+      {/* <RuxNotification
         small
         closeAfter={3}
         onRuxclosed={() => setOpenBanner(false)}
         open={openBanner}
       >
         This feature has not been implemented.
-      </RuxNotification>
+      </RuxNotification> */}
+      <RuxToastStack />
       <RuxGlobalStatusBar
         appDomain="TT&C"
         appName="MONITOR"
@@ -74,7 +76,11 @@ const GlobalStatusBar = () => {
           closeOnSelect
         >
           <RuxIcon slot="trigger" size="small" icon="apps" />
-          <RuxMenu onRuxmenuselected={() => setOpenBanner(true)}>
+          <RuxMenu
+            onRuxmenuselected={() =>
+              addToast("This feature has not been implemented", false, 3000)
+            }
+          >
             <RuxMenuItem>Preferences</RuxMenuItem>
             <RuxMenuItem>Sign Out</RuxMenuItem>
           </RuxMenu>
@@ -84,7 +90,11 @@ const GlobalStatusBar = () => {
         <div className="status-indicators" slot="right-side">
           <RuxTooltip message={`Ground ${notifications1}`} placement="bottom">
             <RuxPopUp placement="bottom" closeOnSelect>
-              <RuxMenu onRuxmenuselected={() => setOpenBanner(true)}>
+              <RuxMenu
+                onRuxmenuselected={() =>
+                  addToast("This feature has not been implemented", false, 3000)
+                }
+              >
                 <RuxMenuItem>Investigate</RuxMenuItem>
               </RuxMenu>
               <RuxMonitoringIcon
@@ -99,7 +109,11 @@ const GlobalStatusBar = () => {
 
           <RuxTooltip message={`Comms ${notifications2}`} placement="bottom">
             <RuxPopUp placement="bottom" closeOnSelect>
-              <RuxMenu onRuxmenuselected={() => setOpenBanner(true)}>
+              <RuxMenu
+                onRuxmenuselected={() =>
+                  addToast("This feature has not been implemented", false, 3000)
+                }
+              >
                 <RuxMenuItem>Investigate</RuxMenuItem>
               </RuxMenu>
               <RuxMonitoringIcon
@@ -114,7 +128,11 @@ const GlobalStatusBar = () => {
 
           <RuxTooltip message={`Software ${notifications3}`} placement="bottom">
             <RuxPopUp placement="bottom" closeOnSelect>
-              <RuxMenu onRuxmenuselected={() => setOpenBanner(true)}>
+              <RuxMenu
+                onRuxmenuselected={() =>
+                  addToast("This feature has not been implemented", false, 3000)
+                }
+              >
                 <RuxMenuItem>Investigate</RuxMenuItem>
               </RuxMenu>
               <RuxMonitoringIcon

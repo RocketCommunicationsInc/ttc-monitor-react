@@ -9,3 +9,7 @@
 .app-icon-pop-up {
   height: calc(var(--spacing-14, 3.5rem) + var(--spacing-050, 0.125rem));
 }
+
+rux-toast-stack {
+  top: 96px;
+}
