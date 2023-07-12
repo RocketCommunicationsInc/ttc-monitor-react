@@ -27,6 +27,9 @@ const LineChart = ({ data, chartData }: PropTypes) => {
       toolbar: {
         show: false,
       },
+      zoom: {
+        enabled: false,
+      },
     },
     grid: {
       borderColor: "var(--color-border-interactive-default)",
