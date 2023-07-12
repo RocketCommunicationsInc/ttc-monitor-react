@@ -31,7 +31,8 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 
-  & rux-button::part(container):hover {
+  & rux-button::part(container) {
+    padding-inline: var(--spacing-1);
     box-shadow: none;
   }
 }
