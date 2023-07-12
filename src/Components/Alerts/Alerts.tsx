@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   RuxContainer,
   RuxSelect,
@@ -11,7 +11,6 @@ import type { Category, Status } from "@astrouxds/mock-data";
 import "./Alerts.css";
 
 const Alerts = () => {
-  const [dataFiltered, setDataFiltered] = useState(false);
   const [severitySelection, setSeveritySelection] = useState<Status | "all">(
     "all"
   );
@@ -25,16 +24,9 @@ const Alerts = () => {
   const anySelected = anyAlertsHaveProp("selected", true);
   const deleteSelectedAlerts = () => deleteAlertsWithProp("selected", true);
 
-  useEffect(() => {
-    setDataFiltered(false);
-    if (severitySelection !== "all" || categorySelection !== "all")
-      setDataFiltered(true);
-  }, [severitySelection, categorySelection]);
-
   const handleClearFilter = () => {
     setSeveritySelection("all");
     setCategorySelection("all");
-    setDataFiltered(false);
   };
 
   return (
@@ -71,7 +63,10 @@ const Alerts = () => {
           </RuxSelect>
         </div>
       </div>
-      <div className="filter-notification" hidden={!dataFiltered}>
+      <div
+        className="filter-notification"
+        hidden={severitySelection === "all" && categorySelection === "all"}
+      >
         One or more filters selected.
         <RuxButton
           onClick={handleClearFilter}
