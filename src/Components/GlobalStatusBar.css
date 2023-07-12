@@ -7,7 +7,7 @@
 }
 
 rux-menu-item[value="themeToggle"] span {
-  display: flex;
+  display: flex; 
   gap: var(--spacing-2);
   align-items: center;
 }
