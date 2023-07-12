@@ -11,7 +11,6 @@ import {
 } from "@astrouxds/react";
 import type { Status } from "@astrouxds/mock-data";
 import "./GlobalStatusBar.css";
-import { RuxMenuCustomEvent } from "@astrouxds/astro-web-components";
 
 const GlobalStatusBar = () => {
   const [status1, setStatus1] = useState<Status>("off");
@@ -53,8 +52,9 @@ const GlobalStatusBar = () => {
     return () => clearInterval(interval);
   });
 
-  function menuSelect(e: RuxMenuCustomEvent<HTMLRuxMenuItemElement>) {
-    if (e.detail.value === "themeToggle") {
+  function menuSelect(e: CustomEvent) {
+    const { detail } = e;
+    if (detail.value === "themeToggle") {
       setLightTheme(!lightTheme);
       document.body.classList.toggle("light-theme");
       return;
