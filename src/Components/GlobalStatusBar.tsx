@@ -7,9 +7,10 @@ import {
   RuxMenu,
   RuxMenuItem,
   RuxMonitoringIcon,
-  RuxNotification,
+  RuxToastStack,
 } from "@astrouxds/react";
 import type { Status } from "@astrouxds/mock-data";
+import { addToast } from "../utils";
 import "./GlobalStatusBar.css";
 
 const GlobalStatusBar = () => {
@@ -20,7 +21,6 @@ const GlobalStatusBar = () => {
   const [notifications2, setNotifications2] = useState(2);
   const [notifications3, setNotifications3] = useState(4);
   const [lightTheme, setLightTheme] = useState(false);
-  const [openBanner, setOpenBanner] = useState(false);
 
   const statusValuesArr = [
     "off",
@@ -59,25 +59,23 @@ const GlobalStatusBar = () => {
       document.body.classList.toggle("light-theme");
       return;
     }
-    setOpenBanner(true);
+    addToast("This feature has not been implemented", false, 3000);
   }
 
   return (
     <>
-      <RuxNotification
-        small
-        closeAfter={3}
-        onRuxclosed={() => setOpenBanner(false)}
-        open={openBanner}
-      >
-        This feature has not been implemented.
-      </RuxNotification>
+      <RuxToastStack />
       <RuxGlobalStatusBar
         appDomain="TT&C"
         appName="MONITOR"
         username="J. Smith"
       >
-        <RuxPopUp placement="top-start" slot="left-side" closeOnSelect>
+        <RuxPopUp
+          className="app-icon-pop-up"
+          placement="top-start"
+          slot="left-side"
+          closeOnSelect
+        >
           <RuxIcon slot="trigger" size="small" icon="apps" />
           <RuxMenu onRuxmenuselected={(e) => menuSelect(e)}>
             <RuxMenuItem value="themeToggle">
@@ -91,7 +89,11 @@ const GlobalStatusBar = () => {
 
         <div className="status-indicators" slot="right-side">
           <RuxPopUp placement="bottom" closeOnSelect>
-            <RuxMenu onRuxmenuselected={() => setOpenBanner(true)}>
+            <RuxMenu
+              onRuxmenuselected={() =>
+                addToast("This feature has not been implemented", false, 3000)
+              }
+            >
               <RuxMenuItem>Investigate</RuxMenuItem>
             </RuxMenu>
             <RuxMonitoringIcon
@@ -104,7 +106,11 @@ const GlobalStatusBar = () => {
           </RuxPopUp>
 
           <RuxPopUp placement="bottom" closeOnSelect>
-            <RuxMenu onRuxmenuselected={() => setOpenBanner(true)}>
+            <RuxMenu
+              onRuxmenuselected={() =>
+                addToast("This feature has not been implemented", false, 3000)
+              }
+            >
               <RuxMenuItem>Investigate</RuxMenuItem>
             </RuxMenu>
             <RuxMonitoringIcon
@@ -117,7 +123,11 @@ const GlobalStatusBar = () => {
           </RuxPopUp>
 
           <RuxPopUp placement="bottom" closeOnSelect>
-            <RuxMenu onRuxmenuselected={() => setOpenBanner(true)}>
+            <RuxMenu
+              onRuxmenuselected={() =>
+                addToast("This feature has not been implemented", false, 3000)
+              }
+            >
               <RuxMenuItem>Investigate</RuxMenuItem>
             </RuxMenu>
             <RuxMonitoringIcon

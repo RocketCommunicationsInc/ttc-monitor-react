@@ -134,6 +134,10 @@ li {
   align-self: flex-start;
 }
 
+rux-button.alerts_clear-filter::part(container) {
+  padding-inline: var(--spacing-2);
+}
+
 /* ALERTS FOOTER STYLES */
 
 .alerts::part(footer) {

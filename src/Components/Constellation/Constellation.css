@@ -12,11 +12,8 @@
 
 /* NOTIFICATION BANNER STYLES */
 
-.constellation rux-notification > span {
-  color: var(--color-text-interactive-default);
-  text-decoration: underline;
-  margin-left: 0.5rem;
-  cursor: pointer;
+.constellation rux-notification rux-button::part(container) {
+  padding-inline: var(--spacing-2);
 }
 
 /* CONSTELLATION TABLE STYLES */
@@ -35,16 +32,6 @@
 
 .constellation rux-table-cell:last-of-type rux-icon {
   margin-inline: 1rem;
-  cursor: pointer;
-}
-
-.constellation rux-table-cell:has(#sat-icon) {
-  color: var(--color-text-interactive-default);
-}
-
-.constellation #sat-icon {
-  padding-left: 0.5rem;
-  padding-bottom: 0.3rem;
   cursor: pointer;
 }
 

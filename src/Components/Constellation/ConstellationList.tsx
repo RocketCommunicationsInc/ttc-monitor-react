@@ -13,9 +13,10 @@ import {
   RuxMenu,
   RuxMenuItem,
   RuxNotification,
-  RuxButton,
 } from "@astrouxds/react";
 import type { Contact } from "@astrouxds/mock-data";
+import LinkButtonWithIcon from "../LinkButtonWithIcon/LinkButtonWithIcon";
+import { addToast } from "../../utils/index";
 
 type PropTypes = {
   contacts: { [key: string]: Contact };
@@ -25,7 +26,7 @@ type PropTypes = {
 
 type SortDirection = "ASC" | "DESC";
 
-const CostellationList = ({
+const ConstellationList = ({
   contacts,
   contactIds,
   toggleDrawer,
@@ -34,7 +35,6 @@ const CostellationList = ({
   const [sortProp, setSortProp] = useState<keyof Contact>("id");
   const [sortedContactIds, setSortedContactIds] =
     useState<string[]>(contactIds);
-  const [openFeatureUnavailable, setOpenFeatureUnavailable] = useState(false);
   const [openPrePassBanner, setOpenPrePassBanner] = useState(false);
 
   const handleClick = (event: any) => {
@@ -83,10 +83,10 @@ const CostellationList = ({
 
   const popupMenuHandler = (e: MouseEvent<HTMLSpanElement>) => {
     e.stopPropagation();
-    setOpenFeatureUnavailable(true);
+    addToast("This feature has not been implemented.", false, 3000);
   };
 
-  const prePasshandler = (e: MouseEvent<HTMLRuxIconElement>) => {
+  const prePasshandler = (e: MouseEvent<HTMLRuxButtonElement>) => {
     e.stopPropagation();
     setOpenPrePassBanner(true);
   };
@@ -98,21 +98,7 @@ const CostellationList = ({
         onRuxclosed={() => setOpenPrePassBanner(false)}
       >
         Pre-Pass for is about to begin.
-        <span onClick={popupMenuHandler}>Open Contact</span>
-        <RuxButton
-          iconOnly
-          borderless
-          icon="launch"
-          onClick={popupMenuHandler}
-        />
-      </RuxNotification>
-      <RuxNotification
-        small
-        closeAfter={3}
-        onRuxclosed={() => setOpenFeatureUnavailable(false)}
-        open={openFeatureUnavailable}
-      >
-        This feature has not been implemented.
+        <LinkButtonWithIcon onClick={popupMenuHandler} text={"Open Contact"} />
       </RuxNotification>
       <div className="table-wrapper">
         <RuxTable>
@@ -259,12 +245,9 @@ const CostellationList = ({
                   </RuxTableCell>
                   {contact.state === "ready" ? (
                     <RuxTableCell>
-                      {contact.satellite}
-                      <RuxIcon
-                        id="sat-icon"
-                        size="1rem"
-                        icon="launch"
+                      <LinkButtonWithIcon
                         onClick={prePasshandler}
+                        text={contact.satellite}
                       />
                     </RuxTableCell>
                   ) : (
@@ -313,4 +296,4 @@ const CostellationList = ({
   );
 };
 
-export default CostellationList;
+export default ConstellationList;

@@ -115,19 +115,19 @@
 .drawer__header {
   display: flex;
   justify-content: space-between;
-  padding-top: 1rem;
+  padding-top: var(--spacing-4);
   align-items: center;
+  padding-inline: var(--spacing-4);
 }
 
 .drawer__header rux-status {
   margin-right: 1rem;
 }
 
-.drawer__header rux-icon {
-  margin-left: -0.5rem;
-  cursor: pointer;
+.drawer__header > div {
+  display: flex;
+  align-items: center;
 }
-
 /* DRAWER FOOTER */
 
 .run-length-footer {

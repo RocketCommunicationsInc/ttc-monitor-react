@@ -8,3 +8,19 @@ export const getJulianDay = (date: Date) => {
     1000
   );
 };
+
+export const addToast = (
+  message: string,
+  hideClose: boolean | null,
+  closeAfter: number | null
+) => {
+  const toastStack = document.querySelector(
+    "rux-toast-stack"
+  ) as HTMLRuxToastStackElement;
+
+  toastStack.addToast({
+    message: message,
+    hideClose: hideClose,
+    closeAfter: closeAfter,
+  });
+};

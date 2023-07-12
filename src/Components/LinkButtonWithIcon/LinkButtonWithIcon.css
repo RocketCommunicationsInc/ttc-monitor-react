@@ -1,0 +1,13 @@
+rux-icon.launch-icon {
+  margin-inline: 1rem;
+  cursor: pointer;
+  margin-inline-start: var(--spacing-1);
+  display: flex;
+  align-items: center;
+}
+
+rux-button.link-button-with-icon::part(container) {
+  padding: var(--spacing-0);
+  display: flex;
+  align-items: center;
+}

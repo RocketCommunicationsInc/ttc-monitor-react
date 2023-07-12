@@ -6,6 +6,16 @@ type PropTypes = {
   data: Mnemonic;
 };
 
+const iconStyles = {
+  marginLeft: "var(--spacing-1)",
+  marginBottom: "var(--spacing-1)",
+};
+
+const linkStyles = {
+  display: "flex",
+  alignItems: "center",
+};
+
 const MnemonicPopUp = ({ triggerValue, data }: PropTypes) => {
   return (
     <RuxPopUp
@@ -21,16 +31,15 @@ const MnemonicPopUp = ({ triggerValue, data }: PropTypes) => {
         </div>
         <div>
           <span>Subsystem</span>
-          <span>
-            <a
-              href="https://ttc-investigate.astrouxds.com/?system=Attitude"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Altitude
-            </a>
-            <RuxIcon size="1rem" icon="launch" />
-          </span>
+          <a
+            href="https://ttc-investigate.astrouxds.com/?system=Attitude"
+            target="_blank"
+            rel="noreferrer"
+            style={linkStyles}
+          >
+            Altitude
+            <RuxIcon style={iconStyles} size="1rem" icon="launch" />
+          </a>
         </div>
         <div slot="footer">
           <RuxCheckbox>Add to Watcher</RuxCheckbox>
