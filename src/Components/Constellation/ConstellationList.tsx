@@ -84,7 +84,6 @@ const ConstellationList = ({
   const popupMenuHandler = (e: MouseEvent<HTMLSpanElement>) => {
     e.stopPropagation();
     addToast("This feature has not been implemented.", false, 3000);
-    // setOpenFeatureUnavailable(true);
   };
 
   const prePasshandler = (e: MouseEvent<HTMLRuxButtonElement>) => {
