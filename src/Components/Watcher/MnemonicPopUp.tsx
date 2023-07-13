@@ -6,14 +6,15 @@ type PropTypes = {
   data: Mnemonic;
 };
 
-const iconStyles = {
-  marginLeft: "var(--spacing-1)",
-  marginBottom: "var(--spacing-1)",
-};
-
-const linkStyles = {
-  display: "flex",
-  alignItems: "center",
+const styles = {
+  iconStyles: {
+    marginLeft: "var(--spacing-1)",
+    marginBottom: "var(--spacing-1)",
+  },
+  linkStyles: {
+    display: "flex",
+    alignItems: "center",
+  },
 };
 
 const MnemonicPopUp = ({ triggerValue, data }: PropTypes) => {
@@ -31,10 +32,10 @@ const MnemonicPopUp = ({ triggerValue, data }: PropTypes) => {
             href="https://ttc-investigate.astrouxds.com/?system=Attitude"
             target="_blank"
             rel="noreferrer"
-            style={linkStyles}
+            style={styles.linkStyles}
           >
             Altitude
-            <RuxIcon style={iconStyles} size="1rem" icon="launch" />
+            <RuxIcon style={styles.iconStyles} size="1rem" icon="launch" />
           </a>
         </div>
         <div slot="footer">
