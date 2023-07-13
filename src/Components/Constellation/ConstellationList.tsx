@@ -37,6 +37,9 @@ const ConstellationList = ({
     useState<string[]>(contactIds);
   const [openPrePassBanner, setOpenPrePassBanner] = useState(false);
   const [currentSat, setCurrentSat] = useState<string | null>(null);
+  const [currentContactId, setCurrentContactId] = useState<string | undefined>(
+    undefined
+  );
 
   const handleClick = (event: any) => {
     const target = event.currentTarget as HTMLElement;
@@ -89,10 +92,12 @@ const ConstellationList = ({
 
   const prePasshandler = (
     e: MouseEvent<HTMLRuxButtonElement>,
-    satellite: string | null
+    satellite: string | null,
+    contactId: string | undefined
   ) => {
     e.stopPropagation();
     setCurrentSat(satellite);
+    setCurrentContactId(contactId);
     setOpenPrePassBanner(true);
   };
 
@@ -106,7 +111,12 @@ const ConstellationList = ({
         }}
       >
         Pre-Pass {currentSat && `for ${currentSat}`} is about to begin.
-        <LinkButtonWithIcon onClick={popupMenuHandler} text={"Open Contact"} />
+        <LinkButtonWithIcon
+          onClick={() => {
+            toggleDrawer(currentContactId);
+          }}
+          text={"Open Contact"}
+        />
       </RuxNotification>
       <div className="table-wrapper">
         <RuxTable>
@@ -244,17 +254,16 @@ const ConstellationList = ({
             {sortedContactIds.map((contactId) => {
               const contact = contacts[contactId];
               return (
-                <RuxTableRow
-                  key={contactId}
-                  onClick={() => toggleDrawer(contactId)}
-                >
+                <RuxTableRow key={contactId}>
                   <RuxTableCell>
                     <RuxStatus status={contact.status} />
                   </RuxTableCell>
                   {contact.state === "ready" ? (
                     <RuxTableCell>
                       <LinkButtonWithIcon
-                        onClick={(e) => prePasshandler(e, contact.satellite)}
+                        onClick={(e) =>
+                          prePasshandler(e, contact.satellite, contactId)
+                        }
                         text={contact.satellite}
                       />
                     </RuxTableCell>
