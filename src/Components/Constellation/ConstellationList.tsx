@@ -35,7 +35,7 @@ const ConstellationList = ({
   const [sortProp, setSortProp] = useState<keyof Contact>("id");
   const [sortedContactIds, setSortedContactIds] =
     useState<string[]>(contactIds);
-  const [openPrePassBanner, setOpenPrePassBanner] = useState(false);
+  const [currentSat, setCurrentSat] = useState<string | null>(null);
 
   const handleClick = (event: any) => {
     const target = event.currentTarget as HTMLElement;
@@ -86,18 +86,23 @@ const ConstellationList = ({
     addToast("This feature has not been implemented.", false, 3000);
   };
 
-  const prePasshandler = (e: MouseEvent<HTMLRuxButtonElement>) => {
+  const prePasshandler = (
+    e: MouseEvent<HTMLRuxButtonElement>,
+    satellite: string | null
+  ) => {
     e.stopPropagation();
-    setOpenPrePassBanner(true);
+    setCurrentSat(satellite);
   };
 
   return (
     <>
       <RuxNotification
-        open={openPrePassBanner}
-        onRuxclosed={() => setOpenPrePassBanner(false)}
+        open={currentSat !== null}
+        onRuxclosed={() => {
+          setCurrentSat(null);
+        }}
       >
-        Pre-Pass for is about to begin.
+        Pre-Pass {currentSat && `for ${currentSat}`} is about to begin.
         <LinkButtonWithIcon onClick={popupMenuHandler} text={"Open Contact"} />
       </RuxNotification>
       <div className="table-wrapper">
@@ -246,7 +251,7 @@ const ConstellationList = ({
                   {contact.state === "ready" ? (
                     <RuxTableCell>
                       <LinkButtonWithIcon
-                        onClick={prePasshandler}
+                        onClick={(e) => prePasshandler(e, contact.satellite)}
                         text={contact.satellite}
                       />
                     </RuxTableCell>

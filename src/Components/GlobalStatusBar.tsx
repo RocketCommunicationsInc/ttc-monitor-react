@@ -69,6 +69,8 @@ const GlobalStatusBar = () => {
         appDomain="TT&C"
         appName="MONITOR"
         username="J. Smith"
+        app-state="Demo"
+        app-state-color="tag1"
       >
         <RuxPopUp
           className="app-icon-pop-up"
