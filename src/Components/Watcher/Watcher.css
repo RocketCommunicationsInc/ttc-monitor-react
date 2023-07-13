@@ -81,10 +81,16 @@
 
 rux-pop-up.mnemonic-pop-up span[slot="trigger"] {
   color: var(--color-text-interactive-default);
+  display: inline-block;
 }
 
 rux-pop-up.mnemonic-pop-up span[slot="trigger"]:hover {
   border-bottom: 1px solid var(--color-text-interactive-default);
+}
+
+rux-pop-up.mnemonic-pop-up rux-card::part(container) {
+  border-width: 0px;
+  box-shadow: none;
 }
 
 rux-pop-up.mnemonic-pop-up rux-card::part(body) {
@@ -100,4 +106,12 @@ rux-pop-up.mnemonic-pop-up rux-card div {
 
 rux-pop-up.mnemonic-pop-up rux-checkbox::part(label) {
   font-weight: var(--font-weights-bold);
+}
+
+.threshold-value {
+  margin-left: "auto";
+
+  &::part(container) {
+    box-shadow: none;
+  }
 }

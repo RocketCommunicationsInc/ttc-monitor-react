@@ -69,8 +69,8 @@ const Alerts = () => {
       >
         One or more filters selected.
         <RuxButton
+          className="alerts_clear-filter"
           onClick={handleClearFilter}
-          secondary
           borderless
           size="small"
         >

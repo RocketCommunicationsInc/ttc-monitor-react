@@ -9,7 +9,6 @@ import {
   RuxTableBody,
   RuxAccordion,
   RuxAccordionItem,
-  RuxNotification,
 } from "@astrouxds/react";
 import LineChart from "./LineChart";
 import WatcherListItem from "./WatcherListItem";
@@ -39,7 +38,6 @@ const updatedMnemoncicsData = mnemonicsData.map((data) => {
 
 const Watcher = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [openBanner, setOpenBanner] = useState(false);
 
   useEffect(() => {
     const watcherDiv = document.querySelector(".watcher");
@@ -72,14 +70,6 @@ const Watcher = () => {
         <div slot="header" style={styles.container}>
           Watcher
         </div>
-        <RuxNotification
-          small
-          closeAfter={3}
-          onRuxclosed={() => setOpenBanner(false)}
-          open={openBanner}
-        >
-          This feature has not been implemented.
-        </RuxNotification>
         <RuxAccordion>
           <RuxAccordionItem expanded>
             <span slot="label">IRON 4090</span>
@@ -115,7 +105,6 @@ const Watcher = () => {
                           rowData={dataObj}
                           chartDataSlope={chartDataSlope}
                           index={index}
-                          setOpenBanner={setOpenBanner}
                         />
                       );
                     }
