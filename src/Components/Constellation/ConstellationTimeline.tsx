@@ -9,7 +9,7 @@ import { useTTCGRMContacts } from "@astrouxds/mock-data";
 
 type PropTypes = {
   zoomLevel: number;
-  toggleDrawer: (id?: string) => void;
+  toggleDrawer: (id?: string, passPlan?: boolean) => void;
 };
 
 const ConstellationTimeline = ({ zoomLevel, toggleDrawer }: PropTypes) => {

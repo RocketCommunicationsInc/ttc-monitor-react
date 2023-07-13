@@ -21,7 +21,7 @@ import { addToast } from "../../utils/index";
 type PropTypes = {
   contacts: { [key: string]: Contact };
   contactIds: string[];
-  toggleDrawer: (id?: string) => void;
+  toggleDrawer: (id?: string, passPlan?: boolean) => void;
 };
 
 type SortDirection = "ASC" | "DESC";
@@ -261,9 +261,7 @@ const ConstellationList = ({
                   {contact.state === "ready" ? (
                     <RuxTableCell>
                       <LinkButtonWithIcon
-                        onClick={(e) =>
-                          prePasshandler(e, contact.satellite, contactId)
-                        }
+                        onClick={() => toggleDrawer(contactId)}
                         text={contact.satellite}
                       />
                     </RuxTableCell>
@@ -288,7 +286,9 @@ const ConstellationList = ({
                   <RuxTableCell id="state-t-cell">{contact.state}</RuxTableCell>
                   <RuxPopUp placement="bottom" closeOnSelect>
                     <RuxMenu>
-                      <RuxMenuItem onClick={popupMenuHandler}>
+                      <RuxMenuItem
+                        onClick={() => toggleDrawer(contactId, true)}
+                      >
                         View Pass Plan
                       </RuxMenuItem>
                       <RuxMenuItem onClick={popupMenuHandler}>
