@@ -35,7 +35,6 @@ const ConstellationList = ({
   const [sortProp, setSortProp] = useState<keyof Contact>("id");
   const [sortedContactIds, setSortedContactIds] =
     useState<string[]>(contactIds);
-  const [openPrePassBanner, setOpenPrePassBanner] = useState(false);
   const [currentSat, setCurrentSat] = useState<string | null>(null);
 
   const handleClick = (event: any) => {
@@ -93,15 +92,13 @@ const ConstellationList = ({
   ) => {
     e.stopPropagation();
     setCurrentSat(satellite);
-    setOpenPrePassBanner(true);
   };
 
   return (
     <>
       <RuxNotification
-        open={openPrePassBanner}
+        open={currentSat !== null}
         onRuxclosed={() => {
-          setOpenPrePassBanner(false);
           setCurrentSat(null);
         }}
       >
