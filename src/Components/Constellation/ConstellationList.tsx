@@ -12,7 +12,6 @@ import {
   RuxPopUp,
   RuxMenu,
   RuxMenuItem,
-  RuxNotification,
 } from "@astrouxds/react";
 import type { Contact } from "@astrouxds/mock-data";
 import LinkButtonWithIcon from "../LinkButtonWithIcon/LinkButtonWithIcon";
@@ -21,7 +20,7 @@ import { addToast } from "../../utils/index";
 type PropTypes = {
   contacts: { [key: string]: Contact };
   contactIds: string[];
-  toggleDrawer: (id?: string) => void;
+  toggleDrawer: (id?: string, passPlan?: boolean) => void;
 };
 
 type SortDirection = "ASC" | "DESC";
@@ -35,7 +34,6 @@ const ConstellationList = ({
   const [sortProp, setSortProp] = useState<keyof Contact>("id");
   const [sortedContactIds, setSortedContactIds] =
     useState<string[]>(contactIds);
-  const [currentSat, setCurrentSat] = useState<string | null>(null);
 
   const handleClick = (event: any) => {
     const target = event.currentTarget as HTMLElement;
@@ -86,25 +84,8 @@ const ConstellationList = ({
     addToast("This feature has not been implemented.", false, 3000);
   };
 
-  const prePasshandler = (
-    e: MouseEvent<HTMLRuxButtonElement>,
-    satellite: string | null
-  ) => {
-    e.stopPropagation();
-    setCurrentSat(satellite);
-  };
-
   return (
     <>
-      <RuxNotification
-        open={currentSat !== null}
-        onRuxclosed={() => {
-          setCurrentSat(null);
-        }}
-      >
-        Pre-Pass {currentSat && `for ${currentSat}`} is about to begin.
-        <LinkButtonWithIcon onClick={popupMenuHandler} text={"Open Contact"} />
-      </RuxNotification>
       <div className="table-wrapper">
         <RuxTable>
           <RuxTableHeader>
@@ -241,17 +222,14 @@ const ConstellationList = ({
             {sortedContactIds.map((contactId) => {
               const contact = contacts[contactId];
               return (
-                <RuxTableRow
-                  key={contactId}
-                  onClick={() => toggleDrawer(contactId)}
-                >
+                <RuxTableRow key={contactId}>
                   <RuxTableCell>
                     <RuxStatus status={contact.status} />
                   </RuxTableCell>
                   {contact.state === "ready" ? (
                     <RuxTableCell>
                       <LinkButtonWithIcon
-                        onClick={(e) => prePasshandler(e, contact.satellite)}
+                        onClick={() => toggleDrawer(contactId)}
                         text={contact.satellite}
                       />
                     </RuxTableCell>
@@ -276,7 +254,9 @@ const ConstellationList = ({
                   <RuxTableCell id="state-t-cell">{contact.state}</RuxTableCell>
                   <RuxPopUp placement="bottom" closeOnSelect>
                     <RuxMenu>
-                      <RuxMenuItem onClick={popupMenuHandler}>
+                      <RuxMenuItem
+                        onClick={() => toggleDrawer(contactId, true)}
+                      >
                         View Pass Plan
                       </RuxMenuItem>
                       <RuxMenuItem onClick={popupMenuHandler}>

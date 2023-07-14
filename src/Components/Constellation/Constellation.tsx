@@ -21,6 +21,7 @@ const Constellation = () => {
   const [zoomLevel, setZoomLevel] = useState(5);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [drawerContact, setDrawerContact] = useState<Contact | null>(null);
+  const [selectPassPlan, setSelectPassPlan] = useState<boolean>(false);
 
   const { dataById: contacts, dataIds: contactIds } = useTTCGRMContacts();
 
@@ -33,9 +34,11 @@ const Constellation = () => {
   };
 
   const toggleDrawer = useCallback(
-    (id?: string) => {
+    (id?: string, passPlan?: boolean) => {
       if (id) setDrawerContact(contacts[id]);
       setDrawerOpen((prevState) => !prevState);
+
+      passPlan ? setSelectPassPlan(true) : setSelectPassPlan(false);
     },
     [contacts]
   );
@@ -82,6 +85,7 @@ const Constellation = () => {
       </RuxContainer>
       <ContactDrawer
         open={drawerOpen}
+        selectPassPlan={selectPassPlan}
         toggle={toggleDrawer}
         contact={drawerContact}
       />

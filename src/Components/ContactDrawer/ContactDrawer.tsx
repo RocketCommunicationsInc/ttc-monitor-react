@@ -25,11 +25,17 @@ const settings = {
 
 type PropTypes = {
   open: boolean;
-  toggle: (id?: string) => void;
+  selectPassPlan: boolean;
+  toggle: (id?: string, passPlan?: boolean) => void;
   contact: Contact | null;
 };
 
-const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
+const ContactDrawer = ({
+  open,
+  selectPassPlan,
+  toggle,
+  contact,
+}: PropTypes) => {
   const [selectedTab, setSelectedTab] = useState("");
   const passPlanRef = useRef<HTMLRuxTabElement | null>(null);
   const contactDrawer = useRef<HTMLElement | null>(null);
@@ -135,8 +141,17 @@ const ContactDrawer = ({ open, toggle, contact }: PropTypes) => {
                 small
                 id="contact-drawer-tabs"
               >
-                <RuxTab id="contact-details-tab">Contact Details</RuxTab>
-                <RuxTab ref={passPlanRef} id="pass-plan-tab">
+                <RuxTab
+                  selected={selectPassPlan ? false : true}
+                  id="contact-details-tab"
+                >
+                  Contact Details
+                </RuxTab>
+                <RuxTab
+                  selected={selectPassPlan ? true : false}
+                  ref={passPlanRef}
+                  id="pass-plan-tab"
+                >
                   Pass Plan
                 </RuxTab>
               </RuxTabs>
