@@ -12,7 +12,7 @@ import {
   RuxPopUp,
   RuxMenu,
   RuxMenuItem,
-  RuxNotification,
+  // RuxNotification,
 } from "@astrouxds/react";
 import type { Contact } from "@astrouxds/mock-data";
 import LinkButtonWithIcon from "../LinkButtonWithIcon/LinkButtonWithIcon";
@@ -35,10 +35,10 @@ const ConstellationList = ({
   const [sortProp, setSortProp] = useState<keyof Contact>("id");
   const [sortedContactIds, setSortedContactIds] =
     useState<string[]>(contactIds);
-  const [currentSat, setCurrentSat] = useState<string | null>(null);
-  const [currentContactId, setCurrentContactId] = useState<string | undefined>(
-    undefined
-  );
+  // const [currentSat, setCurrentSat] = useState<string | null>(null);
+  // const [currentContactId, setCurrentContactId] = useState<string | undefined>(
+  //   undefined
+  // );
 
   const handleClick = (event: any) => {
     const target = event.currentTarget as HTMLElement;
@@ -89,19 +89,19 @@ const ConstellationList = ({
     addToast("This feature has not been implemented.", false, 3000);
   };
 
-  const prePasshandler = (
-    e: MouseEvent<HTMLRuxButtonElement>,
-    satellite: string | null,
-    contactId: string | undefined
-  ) => {
-    e.stopPropagation();
-    setCurrentSat(satellite);
-    setCurrentContactId(contactId);
-  };
+  // const prePasshandler = (
+  //   e: MouseEvent<HTMLRuxButtonElement>,
+  //   satellite: string | null,
+  //   contactId: string | undefined
+  // ) => {
+  //   e.stopPropagation();
+  //   setCurrentSat(satellite);
+  //   setCurrentContactId(contactId);
+  // };
 
   return (
     <>
-      <RuxNotification
+      {/* <RuxNotification
         open={currentSat !== null}
         onRuxclosed={() => {
           setCurrentSat(null);
@@ -114,7 +114,7 @@ const ConstellationList = ({
           }}
           text={"Open Contact"}
         />
-      </RuxNotification>
+      </RuxNotification> */}
       <div className="table-wrapper">
         <RuxTable>
           <RuxTableHeader>
