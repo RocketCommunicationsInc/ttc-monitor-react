@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   RuxContainer,
   RuxSelect,
   RuxOption,
   RuxButton,
-  RuxNotification,
 } from "@astrouxds/react";
 import AlertsList from "./AlertsList";
 import { useTTCGRMActions, useTTCGRMAlerts } from "@astrouxds/mock-data";
@@ -12,7 +11,6 @@ import type { Category, Status } from "@astrouxds/mock-data";
 import "./Alerts.css";
 
 const Alerts = () => {
-  const [openBanner, setOpenBanner] = useState(false);
   const [severitySelection, setSeveritySelection] = useState<Status | "all">(
     "all"
   );
@@ -26,16 +24,9 @@ const Alerts = () => {
   const anySelected = anyAlertsHaveProp("selected", true);
   const deleteSelectedAlerts = () => deleteAlertsWithProp("selected", true);
 
-  useEffect(() => {
-    setOpenBanner(false);
-    if (severitySelection !== "all" || categorySelection !== "all")
-      setOpenBanner(true);
-  }, [severitySelection, categorySelection]);
-
   const handleClearFilter = () => {
     setSeveritySelection("all");
     setCategorySelection("all");
-    setOpenBanner(false);
   };
 
   return (
@@ -72,7 +63,10 @@ const Alerts = () => {
           </RuxSelect>
         </div>
       </div>
-      <RuxNotification open={openBanner} small hide-close>
+      <div
+        className="filter-notification"
+        hidden={severitySelection === "all" && categorySelection === "all"}
+      >
         One or more filters selected.
         <RuxButton
           className="alerts_clear-filter"
@@ -83,7 +77,7 @@ const Alerts = () => {
           Clear filters
         </RuxButton>
         to display all alerts.
-      </RuxNotification>
+      </div>
       <AlertsList
         severitySelection={severitySelection}
         categorySelection={categorySelection}

@@ -23,7 +23,6 @@ type PropTypes = {
   contactIds: string[];
   toggleDrawer: (id?: string, passPlan?: boolean) => void;
 };
-// comment to get deploy working
 
 type SortDirection = "ASC" | "DESC";
 
@@ -36,7 +35,6 @@ const ConstellationList = ({
   const [sortProp, setSortProp] = useState<keyof Contact>("id");
   const [sortedContactIds, setSortedContactIds] =
     useState<string[]>(contactIds);
-  const [openPrePassBanner, setOpenPrePassBanner] = useState(false);
   const [currentSat, setCurrentSat] = useState<string | null>(null);
   const [currentContactId, setCurrentContactId] = useState<string | undefined>(
     undefined
@@ -99,15 +97,13 @@ const ConstellationList = ({
     e.stopPropagation();
     setCurrentSat(satellite);
     setCurrentContactId(contactId);
-    setOpenPrePassBanner(true);
   };
 
   return (
     <>
       <RuxNotification
-        open={openPrePassBanner}
+        open={currentSat !== null}
         onRuxclosed={() => {
-          setOpenPrePassBanner(false);
           setCurrentSat(null);
         }}
       >
