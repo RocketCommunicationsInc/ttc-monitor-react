@@ -73,6 +73,20 @@ rux-table-header {
   z-index: 10;
 }
 
+rux-table-header-cell[data-sortprop="status"] {
+  text-align: center;
+}
+
+
 rux-status::part(status) {
   margin-inline: auto;
+}
+
+.text-align-right {
+  text-align: right;
+}
+
+rux-table-cell.text-align-right {
+  text-align: right;
+  padding-right: calc(32px + 0.5rem);
 }

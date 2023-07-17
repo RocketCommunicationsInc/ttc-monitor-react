@@ -10,7 +10,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  z-index: 200;
+  z-index: 99;
   opacity: 0;
 
   transition: opacity 0.3s;
@@ -52,7 +52,7 @@
   bottom: 0;
   width: 100%;
   max-width: 500px;
-  z-index: 9999;
+  z-index: 99;
   overflow: auto;
 
   transition: transform 0.3s;
@@ -115,7 +115,7 @@
 .drawer__header {
   display: flex;
   justify-content: space-between;
-  padding-top: var(--spacing-4);
+  padding-block: var(--spacing-4);
   align-items: center;
   padding-inline: var(--spacing-4);
 }

@@ -63,7 +63,7 @@
 
 .watcher rux-input::part(form-field) {
   position: relative;
-  left: 30px;
+  left: 20px;
   width: 110px;
   box-shadow: rgba(0, 0, 0, 0.45) 0px 0.25rem 0.5rem;
 }
@@ -114,4 +114,12 @@ rux-pop-up.mnemonic-pop-up rux-checkbox::part(label) {
   &::part(container) {
     box-shadow: none;
   }
+}
+
+.watcher rux-table-cell.text-align-right {
+    padding-right: 0.5rem;
+}
+
+.watcher rux-table-cell.text-align-right rux-button::part(container) {
+    padding-right: 0px;
 }
