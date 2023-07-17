@@ -36,7 +36,7 @@ const ContactDrawer = ({
   toggle,
   contact,
 }: PropTypes) => {
-  const [selectedTab, setSelectedTab] = useState("");
+  const [selectedTab, setSelectedTab] = useState(selectPassPlan ? "pass-plan-tab" : "contact-details-tab");
   const passPlanRef = useRef<HTMLRuxTabElement | null>(null);
   const contactDrawer = useRef<HTMLElement | null>(null);
   const keydownHandler = useCallback(
@@ -97,13 +97,14 @@ const ContactDrawer = ({
   useEffect(() => {
     if (open) {
       openDrawer();
+      setSelectedTab(selectPassPlan ? "pass-plan-tab" : "contact-details-tab")
       document.addEventListener("keydown", keydownHandler);
     } else {
       closeDrawer();
     }
 
     return () => document.removeEventListener("keydown", keydownHandler);
-  }, [open, keydownHandler]);
+  }, [open, keydownHandler, selectPassPlan]);
 
   return (
     <section className={"drawer"} id="contact-drawer" ref={contactDrawer}>
@@ -142,13 +143,13 @@ const ContactDrawer = ({
                 id="contact-drawer-tabs"
               >
                 <RuxTab
-                  selected={selectPassPlan ? false : true}
+                  selected={selectedTab === "contact-details-tab"}
                   id="contact-details-tab"
                 >
                   Contact Details
                 </RuxTab>
                 <RuxTab
-                  selected={selectPassPlan ? true : false}
+                  selected={selectedTab === "pass-plan-tab"}
                   ref={passPlanRef}
                   id="pass-plan-tab"
                 >
