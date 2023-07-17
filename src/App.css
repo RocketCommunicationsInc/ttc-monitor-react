@@ -76,3 +76,12 @@ rux-table-header {
 rux-status::part(status) {
   margin-inline: auto;
 }
+
+.text-align-right {
+  text-align: right;
+}
+
+rux-table-cell.text-align-right {
+  text-align: right;
+  padding-right: calc(32px + 0.5rem);
+}
