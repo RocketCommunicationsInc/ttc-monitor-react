@@ -106,7 +106,7 @@
   margin-left: 1rem;
 }
 
-rux-accordion rux-status {
+rux-accordion div[slot="label"] rux-status {
   padding-inline: 1rem;
 }
 

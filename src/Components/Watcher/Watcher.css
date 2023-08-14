@@ -20,20 +20,8 @@
   height: calc(100% - 58px);
 }
 
-.watcher rux-table-header-cell.number {
-  text-align: right;
-}
-
-.watcher rux-table-header-cell:nth-of-type(2) {
-  text-align: left;
-}
-
 .watcher rux-table-body {
   height: 100px;
-}
-
-.watcher rux-table-cell.number {
-  text-align: right;
 }
 
 .watcher rux-table-cell:last-of-type {
