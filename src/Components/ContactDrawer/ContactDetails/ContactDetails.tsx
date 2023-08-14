@@ -10,7 +10,7 @@ type PropTypes = {
 const ContactDetails = ({ contact }: PropTypes) => {
   return (
     <div className="contact-details-wrapper">
-      <div className="contact-details-grid first">
+      <div className="contact-details-grid">
         <RuxIcon
           icon="schedule"
           size="1.4rem"
