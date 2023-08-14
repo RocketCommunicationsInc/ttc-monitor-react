@@ -20,20 +20,8 @@
   height: calc(100% - 58px);
 }
 
-.watcher rux-table-header-cell.number {
-  text-align: right;
-}
-
-.watcher rux-table-header-cell:nth-of-type(2) {
-  text-align: left;
-}
-
 .watcher rux-table-body {
   height: 100px;
-}
-
-.watcher rux-table-cell.number {
-  text-align: right;
 }
 
 .watcher rux-table-cell:last-of-type {
@@ -95,10 +83,20 @@ rux-tooltip:hover {
   }
 }
 
+.watcher rux-table-header-cell:nth-of-type(3) {
+  text-align: left;
+  padding-left: var(--spacing-4);
+}
+
 .watcher rux-table-cell.text-align-right {
-    padding-right: 0.5rem;
+  padding-right: 0.5rem;
 }
 
 .watcher rux-table-cell.text-align-right rux-button::part(container) {
-    padding-right: 0px;
+  padding-right: 0px;
+}
+
+.watcher rux-table-cell:nth-of-type(3) {
+  padding-left: var(--spacing-4);
+  text-align: left;
 }

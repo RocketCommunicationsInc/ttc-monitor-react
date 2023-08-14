@@ -77,7 +77,6 @@ rux-table-header-cell[data-sortprop="status"] {
   text-align: center;
 }
 
-
 rux-status::part(status) {
   margin-inline: auto;
 }

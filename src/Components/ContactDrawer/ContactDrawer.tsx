@@ -36,7 +36,9 @@ const ContactDrawer = ({
   toggle,
   contact,
 }: PropTypes) => {
-  const [selectedTab, setSelectedTab] = useState(selectPassPlan ? "pass-plan-tab" : "contact-details-tab");
+  const [selectedTab, setSelectedTab] = useState(
+    selectPassPlan ? "pass-plan-tab" : "contact-details-tab"
+  );
   const passPlanRef = useRef<HTMLRuxTabElement | null>(null);
   const contactDrawer = useRef<HTMLElement | null>(null);
   const keydownHandler = useCallback(
@@ -97,7 +99,7 @@ const ContactDrawer = ({
   useEffect(() => {
     if (open) {
       openDrawer();
-      setSelectedTab(selectPassPlan ? "pass-plan-tab" : "contact-details-tab")
+      setSelectedTab(selectPassPlan ? "pass-plan-tab" : "contact-details-tab");
       document.addEventListener("keydown", keydownHandler);
     } else {
       closeDrawer();
@@ -131,9 +133,8 @@ const ContactDrawer = ({
               aria-label="Close Drawer"
               onClick={() => toggle()}
               icon="keyboard-arrow-right"
-            >
-              Close
-            </RuxButton>
+              iconOnly
+            />
           </div>
           <div className="drawer__content">
             <div className="tabs-wrapper">
