@@ -18,18 +18,18 @@ type PropTypes = {
   index: number;
 };
 
-
 const WatcherListItem = ({ rowData, chartDataSlope, index }: PropTypes) => {
-  const tooltipMessage = `${rowData.subsystem}/ ${rowData.measurement} - ${rowData.mnemonicId} `
+  const tooltipMessage = `${rowData.subsystem}/ ${rowData.measurement} - ${rowData.mnemonicId} `;
 
-  
   return (
     <RuxTableRow key={rowData.mnemonicId} data-index={index}>
       <RuxTableCell>
         <RuxStatus status={rowData.status as Status} />
       </RuxTableCell>
       <RuxTableCell>
-        <RuxTooltip message={tooltipMessage} placement="top-end" delay={300}>{rowData.mnemonicId}</RuxTooltip>
+        <RuxTooltip message={tooltipMessage} placement="top-end" delay={300}>
+          {rowData.mnemonicId}
+        </RuxTooltip>
       </RuxTableCell>
       <RuxTableCell> {rowData.unit}</RuxTableCell>
       <RuxTableCell className="text-align-right">

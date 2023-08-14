@@ -85,7 +85,9 @@ const Watcher = () => {
                     <RuxTableHeaderCell className="text-align-right">
                       Threshold
                     </RuxTableHeaderCell>
-                    <RuxTableHeaderCell className="text-align-right">Actual</RuxTableHeaderCell>
+                    <RuxTableHeaderCell className="text-align-right">
+                      Actual
+                    </RuxTableHeaderCell>
                     <RuxTableHeaderCell>
                       {/* placeholder for actions menu column */}
                     </RuxTableHeaderCell>
