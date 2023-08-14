@@ -27,7 +27,7 @@ const WatcherListItem = ({ rowData, chartDataSlope, index }: PropTypes) => {
       <RuxTableCell>
         <MnemonicPopUp triggerValue={rowData.mnemonicId} data={rowData} />
       </RuxTableCell>
-      <RuxTableCell className="text-align-left"> {rowData.unit}</RuxTableCell>
+      <RuxTableCell> {rowData.unit}</RuxTableCell>
       <RuxTableCell className="text-align-right">
         <ThresholdInput savedValue={String(rowData.thresholdMax)} />
       </RuxTableCell>
@@ -41,7 +41,7 @@ const WatcherListItem = ({ rowData, chartDataSlope, index }: PropTypes) => {
           )}
         </>
       </RuxTableCell>
-      <RuxTableCell>
+      <RuxTableCell className="text-align-right">
         <RuxPopUp placement="left" closeOnSelect>
           <RuxIcon slot="trigger" icon="more-horiz" size="1.5rem" />
           <RuxMenu

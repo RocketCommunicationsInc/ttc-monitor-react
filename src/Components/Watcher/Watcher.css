@@ -129,7 +129,7 @@ rux-pop-up.mnemonic-pop-up rux-checkbox::part(label) {
   padding-right: 0px;
 }
 
-.watcher rux-table-cell.text-align-left {
-  text-align: left;
+.watcher rux-table-cell:nth-of-type(3) {
   padding-left: var(--spacing-4);
+  text-align: left;
 }
