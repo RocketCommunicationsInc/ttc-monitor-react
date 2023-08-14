@@ -12,8 +12,8 @@
   color: var(--color-text-primary);
   display: grid;
   gap: var(--spacing-2);
-  grid-template-columns: calc(30% - (var(--spacing-2) / 2)) 1fr 1fr;
-  grid-template-rows: calc(55% - (var(--spacing-2) / 2)) calc(45% - (var(--spacing-2) / 2));
+  grid-template-columns: calc(30% - 4px) 1fr 1fr;
+  grid-template-rows: calc(55% - 4px) calc(45% - 4px);
   grid-template-areas:
     "alerts constellation constellation"
     "alerts watcher watcher";
