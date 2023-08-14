@@ -1,4 +1,4 @@
-import { RuxCheckbox, RuxIcon, RuxPopUp, RuxCard } from "@astrouxds/react";
+import { RuxIcon, RuxPopUp, RuxCard } from "@astrouxds/react";
 import type { Mnemonic } from "@astrouxds/mock-data";
 
 type PropTypes = {
@@ -41,9 +41,6 @@ const MnemonicPopUp = ({ triggerValue, data }: PropTypes) => {
             Altitude
             <RuxIcon style={styles.iconStyles} size="1rem" icon="launch" />
           </a>
-        </div>
-        <div slot="footer">
-          <RuxCheckbox>Add to Watcher</RuxCheckbox>
         </div>
       </RuxCard>
       <span slot="trigger">{triggerValue}</span>
