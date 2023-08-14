@@ -116,7 +116,11 @@ const ConstellationList = ({
                   className={sortProp === "satellite" ? "visible" : "hidden"}
                 />
               </RuxTableHeaderCell>
-              <RuxTableHeaderCell data-sortprop="rev" onClick={handleClick} className="text-align-right">
+              <RuxTableHeaderCell
+                data-sortprop="rev"
+                onClick={handleClick}
+                className="text-align-right"
+              >
                 Next Pass
                 <RuxIcon
                   icon={
@@ -176,7 +180,11 @@ const ConstellationList = ({
                   className={sortProp === "ground" ? "visible" : "hidden"}
                 />
               </RuxTableHeaderCell>
-              <RuxTableHeaderCell data-sortprop="azimuth" onClick={handleClick} className="text-align-right">
+              <RuxTableHeaderCell
+                data-sortprop="azimuth"
+                onClick={handleClick}
+                className="text-align-right"
+              >
                 Azimuth
                 <RuxIcon
                   icon={
@@ -237,11 +245,13 @@ const ConstellationList = ({
                   ) : (
                     <RuxTableCell>{contact.satellite}</RuxTableCell>
                   )}
-                  <RuxTableCell className="text-align-right">{contact.rev}</RuxTableCell>
-                  <RuxTableCell>
+                  <RuxTableCell className="text-align-right">
+                    {contact.rev}
+                  </RuxTableCell>
+                  <RuxTableCell className="text-align-right">
                     {new Date(contact.aos).toTimeString().slice(0, 8)}
                   </RuxTableCell>
-                  <RuxTableCell>
+                  <RuxTableCell className="text-align-right">
                     {new Date(contact.los).toTimeString().slice(0, 8)}
                   </RuxTableCell>
                   <RuxTableCell>
@@ -251,7 +261,9 @@ const ConstellationList = ({
                   <RuxTableCell className="text-align-right degree">
                     {contact.azimuth.toString().slice(0, 6)}&deg;
                   </RuxTableCell>
-                  <RuxTableCell className="text-align-right degree">{contact.elevation.toString().slice(0, 6)}&deg;</RuxTableCell>
+                  <RuxTableCell className="text-align-right degree">
+                    {contact.elevation.toString().slice(0, 6)}&deg;
+                  </RuxTableCell>
                   <RuxTableCell id="state-t-cell">{contact.state}</RuxTableCell>
                   <RuxPopUp placement="bottom" closeOnSelect>
                     <RuxMenu>

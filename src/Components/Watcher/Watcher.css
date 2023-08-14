@@ -116,10 +116,20 @@ rux-pop-up.mnemonic-pop-up rux-checkbox::part(label) {
   }
 }
 
+.watcher rux-table-header-cell:nth-of-type(3) {
+  text-align: left;
+  padding-left: var(--spacing-4);
+}
+
 .watcher rux-table-cell.text-align-right {
-    padding-right: 0.5rem;
+  padding-right: 0.5rem;
 }
 
 .watcher rux-table-cell.text-align-right rux-button::part(container) {
-    padding-right: 0px;
+  padding-right: 0px;
+}
+
+.watcher rux-table-cell.text-align-left {
+  text-align: left;
+  padding-left: var(--spacing-4);
 }
