@@ -132,7 +132,11 @@ const ConstellationList = ({
                   className={sortProp === "rev" ? "visible" : "hidden"}
                 />
               </RuxTableHeaderCell>
-              <RuxTableHeaderCell data-sortprop="aos" onClick={handleClick}>
+              <RuxTableHeaderCell
+                className="text-align-right"
+                data-sortprop="aos"
+                onClick={handleClick}
+              >
                 AOS
                 <RuxIcon
                   icon={
@@ -144,7 +148,11 @@ const ConstellationList = ({
                   className={sortProp === "aos" ? "visible" : "hidden"}
                 />
               </RuxTableHeaderCell>
-              <RuxTableHeaderCell data-sortprop="los" onClick={handleClick}>
+              <RuxTableHeaderCell
+                className="text-align-right"
+                data-sortprop="los"
+                onClick={handleClick}
+              >
                 LOS
                 <RuxIcon
                   icon={
