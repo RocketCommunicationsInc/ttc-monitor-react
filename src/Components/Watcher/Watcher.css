@@ -20,7 +20,7 @@
   height: calc(100% - 58px);
 }
 
-.watcher rux-table-header-cell {
+.watcher rux-table-header-cell.number {
   text-align: right;
 }
 
@@ -32,7 +32,7 @@
   height: 100px;
 }
 
-.watcher rux-table-cell {
+.watcher rux-table-cell.number {
   text-align: right;
 }
 
@@ -77,35 +77,14 @@
   justify-content: center;
 }
 
-/* MNEMONIC POP-UP STYLES */
-
-rux-pop-up.mnemonic-pop-up span[slot="trigger"] {
+rux-tooltip {
   color: var(--color-text-interactive-default);
   display: inline-block;
+  border-bottom: 1px solid transparent;
 }
 
-rux-pop-up.mnemonic-pop-up span[slot="trigger"]:hover {
+rux-tooltip:hover {
   border-bottom: 1px solid var(--color-text-interactive-default);
-}
-
-rux-pop-up.mnemonic-pop-up rux-card::part(container) {
-  border-width: 0px;
-  box-shadow: none;
-}
-
-rux-pop-up.mnemonic-pop-up rux-card::part(body) {
-  display: flex;
-  flex-direction: column;
-}
-
-rux-pop-up.mnemonic-pop-up rux-card div {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--spacing-8);
-}
-
-rux-pop-up.mnemonic-pop-up rux-checkbox::part(label) {
-  font-weight: var(--font-weights-bold);
 }
 
 .threshold-value {
