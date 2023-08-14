@@ -43,7 +43,7 @@ const WatcherListItem = ({ rowData, chartDataSlope, index }: PropTypes) => {
       </RuxTableCell>
       <RuxTableCell>
         <RuxPopUp placement="left" closeOnSelect>
-          <RuxIcon slot="trigger" icon="more-horiz" size="small" />
+          <RuxIcon slot="trigger" icon="more-horiz" size="1.5rem" />
           <RuxMenu
             onRuxmenuselected={() =>
               addToast("This feature has not been implemented", false, 3000)

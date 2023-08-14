@@ -23,7 +23,7 @@ const LineChart = ({ data, chartData }: PropTypes) => {
   var options = {
     chart: {
       stacked: false,
-      background: "var(--color-background-base-header)",
+      background: "var(--color-background-base-default)",
       toolbar: {
         show: false,
       },
