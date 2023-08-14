@@ -1,8 +1,8 @@
 /* DRAWER LAYOUT */
-
 .drawer {
   display: none;
 }
+
 .drawer__overlay {
   position: fixed;
   top: 0;
@@ -23,24 +23,11 @@
 
 .drawer rux-container div[slot="header"] {
   display: flex;
-  gap: 1rem;
+  gap: var(--spacing-4);
 }
 
 .drawer rux-container div[slot="header"] rux-button {
   margin-left: auto;
-}
-
-.drawer__close {
-  /* Optional */
-  margin: 0;
-  padding: 0;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  width: 15px;
-  height: 15px;
-  flex-shrink: 0;
-  margin-left: 1rem;
 }
 
 .drawer__wrapper {
@@ -57,10 +44,7 @@
   display: flex;
   flex-direction: column;
   -webkit-transform: translate3d(103%, 0, 0);
-  transform: translate3d(103%, 0, 0); /* extra 3% because of box-shadow */
-  -webkit-overflow-scrolling: touch; /* enables momentum scrolling in iOS overflow elements */
-  /* Optional */
-  box-shadow: 0 2px 6px #000;
+  transform: translate3d(103%, 0, 0);
 }
 
 /* DRAWER CONTENT  */
@@ -94,7 +78,7 @@
 }
 
 .drawer.is-visible .drawer__overlay {
-  opacity: 0.5;
+  opacity: var(--opacity-50);
 }
 
 .tabs-wrapper {
@@ -112,14 +96,14 @@
 
 .drawer__header rux-status {
   margin-right: var(--spacing-4);
-    margin-left: var(--spacing-3);
-
+  margin-left: var(--spacing-3);
 }
 
 .drawer__header > div {
   display: flex;
   align-items: center;
 }
+
 /* DRAWER FOOTER */
 
 .run-length-footer {
@@ -129,6 +113,6 @@
   height: 4.5rem;
   width: 93%;
   background-color: var(--color-background-base-header);
-  font-weight: bold;
-  padding-right: 2rem;
+  font-weight: var(--font-weights-bold);
+  padding-right: var(--spacing-8);
 }

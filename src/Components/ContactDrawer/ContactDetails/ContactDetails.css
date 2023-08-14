@@ -5,7 +5,7 @@
 }
 
 .contact-details-grid {
-  margin-top: 2rem;
+  margin-top: var(--spacing-8);
   display: grid;
   grid-template-columns: 1fr 9fr 4fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
