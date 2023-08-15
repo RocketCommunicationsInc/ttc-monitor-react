@@ -48,7 +48,7 @@ const GlobalStatusBar = () => {
       setNotifications1(notificationsArr[randomNumber]);
       setNotifications2(notificationsArr[randomNumber2]);
       setNotifications3(notificationsArr[randomNumber3]);
-    }, 3000);
+    }, 12000);
     return () => clearInterval(interval);
   });
 
