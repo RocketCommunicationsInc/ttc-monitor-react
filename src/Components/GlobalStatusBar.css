@@ -6,6 +6,10 @@
   margin-inline: var(--spacing-3);
 }
 
+.status-indicators rux-monitoring-icon:hover {
+  background-color: var(--color-background-surface-hover);
+}
+
 .app-icon-pop-up {
   height: calc(var(--spacing-14, 3.5rem) + var(--spacing-050, 0.125rem));
 }
@@ -22,4 +26,8 @@ rux-menu-item[value="themeToggle"] span {
   display: flex;
   gap: var(--spacing-2);
   align-items: center;
+}
+
+rux-global-status-bar rux-icon {
+  margin-left: var(--spacing-2);
 }
