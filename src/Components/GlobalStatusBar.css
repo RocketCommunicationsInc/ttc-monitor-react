@@ -36,6 +36,6 @@ rux-menu-item[value="themeToggle"] span {
   align-items: center;
 }
 
-rux-global-status-bar rux-icon {
-  margin-left: var(--spacing-2);
+rux-global-status-bar {
+  padding-right: var(--spacing-4);
 }
