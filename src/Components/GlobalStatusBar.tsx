@@ -14,22 +14,15 @@ import { addToast } from "../utils";
 import "./GlobalStatusBar.css";
 
 const GlobalStatusBar = () => {
-  const [status1, setStatus1] = useState<Status>("off");
-  const [status2, setStatus2] = useState<Status>("standby");
+  const [status1, setStatus1] = useState<Status>("normal");
+  const [status2, setStatus2] = useState<Status>("off");
   const [status3, setStatus3] = useState<Status>("normal");
   const [notifications1, setNotifications1] = useState(0);
   const [notifications2, setNotifications2] = useState(2);
   const [notifications3, setNotifications3] = useState(4);
   const [lightTheme, setLightTheme] = useState(false);
 
-  const statusValuesArr = [
-    "off",
-    "caution",
-    "critical",
-    "normal",
-    "serious",
-    "standby",
-  ];
+  const statusValuesArr = ["caution", "normal", "serious", "off"];
 
   const notificationsArr = [12, 14, 23, 42, 6, 37, 25, 38, 9];
 
