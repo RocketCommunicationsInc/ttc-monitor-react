@@ -6,6 +6,18 @@
   margin-inline: var(--spacing-3);
 }
 
+.status-indicators rux-monitoring-icon:hover {
+  background-color: var(--color-background-surface-hover);
+}
+
+.status-indicators rux-monitoring-icon::part(monitoring-label) {
+  color: var(--color-text-interactive-default)
+}
+
+.status-indicators rux-monitoring-icon::part(monitoring-label):hover {
+  color: var(--color-text-interactive-hover)
+}
+
 .app-icon-pop-up {
   height: calc(var(--spacing-14, 3.5rem) + var(--spacing-050, 0.125rem));
 }
@@ -22,4 +34,12 @@ rux-menu-item[value="themeToggle"] span {
   display: flex;
   gap: var(--spacing-2);
   align-items: center;
+}
+
+rux-global-status-bar {
+  padding-right: var(--spacing-3);
+}
+
+.app-switcher-icon:focus {
+  outline-offset: -1px;
 }
