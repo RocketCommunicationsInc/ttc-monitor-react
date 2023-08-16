@@ -37,9 +37,9 @@ rux-menu-item[value="themeToggle"] span {
 }
 
 rux-global-status-bar {
-  padding-right: 14px;
+  padding-right: var(--spacing-3);
 }
 
-.app-switcher-icon {
- padding-left: 2px;
+.app-switcher-icon:focus {
+  outline-offset: -1px;
 }
