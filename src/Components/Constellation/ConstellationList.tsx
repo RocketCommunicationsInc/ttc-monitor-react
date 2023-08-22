@@ -61,6 +61,23 @@ const ConstellationList = ({
   ) => {
     const newSortedContactIds = [...sortedContactIds].sort(
       (a: string, b: string) => {
+        if (property === "status") {
+          const statusOrder = [
+            "off",
+            "standby",
+            "normal",
+            "caution",
+            "serious",
+            "critical",
+          ];
+          const statusAsc = statusOrder.indexOf(contacts[a].status);
+          const statusDesc = statusOrder.indexOf(contacts[b].status);
+          if (sortDirection !== "ASC") {
+            return statusAsc - statusDesc;
+          } else {
+            return statusDesc - statusAsc;
+          }
+        }
         const firstContact = contacts[a];
         const secondContact = contacts[b];
         const firstContactValue = firstContact[property as keyof Contact];
