@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@astrouxds/mock-data": "^0.5.1",
-    "@astrouxds/react": "^7.14.0",
-    "@astrouxds/tokens": "^1.7.0",
+    "@astrouxds/mock-data": "^0.6.4",
+    "@astrouxds/react": "^7.16.0",
+    "@astrouxds/tokens": "^1.11.0",
     "@faker-js/faker": "^8.0.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
