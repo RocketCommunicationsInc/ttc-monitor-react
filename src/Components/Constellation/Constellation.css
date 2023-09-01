@@ -53,11 +53,6 @@
 
 /* TIMELINE STYLES */
 
-/* .constellation rux-time-region::part(container) {
-  margin: 3px;
-  border: 1px solid var(--color-border-interactive-muted);
-} */
-
 .constellation rux-timeline {
   height: 100%;
   overflow: auto;
