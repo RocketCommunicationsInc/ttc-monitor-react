@@ -32,12 +32,13 @@ const ConstellationList = ({
 }: PropTypes) => {
   const [sortDirection, setSortDirection] = useState<SortDirection>("ASC");
   const [sortProp, setSortProp] = useState<keyof Contact>("id");
-  const [sortedContactIds, setSortedContactIds] =
-    useState<string[]>(contactIds);
+  const [sortedContactIds, setSortedContactIds] = useState<string[]>(contactIds);
+  const [activeHeader, setActiveHeader] = useState<keyof Contact>()
 
   const handleClick = (event: any) => {
     const target = event.currentTarget as HTMLElement;
     const sortProperty = target.dataset.sortprop as keyof Contact;
+    setActiveHeader(sortProperty)
     if (sortProperty === sortProp) {
       // clicked same currently sorted column
       if (sortDirection === "ASC") {
@@ -110,7 +111,7 @@ const ConstellationList = ({
               <RuxTableHeaderCell data-sortprop="status" onClick={handleClick}>
                 <RuxIcon
                   icon={
-                    sortDirection === "ASC"
+                    (sortDirection === 'ASC' || activeHeader !== 'status')
                       ? "arrow-drop-down"
                       : "arrow-drop-up"
                   }
@@ -125,7 +126,7 @@ const ConstellationList = ({
                 Satellite
                 <RuxIcon
                   icon={
-                    sortDirection === "ASC"
+                    (sortDirection === 'ASC' || activeHeader !== 'satellite')
                       ? "arrow-drop-down"
                       : "arrow-drop-up"
                   }
@@ -141,7 +142,7 @@ const ConstellationList = ({
                 Next Pass
                 <RuxIcon
                   icon={
-                    sortDirection === "ASC"
+                    (sortDirection === 'ASC' || activeHeader !== 'rev')
                       ? "arrow-drop-down"
                       : "arrow-drop-up"
                   }
@@ -157,7 +158,7 @@ const ConstellationList = ({
                 AOS
                 <RuxIcon
                   icon={
-                    sortDirection === "ASC"
+                    (sortDirection === 'ASC' || activeHeader !== 'aos')
                       ? "arrow-drop-down"
                       : "arrow-drop-up"
                   }
@@ -173,7 +174,7 @@ const ConstellationList = ({
                 LOS
                 <RuxIcon
                   icon={
-                    sortDirection === "ASC"
+                    (sortDirection === 'ASC' || activeHeader !== 'los')
                       ? "arrow-drop-down"
                       : "arrow-drop-up"
                   }
@@ -184,7 +185,7 @@ const ConstellationList = ({
               <RuxTableHeaderCell data-sortprop="status" onClick={handleClick}>
                 <RuxIcon
                   icon={
-                    sortDirection === "ASC"
+                    (sortDirection === 'ASC' || activeHeader !== 'status')
                       ? "arrow-drop-down"
                       : "arrow-drop-up"
                   }
@@ -197,7 +198,7 @@ const ConstellationList = ({
                 Ground Station
                 <RuxIcon
                   icon={
-                    sortDirection === "ASC"
+                    (sortDirection === 'ASC' || activeHeader !== 'ground')
                       ? "arrow-drop-down"
                       : "arrow-drop-up"
                   }
@@ -213,7 +214,7 @@ const ConstellationList = ({
                 Azimuth
                 <RuxIcon
                   icon={
-                    sortDirection === "ASC"
+                    (sortDirection === 'ASC' || activeHeader !== 'azimuth')
                       ? "arrow-drop-down"
                       : "arrow-drop-up"
                   }
@@ -229,7 +230,7 @@ const ConstellationList = ({
                 Elevation
                 <RuxIcon
                   icon={
-                    sortDirection === "ASC"
+                    (sortDirection === 'ASC' || activeHeader !== 'elevation')
                       ? "arrow-drop-down"
                       : "arrow-drop-up"
                   }
@@ -241,7 +242,7 @@ const ConstellationList = ({
                 State
                 <RuxIcon
                   icon={
-                    sortDirection === "ASC"
+                    (sortDirection === 'ASC' || activeHeader !== 'state')
                       ? "arrow-drop-down"
                       : "arrow-drop-up"
                   }
