@@ -34,10 +34,12 @@ const ConstellationList = ({
   const [sortProp, setSortProp] = useState<keyof Contact>("id");
   const [sortedContactIds, setSortedContactIds] =
     useState<string[]>(contactIds);
+  const [activeHeader, setActiveHeader] = useState<keyof Contact>();
 
   const handleClick = (event: any) => {
     const target = event.currentTarget as HTMLElement;
     const sortProperty = target.dataset.sortprop as keyof Contact;
+    setActiveHeader(sortProperty);
     if (sortProperty === sortProp) {
       // clicked same currently sorted column
       if (sortDirection === "ASC") {
@@ -95,7 +97,6 @@ const ConstellationList = ({
     );
     setSortedContactIds(newSortedContactIds);
   };
-
   const popupMenuHandler = (e: MouseEvent<HTMLSpanElement>) => {
     e.stopPropagation();
     addToast("This feature has not been implemented.", false, 3000);
@@ -110,7 +111,7 @@ const ConstellationList = ({
               <RuxTableHeaderCell data-sortprop="status" onClick={handleClick}>
                 <RuxIcon
                   icon={
-                    sortDirection === "ASC"
+                    sortDirection === "ASC" || activeHeader !== "status"
                       ? "arrow-drop-down"
                       : "arrow-drop-up"
                   }
@@ -122,10 +123,10 @@ const ConstellationList = ({
                 data-sortprop="satellite"
                 onClick={handleClick}
               >
-                Satellite
+                <span>Satellite</span>
                 <RuxIcon
                   icon={
-                    sortDirection === "ASC"
+                    sortDirection === "ASC" || activeHeader !== "satellite"
                       ? "arrow-drop-down"
                       : "arrow-drop-up"
                   }
@@ -138,10 +139,10 @@ const ConstellationList = ({
                 onClick={handleClick}
                 className="text-align-right"
               >
-                Next Pass
+                <span>Next Pass</span>
                 <RuxIcon
                   icon={
-                    sortDirection === "ASC"
+                    sortDirection === "ASC" || activeHeader !== "rev"
                       ? "arrow-drop-down"
                       : "arrow-drop-up"
                   }
@@ -154,10 +155,10 @@ const ConstellationList = ({
                 data-sortprop="aos"
                 onClick={handleClick}
               >
-                AOS
+                <span>AOS</span>
                 <RuxIcon
                   icon={
-                    sortDirection === "ASC"
+                    sortDirection === "ASC" || activeHeader !== "aos"
                       ? "arrow-drop-down"
                       : "arrow-drop-up"
                   }
@@ -170,10 +171,10 @@ const ConstellationList = ({
                 data-sortprop="los"
                 onClick={handleClick}
               >
-                LOS
+                <span>LOS</span>
                 <RuxIcon
                   icon={
-                    sortDirection === "ASC"
+                    sortDirection === "ASC" || activeHeader !== "los"
                       ? "arrow-drop-down"
                       : "arrow-drop-up"
                   }
@@ -184,7 +185,7 @@ const ConstellationList = ({
               <RuxTableHeaderCell data-sortprop="status" onClick={handleClick}>
                 <RuxIcon
                   icon={
-                    sortDirection === "ASC"
+                    sortDirection === "ASC" || activeHeader !== "status"
                       ? "arrow-drop-down"
                       : "arrow-drop-up"
                   }
@@ -194,10 +195,10 @@ const ConstellationList = ({
                 />
               </RuxTableHeaderCell>
               <RuxTableHeaderCell data-sortprop="ground" onClick={handleClick}>
-                Ground Station
+                <span>Ground Station</span>
                 <RuxIcon
                   icon={
-                    sortDirection === "ASC"
+                    sortDirection === "ASC" || activeHeader !== "ground"
                       ? "arrow-drop-down"
                       : "arrow-drop-up"
                   }
@@ -210,10 +211,10 @@ const ConstellationList = ({
                 onClick={handleClick}
                 className="text-align-right"
               >
-                Azimuth
+                <span>Azimuth</span>
                 <RuxIcon
                   icon={
-                    sortDirection === "ASC"
+                    sortDirection === "ASC" || activeHeader !== "azimuth"
                       ? "arrow-drop-down"
                       : "arrow-drop-up"
                   }
@@ -226,10 +227,10 @@ const ConstellationList = ({
                 onClick={handleClick}
                 className="text-align-right"
               >
-                Elevation
+                <span>Elevation</span>
                 <RuxIcon
                   icon={
-                    sortDirection === "ASC"
+                    sortDirection === "ASC" || activeHeader !== "elevation"
                       ? "arrow-drop-down"
                       : "arrow-drop-up"
                   }
@@ -238,10 +239,10 @@ const ConstellationList = ({
                 />
               </RuxTableHeaderCell>
               <RuxTableHeaderCell data-sortprop="state" onClick={handleClick}>
-                State
+                <span>State</span>
                 <RuxIcon
                   icon={
-                    sortDirection === "ASC"
+                    sortDirection === "ASC" || activeHeader !== "state"
                       ? "arrow-drop-down"
                       : "arrow-drop-up"
                   }

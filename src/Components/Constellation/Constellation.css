@@ -30,6 +30,18 @@
   visibility: hidden;
 }
 
+.constellation rux-table-header-row rux-table-header-cell:hover rux-icon {
+  visibility: visible;
+}
+
+.constellation rux-table-header-row rux-table-header-cell:hover {
+  cursor: pointer;
+}
+
+.constellation rux-table-header-row rux-table-header-cell:last-child:hover {
+  cursor: text;
+}
+
 .constellation rux-table-cell:last-of-type rux-icon {
   margin-inline: 1rem;
   cursor: pointer;
@@ -40,11 +52,6 @@
 }
 
 /* TIMELINE STYLES */
-
-/* .constellation rux-time-region::part(container) {
-  margin: 3px;
-  border: 1px solid var(--color-border-interactive-muted);
-} */
 
 .constellation rux-timeline {
   height: 100%;
