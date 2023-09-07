@@ -6,6 +6,7 @@ import {
   RuxIcon,
   RuxMenu,
   RuxMenuItem,
+  RuxMenuItemDivider,
   RuxMonitoringIcon,
   RuxToastStack,
 } from "@astrouxds/react";
@@ -47,6 +48,7 @@ const GlobalStatusBar = () => {
 
   function menuSelect(e: CustomEvent) {
     const { detail } = e;
+    if (detail.href) return;
     if (detail.value === "themeToggle") {
       setLightTheme(!lightTheme);
       document.body.classList.toggle("light-theme");
@@ -78,6 +80,11 @@ const GlobalStatusBar = () => {
             icon="apps"
           />
           <RuxMenu onRuxmenuselected={(e) => menuSelect(e)}>
+            <RuxMenuItem href="https://ttc-command-react.netlify.app/">
+              TTC Command & Investigate
+            </RuxMenuItem>
+            <RuxMenuItem href="#">TTC Monitor</RuxMenuItem>
+            <RuxMenuItemDivider />
             <RuxMenuItem value="themeToggle">
               {lightTheme ? "Dark" : "Light"} Theme
             </RuxMenuItem>
