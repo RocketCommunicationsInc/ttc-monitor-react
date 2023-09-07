@@ -26,6 +26,7 @@ rux-menu-item[value="themeToggle"] span {
 
 rux-global-status-bar {
   padding-right: var(--spacing-3);
+  z-index: 100;
 }
 
 .app-switcher-icon:focus {
