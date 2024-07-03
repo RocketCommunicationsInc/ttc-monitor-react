@@ -23,7 +23,7 @@ const styles = {
 };
 
 const generateMnemonicValue = () =>
-  faker.number.float({ max: 110, precision: 0.1 });
+  faker.number.float({ max: 110, multipleOf: 0.1 });
 
 const generateChartData = () =>
   faker.helpers.multiple(() => generateMnemonicValue(), { count: 9 });
