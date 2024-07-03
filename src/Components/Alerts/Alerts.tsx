@@ -44,8 +44,11 @@ const Alerts = () => {
           >
             <RuxOption label="All" value="all" />
             <RuxOption label="Critical" value="critical" />
-            <RuxOption label="Caution" value="caution" />
             <RuxOption label="Serious" value="serious" />
+            <RuxOption label="Caution" value="caution" />
+            <RuxOption label="Normal" value="normal" />
+            <RuxOption label="Standby" value="standby" />
+            <RuxOption label="Off" value="off" />
           </RuxSelect>
 
           <RuxSelect
